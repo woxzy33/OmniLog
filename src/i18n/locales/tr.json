@@ -1,0 +1,64 @@
+{
+  "nav": {
+    "train": "Antrenman",
+    "history": "Geçmiş",
+    "profile": "Profil"
+  },
+  "settings": {
+    "title": "Ayarlar",
+    "sections": {
+      "workout": "Antrenman Tercihleri",
+      "display": "Görünüm & Bölge",
+      "data": "Veri Yönetimi"
+    },
+    "theme": "Tema",
+    "language": "Dil",
+    "unit": "Ağırlık Birimi",
+    "compoundRest": "Bileşik Egzersiz Dinlenme (sn)",
+    "isolationRest": "İzolasyon Egzersiz Dinlenme (sn)",
+    "exportData": "Verileri Dışa Aktar",
+    "importData": "Verileri İçe Aktar",
+    "wipeData": "Verileri Sil",
+    "wipeDataConfirm1": "Silmek için tekrar tıkla",
+    "wipeDataConfirm2": "Emin misin? Tekrar tıkla",
+    "close": "Kapat"
+  },
+  "jargon": {
+    "failure": "Tükeniş",
+    "sets": "Setler",
+    "set": "Set",
+    "reps": "Tekrarlar",
+    "rep": "Tekrar",
+    "workingSet": "Çalışma Seti",
+    "warmUp": "Isınma Seti",
+    "barbell": "Bar",
+    "dumbbell": "Dambıl"
+  },
+  "categories": {
+    "push": "İtiş",
+    "pull": "Çekiş",
+    "legs": "Bacak",
+    "chest": "Göğüs",
+    "back": "Sırt",
+    "shoulders": "Omuz",
+    "arms": "Kollar",
+    "core": "Merkez Bölge"
+  },
+  "app": {
+    "headerTitle": "OMNI",
+    "headerSub": "LOG"
+  },
+  "workout": {
+    "set": "Set",
+    "rep": "Tekrar",
+    "failure": "Tükeniş",
+    "warmupSet": "Isınma Seti",
+    "workingSet": "Çalışma Seti",
+    "dropSet": "Drop Set",
+    "barbell": "Bar / Halter",
+    "dumbbell": "Dambıl",
+    "pr": "Kişisel Rekor (PR)",
+    "volume": "Hacim",
+    "rpe": "Zorluk Derecesi (RPE)"
+  }
+}

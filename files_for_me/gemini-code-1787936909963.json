@@ -1,0 +1,25 @@
+{
+  "categories": {
+    "push": "Push",
+    "pull": "Pull",
+    "legs": "Legs",
+    "chest": "Chest",
+    "back": "Back",
+    "shoulders": "Shoulders",
+    "arms": "Arms",
+    "core": "Core"
+  },
+  "workout": {
+    "set": "Set",
+    "rep": "Rep",
+    "failure": "Failure",
+    "warmupSet": "Warm-up Set",
+    "workingSet": "Working Set",
+    "dropSet": "Drop-set",
+    "barbell": "Barbell",
+    "dumbbell": "Dumbbell",
+    "pr": "Personal Record",
+    "volume": "Volume",
+    "rpe": "RPE"
+  }
+}

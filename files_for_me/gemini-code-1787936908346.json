@@ -1,0 +1,25 @@
+{
+  "categories": {
+    "push": "Drücken",
+    "pull": "Ziehen",
+    "legs": "Beine",
+    "chest": "Brust",
+    "back": "Rücken",
+    "shoulders": "Schultern",
+    "arms": "Arme",
+    "core": "Rumpf / Bauch"
+  },
+  "workout": {
+    "set": "Satz",
+    "rep": "Wiederholung",
+    "failure": "Muskelversagen",
+    "warmupSet": "Aufwärmsatz",
+    "workingSet": "Arbeitssatz",
+    "dropSet": "Reduktionssatz",
+    "barbell": "Langhantel",
+    "dumbbell": "Kurzhantel",
+    "pr": "Persönlicher Rekord",
+    "volume": "Volumen",
+    "rpe": "Anstrengungsgrad (RPE)"
+  }
+}

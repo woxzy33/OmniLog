@@ -1,0 +1,25 @@
+{
+  "categories": {
+    "push": "İtiş",
+    "pull": "Çekiş",
+    "legs": "Bacak",
+    "chest": "Göğüs",
+    "back": "Sırt",
+    "shoulders": "Omuz",
+    "arms": "Kol",
+    "core": "Karın / Merkez"
+  },
+  "workout": {
+    "set": "Set",
+    "rep": "Tekrar",
+    "failure": "Tükeniş",
+    "warmupSet": "Isınma Seti",
+    "workingSet": "Çalışma Seti",
+    "dropSet": "Drop Set",
+    "barbell": "Bar / Halter",
+    "dumbbell": "Dambıl",
+    "pr": "Kişisel Rekor (PR)",
+    "volume": "Hacim",
+    "rpe": "Zorluk Derecesi (RPE)"
+  }
+}

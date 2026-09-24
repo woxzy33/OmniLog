@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Production build outputs
+dist/
+build/
+*.apk
+
+# Android / Gradle caches
+android/.gradle/
+android/app/build/
+android/.idea/
+*.iml
+.gradle/
+local.properties
+
+# Environment variables and temp files
+.env
+.env.local
+*.tmp
+*.log
+
+# Editor & OS files
+.DS_Store
+.vscode/
+*.crdownload

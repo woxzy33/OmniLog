@@ -1,0 +1,39 @@
+{
+  "tabs": {
+    "train": "Antrenman",
+    "history": "Geçmiş",
+    "dashboard": "Panel",
+    "library": "Hareketler"
+  },
+  "workout": {
+    "startBlank": "Boş Antrenman",
+    "finish": "Antrenmanı Bitir",
+    "addExercise": "Hareket Ekle",
+    "copyLast": "Öncekini Kopyala",
+    "restTimer": "Dinlenme Süresi",
+    "linkSuperset": "Süperset Olarak Ekle",
+    "linkedSuperset": "Süpersete Bağlı"
+  },
+  "dashboard": {
+    "volumeDistribution": "Hacim Dağılımı",
+    "measurements": "Vücut Ölçüleri",
+    "logMeasurement": "Ölçüm Gir",
+    "weight": "Ağırlık",
+    "bodyFat": "Yağ Oranı %",
+    "estimated1RM": "Tahmini 1RM"
+  },
+  "settings": {
+    "title": "Ayarlar",
+    "workoutPreferences": "Antrenman Tercihleri",
+    "compoundRest": "Bileşik Hareket Molası (sn)",
+    "isolationRest": "İzole Hareket Molası (sn)",
+    "unit": "Ağırlık Birimi",
+    "displayRegion": "Görünüm & Bölge",
+    "theme": "Tema",
+    "language": "Dil",
+    "dataManagement": "Veri Yönetimi",
+    "exportData": "Veriyi Dışa Aktar",
+    "importData": "Veriyi İçe Aktar",
+    "wipeData": "Tüm Veriyi Sil"
+  }
+}

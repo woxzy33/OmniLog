@@ -1,0 +1,39 @@
+{
+  "tabs": {
+    "train": "Training",
+    "history": "Verlauf",
+    "dashboard": "Dashboard",
+    "library": "Bibliothek"
+  },
+  "workout": {
+    "startBlank": "Leeres Training",
+    "finish": "Training Beenden",
+    "addExercise": "Übung Hinzufügen",
+    "copyLast": "Letzte Kopieren",
+    "restTimer": "Pausen-Timer",
+    "linkSuperset": "Als Superset Verbinden",
+    "linkedSuperset": "Im Superset Verbunden"
+  },
+  "dashboard": {
+    "volumeDistribution": "Volumenverteilung",
+    "measurements": "Körpermaße",
+    "logMeasurement": "Maße Eintragen",
+    "weight": "Gewicht",
+    "bodyFat": "Körperfettanteil %",
+    "estimated1RM": "Geschätztes 1RM"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "workoutPreferences": "Trainingspräferenzen",
+    "compoundRest": "Pause Grundübungen (sek)",
+    "isolationRest": "Pause Isolation (sek)",
+    "unit": "Gewichtseinheit",
+    "displayRegion": "Anzeige & Region",
+    "theme": "Design",
+    "language": "Sprache",
+    "dataManagement": "Datenverwaltung",
+    "exportData": "Daten Exportieren",
+    "importData": "Daten Importieren",
+    "wipeData": "Alle Daten Löschen"
+  }
+}

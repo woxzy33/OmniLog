@@ -1,0 +1,64 @@
+{
+  "nav": {
+    "train": "Train",
+    "history": "History",
+    "profile": "Profile"
+  },
+  "settings": {
+    "title": "Settings",
+    "sections": {
+      "workout": "Workout Preferences",
+      "display": "Display & Region",
+      "data": "Data Management"
+    },
+    "theme": "Theme",
+    "language": "Language",
+    "unit": "Weight Unit",
+    "compoundRest": "Compound Rest (sec)",
+    "isolationRest": "Isolation Rest (sec)",
+    "exportData": "Export Data",
+    "importData": "Import Data",
+    "wipeData": "Wipe Data",
+    "wipeDataConfirm1": "Click again to confirm wipe",
+    "wipeDataConfirm2": "Are you sure? Click again",
+    "close": "Close"
+  },
+  "jargon": {
+    "failure": "Failure",
+    "sets": "Sets",
+    "set": "Set",
+    "reps": "Reps",
+    "rep": "Rep",
+    "workingSet": "Working Set",
+    "warmUp": "Warm-up",
+    "barbell": "Barbell",
+    "dumbbell": "Dumbbell"
+  },
+  "categories": {
+    "push": "Push",
+    "pull": "Pull",
+    "legs": "Legs",
+    "chest": "Chest",
+    "back": "Back",
+    "shoulders": "Shoulders",
+    "arms": "Arms",
+    "core": "Core"
+  },
+  "app": {
+    "headerTitle": "OMNI",
+    "headerSub": "LOG"
+  },
+  "workout": {
+    "set": "Set",
+    "rep": "Rep",
+    "failure": "Failure",
+    "warmupSet": "Warm-up Set",
+    "workingSet": "Working Set",
+    "dropSet": "Drop-set",
+    "barbell": "Barbell",
+    "dumbbell": "Dumbbell",
+    "pr": "Personal Record",
+    "volume": "Volume",
+    "rpe": "RPE"
+  }
+}

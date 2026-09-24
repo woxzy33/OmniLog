@@ -1,0 +1,64 @@
+{
+  "nav": {
+    "train": "Training",
+    "history": "Verlauf",
+    "profile": "Profil"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "sections": {
+      "workout": "Trainingspräferenzen",
+      "display": "Anzeige & Region",
+      "data": "Datenverwaltung"
+    },
+    "theme": "Design",
+    "language": "Sprache",
+    "unit": "Gewichtseinheit",
+    "compoundRest": "Pause Mehrgelenkübungen (sek)",
+    "isolationRest": "Pause Isolationsübungen (sek)",
+    "exportData": "Daten exportieren",
+    "importData": "Daten importieren",
+    "wipeData": "Daten löschen",
+    "wipeDataConfirm1": "Zum Bestätigen erneut klicken",
+    "wipeDataConfirm2": "Bist du sicher? Erneut klicken",
+    "close": "Schließen"
+  },
+  "jargon": {
+    "failure": "Muskelversagen",
+    "sets": "Sätze",
+    "set": "Satz",
+    "reps": "Wiederholungen",
+    "rep": "Wiederholung",
+    "workingSet": "Arbeitssatz",
+    "warmUp": "Aufwärmsatz",
+    "barbell": "Langhantel",
+    "dumbbell": "Kurzhantel"
+  },
+  "categories": {
+    "push": "Push",
+    "pull": "Pull",
+    "legs": "Beine",
+    "chest": "Brust",
+    "back": "Rücken",
+    "shoulders": "Schultern",
+    "arms": "Arme",
+    "core": "Core"
+  },
+  "app": {
+    "headerTitle": "OMNI",
+    "headerSub": "LOG"
+  },
+  "workout": {
+    "set": "Satz",
+    "rep": "Wiederholung",
+    "failure": "Muskelversagen",
+    "warmupSet": "Aufwärmsatz",
+    "workingSet": "Arbeitssatz",
+    "dropSet": "Drop-Satz",
+    "barbell": "Langhantel",
+    "dumbbell": "Kurzhantel",
+    "pr": "Persönlicher Rekord (PR)",
+    "volume": "Volumen",
+    "rpe": "RPE"
+  }
+}
