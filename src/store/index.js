@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { Storage } from '../data/storage';
-import { DEFAULT_EXERCISES } from '../data/exerciseDb';
+import { DEFAULT_EXERCISES, exerciseRequiresWeight } from '../data/exerciseDb';
 import { Preferences } from '@capacitor/preferences';
 import { ensureSessionPRs } from '../utils';
 
@@ -15,10 +15,42 @@ const emptyData = () => ({
     locations: [{ id: "loc-default", name: "Default Gym" }],
     activeLocationId: "loc-default"
   },
-  settings: { unit: "kg" }
+  settings: { unit: "kg", notificationsEnabled: true, reminderHour: 19 }
 });
 
-import { saveAppData, subscribeToAppData } from './Database';
+import { saveAppData, subscribeToAppData, flushSaveAppData } from './Database';
+
+function sanitizeAppData(raw) {
+  if (!raw) return emptyData();
+  const defaultMap = new Map(DEFAULT_EXERCISES.map(e => [e.name, e]));
+  const mergedExercises = (raw.exercises || []).map(ex => {
+    if (defaultMap.has(ex.name)) {
+      const defEx = defaultMap.get(ex.name);
+      const merged = { ...defEx, ...ex };
+      if (defEx.bodyPart !== undefined) merged.bodyPart = defEx.bodyPart;
+      merged.requiresWeight = defEx.requiresWeight;
+      return merged;
+    }
+    return {
+      ...ex,
+      requiresWeight: exerciseRequiresWeight(ex)
+    };
+  });
+
+  const measurements = Array.isArray(raw.measurements) ? raw.measurements : [];
+  const sessions = ensureSessionPRs(raw.sessions || [], mergedExercises, measurements);
+
+  return {
+    ...raw,
+    exercises: mergedExercises,
+    settings: { unit: "kg", notificationsEnabled: true, reminderHour: 19, ...(raw.settings || {}) },
+    measurements,
+    sessions,
+    templates: raw.templates || [],
+    plannedSessions: raw.plannedSessions || [],
+    user: raw.user || { name: "Iron Lifter", locations: [{ id: "loc-default", name: "Default Gym" }], activeLocationId: "loc-default" }
+  };
+}
 
 export const useAppStore = create((set, get) => ({
   isLoaded: false,
@@ -26,81 +58,77 @@ export const useAppStore = create((set, get) => ({
   userId: null,
   unsubscribeFn: null,
 
-  initCloudSync: (uid) => {
-    // If already syncing this user, do nothing
-    if (get().userId === uid) return;
+  initCloudSync: async (uid) => {
+    if (!uid) return;
+    // If already actively syncing this user, do nothing
+    if (get().userId === uid && get().unsubscribeFn) return;
     
     // Clear previous subscription if switching users
     if (get().unsubscribeFn) {
       get().unsubscribeFn();
     }
 
-    set({ userId: uid, isLoaded: false });
+    set({ userId: uid });
 
+    // 1. Instant Local-First Load: Read from persistent IndexedDB cache immediately
+    try {
+      const cached = await Storage.get(`omnilog_data_${uid}`);
+      if (cached && get().userId === uid && !get().isLoaded) {
+        set({ data: sanitizeAppData(cached), isLoaded: true });
+      }
+    } catch (e) {
+      console.warn("Local storage cache read error:", e);
+    }
+
+    // 2. Realtime Cloud Sync via Firestore
     const unsubscribe = subscribeToAppData(uid, (parsed) => {
+      if (get().userId !== uid) return;
+
       if (parsed) {
-        const defaultMap = new Map(DEFAULT_EXERCISES.map(e => [e.name, e]));
-        const mergedExercises = (parsed.exercises || []).map(ex => {
-          if (defaultMap.has(ex.name)) {
-            const defEx = defaultMap.get(ex.name);
-            const merged = { ...defEx, ...ex };
-            if (defEx.bodyPart !== undefined) merged.bodyPart = defEx.bodyPart;
-            return merged;
-          }
-          return ex;
-        });
-        parsed.exercises = mergedExercises;
-        parsed.settings = parsed.settings || { unit: "kg" };
-        parsed.sessions = ensureSessionPRs(parsed.sessions || []);
-        parsed.templates = parsed.templates || [];
-        parsed.measurements = parsed.measurements || [];
-        parsed.plannedSessions = parsed.plannedSessions || [];
-        parsed.user = parsed.user || { name: "Iron Lifter", locations: [{ id: "loc-default", name: "Default Gym" }], activeLocationId: "loc-default" };
-        set({ data: parsed, isLoaded: true });
+        const sanitized = sanitizeAppData(parsed);
+        Storage.set(`omnilog_data_${uid}`, sanitized).catch(console.warn);
+        set({ data: sanitized, isLoaded: true });
       } else {
-        set({ data: emptyData(), isLoaded: true });
+        // Document does not exist yet on Firestore (new user or fresh account)
+        // Preserve any current local data (such as baseline measurements logged during onboarding)
+        const currentData = sanitizeAppData(get().data);
+        saveAppData(uid, currentData, true);
+        Storage.set(`omnilog_data_${uid}`, currentData).catch(console.warn);
+        set({ data: currentData, isLoaded: true });
       }
     });
 
     set({ unsubscribeFn: unsubscribe });
   },
 
-  persist: (newDataOrUpdater) => {
-    const newData = typeof newDataOrUpdater === 'function' ? newDataOrUpdater(get().data) : newDataOrUpdater;
-    set({ data: newData });
+  resetStore: () => {
+    if (get().unsubscribeFn) {
+      get().unsubscribeFn();
+    }
+    set({ userId: null, isLoaded: false, data: emptyData(), unsubscribeFn: null });
+  },
+
+  persist: (newDataOrUpdater, immediate = false) => {
+    const prev = get().data;
+    const computed = typeof newDataOrUpdater === 'function' ? newDataOrUpdater(prev) : newDataOrUpdater;
+    const sanitized = sanitizeAppData(computed);
+    set({ data: sanitized });
+
     const uid = get().userId;
     if (uid) {
-      saveAppData(uid, newData);
+      Storage.set(`omnilog_data_${uid}`, sanitized).catch(console.warn);
+      saveAppData(uid, sanitized, immediate);
     }
   },
 
   importData: async (importedData) => {
-    const defaultMap = new Map(DEFAULT_EXERCISES.map(e => [e.name, e]));
-    const mergedExercises = (importedData.exercises || []).map(ex => {
-      if (defaultMap.has(ex.name)) {
-        const defEx = defaultMap.get(ex.name);
-        const merged = { ...defEx, ...ex };
-        if (defEx.bodyPart !== undefined) merged.bodyPart = defEx.bodyPart;
-        return merged;
-      }
-      return ex;
-    });
-    
-    const sanitizedData = {
-      ...importedData,
-      exercises: mergedExercises,
-      settings: importedData.settings || { unit: "kg" },
-      sessions: ensureSessionPRs(importedData.sessions || []),
-      templates: importedData.templates || [],
-      measurements: importedData.measurements || [],
-      plannedSessions: importedData.plannedSessions || [],
-      user: importedData.user || { name: "Iron Lifter", locations: [{ id: "loc-default", name: "Default Gym" }], activeLocationId: "loc-default" }
-    };
-    
+    const sanitizedData = sanitizeAppData(importedData);
     set({ data: sanitizedData });
+
     const uid = get().userId;
     if (uid) {
-      await saveAppData(uid, sanitizedData);
+      await Storage.set(`omnilog_data_${uid}`, sanitizedData).catch(console.warn);
+      await saveAppData(uid, sanitizedData, true);
     }
   }
 }));

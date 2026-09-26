@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { styles } from '../styles';
 import { User, Barbell, Calendar as CalendarIcon, List } from './Icons';
-import { parseVolume, formatWeight } from '../utils';
+import { parseVolume, formatWeight, getUserWeightAtDate } from '../utils';
+import { exerciseRequiresWeight } from '../data/exerciseDb';
 import PostWorkoutSummary from './PostWorkoutSummary';
 import CalendarView from './CalendarView';
 import { useAppStore } from '../store';
@@ -76,10 +77,13 @@ export default function HistoryTab() {
           {visibleSessions.map((s) => {
             let sessionVolume = 0;
             let prCount = 0;
+            const userWeight = getUserWeightAtDate(data?.measurements, s.date);
             (s.exercises || []).forEach(ex => {
+              const exObj = exerciseDict[ex.exerciseId];
+              const requiresWeight = exerciseRequiresWeight(exObj);
               (ex.sets || []).forEach(set => {
                 if (set.completed) {
-                  sessionVolume += parseVolume(set.weight, set.reps);
+                  sessionVolume += parseVolume(set.weight, set.reps, requiresWeight ? 0 : userWeight);
                   if (set.isPR) prCount++;
                 }
               });

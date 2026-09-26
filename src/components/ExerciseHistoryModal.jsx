@@ -3,12 +3,14 @@ import { motion } from 'framer-motion';
 import { styles } from '../styles';
 import { X, Trophy, TrendingUp } from './Icons';
 import { formatWeight } from '../utils';
+import { exerciseRequiresWeight } from '../data/exerciseDb';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import ExerciseGif from './ExerciseGif';
 
 export default function ExerciseHistoryModal({ exerciseId, data, onClose, settings }) {
   const [chartMode, setChartMode] = useState('1rm'); // '1rm' or 'volume'
   const exObj = data.exercises.find(e => e.id === exerciseId);
+  const requiresWeight = exerciseRequiresWeight(exObj);
   
   const history = useMemo(() => {
     const threeMonthsAgo = new Date();
@@ -16,6 +18,7 @@ export default function ExerciseHistoryModal({ exerciseId, data, onClose, settin
     
     let maxWeight = 0;
     let maxRepsForWeight = 0;
+    let maxRepsEver = 0;
     
     const pastSessions = [];
     
@@ -28,11 +31,15 @@ export default function ExerciseHistoryModal({ exerciseId, data, onClose, settin
           if (completedSets.length > 0) {
             let sessionMax1RM = 0;
             let sessionVolume = 0;
+            let sessionMaxReps = 0;
             
             completedSets.forEach(set => {
               const w = Number(set.weight) || 0;
               const r = Number(set.reps) || 0;
               
+              if (r > sessionMaxReps) sessionMaxReps = r;
+              if (r > maxRepsEver) maxRepsEver = r;
+
               if (w > maxWeight) {
                 maxWeight = w;
                 maxRepsForWeight = r;
@@ -52,7 +59,8 @@ export default function ExerciseHistoryModal({ exerciseId, data, onClose, settin
               sessionName: s.name,
               sets: completedSets,
               max1RM: Math.round(sessionMax1RM),
-              volume: Math.round(sessionVolume)
+              volume: Math.round(sessionVolume),
+              maxReps: sessionMaxReps
             });
           }
         }
@@ -62,9 +70,11 @@ export default function ExerciseHistoryModal({ exerciseId, data, onClose, settin
     return { 
       sessions: pastSessions.sort((a,b) => b.date - a.date), // Descending for list
       chartData: pastSessions.slice().sort((a,b) => a.date - b.date), // Ascending for chart
-      pr: maxWeight > 0 ? { weight: maxWeight, reps: maxRepsForWeight } : null
+      pr: requiresWeight
+        ? (maxWeight > 0 ? { weight: maxWeight, reps: maxRepsForWeight } : null)
+        : (maxRepsEver > 0 ? { reps: maxRepsEver } : null)
     };
-  }, [data.sessions, exerciseId]);
+  }, [data.sessions, exerciseId, requiresWeight]);
 
   if (!exObj) return null;
 
@@ -104,7 +114,13 @@ export default function ExerciseHistoryModal({ exerciseId, data, onClose, settin
               <div>
                 <div style={{ fontSize: 11, fontWeight: 700, color: '#E8C12C', textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 2 }}>3-Month PR</div>
                 <div style={{ fontSize: 20, fontWeight: 800, color: '#e2e2e2' }}>
-                  {formatWeight(history.pr.weight, settings?.unit)} {settings?.unit || 'kg'} <span style={{ fontSize: 14, color: '#8b90a0' }}>x {history.pr.reps}</span>
+                  {requiresWeight ? (
+                    <>
+                      {formatWeight(history.pr.weight, settings?.unit)} {settings?.unit || 'kg'} <span style={{ fontSize: 14, color: '#8b90a0' }}>x {history.pr.reps}</span>
+                    </>
+                  ) : (
+                    <span>{history.pr.reps} Reps</span>
+                  )}
                 </div>
               </div>
             </div>
@@ -116,32 +132,56 @@ export default function ExerciseHistoryModal({ exerciseId, data, onClose, settin
                 <div style={{ fontSize: 12, fontWeight: 700, color: '#8b90a0', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: 6 }}>
                   <TrendingUp size={16} /> Progress
                 </div>
-                <div style={{ display: 'flex', background: '#121212', borderRadius: 8, padding: 2 }}>
-                  <button 
-                    onClick={() => setChartMode('1rm')}
-                    style={{ background: chartMode === '1rm' ? '#2c2c2e' : 'transparent', color: chartMode === '1rm' ? '#fff' : '#8b90a0', border: 'none', padding: '4px 8px', borderRadius: 6, fontSize: 11, fontWeight: 700, cursor: 'pointer' }}
-                  >
-                    Est. 1RM
-                  </button>
-                  <button 
-                    onClick={() => setChartMode('volume')}
-                    style={{ background: chartMode === 'volume' ? '#2c2c2e' : 'transparent', color: chartMode === 'volume' ? '#fff' : '#8b90a0', border: 'none', padding: '4px 8px', borderRadius: 6, fontSize: 11, fontWeight: 700, cursor: 'pointer' }}
-                  >
-                    Volume
-                  </button>
-                </div>
+                {requiresWeight ? (
+                  <div style={{ display: 'flex', background: '#121212', borderRadius: 8, padding: 2 }}>
+                    <button 
+                      onClick={() => setChartMode('1rm')}
+                      style={{ background: chartMode === '1rm' ? '#2c2c2e' : 'transparent', color: chartMode === '1rm' ? '#fff' : '#8b90a0', border: 'none', padding: '4px 8px', borderRadius: 6, fontSize: 11, fontWeight: 700, cursor: 'pointer' }}
+                    >
+                      Est. 1RM
+                    </button>
+                    <button 
+                      onClick={() => setChartMode('volume')}
+                      style={{ background: chartMode === 'volume' ? '#2c2c2e' : 'transparent', color: chartMode === 'volume' ? '#fff' : '#8b90a0', border: 'none', padding: '4px 8px', borderRadius: 6, fontSize: 11, fontWeight: 700, cursor: 'pointer' }}
+                    >
+                      Volume
+                    </button>
+                  </div>
+                ) : (
+                  <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--primary)', background: '#121212', padding: '4px 8px', borderRadius: 6 }}>
+                    Max Reps
+                  </span>
+                )}
               </div>
               <div style={{ width: '100%', height: 140 }}>
                 <ResponsiveContainer>
                   <LineChart data={history.chartData} margin={{ top: 5, right: 5, left: -25, bottom: 0 }}>
                     <XAxis dataKey="dateStr" stroke="#6b7080" fontSize={10} tickLine={false} axisLine={false} />
-                    <YAxis stroke="#6b7080" fontSize={10} tickLine={false} axisLine={false} tickFormatter={(val) => formatWeight(val, settings?.unit)} />
+                    <YAxis 
+                      stroke="#6b7080" 
+                      fontSize={10} 
+                      tickLine={false} 
+                      axisLine={false} 
+                      tickFormatter={(val) => requiresWeight ? formatWeight(val, settings?.unit) : `${val}`} 
+                    />
                     <Tooltip 
                       contentStyle={{ background: '#121212', border: '1px solid #333535', borderRadius: 8, fontSize: 12 }}
                       itemStyle={{ color: 'var(--primary)', fontWeight: 800 }}
-                      formatter={(value) => [`${formatWeight(value, settings?.unit)} ${settings?.unit || 'kg'}`, chartMode === '1rm' ? 'Est. 1RM' : 'Volume']}
+                      formatter={(value) => [
+                        requiresWeight 
+                          ? `${formatWeight(value, settings?.unit)} ${settings?.unit || 'kg'}`
+                          : `${value} reps`,
+                        requiresWeight ? (chartMode === '1rm' ? 'Est. 1RM' : 'Volume') : 'Max Reps'
+                      ]}
                     />
-                    <Line type="monotone" dataKey={chartMode === '1rm' ? 'max1RM' : 'volume'} stroke="var(--primary)" strokeWidth={3} dot={{ fill: 'var(--primary)', r: 3, strokeWidth: 0 }} activeDot={{ r: 5 }} />
+                    <Line 
+                      type="monotone" 
+                      dataKey={requiresWeight ? (chartMode === '1rm' ? 'max1RM' : 'volume') : 'maxReps'} 
+                      stroke="var(--primary)" 
+                      strokeWidth={3} 
+                      dot={{ fill: 'var(--primary)', r: 3, strokeWidth: 0 }} 
+                      activeDot={{ r: 5 }} 
+                    />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
@@ -164,7 +204,12 @@ export default function ExerciseHistoryModal({ exerciseId, data, onClose, settin
                     {s.sets.map((set, j) => (
                       <div key={j} style={{ fontSize: 13, color: '#e2e2e2', display: 'flex', alignItems: 'center', gap: 6 }}>
                         <span style={{ color: '#8b90a0', fontSize: 11 }}>Set {j+1}</span>
-                        <span style={{ fontWeight: 600 }}>{formatWeight(set.weight, settings?.unit)}{settings?.unit || 'kg'} x {set.reps}</span>
+                        <span style={{ fontWeight: 600 }}>
+                          {requiresWeight 
+                            ? `${formatWeight(set.weight, settings?.unit)}${settings?.unit || 'kg'} x ${set.reps}`
+                            : `${set.reps} reps`
+                          }
+                        </span>
                       </div>
                     ))}
                   </div>

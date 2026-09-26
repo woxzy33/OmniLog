@@ -1,7 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Dumbbell, Calendar, Trophy, Clock, TrendingUp, User } from './Icons';
-import { parseVolume, formatWeight } from '../utils';
+import { parseVolume, formatWeight, getUserWeightAtDate } from '../utils';
+import { exerciseRequiresWeight } from '../data/exerciseDb';
 
 export default function CalendarView({ sessions = [], onSessionClick, data, settings }) {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -62,10 +63,12 @@ export default function CalendarView({ sessions = [], onSessionClick, data, sett
       trainedDaysSet.add(dateStr);
 
       totalDurationMins += Number(s.durationMins) || 0;
+      const userWeight = getUserWeightAtDate(data?.measurements, s.date);
 
       (s.exercises || []).forEach(ex => {
         const exObj = data?.exercises?.find(e => e.id === ex.exerciseId);
         const cat = exObj?.category || 'Other';
+        const requiresWeight = exerciseRequiresWeight(exObj);
 
         (ex.sets || []).forEach(set => {
           if (set.completed) {
@@ -73,7 +76,7 @@ export default function CalendarView({ sessions = [], onSessionClick, data, sett
             const r = Number(set.reps) || 0;
             const w = Number(set.weight) || 0;
             totalReps += r;
-            totalVolume += parseVolume(w, r);
+            totalVolume += parseVolume(w, r, requiresWeight ? 0 : userWeight);
             if (set.isPR) totalPRs++;
             categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
           }
@@ -244,11 +247,14 @@ export default function CalendarView({ sessions = [], onSessionClick, data, sett
                     let sessVol = 0;
                     let sessSets = 0;
                     let prCount = 0;
+                    const userWeight = getUserWeightAtDate(data?.measurements, s.date);
                     (s.exercises || []).forEach(ex => {
+                      const exObj = data?.exercises?.find(e => e.id === ex.exerciseId);
+                      const requiresWeight = exerciseRequiresWeight(exObj);
                       (ex.sets || []).forEach(st => {
                         if (st.completed) {
                           sessSets++;
-                          sessVol += parseVolume(st.weight, st.reps);
+                          sessVol += parseVolume(st.weight, st.reps, requiresWeight ? 0 : userWeight);
                           if (st.isPR) prCount++;
                         }
                       });

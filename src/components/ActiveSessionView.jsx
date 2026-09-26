@@ -9,8 +9,8 @@ import useSound from 'use-sound';
 import ExerciseLogger from './ExerciseLogger';
 import ExerciseHistoryModal from './ExerciseHistoryModal';
 import ExerciseSelectorModal from './ExerciseSelectorModal';
-import { uid } from '../data/exerciseDb';
-import { getLastSessionSets, parseVolume, formatWeight, evaluatePR } from '../utils';
+import { uid, exerciseRequiresWeight } from '../data/exerciseDb';
+import { getLastSessionSets, parseVolume, formatWeight, evaluatePR, getUserWeightAtDate } from '../utils';
 import { useTooltip } from './TooltipContext';
 import { ConfirmCancelModal, IncompleteSetsWarning, ConfirmDeleteModal, ErrorModal } from './WorkoutSafeguards';
 
@@ -69,19 +69,25 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
     return () => clearInterval(interval);
   }, [session.date]);
 
+  const userWeight = useMemo(() => {
+    return getUserWeightAtDate(data?.measurements, session?.date);
+  }, [data?.measurements, session?.date]);
+
   const stats = useMemo(() => {
     let vol = 0;
     let sets = 0;
     session.exercises.forEach(ex => {
+      const exObj = data.exercises.find(e => e.id === ex.exerciseId);
+      const requiresWeight = exerciseRequiresWeight(exObj);
       (ex.sets || []).forEach(s => {
         if (s.completed) {
-          vol += parseVolume(s.weight, s.reps);
+          vol += parseVolume(s.weight, s.reps, requiresWeight ? 0 : userWeight);
           sets += 1;
         }
       });
     });
     return { vol, sets };
-  }, [session.exercises]);
+  }, [session.exercises, data.exercises, userWeight]);
 
   const addExercise = (exerciseIds) => {
     playPop();
@@ -129,13 +135,20 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
   }, [prQueue, prNotification]);
 
   const checkPR = (exerciseId, set, currentExIdx, currentSetIdx) => {
+    const exObj = data.exercises.find(e => e.id === exerciseId);
+    const requiresWeight = exerciseRequiresWeight(exObj);
+    const currentSessionUserWeight = getUserWeightAtDate(data.measurements, session.date);
     const historySets = [];
     (data.sessions || []).forEach(s => {
+      const pastSessUserWeight = getUserWeightAtDate(data.measurements, s.date);
       (s.exercises || []).forEach(e => {
         if (e.exerciseId === exerciseId) {
           (e.sets || []).forEach(pastSet => {
-            if (pastSet.completed && (Number(pastSet.weight) > 0 || Number(pastSet.reps) > 0)) {
-              historySets.push(pastSet);
+            if (pastSet.completed && Number(pastSet.reps) > 0 && (requiresWeight ? Number(pastSet.weight) > 0 : true)) {
+              historySets.push({
+                ...pastSet,
+                bodyweight: pastSet.bodyweight !== undefined ? pastSet.bodyweight : pastSessUserWeight
+              });
             }
           });
         }
@@ -147,8 +160,11 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
         if (ex.exerciseId === exerciseId) {
           (ex.sets || []).forEach((s, sIdx) => {
             if (eIdx < currentExIdx || (eIdx === currentExIdx && sIdx < currentSetIdx)) {
-              if (s.completed && (Number(s.weight) > 0 || Number(s.reps) > 0)) {
-                historySets.push(s);
+              if (s.completed && Number(s.reps) > 0 && (requiresWeight ? Number(s.weight) > 0 : true)) {
+                historySets.push({
+                  ...s,
+                  bodyweight: currentSessionUserWeight
+                });
               }
             }
           });
@@ -156,7 +172,7 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
       });
     }
 
-    return evaluatePR(historySets, set);
+    return evaluatePR(historySets, set, requiresWeight, currentSessionUserWeight);
   };
 
   const updateExerciseNotes = React.useCallback((exIdx, text) => {
@@ -231,12 +247,21 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
     const startTime = new Date(session.date).getTime();
     const durationMins = Math.round((endTime - startTime) / 60000);
 
+    const currentSessionUserWeight = getUserWeightAtDate(data.measurements, session.date);
     const allPriorHistoryMap = new Map();
     (data.sessions || []).forEach(s => {
+      const pastSessUserWeight = getUserWeightAtDate(data.measurements, s.date);
       (s.exercises || []).forEach(e => {
         const list = allPriorHistoryMap.get(e.exerciseId) || [];
+        const eObj = data.exercises.find(x => x.id === e.exerciseId);
+        const eReqW = exerciseRequiresWeight(eObj);
         (e.sets || []).forEach(ps => {
-          if (ps.completed && (Number(ps.weight) > 0 || Number(ps.reps) > 0)) list.push(ps);
+          if (ps.completed && Number(ps.reps) > 0 && (eReqW ? Number(ps.weight) > 0 : true)) {
+            list.push({
+              ...ps,
+              bodyweight: ps.bodyweight !== undefined ? ps.bodyweight : pastSessUserWeight
+            });
+          }
         });
         allPriorHistoryMap.set(e.exerciseId, list);
       });
@@ -245,12 +270,18 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
     const evaluatedExercises = session.exercises
       .filter((e) => e.sets.some(s => s.completed))
       .map(ex => {
+        const exObj = data.exercises.find(e => e.id === ex.exerciseId);
+        const requiresWeight = exerciseRequiresWeight(exObj);
         const priorHistory = allPriorHistoryMap.get(ex.exerciseId) || [];
         const localHistory = [...priorHistory];
         const updatedSets = (ex.sets || []).map(s => {
-          if (!s.completed || Number(s.weight) <= 0 || Number(s.reps) <= 0) return s;
-          const pr = evaluatePR(localHistory, s);
-          localHistory.push(s);
+          if (!s.completed || Number(s.reps) <= 0) return s;
+          if (requiresWeight && Number(s.weight) <= 0) return s;
+          const pr = evaluatePR(localHistory, s, requiresWeight, currentSessionUserWeight);
+          localHistory.push({
+            ...s,
+            bodyweight: currentSessionUserWeight
+          });
           return pr ? { ...s, isPR: pr } : { ...s, isPR: false };
         });
         allPriorHistoryMap.set(ex.exerciseId, localHistory);
@@ -557,6 +588,7 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
                             onSetsChange={updateExerciseSets}
                             startTimer={startTimer}
                             settings={settings}
+                            requiresWeight={exerciseRequiresWeight(exObj)}
                           />
                         </div>
                       </div>

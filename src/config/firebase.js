@@ -1,6 +1,10 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, setPersistence, browserLocalPersistence } from 'firebase/auth';
-import { getFirestore, enableMultiTabIndexedDbPersistence } from 'firebase/firestore';
+import { 
+  initializeFirestore, 
+  persistentLocalCache, 
+  persistentMultipleTabManager 
+} from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCmQm2bfqQTTdRWvo73Ee8g0C0OTBMs7zw",
@@ -14,10 +18,17 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app);
 
-// Configure persistent auth and offline database capabilities
-setPersistence(auth, browserLocalPersistence).catch(console.error);
-enableMultiTabIndexedDbPersistence(db).catch(console.error);
+// Initialize Firestore with robust multi-tab and offline IndexedDB persistence
+const db = initializeFirestore(app, {
+  localCache: persistentLocalCache({
+    tabManager: persistentMultipleTabManager()
+  })
+});
+
+// Configure persistent auth across sessions
+setPersistence(auth, browserLocalPersistence).catch(err => {
+  console.warn("Auth persistence notice:", err);
+});
 
 export { auth, db };

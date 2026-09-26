@@ -4,8 +4,8 @@ import MuscleHeatmap from './MuscleHeatmap';
 import { RadarChart, PolarGrid, PolarAngleAxis, Radar, ResponsiveContainer } from 'recharts';
 import { styles } from '../styles';
 import { Check, X, Edit2 } from './Icons';
-import { parseVolume, formatWeight, translateExerciseName } from '../utils';
-import { CATEGORIES, uid } from '../data/exerciseDb';
+import { parseVolume, formatWeight, translateExerciseName, getUserWeightAtDate } from '../utils';
+import { CATEGORIES, uid, exerciseRequiresWeight } from '../data/exerciseDb';
 import { useTranslation } from 'react-i18next';
 import { ErrorModal } from './WorkoutSafeguards';
 
@@ -47,7 +47,7 @@ export default function PostWorkoutSummary({ session, data, persist, onClose, on
       }
     }
     if (templateAction === 'update_existing' && persist && session.templateId) {
-      persist(prevData => {
+       persist(prevData => {
         const nextTemplates = prevData.templates.map(t => {
           if (t.id === session.templateId) {
              return {
@@ -56,7 +56,7 @@ export default function PostWorkoutSummary({ session, data, persist, onClose, on
                exercises: session.exercises.map(ex => ({
                   exerciseId: ex.exerciseId,
                   notes: ex.notes || "",
-                  sets: (ex.sets || []).map(s => ({ weight: s.weight, reps: s.reps, rpe: s.rpe, type: s.type }))
+                  sets: (ex.sets || []).map(s => ({ weight: "", reps: "", rpe: "", type: s.type || "N", completed: false }))
                }))
              };
           }
@@ -71,7 +71,7 @@ export default function PostWorkoutSummary({ session, data, persist, onClose, on
         exercises: session.exercises.map(ex => ({
           exerciseId: ex.exerciseId,
           notes: ex.notes || "",
-          sets: (ex.sets || []).map(s => ({ weight: s.weight, reps: s.reps, rpe: s.rpe, type: s.type }))
+          sets: (ex.sets || []).map(s => ({ weight: "", reps: "", rpe: "", type: s.type || "N", completed: false }))
         }))
       };
       persist(prevData => ({ ...prevData, templates: [...prevData.templates, newTemplate] }));
@@ -93,13 +93,15 @@ export default function PostWorkoutSummary({ session, data, persist, onClose, on
     const prDetails = [];
     CATEGORIES.forEach(c => muscleMap[c] = 0);
 
+    const userWeight = getUserWeightAtDate(data?.measurements, session.date);
     session.exercises.forEach(ex => {
       const exObj = exerciseDict[ex.exerciseId];
+      const requiresWeight = exerciseRequiresWeight(exObj);
       (ex.sets || []).forEach(s => {
         if (s.completed) {
           const w = Number(s.weight) || 0;
           const r = Number(s.reps) || 0;
-          vol += (w * r);
+          vol += parseVolume(w, r, requiresWeight ? 0 : userWeight);
           setsCount += 1;
           repsCount += r;
           if (s.isPR) {
@@ -291,13 +293,18 @@ export default function PostWorkoutSummary({ session, data, persist, onClose, on
       <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
         {session.exercises.map((ex, idx) => {
           const exObj = exerciseDict[ex.exerciseId];
-          const exVol = ex.sets.reduce((acc, set) => set.completed ? acc + parseVolume(set.weight, set.reps) : acc, 0);
+          const requiresWeight = exerciseRequiresWeight(exObj);
+          const userWeight = getUserWeightAtDate(data?.measurements, session.date);
+          const exVol = ex.sets.reduce((acc, set) => set.completed ? acc + parseVolume(set.weight, set.reps, requiresWeight ? 0 : userWeight) : acc, 0);
+          const exReps = ex.sets.reduce((acc, set) => set.completed ? acc + (Number(set.reps) || 0) : acc, 0);
           
           return (
             <div key={idx} style={{ paddingBottom: 24, borderBottom: idx < session.exercises.length - 1 ? '1px dashed #2A2A2A' : 'none' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16 }}>
                 <span style={{ fontFamily: '"Inter", sans-serif', fontWeight: 800, fontSize: 16, color: '#ffffff', letterSpacing: '-0.01em' }}>{exObj ? translateExerciseName(exObj.name, t) : "Unknown Move"}</span>
-                <span style={{ fontFamily: '"Inter", sans-serif', fontSize: 13, color: "var(--primary)", fontWeight: 800, background: 'rgba(var(--primary-rgb), 0.1)', padding: '2px 8px', borderRadius: 6 }}>{formatWeight(exVol, settings?.unit)} {settings?.unit || 'kg'}</span>
+                <span style={{ fontFamily: '"Inter", sans-serif', fontSize: 13, color: "var(--primary)", fontWeight: 800, background: 'rgba(var(--primary-rgb), 0.1)', padding: '2px 8px', borderRadius: 6 }}>
+                  {requiresWeight ? `${formatWeight(exVol, settings?.unit)} ${settings?.unit || 'kg'}` : `${exReps} reps • ${formatWeight(exVol, settings?.unit)} ${settings?.unit || 'kg'}`}
+                </span>
               </div>
               
               {ex.notes && (
@@ -313,7 +320,12 @@ export default function PostWorkoutSummary({ session, data, persist, onClose, on
                     <div key={sIdx} style={{ display: 'flex', flexDirection: 'column', gap: 6, background: pr ? 'linear-gradient(135deg, rgba(232, 193, 44, 0.1), rgba(232, 193, 44, 0.02))' : 'transparent', border: pr ? '1px solid rgba(232, 193, 44, 0.3)' : '1px solid transparent', padding: pr ? '10px' : '2px 0', borderRadius: 12 }}>
                       <div style={{ fontSize: 14, color: '#e2e2e2', display: 'flex', alignItems: 'center', gap: 12, fontFamily: '"Inter", sans-serif' }}>
                         <span style={{ width: 24, fontWeight: 800, color: pr ? '#E8C12C' : '#555' }}>{sIdx + 1}.</span>
-                        <span style={{ fontWeight: 700 }}>{formatWeight(set.weight || 0, settings?.unit)} {settings?.unit || 'kg'} × {set.reps || 0}</span>
+                        <span style={{ fontWeight: 700 }}>
+                          {requiresWeight 
+                            ? `${formatWeight(set.weight || 0, settings?.unit)} ${settings?.unit || 'kg'} × ${set.reps || 0}`
+                            : `${set.reps || 0} reps`
+                          }
+                        </span>
                         {set.effort && <span style={{ color: '#8b90a0', fontSize: 12, fontWeight: 700 }}>RPE {set.effort}</span>}
                         
                         {set.isPR && !pr && (
@@ -324,14 +336,14 @@ export default function PostWorkoutSummary({ session, data, persist, onClose, on
                       {pr && (
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 4, marginLeft: 36 }}>
                           <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <span style={{ fontSize: 9, fontWeight: 800, color: '#000', background: pr.type==='1rm'?'#E8C12C':'#0A84FF', padding: '3px 8px', borderRadius: 6, letterSpacing: '0.05em', boxShadow: `0 0 10px ${pr.type==='1rm'?'rgba(232,193,44,0.5)':'rgba(10,132,255,0.5)'}` }}>
-                              {pr.type === '1rm' ? '1RM RECORD' : 'VOLUME RECORD'}
+                            <span style={{ fontSize: 9, fontWeight: 800, color: '#000', background: pr.type==='1rm'?'#E8C12C':(pr.type==='reps'?'#30D158':'#0A84FF'), padding: '3px 8px', borderRadius: 6, letterSpacing: '0.05em', boxShadow: `0 0 10px ${pr.type==='1rm'?'rgba(232,193,44,0.5)':(pr.type==='reps'?'rgba(48,209,88,0.5)':'rgba(10,132,255,0.5)')}` }}>
+                              {pr.type === '1rm' ? '1RM RECORD' : (pr.type === 'reps' ? 'REPS RECORD' : 'VOLUME RECORD')}
                             </span>
                           </div>
                           {pr.oldRecord !== undefined && (
                             <div style={{ fontSize: 12, color: '#e2e2e2', fontWeight: 600, fontFamily: '"Inter", sans-serif' }}>
-                              Prev: <span style={{ color: '#8b90a0' }}>{formatWeight(pr.oldRecord, settings?.unit)}</span>
-                              {pr.increase > 0 && <span style={{ color: '#30D158', marginLeft: 8, fontWeight: 800, background: 'rgba(48,209,88,0.1)', padding: '2px 6px', borderRadius: 4 }}>+{formatWeight(pr.increase, settings?.unit)}</span>}
+                              Prev: <span style={{ color: '#8b90a0' }}>{pr.type === 'reps' ? `${pr.oldRecord} reps` : formatWeight(pr.oldRecord, settings?.unit)}</span>
+                              {pr.increase > 0 && <span style={{ color: '#30D158', marginLeft: 8, fontWeight: 800, background: 'rgba(48,209,88,0.1)', padding: '2px 6px', borderRadius: 4 }}>+{pr.type === 'reps' ? `${pr.increase} reps` : formatWeight(pr.increase, settings?.unit)}</span>}
                             </div>
                           )}
                         </div>

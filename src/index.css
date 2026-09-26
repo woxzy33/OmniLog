@@ -21,15 +21,36 @@
 }
 
 * { box-sizing: border-box; }
+html {
+  min-height: 100%;
+  overflow-x: hidden;
+}
 body { 
   margin: 0; 
   background: var(--bg-main); 
   color: #e2e2e2;
   -webkit-tap-highlight-color: transparent; 
   font-family: 'Inter', sans-serif;
+  min-height: 100%;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  width: 100%;
 }
-input { transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); }
+input { 
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); 
+}
 input:focus { outline: none; box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.3); }
+
+/* Prevent iOS Safari from auto-zooming on focus while keeping desktop typography intact */
+@media screen and (max-width: 768px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"] {
+    font-size: 16px !important;
+  }
+}
+
 button { cursor: pointer; font-family: inherit; }
 
 /* Smooth Scrollbar */
@@ -55,6 +76,7 @@ button { cursor: pointer; font-family: inherit; }
   background: var(--bg-main);
   color: #F5F5F7;
   min-height: 100vh;
+  min-height: 100dvh;
   max-width: 480px;
   margin: 0 auto;
   position: relative;
@@ -63,6 +85,7 @@ button { cursor: pointer; font-family: inherit; }
 
 .loadingWrap {
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;

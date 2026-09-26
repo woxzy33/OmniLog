@@ -21,6 +21,8 @@ local.properties
 .env.local
 *.tmp
 *.log
+scratch/
+*_dump.json
 
 # Editor & OS files
 .DS_Store

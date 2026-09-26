@@ -5,9 +5,9 @@ import MuscleHeatmap from './MuscleHeatmap';
 import { styles } from '../styles';
 import { useAppStore } from '../store';
 import { Plus, X, Check, ChevronLeft, ChevronRight, Search, TrendingUp, Dumbbell, User, Calendar as CalendarIcon, Edit2, Share, Settings, Download, Upload, Filter, Trash2 } from './Icons';
-import { formatWeight, translateExerciseName, calculate1RM, validateMeasurement } from '../utils';
+import { formatWeight, translateExerciseName, calculate1RM, validateMeasurement, parseVolume, getUserWeightAtDate, calculateStreak } from '../utils';
 import { useTranslation } from 'react-i18next';
-import { uid, CATEGORIES, MACHINES } from '../data/exerciseDb';
+import { uid, CATEGORIES, MACHINES, exerciseRequiresWeight } from '../data/exerciseDb';
 import { ErrorModal, ConfirmModal } from './WorkoutSafeguards';
 
 const RADAR_AXES = ["Chest", "Back", "Shoulders", "Arms", "Legs", "Core"];
@@ -18,35 +18,6 @@ const METRIC_LABELS = {
   leftThigh: "L. Thigh (cm)", rightThigh: "R. Thigh (cm)", waist: "Waist (cm)", calves: "Calves (cm)", neck: "Neck (cm)",
   shoulders: "Shoulders (cm)", height: "Height (cm)"
 };
-
-function calculateStreak(sessions) {
-  if (!sessions || sessions.length === 0) return 0;
-  const dates = [...new Set(sessions.map(s => new Date(s.date).toLocaleDateString('en-US')))]
-    .sort((a, b) => new Date(b) - new Date(a));
-  
-  let streak = 0;
-  let currentDate = new Date();
-  currentDate.setHours(0,0,0,0);
-
-  let checkDate = new Date(dates[0]);
-  checkDate.setHours(0,0,0,0);
-  
-  const diffDays = Math.floor((currentDate - checkDate) / (1000 * 60 * 60 * 24));
-  if (diffDays > 1) return 0;
-
-  let expectedDate = checkDate;
-  for (let i = 0; i < dates.length; i++) {
-    const d = new Date(dates[i]);
-    d.setHours(0,0,0,0);
-    if (d.getTime() === expectedDate.getTime()) {
-      streak++;
-      expectedDate.setDate(expectedDate.getDate() - 1);
-    } else {
-      break;
-    }
-  }
-  return streak;
-}
 
 const STATS_RANGES = {
   "This Week": 7,
@@ -98,18 +69,25 @@ function StatisticsView({ data, onBack, settings }) {
 
   const stats = useMemo(() => {
     let vol = 0, reps = 0, sets = 0, duration = 0;
+    const dict = {};
+    (data.exercises || []).forEach(e => dict[e.id] = e);
     filteredSessions.forEach(s => {
       duration += (s.durationMins || 0);
-      (s.exercises || []).forEach(ex => (ex.sets || []).forEach(set => {
-        if (set.completed) {
-          vol += (Number(set.weight) || 0) * (Number(set.reps) || 0);
-          reps += (Number(set.reps) || 0);
-          sets += 1;
-        }
-      }));
+      const userWeight = getUserWeightAtDate(data.measurements, s.date);
+      (s.exercises || []).forEach(ex => {
+        const exObj = dict[ex.exerciseId];
+        const requiresWeight = exerciseRequiresWeight(exObj);
+        (ex.sets || []).forEach(set => {
+          if (set.completed) {
+            vol += parseVolume(set.weight, set.reps, requiresWeight ? 0 : userWeight);
+            reps += (Number(set.reps) || 0);
+            sets += 1;
+          }
+        });
+      });
     });
     return { vol, reps, sets, duration, workouts: filteredSessions.length };
-  }, [filteredSessions]);
+  }, [filteredSessions, data.exercises, data.measurements]);
 
   const radarData = useMemo(() => {
     const dict = {};
@@ -117,16 +95,18 @@ function StatisticsView({ data, onBack, settings }) {
     const volumes = {};
     RADAR_AXES.forEach(cat => volumes[cat] = 0);
     filteredSessions.forEach(session => {
+      const userWeight = getUserWeightAtDate(data.measurements, session.date);
       session.exercises.forEach(ex => {
         const exObj = dict[ex.exerciseId];
         if (exObj && volumes[exObj.category] !== undefined) {
-          const vol = ex.sets.reduce((acc, s) => acc + (s.completed ? ((Number(s.weight)||0)*(Number(s.reps)||0)) : 0), 0);
+          const requiresWeight = exerciseRequiresWeight(exObj);
+          const vol = ex.sets.reduce((acc, s) => acc + (s.completed ? parseVolume(s.weight, s.reps, requiresWeight ? 0 : userWeight) : 0), 0);
           volumes[exObj.category] += vol;
         }
       });
     });
     return RADAR_AXES.map(cat => ({ subject: cat, Volume: volumes[cat] }));
-  }, [filteredSessions, data.exercises]);
+  }, [filteredSessions, data.exercises, data.measurements]);
 
   return (
     <motion.div initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: 20, opacity: 0 }}>
@@ -281,11 +261,22 @@ function MainProfileView({ data, persist, onNavigate, settings }) {
   const streak = useMemo(() => calculateStreak(data.sessions), [data.sessions]);
   const lifetimeVolume = useMemo(() => {
     let vol = 0;
-    data.sessions.forEach(s => (s.exercises || []).forEach(ex => (ex.sets || []).forEach(set => {
-      if (set.completed) vol += (Number(set.weight) || 0) * (Number(set.reps) || 0);
-    })));
+    const dict = {};
+    (data.exercises || []).forEach(e => dict[e.id] = e);
+    (data.sessions || []).forEach(s => {
+      const userWeight = getUserWeightAtDate(data.measurements, s.date);
+      (s.exercises || []).forEach(ex => {
+        const exObj = dict[ex.exerciseId];
+        const requiresWeight = exerciseRequiresWeight(exObj);
+        (ex.sets || []).forEach(set => {
+          if (set.completed) {
+            vol += parseVolume(set.weight, set.reps, requiresWeight ? 0 : userWeight);
+          }
+        });
+      });
+    });
     return vol;
-  }, [data.sessions]);
+  }, [data.sessions, data.exercises, data.measurements]);
 
   const activityData = useMemo(() => {
     const bins = [];
@@ -509,7 +500,9 @@ function MainProfileView({ data, persist, onNavigate, settings }) {
           </div>
           <div style={{ textAlign: 'center' }}>
             <div style={{ color: '#8b90a0', fontSize: 12, fontWeight: 700, textTransform: 'uppercase' }}>Streak</div>
-            <div style={{ color: '#E8C12C', fontSize: 24, fontWeight: 800 }}>{streak} <span style={{ fontSize: 14 }}>🔥</span></div>
+            <div style={{ color: '#E8C12C', fontSize: 24, fontWeight: 800 }}>
+              {streak} {streak > 0 && <span style={{ fontSize: 13, fontWeight: 600, color: '#a0a5b5' }}>{streak === 1 ? 'wk' : 'wks'}</span>} <span style={{ fontSize: 14 }}>🔥</span>
+            </div>
           </div>
           <div style={{ textAlign: 'center' }}>
             <div style={{ color: '#8b90a0', fontSize: 12, fontWeight: 700, textTransform: 'uppercase' }}>Volume</div>
@@ -888,6 +881,7 @@ function ExerciseDetailView({ data, exerciseId, onBack, settings }) {
 function MeasuresView({ data, persist, onBack, settings }) {
   const [selectedMetric, setSelectedMetric] = useState("weight");
   const [showLogModal, setShowLogModal] = useState(false);
+  const [editTarget, setEditTarget] = useState(null);
   const [deleteTargetId, setDeleteTargetId] = useState(null);
 
   const sliderRef = React.useRef(null);
@@ -900,14 +894,45 @@ function MeasuresView({ data, persist, onBack, settings }) {
     return [...measurements].sort((a, b) => new Date(a.date) - new Date(b.date));
   }, [measurements]);
 
-  // Chart data for selected metric
+  // Chart data for selected metric with exact unit conversion
   const chartData = useMemo(() => {
+    const isImperial = settings?.unit === 'lbs';
     return chronological
-      .map(m => ({
-        date: new Date(m.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
-        value: Number(m[selectedMetric]) || 0
-      }))
-      .filter(m => m.value > 0);
+      .map(m => {
+        let val = Number(m[selectedMetric]);
+        if (val && !isNaN(val) && val > 0) {
+          if (selectedMetric === 'weight') {
+            val = isImperial ? Number((val * 2.20462).toFixed(1)) : Number(val.toFixed(1));
+          } else if (selectedMetric === 'bodyFat') {
+            val = Number(val.toFixed(1));
+          } else {
+            val = isImperial ? Number((val / 2.54).toFixed(1)) : Number(val.toFixed(1));
+          }
+          return {
+            date: new Date(m.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+            value: val
+          };
+        }
+        return null;
+      })
+      .filter(Boolean);
+  }, [chronological, selectedMetric, settings?.unit]);
+
+  // Summary stats for the active metric (Current, Start, Net Change)
+  const metricSummary = useMemo(() => {
+    const valid = chronological.filter(m => m[selectedMetric] !== undefined && m[selectedMetric] !== null && m[selectedMetric] !== "");
+    if (valid.length === 0) return null;
+    const first = valid[0];
+    const latest = valid[valid.length - 1];
+    const firstVal = Number(first[selectedMetric]) || 0;
+    const latestVal = Number(latest[selectedMetric]) || 0;
+    const diff = latestVal - firstVal;
+    return {
+      current: latestVal,
+      start: firstVal,
+      diff,
+      count: valid.length
+    };
   }, [chronological, selectedMetric]);
 
   // Reverse chronological (newest to oldest) list for the selected metric
@@ -1122,6 +1147,53 @@ function MeasuresView({ data, persist, onBack, settings }) {
         </div>
       </div>
 
+      {/* Active Metric Summary Card */}
+      {metricSummary && (
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr 1fr',
+          gap: 8,
+          background: '#12141C',
+          border: '1px solid rgba(255, 255, 255, 0.08)',
+          borderRadius: 16,
+          padding: '14px 12px',
+          marginBottom: 16
+        }}>
+          <div>
+            <div style={{ fontSize: 10, fontWeight: 800, color: '#8B90A0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Current</div>
+            <div style={{ fontSize: 16, fontWeight: 800, color: '#fff', marginTop: 2 }}>
+              {formatMetricVal(metricSummary.current, selectedMetric)}
+            </div>
+          </div>
+          <div>
+            <div style={{ fontSize: 10, fontWeight: 800, color: '#8B90A0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Baseline</div>
+            <div style={{ fontSize: 16, fontWeight: 700, color: '#9CA3AF', marginTop: 2 }}>
+              {formatMetricVal(metricSummary.start, selectedMetric)}
+            </div>
+          </div>
+          <div>
+            <div style={{ fontSize: 10, fontWeight: 800, color: '#8B90A0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Net Change</div>
+            <div style={{
+              fontSize: 16,
+              fontWeight: 800,
+              marginTop: 2,
+              color: metricSummary.diff > 0 
+                ? (['waist', 'bodyFat'].includes(selectedMetric) ? '#EF4444' : '#10B981')
+                : (metricSummary.diff < 0 
+                  ? (['waist', 'bodyFat'].includes(selectedMetric) ? '#10B981' : '#3B82F6')
+                  : '#9CA3AF')
+            }}>
+              {metricSummary.diff > 0 ? '+' : ''}
+              {settings?.unit === 'lbs' && selectedMetric === 'weight'
+                ? (metricSummary.diff * 2.20462).toFixed(1)
+                : (settings?.unit === 'lbs' && selectedMetric !== 'bodyFat'
+                  ? (metricSummary.diff / 2.54).toFixed(1)
+                  : metricSummary.diff.toFixed(1))} {selectedMetric === 'weight' ? (settings?.unit || 'kg') : (selectedMetric === 'bodyFat' ? '%' : (settings?.unit === 'lbs' ? 'in' : 'cm'))}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Progress Chart */}
       <div className="chartCard" style={{ padding: '16px 0', height: 260, marginBottom: 24 }}>
         {chartData.length > 0 ? (
@@ -1208,25 +1280,46 @@ function MeasuresView({ data, persist, onBack, settings }) {
                     </span>
                   </div>
 
-                  <button
-                    onClick={() => setDeleteTargetId(entry.id)}
-                    title="Delete record"
-                    style={{
-                      background: 'transparent',
-                      border: 'none',
-                      color: '#6b7080',
-                      cursor: 'pointer',
-                      padding: 4,
-                      display: 'flex',
-                      alignItems: 'center',
-                      borderRadius: 6,
-                      transition: 'color 0.2s'
-                    }}
-                    onMouseEnter={(e) => e.currentTarget.style.color = '#E81123'}
-                    onMouseLeave={(e) => e.currentTarget.style.color = '#6b7080'}
-                  >
-                    <Trash2 size={16} />
-                  </button>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <button
+                      onClick={() => setEditTarget(entry)}
+                      title="Edit record"
+                      style={{
+                        background: 'transparent',
+                        border: 'none',
+                        color: '#6b7080',
+                        cursor: 'pointer',
+                        padding: 4,
+                        display: 'flex',
+                        alignItems: 'center',
+                        borderRadius: 6,
+                        transition: 'color 0.2s'
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.color = 'var(--primary)'}
+                      onMouseLeave={(e) => e.currentTarget.style.color = '#6b7080'}
+                    >
+                      <Edit2 size={16} />
+                    </button>
+                    <button
+                      onClick={() => setDeleteTargetId(entry.id)}
+                      title="Delete record"
+                      style={{
+                        background: 'transparent',
+                        border: 'none',
+                        color: '#6b7080',
+                        cursor: 'pointer',
+                        padding: 4,
+                        display: 'flex',
+                        alignItems: 'center',
+                        borderRadius: 6,
+                        transition: 'color 0.2s'
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.color = '#E81123'}
+                      onMouseLeave={(e) => e.currentTarget.style.color = '#6b7080'}
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  </div>
                 </div>
 
                 {/* Primary metric row */}
@@ -1291,12 +1384,24 @@ function MeasuresView({ data, persist, onBack, settings }) {
       </div>
 
       <LogMeasurementModal 
-        isOpen={showLogModal} 
-        onClose={() => setShowLogModal(false)} 
-        onSave={(newEntry) => {
-          const nextData = { ...data, measurements: [...(data.measurements || []), newEntry] };
-          persist(nextData);
+        isOpen={showLogModal || !!editTarget} 
+        onClose={() => {
           setShowLogModal(false);
+          setEditTarget(null);
+        }} 
+        initialEntry={editTarget}
+        onSave={(savedEntry) => {
+          const existing = data.measurements || [];
+          let updated;
+          if (editTarget) {
+            updated = existing.map(m => m.id === savedEntry.id ? savedEntry : m);
+          } else {
+            updated = [...existing, savedEntry];
+          }
+          const nextData = { ...data, measurements: updated };
+          persist(nextData, true);
+          setShowLogModal(false);
+          setEditTarget(null);
         }} 
         settings={settings}
       />
@@ -1308,7 +1413,7 @@ function MeasuresView({ data, persist, onBack, settings }) {
         onConfirm={() => {
           if (deleteTargetId) {
             const updated = (data.measurements || []).filter(m => m.id !== deleteTargetId);
-            persist({ ...data, measurements: updated });
+            persist({ ...data, measurements: updated }, true);
             setDeleteTargetId(null);
           }
         }}
@@ -1618,31 +1723,98 @@ function CalendarView({ data, persist, onBack, settings }) {
   );
 }
 
-function LogMeasurementModal({ isOpen, onClose, onSave, settings }) {
-  const [entry, setEntry] = useState({});
+function LogMeasurementModal({ isOpen, onClose, onSave, settings, initialEntry = null }) {
+  const isImperial = settings?.unit === 'lbs';
+
+  const [entry, setEntry] = useState(() => {
+    if (!initialEntry) return {};
+    const populated = {};
+    METRICS.forEach(m => {
+      const val = initialEntry[m];
+      if (val !== undefined && val !== null && val !== '') {
+        const num = Number(val);
+        if (m === 'weight') {
+          populated[m] = isImperial ? (num * 2.20462).toFixed(1) : num.toFixed(1);
+        } else if (m === 'bodyFat') {
+          populated[m] = num.toFixed(1);
+        } else {
+          populated[m] = isImperial ? (num / 2.54).toFixed(1) : num.toFixed(1);
+        }
+      }
+    });
+    return populated;
+  });
+
   const [validationErrors, setValidationErrors] = useState({});
   const [modalError, setModalError] = useState(null);
+
+  useEffect(() => {
+    if (initialEntry) {
+      const populated = {};
+      METRICS.forEach(m => {
+        const val = initialEntry[m];
+        if (val !== undefined && val !== null && val !== '') {
+          const num = Number(val);
+          if (m === 'weight') {
+            populated[m] = isImperial ? (num * 2.20462).toFixed(1) : num.toFixed(1);
+          } else if (m === 'bodyFat') {
+            populated[m] = num.toFixed(1);
+          } else {
+            populated[m] = isImperial ? (num / 2.54).toFixed(1) : num.toFixed(1);
+          }
+        }
+      });
+      setEntry(populated);
+    } else {
+      setEntry({});
+    }
+    setValidationErrors({});
+    setModalError(null);
+  }, [initialEntry, isOpen, isImperial]);
 
   if (!isOpen) return null;
 
   const handleSave = () => {
-    const isImperial = settings?.unit === 'lbs';
     const errors = {};
-    for (const [key, value] of Object.entries(entry)) {
-      if (value !== "" && value != null) {
-        const err = validateMeasurement(key, value, settings?.unit, isImperial);
+    const normalized = {};
+    let hasAnyValue = false;
+
+    for (const [key, rawVal] of Object.entries(entry)) {
+      if (rawVal !== "" && rawVal != null) {
+        hasAnyValue = true;
+        const err = validateMeasurement(key, rawVal, settings?.unit, isImperial);
         if (err) {
           errors[key] = err;
+        } else {
+          const num = Number(rawVal);
+          if (key === 'weight') {
+            normalized[key] = isImperial ? Number((num * 0.45359237).toFixed(1)) : Number(num.toFixed(1));
+          } else if (key === 'bodyFat') {
+            normalized[key] = Number(num.toFixed(1));
+          } else {
+            normalized[key] = isImperial ? Number((num * 2.54).toFixed(1)) : Number(num.toFixed(1));
+          }
         }
       }
     }
+
+    if (!hasAnyValue) {
+      setModalError("Please enter at least one measurement value.");
+      return;
+    }
+
     if (Object.keys(errors).length > 0) {
       setValidationErrors(errors);
       setModalError("Please fix the highlighted measurements before saving.");
       return;
     }
+
     setValidationErrors({});
-    onSave({ id: uid(), date: new Date().toISOString(), ...entry });
+    onSave({
+      id: initialEntry?.id || uid(),
+      date: initialEntry?.date || new Date().toISOString(),
+      ...normalized
+    });
   };
 
   return (
@@ -1653,36 +1825,54 @@ function LogMeasurementModal({ isOpen, onClose, onSave, settings }) {
       >
         <motion.div 
           initial={{ y: "100%" }} animate={{ y: 0 }} exit={{ y: "100%" }} transition={{ type: "spring", damping: 25, stiffness: 300 }}
-          style={{ background: '#121212', width: '100%', borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 24, paddingBottom: 40, maxHeight: '80vh', overflowY: 'auto' }}
+          style={{ background: '#121212', width: '100%', borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 24, paddingBottom: 40, maxHeight: '85vh', overflowY: 'auto' }}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-            <div style={{ fontSize: 20, fontWeight: 800, color: '#e2e2e2' }}>Log Body Stats</div>
-            <button style={{ background: 'none', border: 'none', color: '#8b90a0' }} onClick={onClose}><X size={24} /></button>
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-            {METRICS.map(m => (
-              <div key={m} style={{ background: validationErrors[m] ? 'rgba(217, 74, 74, 0.1)' : '#1C1C1E', border: validationErrors[m] ? '1px solid #D94A4A' : '1px solid transparent', borderRadius: 12, padding: '12px 16px', position: 'relative' }}>
-                <div style={{ fontSize: 12, color: validationErrors[m] ? '#D94A4A' : '#8b90a0', fontWeight: 700, marginBottom: 8, display: 'flex', justifyContent: 'space-between' }}>
-                  {m === 'weight' ? `Weight (${settings?.unit || 'kg'})` : METRIC_LABELS[m]}
-                  {validationErrors[m] && <span style={{ color: '#D94A4A', fontWeight: 900 }}>!</span>}
-                </div>
-                <input 
-                  type="number" 
-                  value={entry[m] || ""} 
-                  onChange={e => {
-                    setEntry({ ...entry, [m]: e.target.value });
-                    if (validationErrors[m]) setValidationErrors({ ...validationErrors, [m]: null });
-                  }} 
-                  placeholder="0.0"
-                  style={{ width: '100%', background: 'transparent', border: 'none', color: '#e2e2e2', fontSize: 24, fontWeight: 800, outline: 'none' }}
-                />
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+            <div>
+              <div style={{ fontSize: 20, fontWeight: 800, color: '#e2e2e2' }}>
+                {initialEntry ? "Edit Body Stats" : "Log Body Stats"}
               </div>
-            ))}
+              <div style={{ fontSize: 12, color: '#8B90A0', marginTop: 2 }}>
+                {isImperial ? "Values entered in lbs and inches" : "Values entered in kg and cm"}
+              </div>
+            </div>
+            <button style={{ background: 'none', border: 'none', color: '#8b90a0', cursor: 'pointer', padding: 4 }} onClick={onClose}>
+              <X size={24} />
+            </button>
           </div>
 
-          <button className="finishBtn" style={{ marginTop: 24  }} onClick={handleSave}>
-            <Check size={18} strokeWidth={3} /> Save Log
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+            {METRICS.map(m => {
+              const unitBadge = m === 'weight' ? (settings?.unit || 'kg') : (m === 'bodyFat' ? '%' : (isImperial ? 'in' : 'cm'));
+              return (
+                <div key={m} style={{ background: validationErrors[m] ? 'rgba(217, 74, 74, 0.1)' : '#1C1C1E', border: validationErrors[m] ? '1px solid #D94A4A' : '1px solid rgba(255,255,255,0.06)', borderRadius: 12, padding: '12px 14px', position: 'relative' }}>
+                  <div style={{ fontSize: 11, color: validationErrors[m] ? '#D94A4A' : '#8b90a0', fontWeight: 700, marginBottom: 6, display: 'flex', justifyContent: 'space-between', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                    <span>{m === 'weight' ? `Weight (${unitBadge})` : `${METRIC_LABELS[m]?.split(' (')[0]} (${unitBadge})`}</span>
+                    {validationErrors[m] && <span style={{ color: '#D94A4A', fontWeight: 900 }}>!</span>}
+                  </div>
+                  <input 
+                    type="number" 
+                    step="any"
+                    value={entry[m] || ""} 
+                    onChange={e => {
+                      setEntry({ ...entry, [m]: e.target.value });
+                      if (validationErrors[m]) setValidationErrors({ ...validationErrors, [m]: null });
+                    }} 
+                    placeholder="0.0"
+                    style={{ width: '100%', background: 'transparent', border: 'none', color: '#e2e2e2', fontSize: 22, fontWeight: 800, outline: 'none' }}
+                  />
+                  {validationErrors[m] && (
+                    <div style={{ fontSize: 10, color: '#EF4444', fontWeight: 600, marginTop: 4 }}>
+                      {validationErrors[m]}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          <button className="finishBtn" style={{ marginTop: 24 }} onClick={handleSave}>
+            <Check size={18} strokeWidth={3} /> {initialEntry ? "Update Entry" : "Save Log"}
           </button>
         </motion.div>
       </motion.div>

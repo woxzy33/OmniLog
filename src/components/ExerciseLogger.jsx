@@ -5,6 +5,7 @@ import { useKeypad } from './NumericKeypad';
 import PlateCalculatorModal from './PlateCalculatorModal';
 import { ErrorModal } from './WorkoutSafeguards';
 import { formatWeight, parseDisplayWeight, validateExerciseSet } from '../utils';
+import { exerciseRequiresWeight } from '../data/exerciseDb';
 import { useTranslation } from 'react-i18next';
 
 // High end sound for completing sets - using a clean click URL (safeguarded)
@@ -68,18 +69,20 @@ const SwipeableSetRow = ({ children, onDelete, isCompleted }) => {
   );
 };
 
-const ExerciseLogger = React.memo(({ exIdx, exerciseId, name, category, equipment, imageUrl, sets, priorSets, supersetPrefix = "", onSetsChange, startTimer, footer, notes, onNotesChange, onRemove, settings, onTitleClick, dragControls }) => {
+const ExerciseLogger = React.memo(({ exIdx, exerciseId, name, category, equipment, imageUrl, sets, priorSets, supersetPrefix = "", onSetsChange, startTimer, footer, notes, onNotesChange, onRemove, settings, onTitleClick, dragControls, requiresWeight: requiresWeightProp }) => {
   const { t } = useTranslation();
   const { openKeypad } = useKeypad();
   const [calcWeight, setCalcWeight] = useState(null);
+
+  const requiresWeight = typeof requiresWeightProp === 'boolean'
+    ? requiresWeightProp
+    : exerciseRequiresWeight({ name, category, equipment, requiresWeight: requiresWeightProp });
 
   const handleInputClick = (type, setIndex) => {
     const currentSet = sets[setIndex];
     let val = currentSet[type] || "";
     
     // For weight, we might want to display in lb if settings demand, but store in kg.
-    // However, the keypad allows decimal entry so parseDisplayWeight is tricky mid-typing.
-    // We will just let them edit the string directly and format it on save.
     if (type === 'weight' && val && settings?.unit === 'lbs') {
       val = (Number(val) * 2.20462).toFixed(2).replace(/\.00$/, '');
     }
@@ -87,7 +90,13 @@ const ExerciseLogger = React.memo(({ exIdx, exerciseId, name, category, equipmen
     const nextFn = () => {
        if (type === 'weight') handleInputClick('reps', setIndex);
        else if (type === 'reps') handleInputClick('rpe', setIndex);
-       else if (type === 'rpe' && setIndex < sets.length - 1) handleInputClick('weight', setIndex + 1);
+       else if (type === 'rpe' && setIndex < sets.length - 1) {
+         if (requiresWeight) {
+           handleInputClick('weight', setIndex + 1);
+         } else {
+           handleInputClick('reps', setIndex + 1);
+         }
+       }
     };
     
     openKeypad({
@@ -114,7 +123,7 @@ const ExerciseLogger = React.memo(({ exIdx, exerciseId, name, category, equipmen
     const n = [...sets];
     const prev = n.length > 0 ? n[n.length - 1] : (priorSets && priorSets.length > 0 ? priorSets[0] : null);
     n.push({
-      weight: prev ? prev.weight : "",
+      weight: requiresWeight ? (prev ? prev.weight : "") : "",
       reps: prev ? prev.reps : "",
       rpe: prev ? prev.rpe : "",
       type: "N",
@@ -144,7 +153,9 @@ const ExerciseLogger = React.memo(({ exIdx, exerciseId, name, category, equipmen
   const handleUsePrior = (i) => {
     if (!priorSets?.[i]) return;
     const n = [...sets];
-    n[i].weight = priorSets[i].weight;
+    if (requiresWeight) {
+      n[i].weight = priorSets[i].weight;
+    }
     n[i].reps = priorSets[i].reps;
     onSetsChange(exIdx, n, exerciseId);
   };
@@ -180,8 +191,15 @@ const ExerciseLogger = React.memo(({ exIdx, exerciseId, name, category, equipmen
               style={{ cursor: 'pointer' }}
               onClick={onTitleClick}
             >
-              <div style={{ fontSize: 10, color: "var(--primary)", fontWeight: 700, marginBottom: 2, textTransform: 'uppercase', letterSpacing: 0.5 }}>
-                {supersetPrefix ? `Superset ${supersetPrefix}` : (category ? t(`categories.${category.toLowerCase()}`, category) : 'Exercise')}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
+                <span style={{ fontSize: 10, color: "var(--primary)", fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.5 }}>
+                  {supersetPrefix ? `Superset ${supersetPrefix}` : (category ? t(`categories.${category.toLowerCase()}`, category) : 'Exercise')}
+                </span>
+                {!requiresWeight && (
+                  <span style={{ background: 'rgba(255,255,255,0.08)', color: '#8b90a0', padding: '1px 5px', borderRadius: 4, fontSize: 9, fontWeight: 700, letterSpacing: '0.04em' }}>
+                    BODYWEIGHT
+                  </span>
+                )}
               </div>
               <div style={{ fontSize: 15, fontWeight: 800, color: '#e2e2e2', lineHeight: 1.2 }}>{name}</div>
             </div>
@@ -222,7 +240,9 @@ const ExerciseLogger = React.memo(({ exIdx, exerciseId, name, category, equipmen
             <div style={{ display: 'flex', gap: 6, marginBottom: 6, padding: '0 4px', alignItems: 'center' }}>
               <span style={{ width: 44, textAlign: 'center', fontFamily: "Outfit", fontSize: 9, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase', color: '#6b7080' }}>Set</span>
               <span style={{ flex: 1.5, textAlign: 'left', fontFamily: "Outfit", fontSize: 9, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase', color: '#6b7080', paddingLeft: 4 }}>Previous</span>
-              <span style={{ flex: 1.2, textAlign: 'center', fontFamily: "Outfit", fontSize: 9, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase', color: '#6b7080' }}>Weight</span>
+              {requiresWeight && (
+                <span style={{ flex: 1.2, textAlign: 'center', fontFamily: "Outfit", fontSize: 9, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase', color: '#6b7080' }}>Weight</span>
+              )}
               <span style={{ flex: 1, textAlign: 'center', fontFamily: "Outfit", fontSize: 9, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase', color: '#6b7080' }}>Reps</span>
               <span style={{ flex: 1, textAlign: 'center', fontFamily: "Outfit", fontSize: 9, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase', color: '#6b7080' }}>RPE</span>
               <span style={{ width: 44, textAlign: 'center' }}><Check size={14} color="#6b7080" /></span>
@@ -285,28 +305,33 @@ const ExerciseLogger = React.memo(({ exIdx, exerciseId, name, category, equipmen
                       onClick={() => handleUsePrior(i)}
                       style={{ fontSize: 12, color: '#8b90a0', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap' }}
                     >
-                      {formatWeight(priorSets[i].weight, settings?.unit)}{settings?.unit||'kg'} x {priorSets[i].reps}
+                      {requiresWeight 
+                        ? `${formatWeight(priorSets[i].weight, settings?.unit)}${settings?.unit||'kg'} x ${priorSets[i].reps}`
+                        : `${priorSets[i].reps} reps`
+                      }
                     </div>
                   ) : (
                     <div style={{ fontSize: 12, color: '#444' }}>-</div>
                   )}
                 </div>
                 
-                <div style={{ flex: 1.2 }}>
-                  <div
-                    onClick={() => {
-                      if (s.completed) return;
-                      handleInputClick('weight', i);
-                    }}
-                    onDoubleClick={() => {
-                      if (s.completed) return;
-                      setCalcWeight(s.weight || priorSets?.[i]?.weight || "0")
-                    }}
-                    className="setInput" style={{ background: s.completed ? 'transparent' : '#000000', width: '100%', padding: '6px 0px', fontSize: 15, color: s.weight ? '#fff' : '#6b7080'  }}
-                  >
-                    {s.weight ? formatWeight(s.weight, settings?.unit) : (formatWeight(priorSets?.[i]?.weight, settings?.unit) || "0")}
+                {requiresWeight && (
+                  <div style={{ flex: 1.2 }}>
+                    <div
+                      onClick={() => {
+                        if (s.completed) return;
+                        handleInputClick('weight', i);
+                      }}
+                      onDoubleClick={() => {
+                        if (s.completed) return;
+                        setCalcWeight(s.weight || priorSets?.[i]?.weight || "0")
+                      }}
+                      className="setInput" style={{ background: s.completed ? 'transparent' : '#000000', width: '100%', padding: '6px 0px', fontSize: 15, color: s.weight ? '#fff' : '#6b7080'  }}
+                    >
+                      {s.weight ? formatWeight(s.weight, settings?.unit) : (formatWeight(priorSets?.[i]?.weight, settings?.unit) || "0")}
+                    </div>
                   </div>
-                </div>
+                )}
                 
                 <div style={{ flex: 1 }}>
                   <div
@@ -346,7 +371,14 @@ const ExerciseLogger = React.memo(({ exIdx, exerciseId, name, category, equipmen
                     const completing = !n[i].completed;
                     
                     if (completing) {
-                      const errorMsg = validateExerciseSet(n[i].weight, n[i].reps, category, equipment || 'Other', settings?.unit || 'kg');
+                      const errorMsg = validateExerciseSet(
+                        requiresWeight ? n[i].weight : 0, 
+                        n[i].reps, 
+                        category, 
+                        equipment || 'Other', 
+                        settings?.unit || 'kg',
+                        requiresWeight
+                      );
                       if (errorMsg) {
                         n[i] = { ...n[i], error: errorMsg, completed: false };
                         onSetsChange(exIdx, n, exerciseId, i);

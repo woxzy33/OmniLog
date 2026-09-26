@@ -7,15 +7,22 @@ export default function PRToast({ notification, settings, onClose }) {
   if (!notification) return null;
 
   const is1RM = notification.type === '1rm';
-  const accentColor = is1RM ? '#E8C12C' : '#0A84FF';
-  const shadowGlow = is1RM ? 'rgba(232, 193, 44, 0.4)' : 'rgba(10, 132, 255, 0.4)';
+  const isReps = notification.type === 'reps';
+  const accentColor = is1RM ? '#E8C12C' : (isReps ? '#30D158' : '#0A84FF');
+  const shadowGlow = is1RM ? 'rgba(232, 193, 44, 0.4)' : (isReps ? 'rgba(48, 209, 88, 0.4)' : 'rgba(10, 132, 255, 0.4)');
   
   const recordValue = is1RM 
     ? `${formatWeight(notification.achieved, settings?.unit)} ${settings?.unit || 'kg'} (Est. 1RM)` 
+    : isReps
+    ? `${notification.achieved} Reps`
     : `${formatWeight(notification.achieved, settings?.unit)} ${settings?.unit || 'kg'}`;
     
-  const oldRecordText = `${formatWeight(notification.oldRecord, settings?.unit)} ${settings?.unit || 'kg'}`;
-  const increaseText = `+${formatWeight(notification.increase, settings?.unit)} ${settings?.unit || 'kg'}`;
+  const oldRecordText = isReps
+    ? `${notification.oldRecord} Reps`
+    : `${formatWeight(notification.oldRecord, settings?.unit)} ${settings?.unit || 'kg'}`;
+  const increaseText = isReps
+    ? `+${notification.increase} reps`
+    : `+${formatWeight(notification.increase, settings?.unit)} ${settings?.unit || 'kg'}`;
 
   return (
     <AnimatePresence>
@@ -38,7 +45,7 @@ export default function PRToast({ notification, settings, onClose }) {
         
         <div style={{ flex: 1, zIndex: 1 }}>
           <div style={{ fontSize: 13, fontWeight: 800, color: accentColor, textTransform: 'uppercase', letterSpacing: 1 }}>
-            {is1RM ? 'New 1RM Record!' : 'New Set Volume Record!'}
+            {is1RM ? 'New 1RM Record!' : (isReps ? 'New Reps Record!' : 'New Set Volume Record!')}
           </div>
           
           <div style={{ fontSize: 16, fontWeight: 700, color: '#e2e2e2', marginTop: 4, display: 'flex', alignItems: 'center', gap: 8 }}>

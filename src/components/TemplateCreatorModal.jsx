@@ -1,15 +1,20 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence, Reorder, useDragControls } from 'framer-motion';
 import { styles } from '../styles';
-import { Plus, X, Check, GripHorizontal, Trash } from './Icons';
+import { Plus, X, Check, GripHorizontal, Trash, ChevronDown, Dumbbell } from './Icons';
 import useSound from 'use-sound';
-import ExerciseLogger from './ExerciseLogger';
 import ExerciseSelectorModal from './ExerciseSelectorModal';
-import { uid } from '../data/exerciseDb';
-import { formatWeight } from '../utils';
+import { uid, exerciseRequiresWeight } from '../data/exerciseDb';
 import { ConfirmCancelModal, ConfirmDeleteModal, ErrorModal } from './WorkoutSafeguards';
 
 const MAX_TEMPLATE_NAME_LENGTH = 25;
+
+const typeConfig = {
+  N: { label: 'Normal', short: 'N', color: '#e2e2e2', bg: '#242428', desc: 'Standard working set' },
+  W: { label: 'Warmup', short: 'W', color: '#FF9F0A', bg: 'rgba(255, 159, 10, 0.15)', desc: 'Light preparatory set' },
+  D: { label: 'Drop Set', short: 'D', color: '#E81123', bg: 'rgba(232, 17, 35, 0.15)', desc: 'Immediate reduced-load set' },
+  F: { label: 'Failure', short: 'F', color: '#A855F7', bg: 'rgba(168, 85, 247, 0.15)', desc: 'Take set to muscular failure' }
+};
 
 const DraggableGroup = ({ groupId, style, children }) => {
   const dragControls = useDragControls();
@@ -18,8 +23,9 @@ const DraggableGroup = ({ groupId, style, children }) => {
       value={groupId}
       dragListener={false}
       dragControls={dragControls}
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.95 }}
       style={style}
     >
       {children(dragControls)}
@@ -27,12 +33,15 @@ const DraggableGroup = ({ groupId, style, children }) => {
   );
 };
 
-export default function TemplateCreatorModal({ data, onClose, onSave, settings }) {
-  const [template, setTemplate] = useState({ name: "", exercises: [] });
+export default function TemplateCreatorModal({ data, onClose, onSave, settings, initialTemplate = null }) {
+  const [template, setTemplate] = useState(() => 
+    initialTemplate ? JSON.parse(JSON.stringify(initialTemplate)) : { name: "", exercises: [] }
+  );
   const [showAdd, setShowAdd] = useState(false);
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [exToDelete, setExToDelete] = useState(null);
   const [templateNameError, setTemplateNameError] = useState(null);
+  const [editingSetType, setEditingSetType] = useState(null); // { exIdx, setIdx }
 
   const isNameTooLong = (template.name || "").trim().length > MAX_TEMPLATE_NAME_LENGTH;
   const isNameEmpty = (template.name || "").trim() === "";
@@ -40,49 +49,116 @@ export default function TemplateCreatorModal({ data, onClose, onSave, settings }
   const [playPop] = useSound('/pop.mp3', { volume: 0.5 });
   const [playDelete] = useSound('/sounds/wood_plank_flick.ogg', { volume: 0.5 });
 
-  const stats = useMemo(() => {
-    let vol = 0;
-    let setsCount = 0;
+  const exerciseDict = useMemo(() => {
+    const dict = {};
+    (data?.exercises || []).forEach(e => { dict[e.id] = e; });
+    return dict;
+  }, [data?.exercises]);
+
+  const { totalSets, targetMuscleGroups } = useMemo(() => {
+    let sets = 0;
+    const categories = new Set();
     template.exercises.forEach(ex => {
-      (ex.sets || []).forEach(s => {
-        vol += (Number(s.weight) || 0) * (Number(s.reps) || 0);
-        setsCount += 1;
-      });
+      sets += (ex.sets || []).length;
+      const exObj = exerciseDict[ex.exerciseId];
+      if (exObj?.category) categories.add(exObj.category);
     });
-    return { vol, setsCount };
-  }, [template.exercises]);
+    return { totalSets: sets, targetMuscleGroups: Array.from(categories) };
+  }, [template.exercises, exerciseDict]);
 
   const addExercise = (exerciseIds) => {
     playPop();
     const newExercises = exerciseIds.map(id => ({
-      id: uid(), exerciseId: id, sets: [{ weight: "", reps: "", rpe: "", completed: false, type: "N" }]
+      id: uid(),
+      exerciseId: id,
+      sets: [
+        { type: "N" },
+        { type: "N" },
+        { type: "N" }
+      ],
+      notes: ""
     }));
-    setTemplate({
-      ...template,
-      exercises: [...template.exercises, ...newExercises],
-    });
+    setTemplate(prev => ({
+      ...prev,
+      exercises: [...prev.exercises, ...newExercises],
+    }));
     setShowAdd(false);
   };
 
-  const updateExerciseSets = React.useCallback((idx, sets) => {
+  const handleSetCountChange = (exIdx, delta) => {
     setTemplate(prev => {
       const next = [...prev.exercises];
-      next[idx] = { ...next[idx], sets };
+      const curSets = next[exIdx].sets || [];
+      if (delta > 0) {
+        next[exIdx] = {
+          ...next[exIdx],
+          sets: [...curSets, { type: "N" }]
+        };
+      } else if (delta < 0 && curSets.length > 1) {
+        next[exIdx] = {
+          ...next[exIdx],
+          sets: curSets.slice(0, -1)
+        };
+      }
       return { ...prev, exercises: next };
     });
-  }, []);
-  
-  const updateExerciseNotes = React.useCallback((exIdx, text) => {
+  };
+
+  const removeIndividualSet = (exIdx, setIdx) => {
+    setTemplate(prev => {
+      const next = [...prev.exercises];
+      const curSets = next[exIdx].sets || [];
+      if (curSets.length <= 1) return prev;
+      next[exIdx] = {
+        ...next[exIdx],
+        sets: curSets.filter((_, idx) => idx !== setIdx)
+      };
+      return { ...prev, exercises: next };
+    });
+  };
+
+  const updateSetType = (typeKey) => {
+    if (!editingSetType) return;
+    const { exIdx, setIdx } = editingSetType;
+    setTemplate(prev => {
+      const next = [...prev.exercises];
+      const curSets = [...(next[exIdx].sets || [])];
+      if (curSets[setIdx]) {
+        curSets[setIdx] = { ...curSets[setIdx], type: typeKey };
+      }
+      next[exIdx] = { ...next[exIdx], sets: curSets };
+      return { ...prev, exercises: next };
+    });
+    setEditingSetType(null);
+  };
+
+  const updateAllSetsType = (typeKey) => {
+    if (!editingSetType) return;
+    const { exIdx } = editingSetType;
+    setTemplate(prev => {
+      const next = [...prev.exercises];
+      const curSets = (next[exIdx].sets || []).map(s => ({ ...s, type: typeKey }));
+      next[exIdx] = { ...next[exIdx], sets: curSets };
+      return { ...prev, exercises: next };
+    });
+    setEditingSetType(null);
+  };
+
+  const updateExerciseNotes = (exIdx, text) => {
     setTemplate(prev => {
       const next = [...prev.exercises];
       next[exIdx] = { ...next[exIdx], notes: text };
       return { ...prev, exercises: next };
     });
-  }, []);
+  };
 
-  const handleRemoveExercise = React.useCallback((exIdx, name) => {
-    setExToDelete({ idx: exIdx, name });
-  }, []);
+  const handleCloseRequest = () => {
+    if (template.name.trim() !== "" || template.exercises.length > 0) {
+      setShowCancelModal(true);
+    } else {
+      onClose();
+    }
+  };
 
   const attemptFinish = () => {
     if ((template.name || "").trim() === "") {
@@ -97,16 +173,20 @@ export default function TemplateCreatorModal({ data, onClose, onSave, settings }
       setTemplateNameError("Please add at least one exercise to save the template.");
       return;
     }
-    
-    // Convert template exercises back to the format needed for starting a workout
-    // We basically just store exactly what's here.
+
     onSave({
-      id: uid(),
+      id: initialTemplate?.id || template.id || uid(),
       name: template.name.trim(),
       exercises: template.exercises.map(ex => ({
         exerciseId: ex.exerciseId,
-        sets: (ex.sets || []).map(s => ({ ...s, completed: false })),
-        notes: ex.notes || ""
+        notes: (ex.notes || "").trim(),
+        sets: (ex.sets || []).map(s => ({
+          weight: "",
+          reps: "",
+          rpe: "",
+          type: s.type || "N",
+          completed: false
+        }))
       }))
     });
   };
@@ -114,6 +194,7 @@ export default function TemplateCreatorModal({ data, onClose, onSave, settings }
   return (
     <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'var(--bg-main)', zIndex: 100, overflowY: 'auto' }}>
       <ConfirmCancelModal isOpen={showCancelModal} onClose={() => setShowCancelModal(false)} onConfirm={onClose} />
+      
       <ConfirmDeleteModal 
         isOpen={!!exToDelete} 
         onClose={() => setExToDelete(null)} 
@@ -121,50 +202,67 @@ export default function TemplateCreatorModal({ data, onClose, onSave, settings }
           if (exToDelete) {
             playDelete();
             const next = template.exercises.filter((_, idx) => idx !== exToDelete.idx);
-            setTemplate({ ...template, exercises: next });
+            setTemplate(prev => ({ ...prev, exercises: next }));
             setExToDelete(null);
           }
         }} 
         itemName={exToDelete?.name} 
       />
 
-      <div style={{ position: 'sticky', top: 0, background: 'rgba(18,20,20,0.85)', backdropFilter: 'blur(12px)', zIndex: 80, padding: '16px', borderBottom: '1px solid transparent', display: 'flex', flexDirection: 'column', gap: 12 }}>
+      {/* STICKY HEADER */}
+      <div style={{ 
+        position: 'sticky', top: 0, background: 'rgba(18,20,20,0.92)', backdropFilter: 'blur(16px)', 
+        zIndex: 80, padding: '16px', borderBottom: '1px solid rgba(255,255,255,0.06)', display: 'flex', flexDirection: 'column', gap: 12 
+      }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <span style={{ 
+              background: 'linear-gradient(135deg, var(--primary) 0%, #0056b3 100%)', 
+              color: '#fff', fontSize: 10, fontWeight: 900, padding: '3px 8px', borderRadius: 6, letterSpacing: '0.08em' 
+            }}>
+              {initialTemplate ? "EDIT ROUTINE" : "ROUTINE BLUEPRINT"}
+            </span>
+          </div>
+          <button 
+            style={{ background: 'transparent', border: 'none', color: '#E81123', display: 'flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, cursor: 'pointer' }} 
+            onClick={handleCloseRequest}
+          >
+            <X size={24} />
+          </button>
+        </div>
+
+        {/* TEMPLATE NAME INPUT */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-          <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-            <div style={{ flex: 1, position: 'relative' }}>
-              <input
-                value={template.name}
-                onChange={(e) => setTemplate({ ...template, name: e.target.value })}
-                className="premiumInput" 
-                style={{ 
-                  width: '100%', 
-                  fontSize: 22, 
-                  fontWeight: 800, 
-                  padding: '12px 16px', 
-                  letterSpacing: '-0.02em',
-                  border: (isNameTooLong || isNameEmpty) ? '1px solid #D94A4A' : '1px solid rgba(255,255,255,0.08)',
-                  color: isNameTooLong ? '#D94A4A' : '#fff'
-                }}
-                placeholder="Template name"
-                autoFocus
-              />
-              {(isNameTooLong || isNameEmpty) && (
-                <span style={{ 
-                  position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)',
-                  background: '#D94A4A', color: '#fff', borderRadius: '50%', width: 18, height: 18, 
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 900 
-                }}>!</span>
-              )}
-            </div>
-            <button style={{ background: 'transparent', border: 'none', color: '#E81123', display: 'flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, cursor: 'pointer' }} onClick={() => setShowCancelModal(true)}>
-              <X size={24} />
-            </button>
+          <div style={{ position: 'relative' }}>
+            <input
+              value={template.name}
+              onChange={(e) => setTemplate({ ...template, name: e.target.value })}
+              className="premiumInput" 
+              style={{ 
+                width: '100%', 
+                fontSize: 20, 
+                fontWeight: 800, 
+                padding: '12px 16px', 
+                letterSpacing: '-0.02em',
+                border: (isNameTooLong || isNameEmpty) ? '1px solid #D94A4A' : '1px solid rgba(255,255,255,0.08)',
+                color: isNameTooLong ? '#D94A4A' : '#fff'
+              }}
+              placeholder="e.g. Upper Body Hypertrophy"
+              autoFocus
+            />
+            {(isNameTooLong || isNameEmpty) && (
+              <span style={{ 
+                position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)',
+                background: '#D94A4A', color: '#fff', borderRadius: '50%', width: 18, height: 18, 
+                display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 900 
+              }}>!</span>
+            )}
           </div>
 
           {(isNameTooLong || isNameEmpty) && (
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingLeft: 4, paddingRight: 4 }}>
               <span style={{ color: '#D94A4A', fontSize: 12, fontWeight: 700 }}>
-                {isNameEmpty ? "! Template name cannot be empty." : `! Template name cannot exceed ${MAX_TEMPLATE_NAME_LENGTH} characters.`}
+                {isNameEmpty ? "! Routine name cannot be empty." : `! Name cannot exceed ${MAX_TEMPLATE_NAME_LENGTH} characters.`}
               </span>
               <span style={{ color: isNameTooLong ? '#D94A4A' : '#6b7080', fontSize: 11, fontWeight: 700 }}>
                 {(template.name || "").trim().length}/{MAX_TEMPLATE_NAME_LENGTH}
@@ -173,46 +271,232 @@ export default function TemplateCreatorModal({ data, onClose, onSave, settings }
           )}
         </div>
         
-        <div style={{ display: 'flex', justifyContent: 'space-between', color: '#8b90a0', fontSize: 13, fontWeight: 600 }}>
-          <div>Volume: <span style={{ color: '#e2e2e2' }}>{formatWeight(stats.vol, settings?.unit)} {settings?.unit || 'kg'}</span></div>
-          <div>Sets: <span style={{ color: '#e2e2e2' }}>{stats.setsCount}</span></div>
+        {/* STATS & TARGET MUSCLES */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#121214', padding: '10px 14px', borderRadius: 12, border: '1px solid #1c1c1e' }}>
+          <div style={{ display: 'flex', gap: 16, fontSize: 13, fontWeight: 700, color: '#8b90a0' }}>
+            <span>Exercises: <strong style={{ color: '#fff' }}>{template.exercises.length}</strong></span>
+            <span>Target Sets: <strong style={{ color: 'var(--primary)' }}>{totalSets}</strong></span>
+          </div>
+          {targetMuscleGroups.length > 0 && (
+            <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+              {targetMuscleGroups.slice(0, 3).map((grp, i) => (
+                <span key={i} style={{ background: '#1C1C1E', color: '#8b90a0', fontSize: 10, fontWeight: 800, padding: '2px 6px', borderRadius: 4, textTransform: 'uppercase' }}>
+                  {grp}
+                </span>
+              ))}
+              {targetMuscleGroups.length > 3 && (
+                <span style={{ color: '#6b7080', fontSize: 10, fontWeight: 800 }}>+{targetMuscleGroups.length - 3}</span>
+              )}
+            </div>
+          )}
         </div>
       </div>
 
-      <div style={{ padding: '24px 16px', display: "flex", flexDirection: "column", gap: 14 }}>
-        <Reorder.Group axis="y" values={template.exercises.map(e => e.id)} onReorder={(newOrderIds) => {
-          const newOrder = newOrderIds.map(id => template.exercises.find(e => e.id === id));
-          setTemplate({ ...template, exercises: newOrder });
-        }} style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 14 }}>
-          {template.exercises.map((ex, exIdx) => {
-            const exObj = data.exercises.find((e) => e.id === ex.exerciseId);
-            return (
-              <DraggableGroup key={ex.id} groupId={ex.id}>
-                {(dragControls) => (
-                  <ExerciseLogger
-                    exIdx={exIdx}
-                    exerciseId={ex.exerciseId}
-                    name={exObj?.name || 'Unknown'}
-                    category={exObj?.category}
-                    equipment={exObj?.equipment}
-                    imageUrl={exObj?.imageUrl}
-                    sets={ex.sets}
-                    priorSets={[]}
-                    onSetsChange={updateExerciseSets}
-                    notes={ex.notes}
-                    onNotesChange={updateExerciseNotes}
-                    onRemove={handleRemoveExercise}
-                    settings={settings}
-                    dragControls={dragControls}
-                  />
-                )}
-              </DraggableGroup>
-            );
-          })}
-        </Reorder.Group>
+      {/* EXERCISES LIST */}
+      <div style={{ padding: '20px 16px', display: "flex", flexDirection: "column", gap: 14 }}>
+        {template.exercises.length === 0 ? (
+          <div style={{ 
+            textAlign: 'center', padding: '48px 20px', background: '#121214', borderRadius: 20, 
+            border: '1px dashed #242428', color: '#8b90a0', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 
+          }}>
+            <div style={{ width: 48, height: 48, borderRadius: 24, background: '#1C1C1E', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Dumbbell size={24} color="var(--primary)" />
+            </div>
+            <div>
+              <div style={{ fontSize: 16, fontWeight: 800, color: '#e2e2e2' }}>No exercises in routine yet</div>
+              <div style={{ fontSize: 13, color: '#6b7080', marginTop: 4 }}>Add exercises below to build your custom workout blueprint.</div>
+            </div>
+          </div>
+        ) : (
+          <Reorder.Group 
+            axis="y" 
+            values={template.exercises.map(e => e.id)} 
+            onReorder={(newOrderIds) => {
+              const newOrder = newOrderIds.map(id => template.exercises.find(e => e.id === id));
+              setTemplate(prev => ({ ...prev, exercises: newOrder }));
+            }} 
+            style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 14 }}
+          >
+            {template.exercises.map((ex, exIdx) => {
+              const exObj = exerciseDict[ex.exerciseId];
+              const name = exObj?.name || 'Unknown Exercise';
+              const category = exObj?.category || 'Other';
+              const equipment = exObj?.equipment || '';
+              const requiresWeight = exerciseRequiresWeight(exObj);
+              const setsCount = (ex.sets || []).length;
 
-        <button className="dashedBtn" style={{ height: 64, marginTop: 8  }} onClick={() => setShowAdd(true)}>
-          <Plus size={20} /> Add Exercise
+              return (
+                <DraggableGroup key={ex.id} groupId={ex.id}>
+                  {(dragControls) => (
+                    <div style={{
+                      background: '#161618',
+                      borderRadius: 18,
+                      border: '1px solid rgba(255,255,255,0.08)',
+                      padding: 16,
+                      boxShadow: '0 4px 16px rgba(0,0,0,0.25)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 14
+                    }}>
+                      {/* CARD HEADER */}
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <div 
+                          onPointerDown={(e) => dragControls && dragControls.start(e)}
+                          style={{ cursor: 'grab', padding: 4, display: 'flex', alignItems: 'center', color: '#6b7080', touchAction: 'none' }}
+                        >
+                          <GripHorizontal size={20} />
+                        </div>
+
+                        {exObj?.imageUrl ? (
+                          <img src={exObj.imageUrl} alt={name} style={{ width: 38, height: 38, borderRadius: 8, objectFit: 'cover', background: '#121212' }} />
+                        ) : (
+                          <div style={{ width: 38, height: 38, borderRadius: 8, background: '#242428', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <span style={{ fontSize: 16, color: '#8b90a0', fontWeight: 900 }}>{name.charAt(0)}</span>
+                          </div>
+                        )}
+
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div style={{ fontSize: 15, fontWeight: 800, color: '#fff', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                            {name}
+                          </div>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 4, flexWrap: 'wrap' }}>
+                            <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--primary)', background: 'rgba(0,122,255,0.12)', padding: '2px 6px', borderRadius: 4, textTransform: 'uppercase' }}>
+                              {category}
+                            </span>
+                            {equipment && (
+                              <span style={{ fontSize: 10, fontWeight: 600, color: '#8b90a0', background: '#242428', padding: '2px 6px', borderRadius: 4 }}>
+                                {equipment}
+                              </span>
+                            )}
+                            {!requiresWeight && (
+                              <span style={{ fontSize: 9, fontWeight: 800, color: '#30D158', background: 'rgba(48,209,88,0.12)', padding: '2px 5px', borderRadius: 4 }}>
+                                BODYWEIGHT
+                              </span>
+                            )}
+                          </div>
+                        </div>
+
+                        <button 
+                          style={{ background: 'transparent', border: 'none', color: '#6b7080', cursor: 'pointer', padding: 6, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                          onClick={() => setExToDelete({ idx: exIdx, name })}
+                        >
+                          <Trash size={18} />
+                        </button>
+                      </div>
+
+                      {/* TARGET SETS STEPPER HEADER */}
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#1e1e22', padding: '10px 14px', borderRadius: 12 }}>
+                        <span style={{ fontSize: 13, fontWeight: 800, color: '#e2e2e2' }}>
+                          Target Sets
+                        </span>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                          <button
+                            type="button"
+                            disabled={setsCount <= 1}
+                            onClick={() => handleSetCountChange(exIdx, -1)}
+                            style={{
+                              width: 28, height: 28, borderRadius: 14, background: setsCount <= 1 ? '#242428' : 'rgba(255,255,255,0.1)',
+                              border: 'none', color: setsCount <= 1 ? '#555' : '#fff', fontSize: 18, fontWeight: 900,
+                              display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: setsCount <= 1 ? 'not-allowed' : 'pointer'
+                            }}
+                          >
+                            –
+                          </button>
+                          <span style={{ fontSize: 14, fontWeight: 800, color: '#fff', minWidth: 44, textAlign: 'center' }}>
+                            {setsCount} {setsCount === 1 ? 'Set' : 'Sets'}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => handleSetCountChange(exIdx, 1)}
+                            style={{
+                              width: 28, height: 28, borderRadius: 14, background: 'var(--primary)',
+                              border: 'none', color: '#fff', fontSize: 18, fontWeight: 900,
+                              display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer'
+                            }}
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* INDIVIDUAL SET BLUEPRINT ROWS */}
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                        {(ex.sets || []).map((s, sIdx) => {
+                          const conf = typeConfig[s.type || 'N'] || typeConfig['N'];
+                          return (
+                            <div 
+                              key={sIdx}
+                              style={{ 
+                                display: 'flex', alignItems: 'center', justifyContent: 'space-between', 
+                                background: '#121214', padding: '8px 12px', borderRadius: 10, border: '1px solid #1f1f23' 
+                              }}
+                            >
+                              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                <span style={{ fontSize: 12, fontWeight: 800, color: '#6b7080', width: 44 }}>
+                                  Set {sIdx + 1}
+                                </span>
+                                <button
+                                  type="button"
+                                  onClick={() => setEditingSetType({ exIdx, setIdx: sIdx })}
+                                  style={{
+                                    display: 'flex', alignItems: 'center', gap: 6,
+                                    background: conf.bg, color: conf.color, border: 'none',
+                                    padding: '4px 10px', borderRadius: 8, fontSize: 12, fontWeight: 800,
+                                    cursor: 'pointer'
+                                  }}
+                                >
+                                  <span>{conf.label}</span>
+                                  <ChevronDown size={14} />
+                                </button>
+                              </div>
+
+                              {setsCount > 1 && (
+                                <button
+                                  type="button"
+                                  onClick={() => removeIndividualSet(exIdx, sIdx)}
+                                  style={{ background: 'transparent', border: 'none', color: '#555', cursor: 'pointer', padding: 4 }}
+                                >
+                                  <X size={15} />
+                                </button>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                      {/* INSTRUCTIONS / NOTES */}
+                      <div>
+                        <input
+                          value={ex.notes || ""}
+                          onChange={(e) => updateExerciseNotes(exIdx, e.target.value)}
+                          placeholder="Instructions or target notes (e.g., 8-12 reps, 2s pause)..."
+                          style={{
+                            width: '100%',
+                            background: '#121214',
+                            border: '1px solid #1f1f23',
+                            borderRadius: 10,
+                            color: '#e2e2e2',
+                            fontSize: 12,
+                            padding: '10px 12px',
+                            outline: 'none'
+                          }}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </DraggableGroup>
+              );
+            })}
+          </Reorder.Group>
+        )}
+
+        {/* ADD EXERCISE BUTTON */}
+        <button 
+          className="dashedBtn" 
+          style={{ height: 60, marginTop: 4, borderRadius: 16 }} 
+          onClick={() => setShowAdd(true)}
+        >
+          <Plus size={20} /> Add Exercise to Routine
         </button>
 
         <AnimatePresence>
@@ -226,22 +510,93 @@ export default function TemplateCreatorModal({ data, onClose, onSave, settings }
           )}
         </AnimatePresence>
 
+        {/* SAVE TEMPLATE BUTTON */}
         {template.exercises.length > 0 && (
           <motion.button 
-            whileTap={(!isNameTooLong && !isNameEmpty) ? { scale: 0.95 } : {}}
+            whileTap={(!isNameTooLong && !isNameEmpty) ? { scale: 0.96 } : {}}
             className="finishBtn" 
             style={{ 
               padding: 16, 
-              marginTop: 16,
+              marginTop: 12,
               opacity: (isNameTooLong || isNameEmpty) ? 0.5 : 1,
               cursor: (isNameTooLong || isNameEmpty) ? 'not-allowed' : 'pointer'
             }} 
             onClick={attemptFinish}
           >
-            <Check size={18} strokeWidth={3} /> Save Template
+            <Check size={18} strokeWidth={3} /> {initialTemplate ? "Update Routine Template" : "Save Routine Template"}
           </motion.button>
         )}
       </div>
+
+      {/* SET TYPE PICKER MODAL */}
+      <AnimatePresence>
+        {editingSetType !== null && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.85)', zIndex: 300, display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}
+            onClick={() => setEditingSetType(null)}
+          >
+            <motion.div 
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "100%" }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              onClick={e => e.stopPropagation()}
+              style={{ background: '#161618', width: '100%', maxWidth: 480, borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: '24px 20px', paddingBottom: 40 }}
+            >
+              <div style={{ width: 40, height: 4, background: '#333535', borderRadius: 2, margin: '0 auto 16px' }} />
+              <div style={{ fontSize: 17, fontWeight: 800, color: '#fff', textAlign: 'center', marginBottom: 6 }}>
+                Set {editingSetType.setIdx + 1} Target Type
+              </div>
+              <div style={{ fontSize: 12, color: '#8b90a0', textAlign: 'center', marginBottom: 20 }}>
+                Choose the intended intensity or set strategy for this routine
+              </div>
+              
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                {Object.entries(typeConfig).map(([key, info]) => (
+                  <button 
+                    key={key} 
+                    style={{ 
+                      background: '#1e1e22', border: '1px solid #28282c', display: 'flex', alignItems: 'center', 
+                      justifyContent: 'space-between', padding: '14px 16px', cursor: 'pointer', borderRadius: 14 
+                    }}
+                    onClick={() => updateSetType(key)}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                      <span style={{ 
+                        background: info.bg, color: info.color, fontWeight: 900, fontSize: 13, 
+                        width: 26, height: 26, borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center' 
+                      }}>
+                        {info.short}
+                      </span>
+                      <div style={{ textAlign: 'left' }}>
+                        <div style={{ color: '#fff', fontSize: 15, fontWeight: 700 }}>{info.label}</div>
+                        <div style={{ color: '#8b90a0', fontSize: 11, marginTop: 2 }}>{info.desc}</div>
+                      </div>
+                    </div>
+                    <span style={{ color: 'var(--primary)', fontSize: 12, fontWeight: 700 }}>Select</span>
+                  </button>
+                ))}
+                
+                <div style={{ height: 1, background: '#242428', margin: '6px 0' }} />
+                
+                <button 
+                  style={{ 
+                    background: 'transparent', border: '1px dashed #333535', display: 'flex', alignItems: 'center', 
+                    justifyContent: 'center', padding: '12px', cursor: 'pointer', borderRadius: 12, color: 'var(--primary)',
+                    fontSize: 13, fontWeight: 700
+                  }}
+                  onClick={() => updateAllSetsType(template.exercises[editingSetType.exIdx]?.sets[editingSetType.setIdx]?.type || 'N')}
+                >
+                  Apply this type to all sets of this exercise
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <ErrorModal
         isOpen={!!templateNameError}

@@ -1,7 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, TrendingUp, Trophy, Dumbbell, Calendar, Clock, ChevronRight, Check, Search, Filter } from './Icons';
-import { formatWeight, calculate1RM, parseVolume } from '../utils';
+import { formatWeight, calculate1RM, parseVolume, getUserWeightAtDate } from '../utils';
+import { exerciseRequiresWeight } from '../data/exerciseDb';
 
 const METRIC_LABELS = {
   weight: "Weight", bodyFat: "Body Fat", chest: "Chest", leftArm: "L. Arm", rightArm: "R. Arm",
@@ -53,6 +54,10 @@ export default function ProgressionTrackerModal({ isOpen, onClose, data }) {
           };
         }
 
+        const exObj = (data?.exercises || []).find(e => e.id === ex.exerciseId);
+        const requiresWeight = exerciseRequiresWeight(exObj);
+        const userWeight = getUserWeightAtDate(data?.measurements, sess.date);
+
         let maxWeight = 0;
         let maxReps = 0;
         let max1RM = 0;
@@ -65,13 +70,18 @@ export default function ProgressionTrackerModal({ isOpen, onClose, data }) {
             completedSets++;
             const w = Number(s.weight) || 0;
             const r = Number(s.reps) || 0;
-            if (w > maxWeight) {
-              maxWeight = w;
+
+            if (r > maxReps) {
               maxReps = r;
             }
-            const cur1RM = calculate1RM(w, r);
+            if (w > maxWeight) {
+              maxWeight = w;
+            }
+
+            const effectiveW = requiresWeight ? w : (w + userWeight);
+            const cur1RM = calculate1RM(effectiveW, r);
             if (cur1RM > max1RM) max1RM = cur1RM;
-            vol += parseVolume(w, r);
+            vol += parseVolume(w, r, requiresWeight ? 0 : userWeight);
             if (s.isPR) prCount++;
           }
         });
@@ -102,6 +112,7 @@ export default function ProgressionTrackerModal({ isOpen, onClose, data }) {
       if (item.periodInstances.length === 0) return;
 
       const exObj = (data?.exercises || []).find(e => e.id === item.exerciseId);
+      const requiresWeight = exerciseRequiresWeight(exObj);
       const name = exObj?.name || 'Unknown Exercise';
       const category = exObj?.category || 'Other';
 
@@ -127,6 +138,22 @@ export default function ProgressionTrackerModal({ isOpen, onClose, data }) {
       const weightDelta = currentWeight - startWeight;
       const weightPercent = startWeight > 0 ? (weightDelta / startWeight) * 100 : 0;
 
+      const startReps = baselineInstance.maxReps;
+      const currentReps = currentInstance.maxReps;
+      const repsDelta = currentReps - startReps;
+      const repsPercent = startReps > 0 ? (repsDelta / startReps) * 100 : 0;
+
+      const isBodyweight = !requiresWeight;
+      const effectiveDelta = isBodyweight ? repsDelta : weightDelta;
+      const effectivePercent = isBodyweight ? repsPercent : weightPercent;
+
+      const deltaDisplay = isBodyweight
+        ? (effectiveDelta > 0 ? `+${effectiveDelta} reps` : `${effectiveDelta} reps`)
+        : (effectiveDelta > 0 ? `+${formatWeight(effectiveDelta, unit)} ${unit}` : `${formatWeight(effectiveDelta, unit)} ${unit}`);
+      const rateDisplay = effectivePercent > 0 ? `+${effectivePercent.toFixed(1)}%` : `${effectivePercent.toFixed(1)}%`;
+      const startDisplay = isBodyweight ? `${startReps} reps` : `${formatWeight(startWeight, unit)} ${unit}`;
+      const currentDisplay = isBodyweight ? `${currentReps} reps` : `${formatWeight(currentWeight, unit)} ${unit}`;
+
       const start1RM = baselineInstance.max1RM;
       const current1RM = currentInstance.max1RM;
       const oneRmDelta = current1RM - start1RM;
@@ -146,10 +173,21 @@ export default function ProgressionTrackerModal({ isOpen, onClose, data }) {
         id: item.exerciseId,
         name,
         category,
+        isBodyweight,
         startWeight,
         currentWeight,
         weightDelta,
         weightPercent,
+        startReps,
+        currentReps,
+        repsDelta,
+        repsPercent,
+        effectiveDelta,
+        effectivePercent,
+        deltaDisplay,
+        rateDisplay,
+        startDisplay,
+        currentDisplay,
         start1RM,
         current1RM,
         oneRmDelta,
@@ -162,8 +200,8 @@ export default function ProgressionTrackerModal({ isOpen, onClose, data }) {
     });
 
     // Sort by highest percentage progression first
-    return results.sort((a, b) => b.weightPercent - a.weightPercent);
-  }, [allSessions, cutoffTime, data?.exercises]);
+    return results.sort((a, b) => b.effectivePercent - a.effectivePercent);
+  }, [allSessions, cutoffTime, data?.exercises, unit]);
 
   // Measurements Improvement calculation
   const measurementProgressions = useMemo(() => {
@@ -272,12 +310,15 @@ export default function ProgressionTrackerModal({ isOpen, onClose, data }) {
 
     periodSessions.forEach(s => {
       totalDurationMins += Number(s.durationMins) || 0;
+      const userWeight = getUserWeightAtDate(data?.measurements, s.date);
       (s.exercises || []).forEach(ex => {
+        const exObj = (data?.exercises || []).find(e => e.id === ex.exerciseId);
+        const requiresWeight = exerciseRequiresWeight(exObj);
         (ex.sets || []).forEach(st => {
           if (st.completed) {
             const w = Number(st.weight) || 0;
             const r = Number(st.reps) || 0;
-            totalVol += parseVolume(w, r);
+            totalVol += parseVolume(w, r, requiresWeight ? 0 : userWeight);
             totalReps += r;
             if (st.isPR) totalPRs++;
           }
@@ -286,15 +327,15 @@ export default function ProgressionTrackerModal({ isOpen, onClose, data }) {
     });
 
     // Star exercise (top progression rate)
-    const starExercise = exerciseProgressions.find(e => e.weightDelta > 0) || exerciseProgressions[0];
+    const starExercise = exerciseProgressions.find(e => e.effectiveDelta > 0) || exerciseProgressions[0];
 
     // Key measurement milestone
     const starMeasurement = measurementProgressions.find(m => m.isPositive && Math.abs(m.numericDelta) > 0) || measurementProgressions[0];
 
     // Average strength progression %
-    const progressedExs = exerciseProgressions.filter(e => e.weightDelta > 0);
+    const progressedExs = exerciseProgressions.filter(e => e.effectiveDelta > 0);
     const avgProgressionPct = progressedExs.length > 0 
-      ? (progressedExs.reduce((acc, curr) => acc + curr.weightPercent, 0) / progressedExs.length).toFixed(1)
+      ? (progressedExs.reduce((acc, curr) => acc + curr.effectivePercent, 0) / progressedExs.length).toFixed(1)
       : '0.0';
 
     return {
@@ -309,7 +350,7 @@ export default function ProgressionTrackerModal({ isOpen, onClose, data }) {
       progressedCount: progressedExs.length,
       totalTrackedExercises: exerciseProgressions.length
     };
-  }, [periodSessions, exerciseProgressions, measurementProgressions]);
+  }, [periodSessions, exerciseProgressions, measurementProgressions, data?.exercises, data?.measurements]);
 
   // Filtered exercises for search & category
   const filteredExercises = useMemo(() => {
@@ -522,18 +563,18 @@ export default function ProgressionTrackerModal({ isOpen, onClose, data }) {
 
                       <div style={{ textAlign: 'right' }}>
                         <div style={{ fontSize: 18, fontWeight: 900, color: '#30D158' }}>
-                          {recap.starExercise.weightDelta > 0 ? `+${formatWeight(recap.starExercise.weightDelta, unit)}` : formatWeight(recap.starExercise.weightDelta, unit)} {unit}
+                          {recap.starExercise.deltaDisplay}
                         </div>
                         <div style={{ fontSize: 12, fontWeight: 800, color: '#30D158' }}>
-                          +{recap.starExercise.weightPercent.toFixed(1)}% rate
+                          {recap.starExercise.rateDisplay} rate
                         </div>
                       </div>
                     </div>
 
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 12, padding: '0 4px', fontSize: 12, color: '#8b90a0' }}>
-                      <span>Baseline: <strong>{formatWeight(recap.starExercise.startWeight, unit)} {unit}</strong></span>
+                      <span>Baseline: <strong>{recap.starExercise.startDisplay}</strong></span>
                       <span style={{ color: 'var(--primary)' }}>➔</span>
-                      <span>Current: <strong>{formatWeight(recap.starExercise.currentWeight, unit)} {unit}</strong></span>
+                      <span>Current: <strong>{recap.starExercise.currentDisplay}</strong></span>
                     </div>
                   </div>
                 )}
@@ -620,8 +661,8 @@ export default function ProgressionTrackerModal({ isOpen, onClose, data }) {
                 {/* Exercise Cards */}
                 {filteredExercises.length > 0 ? (
                   filteredExercises.map(ex => {
-                    const isPositive = ex.weightDelta > 0;
-                    const isDeload = ex.weightDelta < 0;
+                    const isPositive = ex.effectiveDelta > 0;
+                    const isDeload = ex.effectiveDelta < 0;
 
                     return (
                       <div 
@@ -639,8 +680,13 @@ export default function ProgressionTrackerModal({ isOpen, onClose, data }) {
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                           <div>
                             <div style={{ fontSize: 16, fontWeight: 900, color: '#fff' }}>{ex.name}</div>
-                            <div style={{ fontSize: 12, color: '#8b90a0', marginTop: 2 }}>
-                              {ex.category} • {ex.sessionCount} workouts in period
+                            <div style={{ fontSize: 12, color: '#8b90a0', marginTop: 2, display: 'flex', alignItems: 'center', gap: 6 }}>
+                              <span>{ex.category} • {ex.sessionCount} workouts in period</span>
+                              {ex.isBodyweight && (
+                                <span style={{ background: 'rgba(255,255,255,0.08)', color: '#8b90a0', padding: '1px 5px', borderRadius: 4, fontSize: 9, fontWeight: 700 }}>
+                                  BODYWEIGHT
+                                </span>
+                              )}
                             </div>
                           </div>
 
@@ -655,10 +701,10 @@ export default function ProgressionTrackerModal({ isOpen, onClose, data }) {
                             textAlign: 'right'
                           }}>
                             <div>
-                              {isPositive ? `+${formatWeight(ex.weightDelta, unit)}` : formatWeight(ex.weightDelta, unit)} {unit}
+                              {ex.deltaDisplay}
                             </div>
                             <div style={{ fontSize: 11, fontWeight: 700, marginTop: 1 }}>
-                              {isPositive ? `+${ex.weightPercent.toFixed(1)}%` : `${ex.weightPercent.toFixed(1)}%`}
+                              {ex.rateDisplay}
                             </div>
                           </div>
                         </div>
@@ -667,19 +713,19 @@ export default function ProgressionTrackerModal({ isOpen, onClose, data }) {
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#18181c', padding: '10px 14px', borderRadius: 12, fontSize: 12 }}>
                           <div>
                             <span style={{ color: '#8b90a0' }}>Starting: </span>
-                            <strong style={{ color: '#e2e2e2' }}>{formatWeight(ex.startWeight, unit)} {unit}</strong>
+                            <strong style={{ color: '#e2e2e2' }}>{ex.startDisplay}</strong>
                           </div>
                           <span style={{ color: 'var(--primary)', fontWeight: 900 }}>➔</span>
                           <div>
                             <span style={{ color: '#8b90a0' }}>Current: </span>
-                            <strong style={{ color: '#fff' }}>{formatWeight(ex.currentWeight, unit)} {unit}</strong>
+                            <strong style={{ color: '#fff' }}>{ex.currentDisplay}</strong>
                           </div>
                         </div>
 
                         {/* Progress Bar */}
                         <div style={{ background: 'rgba(255,255,255,0.05)', height: 6, borderRadius: 3, overflow: 'hidden' }}>
                           <div style={{
-                            width: `${Math.min(100, Math.max(10, Math.abs(ex.weightPercent)))}%`,
+                            width: `${Math.min(100, Math.max(10, Math.abs(ex.effectivePercent)))}%`,
                             height: '100%',
                             background: isPositive ? '#30D158' : (isDeload ? '#D94A4A' : 'var(--primary)'),
                             borderRadius: 3
@@ -688,8 +734,17 @@ export default function ProgressionTrackerModal({ isOpen, onClose, data }) {
 
                         {/* Extra stats */}
                         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: '#8b90a0', paddingTop: 2 }}>
-                          <span>1RM: <strong>{formatWeight(ex.start1RM, unit)} ➔ {formatWeight(ex.current1RM, unit)} {unit}</strong></span>
-                          <span>Vol: <strong>{formatWeight(ex.totalPeriodVol, unit)} {unit}</strong></span>
+                          {ex.isBodyweight ? (
+                            <>
+                              <span>Target: <strong>Bodyweight</strong></span>
+                              <span>Vol: <strong>{formatWeight(ex.totalPeriodVol, unit)} {unit}</strong></span>
+                            </>
+                          ) : (
+                            <>
+                              <span>1RM: <strong>{formatWeight(ex.start1RM, unit)} ➔ {formatWeight(ex.current1RM, unit)} {unit}</strong></span>
+                              <span>Vol: <strong>{formatWeight(ex.totalPeriodVol, unit)} {unit}</strong></span>
+                            </>
+                          )}
                           {ex.totalPeriodPRs > 0 && (
                             <span style={{ color: '#FFD60A', fontWeight: 800 }}>🏆 {ex.totalPeriodPRs} PRs</span>
                           )}

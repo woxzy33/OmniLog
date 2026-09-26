@@ -20,6 +20,7 @@ export default function Train({ setShowProfileModal }) {
   const settings = data?.settings || { unit: 'kg' };
 
   const [showTemplateModal, setShowTemplateModal] = useState(false);
+  const [templateToEdit, setTemplateToEdit] = useState(null);
   const [templateToConfirm, setTemplateToConfirm] = useState(null);
   const [showProgressionModal, setShowProgressionModal] = useState(false);
 
@@ -52,6 +53,12 @@ export default function Train({ setShowProfileModal }) {
 
     return msg;
   }, [data]);
+
+  const exerciseDict = React.useMemo(() => {
+    const dict = {};
+    (data.exercises || []).forEach(e => { dict[e.id] = e; });
+    return dict;
+  }, [data.exercises]);
 
   const trackedStats = React.useMemo(() => {
     const performedExerciseIds = new Set();
@@ -130,7 +137,7 @@ export default function Train({ setShowProfileModal }) {
         id: uid(),
         exerciseId: ex.exerciseId,
         notes: ex.notes || "",
-        sets: ex.sets ? (ex.sets || []).map(s => ({ ...s, completed: false })) : [{ weight: "", reps: "", rpe: "", completed: false, type: "N" }],
+        sets: ex.sets ? (ex.sets || []).map(s => ({ ...s, weight: "", reps: "", rpe: "", completed: false, type: s.type || "N" })) : [{ weight: "", reps: "", rpe: "", completed: false, type: "N" }],
       })),
     });
   };
@@ -246,30 +253,77 @@ export default function Train({ setShowProfileModal }) {
           Your Routines ({data.templates.length})
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-          {data.templates.map(t => (
-            <button 
-              key={t.id} 
-              className="exCard" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", border: "1px solid #1c1c1e", background: "#121212", textAlign: "left", padding: '20px 24px', borderRadius: 20, boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
-              onClick={() => {
-                setTemplateToConfirm(t);
-              }}
-            >
-              <div>
-                <div style={{ fontWeight: 800, fontSize: 17, color: "#fff", letterSpacing: '-0.3px' }}>{t.name}</div>
-                <div style={{ fontSize: 14, color: "#8b90a0", marginTop: 6, fontWeight: 600 }}>{t.exercises.length} exercises</div>
-              </div>
-              <div style={{ background: '#1c1c1e', width: 40, height: 40, borderRadius: 20, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Plus size={20} color="var(--primary)" />
-              </div>
-            </button>
-          ))}
+          {data.templates.map(t => {
+            const names = (t.exercises || [])
+              .map(e => exerciseDict[e.exerciseId]?.name)
+              .filter(Boolean);
+            const preview = names.length === 0 
+              ? "No exercises added" 
+              : names.length <= 7 
+                ? names.join(", ") 
+                : names.slice(0, 7).join(", ") + "...";
+
+            return (
+              <button 
+                key={t.id} 
+                className="exCard" 
+                style={{ 
+                  display: "flex", 
+                  justifyContent: "space-between", 
+                  alignItems: "center", 
+                  border: "1px solid #1c1c1e", 
+                  background: "#121212", 
+                  textAlign: "left", 
+                  padding: '20px 22px', 
+                  borderRadius: 20, 
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                  gap: 16
+                }}
+                onClick={() => {
+                  setTemplateToConfirm(t);
+                }}
+              >
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
+                    <div style={{ fontWeight: 800, fontSize: 17, color: "#fff", letterSpacing: '-0.3px' }}>{t.name}</div>
+                    <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--primary)', background: 'rgba(0, 122, 255, 0.1)', padding: '2px 8px', borderRadius: 8, whiteSpace: 'nowrap' }}>
+                      {t.exercises.length} {t.exercises.length === 1 ? 'exercise' : 'exercises'}
+                    </span>
+                  </div>
+                  <div style={{ 
+                    fontSize: 13, 
+                    color: "#8b90a0", 
+                    lineHeight: '1.4', 
+                    fontWeight: 500,
+                    display: '-webkit-box',
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis'
+                  }}>
+                    {preview}
+                  </div>
+                </div>
+                <div style={{ background: '#1c1c20', width: 40, height: 40, borderRadius: 20, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <Plus size={20} color="var(--primary)" />
+                </div>
+              </button>
+            );
+          })}
           {data.templates.length === 0 && (
             <div style={{ textAlign: 'center', padding: '32px 20px', color: '#6b7080', fontSize: 15, background: '#121212', borderRadius: 20, border: '1px dashed #2a2a2e' }}>
               No routines yet. Create a template below to get started.
             </div>
           )}
         </div>
-        <button className="dashedBtn" style={{ marginTop: 8, padding: '16px', borderRadius: 20, fontSize: 15, fontWeight: 700 }} onClick={() => setShowTemplateModal(true)}>
+        <button 
+          className="dashedBtn" 
+          style={{ marginTop: 8, padding: '16px', borderRadius: 20, fontSize: 15, fontWeight: 700 }} 
+          onClick={() => {
+            setTemplateToEdit(null);
+            setShowTemplateModal(true);
+          }}
+        >
           <Plus size={18} /> Create Template
         </button>
       </div>
@@ -277,9 +331,22 @@ export default function Train({ setShowProfileModal }) {
       {showTemplateModal && (
         <TemplateCreatorModal 
           data={data}
-          onClose={() => setShowTemplateModal(false)}
-          onSave={(newTemplate) => {
-            persist({ ...data, templates: [...data.templates, newTemplate] });
+          initialTemplate={templateToEdit}
+          onClose={() => {
+            setShowTemplateModal(false);
+            setTemplateToEdit(null);
+          }}
+          onSave={(savedTemplate) => {
+            const existingIdx = (data.templates || []).findIndex(t => t.id === savedTemplate.id);
+            let nextTemplates;
+            if (existingIdx !== -1) {
+              nextTemplates = [...(data.templates || [])];
+              nextTemplates[existingIdx] = savedTemplate;
+            } else {
+              nextTemplates = [...(data.templates || []), savedTemplate];
+            }
+            persist({ ...data, templates: nextTemplates });
+            setTemplateToEdit(null);
             setShowTemplateModal(false);
           }}
         />
@@ -287,9 +354,21 @@ export default function Train({ setShowProfileModal }) {
       
       <TemplateConfirmModal
         isOpen={!!templateToConfirm}
+        template={templateToConfirm}
         templateName={templateToConfirm?.name}
+        data={data}
         onConfirm={() => {
           launchTemplate(templateToConfirm);
+          setTemplateToConfirm(null);
+        }}
+        onEdit={(tpl) => {
+          setTemplateToConfirm(null);
+          setTemplateToEdit(tpl);
+          setShowTemplateModal(true);
+        }}
+        onDelete={(tpl) => {
+          const nextTemplates = (data.templates || []).filter(t => t.id !== tpl.id);
+          persist({ ...data, templates: nextTemplates });
           setTemplateToConfirm(null);
         }}
         onCancel={() => setTemplateToConfirm(null)}
