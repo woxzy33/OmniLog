@@ -48,15 +48,16 @@ export class FatalErrorBoundary extends React.Component {
 export class WidgetErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { hasError: false };
+    this.state = { hasError: false, error: null, errorInfo: null };
   }
 
   static getDerivedStateFromError(error) {
-    return { hasError: true };
+    return { hasError: true, error };
   }
 
   componentDidCatch(error, errorInfo) {
     console.error("Widget Error Caught:", error, errorInfo);
+    this.setState({ errorInfo });
   }
 
   render() {
@@ -64,7 +65,18 @@ export class WidgetErrorBoundary extends React.Component {
       return (
         <div style={{ padding: 16, border: '1px dashed #E81123', borderRadius: 12, background: 'rgba(232, 17, 35, 0.1)', color: '#E81123', textAlign: 'center', fontSize: 13, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
           <AlertTriangle size={24} />
-          <span>Widget Failed to Load</span>
+          <span style={{ fontWeight: 800 }}>Widget Failed to Load</span>
+          {this.state.error && (
+            <div style={{ color: '#fff', fontSize: 11, fontFamily: 'monospace', textAlign: 'left', wordBreak: 'break-all', background: '#1c1c1e', padding: 10, borderRadius: 8, maxWidth: '100%', overflowX: 'auto' }}>
+              {this.state.error.toString()}
+            </div>
+          )}
+          <button
+            onClick={() => this.setState({ hasError: false, error: null, errorInfo: null })}
+            style={{ marginTop: 8, background: '#E81123', color: '#fff', border: 'none', padding: '6px 14px', borderRadius: 6, fontSize: 12, fontWeight: 700, cursor: 'pointer' }}
+          >
+            Retry
+          </button>
         </div>
       );
     }

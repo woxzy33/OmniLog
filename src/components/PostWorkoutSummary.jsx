@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import MuscleHeatmap from './MuscleHeatmap';
 import { RadarChart, PolarGrid, PolarAngleAxis, Radar, ResponsiveContainer } from 'recharts';
 import { styles } from '../styles';
-import { Check, X, Edit2 } from './Icons';
+import { Check, X, Edit2, Flame, Clock, Footprints } from './Icons';
 import { parseVolume, formatWeight, translateExerciseName, getUserWeightAtDate } from '../utils';
 import { CATEGORIES, uid, exerciseRequiresWeight } from '../data/exerciseDb';
 import { useTranslation } from 'react-i18next';
@@ -63,7 +63,7 @@ export default function PostWorkoutSummary({ session, data, persist, onClose, on
           return t;
         });
         return { ...prevData, templates: nextTemplates };
-      });
+      }, true);
     } else if (templateAction === 'save_new' && persist && templateName.trim()) {
       const newTemplate = {
         id: uid(),
@@ -74,7 +74,7 @@ export default function PostWorkoutSummary({ session, data, persist, onClose, on
           sets: (ex.sets || []).map(s => ({ weight: "", reps: "", rpe: "", type: s.type || "N", completed: false }))
         }))
       };
-      persist(prevData => ({ ...prevData, templates: [...prevData.templates, newTemplate] }));
+      persist(prevData => ({ ...prevData, templates: [...prevData.templates, newTemplate] }), true);
     }
     onClose();
   };
@@ -121,6 +121,17 @@ export default function PostWorkoutSummary({ session, data, persist, onClose, on
       });
     });
 
+    // Cardio Stats Calculation
+    let cardioMins = 0;
+    let cardioDist = 0;
+    let cardioCals = 0;
+    const completedCardio = (session.cardioActivities || []).filter(c => c.completed);
+    completedCardio.forEach(c => {
+      cardioMins += (Number(c.durationMinutes) || 0) + (Number(c.durationSeconds) || 0) / 60;
+      cardioDist += Number(c.distance) || 0;
+      cardioCals += Number(c.calories) || 0;
+    });
+
     const radarData = Object.keys(muscleMap).map(k => ({ subject: k, volume: muscleMap[k] }));
     
     let mainMuscle = "None";
@@ -132,11 +143,25 @@ export default function PostWorkoutSummary({ session, data, persist, onClose, on
     let durationMins = session.durationMins;
     if (durationMins === undefined || durationMins === null) {
       const endTime = Date.now();
-      const startTime = new Date(session.date).getTime();
-      durationMins = Math.round((endTime - startTime) / 60000);
+      const startTime = session?.startTime ? Number(session.startTime) : (session?.date ? new Date(session.date).getTime() : endTime);
+      durationMins = Math.max(1, Math.round((endTime - startTime) / 60000));
     }
 
-    return { vol, setsCount, repsCount, prsCount, prDetails, radarData, mainMuscle, durationMins, muscleMap };
+    return { 
+      vol, 
+      setsCount, 
+      repsCount, 
+      prsCount, 
+      prDetails, 
+      radarData, 
+      mainMuscle, 
+      durationMins, 
+      muscleMap,
+      cardioMins: Math.round(cardioMins),
+      cardioDist: +cardioDist.toFixed(2),
+      cardioCals,
+      completedCardio
+    };
   }, [session, data]);
 
   const openTimeEditor = () => {
@@ -156,7 +181,7 @@ export default function PostWorkoutSummary({ session, data, persist, onClose, on
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      style={{ padding: 16, paddingBottom: 100, minHeight: '100vh', background: '#000000' }}
+      style={{ padding: 16, paddingTop: 'calc(16px + env(safe-area-inset-top, 0px))', paddingBottom: 100, minHeight: '100vh', background: '#000000' }}
     >
       <AnimatePresence>
         {showEditTime && (
@@ -211,84 +236,226 @@ export default function PostWorkoutSummary({ session, data, persist, onClose, on
         </button>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8, marginBottom: 32 }}>
-        <StatBox label="Time" value={`${stats.durationMins}m`} onClick={onUpdateDuration ? openTimeEditor : undefined} icon={onUpdateDuration ? <Edit2 size={10} color="#8b90a0" /> : null} />
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8, marginBottom: 24 }}>
+        <StatBox 
+          label="Time" 
+          value={stats.durationMins >= 60 ? `${Math.floor(stats.durationMins / 60)}h ${stats.durationMins % 60}m` : `${stats.durationMins}m`} 
+          onClick={onUpdateDuration ? openTimeEditor : undefined} 
+          icon={onUpdateDuration ? <Edit2 size={10} color="#8b90a0" /> : null} 
+        />
         <StatBox label="Volume" value={`${formatWeight(stats.vol, settings?.unit)} ${settings?.unit || "kg"}`} />
         <StatBox label="Sets" value={stats.setsCount} />
         <StatBox label="PRs" value={stats.prsCount} highlight={stats.prsCount > 0} />
       </div>
-      
-      <div style={{ marginBottom: 32, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'radial-gradient(circle at center, rgba(255,255,255,0.03) 0%, transparent 70%)', padding: '16px 0', borderRadius: 24, width: '100%' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', maxWidth: 300, marginBottom: 16 }}>
-          <button onClick={() => setActiveView(activeView === 'heatmap' ? 'radar' : 'heatmap')} style={{ background: 'transparent', border: 'none', color: '#8b90a0', cursor: 'pointer', padding: 8 }}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-          </button>
-          <div style={{ fontFamily: '"Inter", sans-serif', fontSize: 16, color: '#fff', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.15em', textAlign: 'center' }}>
-            {activeView === 'heatmap' ? 'FATIGUE HEATMAP' : 'MUSCLE VOLUME'}
-          </div>
-          <button onClick={() => setActiveView(activeView === 'heatmap' ? 'radar' : 'heatmap')} style={{ background: 'transparent', border: 'none', color: '#8b90a0', cursor: 'pointer', padding: 8 }}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-          </button>
-        </div>
 
-        <div style={{ position: 'relative', width: '100%', minHeight: 400, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <AnimatePresence mode="wait">
-            {activeView === 'heatmap' ? (
-              <motion.div key="heatmap" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 0.2 }} style={{ width: '100%' }}>
-                <div style={{ transform: 'scale(0.95)', transformOrigin: 'center top', filter: 'drop-shadow(0 0 20px rgba(var(--primary-rgb), 0.15))' }}>
-                  <MuscleHeatmap sessions={[session]} dataExercises={[...(data.exercises || []), ...(data.customExercises || [])]} ignoreDate={true} />
-                </div>
-              </motion.div>
-            ) : (
-              <motion.div key="radar" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 0.2 }} style={{ width: '100%', height: 350 }}>
-                <ResponsiveContainer width="100%" height="100%">
-                  <RadarChart cx="50%" cy="50%" outerRadius="70%" data={stats.radarData}>
-                    <PolarGrid stroke="#2A2A2E" />
-                    <PolarAngleAxis dataKey="subject" tick={{ fill: '#8b90a0', fontSize: 11, fontWeight: 700, fontFamily: '"Inter", sans-serif' }} />
-                    <Radar name="Sets" dataKey="volume" stroke="var(--primary)" fill="var(--primary)" fillOpacity={0.4} />
-                  </RadarChart>
-                </ResponsiveContainer>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </div>
-
-      <div style={{ fontFamily: '"Inter", sans-serif', fontSize: 12, fontWeight: 800, color: '#ffffff', marginBottom: 16, textTransform: 'uppercase', letterSpacing: '0.05em', display: 'flex', alignItems: 'center', gap: 8 }}>
-        <div style={{ width: 4, height: 16, background: 'var(--primary)', borderRadius: 2 }}></div>
-        Muscle Split
-      </div>
-      
-      <div style={{ marginBottom: 32, display: 'flex', flexDirection: 'column', gap: 14 }}>
-        {Object.entries(stats.muscleMap)
-          .filter(([_, v]) => v > 0)
-          .sort((a, b) => b[1] - a[1])
-          .map(([muscle, setAmount]) => {
-            const pct = Math.round((setAmount / stats.setsCount) * 100) || 0;
-            return (
-              <div key={muscle}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
-                  <span style={{ fontFamily: '"Inter", sans-serif', fontSize: 13, fontWeight: 700, color: '#e2e2e2' }}>{muscle} <span style={{color:"#8b90a0", fontWeight:600, marginLeft:4}}>({setAmount})</span></span>
-                  <span style={{ fontFamily: '"Inter", sans-serif', fontSize: 13, fontWeight: 700, color: 'var(--primary)' }}>{pct}%</span>
-                </div>
-                <div style={{ height: 6, background: '#121212', borderRadius: 3, overflow: 'hidden', border: '1px solid #1c1c1e' }}>
-                  <motion.div 
-                    initial={{ width: 0 }} animate={{ width: `${pct}%` }} transition={{ duration: 1, ease: 'easeOut', delay: 0.1 }}
-                    style={{ height: '100%', background: 'var(--primary)', borderRadius: 3, boxShadow: '0 0 8px rgba(var(--primary-rgb), 0.5)' }}
-                  />
-                </div>
+      {stats.completedCardio.length > 0 && (
+        <div style={{
+          background: 'linear-gradient(135deg, rgba(255, 107, 0, 0.12) 0%, rgba(255, 69, 0, 0.04) 100%)',
+          border: '1px solid rgba(255, 107, 0, 0.3)',
+          borderRadius: 20,
+          padding: '16px 20px',
+          marginBottom: 32,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 12
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <div style={{
+              width: 44,
+              height: 44,
+              borderRadius: 14,
+              background: 'rgba(255, 107, 0, 0.15)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#FF6B00'
+            }}>
+              <Flame size={24} />
+            </div>
+            <div>
+              <div style={{ fontSize: 11, fontWeight: 800, color: '#FF9E40', textTransform: 'uppercase', letterSpacing: '0.08em', fontFamily: '"Inter", sans-serif' }}>
+                Cardio ({stats.completedCardio.length} {stats.completedCardio.length === 1 ? 'activity' : 'activities'})
               </div>
-            );
-        })}
-        {stats.setsCount === 0 && (
-          <div style={{ fontSize: 12, color: '#8b90a0', textAlign: 'center', fontWeight: 600 }}>No sets recorded.</div>
-        )}
-      </div>
+              <div style={{ fontSize: 16, fontWeight: 800, color: '#fff', fontFamily: '"Inter", sans-serif', marginTop: 2 }}>
+                {Math.round(stats.cardioMins)} min {stats.cardioDist > 0 && `• ${(Math.round(stats.cardioDist * 100) / 100)} km`}
+              </div>
+            </div>
+          </div>
+          {stats.cardioCals > 0 && (
+            <div style={{ textAlign: 'right' }}>
+              <div style={{ fontSize: 10, fontWeight: 700, color: '#8b90a0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Est. Burn</div>
+              <div style={{ fontSize: 17, fontWeight: 900, color: '#FF6B00', fontFamily: '"Inter", sans-serif' }}>
+                ~{Math.round(stats.cardioCals)} <span style={{ fontSize: 11, fontWeight: 700, color: '#FF9E40' }}>kcal</span>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+      
+      {stats.setsCount > 0 && (
+        <>
+          <div style={{ marginBottom: 32, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'radial-gradient(circle at center, rgba(255,255,255,0.03) 0%, transparent 70%)', padding: '16px 0', borderRadius: 24, width: '100%' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', maxWidth: 300, marginBottom: 16 }}>
+              <button onClick={() => setActiveView(activeView === 'heatmap' ? 'radar' : 'heatmap')} style={{ background: 'transparent', border: 'none', color: '#8b90a0', cursor: 'pointer', padding: 8 }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              </button>
+              <div style={{ fontFamily: '"Inter", sans-serif', fontSize: 16, color: '#fff', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.15em', textAlign: 'center' }}>
+                {activeView === 'heatmap' ? 'FATIGUE HEATMAP' : 'MUSCLE VOLUME'}
+              </div>
+              <button onClick={() => setActiveView(activeView === 'heatmap' ? 'radar' : 'heatmap')} style={{ background: 'transparent', border: 'none', color: '#8b90a0', cursor: 'pointer', padding: 8 }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
 
-      <div style={{ fontFamily: '"Inter", sans-serif', fontSize: 12, fontWeight: 800, color: '#ffffff', marginBottom: 16, textTransform: 'uppercase', letterSpacing: '0.05em', display: 'flex', alignItems: 'center', gap: 8 }}>
-        <div style={{ width: 4, height: 16, background: 'var(--primary)', borderRadius: 2 }}></div>
-        Workout Details
-      </div>
+            <div style={{ position: 'relative', width: '100%', minHeight: 400, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <AnimatePresence mode="wait">
+                {activeView === 'heatmap' ? (
+                  <motion.div key="heatmap" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 0.2 }} style={{ width: '100%' }}>
+                    <div style={{ transform: 'scale(0.95)', transformOrigin: 'center top', filter: 'drop-shadow(0 0 20px rgba(var(--primary-rgb), 0.15))' }}>
+                      <MuscleHeatmap sessions={[session]} dataExercises={[...(data.exercises || []), ...(data.customExercises || [])]} ignoreDate={true} />
+                    </div>
+                  </motion.div>
+                ) : (
+                  <motion.div key="radar" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 0.2 }} style={{ width: '100%', height: 350 }}>
+                    <ResponsiveContainer width="100%" height="100%">
+                      <RadarChart cx="50%" cy="50%" outerRadius="70%" data={stats.radarData}>
+                        <PolarGrid stroke="#2A2A2E" />
+                        <PolarAngleAxis dataKey="subject" tick={{ fill: '#8b90a0', fontSize: 11, fontWeight: 700, fontFamily: '"Inter", sans-serif' }} />
+                        <Radar name="Sets" dataKey="volume" stroke="var(--primary)" fill="var(--primary)" fillOpacity={0.4} />
+                      </RadarChart>
+                    </ResponsiveContainer>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
+
+          <div style={{ fontFamily: '"Inter", sans-serif', fontSize: 12, fontWeight: 800, color: '#ffffff', marginBottom: 16, textTransform: 'uppercase', letterSpacing: '0.05em', display: 'flex', alignItems: 'center', gap: 8 }}>
+            <div style={{ width: 4, height: 16, background: 'var(--primary)', borderRadius: 2 }}></div>
+            Muscle Split
+          </div>
+          
+          <div style={{ marginBottom: 32, display: 'flex', flexDirection: 'column', gap: 14 }}>
+            {Object.entries(stats.muscleMap)
+              .filter(([_, v]) => v > 0)
+              .sort((a, b) => b[1] - a[1])
+              .map(([muscle, setAmount]) => {
+                const pct = Math.round((setAmount / stats.setsCount) * 100) || 0;
+                return (
+                  <div key={muscle}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
+                      <span style={{ fontFamily: '"Inter", sans-serif', fontSize: 13, fontWeight: 700, color: '#e2e2e2' }}>{muscle} <span style={{color:"#8b90a0", fontWeight:600, marginLeft:4}}>({setAmount})</span></span>
+                      <span style={{ fontFamily: '"Inter", sans-serif', fontSize: 13, fontWeight: 700, color: 'var(--primary)' }}>{pct}%</span>
+                    </div>
+                    <div style={{ height: 6, background: '#121212', borderRadius: 3, overflow: 'hidden', border: '1px solid #1c1c1e' }}>
+                      <motion.div 
+                        initial={{ width: 0 }} animate={{ width: `${pct}%` }} transition={{ duration: 1, ease: 'easeOut', delay: 0.1 }}
+                        style={{ height: '100%', background: 'var(--primary)', borderRadius: 3, boxShadow: '0 0 8px rgba(var(--primary-rgb), 0.5)' }}
+                      />
+                    </div>
+                  </div>
+                );
+            })}
+          </div>
+        </>
+      )}
+
+      {/* Completed Cardio Activities */}
+      {stats.completedCardio.length > 0 && (
+        <div style={{ marginBottom: 32 }}>
+          <div style={{ fontFamily: '"Inter", sans-serif', fontSize: 12, fontWeight: 800, color: '#ffffff', marginBottom: 16, textTransform: 'uppercase', letterSpacing: '0.05em', display: 'flex', alignItems: 'center', gap: 8 }}>
+            <div style={{ width: 4, height: 16, background: '#FF6B00', borderRadius: 2 }}></div>
+            Cardio Activities
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            {stats.completedCardio.map((c, idx) => {
+              const calVal = Math.round(Number(c.customCalories !== undefined && c.customCalories !== '' ? c.customCalories : c.calories) || 0);
+              return (
+                <div key={c.id || idx} style={{
+                  background: 'linear-gradient(135deg, rgba(255, 107, 0, 0.07) 0%, rgba(20, 20, 24, 0.6) 100%)',
+                  border: '1px solid rgba(255, 107, 0, 0.22)',
+                  borderRadius: 16,
+                  padding: '16px 18px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 10
+                }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                      <span style={{ fontSize: 22 }}>{c.icon || '🏃'}</span>
+                      <div>
+                        <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 800, fontSize: 16, color: '#ffffff' }}>
+                          {c.name}
+                        </div>
+                        <div style={{ fontSize: 11, color: '#8b90a0', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                          {c.category || 'Cardio'}
+                        </div>
+                      </div>
+                    </div>
+                    {calVal > 0 && (
+                      <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 4,
+                        background: 'rgba(255, 107, 0, 0.15)',
+                        border: '1px solid rgba(255, 107, 0, 0.3)',
+                        padding: '4px 10px',
+                        borderRadius: 10,
+                        color: '#FF9E40',
+                        fontSize: 12,
+                        fontWeight: 800
+                      }}>
+                        <Flame size={13} color="#FF6B00" />
+                        {calVal} kcal
+                      </div>
+                    )}
+                  </div>
+
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 4 }}>
+                    <div style={{ background: '#0d0d10', border: '1px solid #222', borderRadius: 8, padding: '6px 12px', fontSize: 12, color: '#ccc', fontWeight: 700 }}>
+                      ⏱️ {c.durationMinutes || 0}m {c.durationSeconds ? `${c.durationSeconds}s` : ''}
+                    </div>
+                    {c.hasDistance && Number(c.distance) > 0 && (
+                      <div style={{ background: '#0d0d10', border: '1px solid #222', borderRadius: 8, padding: '6px 12px', fontSize: 12, color: '#ccc', fontWeight: 700 }}>
+                        📍 {c.distance} km
+                      </div>
+                    )}
+                    {c.pace && (
+                      <div style={{ background: '#0d0d10', border: '1px solid #222', borderRadius: 8, padding: '6px 12px', fontSize: 12, color: '#FF9E40', fontWeight: 700 }}>
+                        ⚡ {c.pace}
+                      </div>
+                    )}
+                    {c.hasIncline && Number(c.incline) > 0 && (
+                      <div style={{ background: '#0d0d10', border: '1px solid #222', borderRadius: 8, padding: '6px 12px', fontSize: 12, color: '#ccc', fontWeight: 700 }}>
+                        ▲ Incline {c.incline}%
+                      </div>
+                    )}
+                    {c.hasResistance && Number(c.resistance) > 0 && (
+                      <div style={{ background: '#0d0d10', border: '1px solid #222', borderRadius: 8, padding: '6px 12px', fontSize: 12, color: '#ccc', fontWeight: 700 }}>
+                        ⚙️ Res {c.resistance}
+                      </div>
+                    )}
+                  </div>
+
+                  {c.notes && (
+                    <div style={{ fontSize: 12, color: '#8b90a0', fontStyle: 'italic', background: '#0a0a0c', padding: '8px 12px', borderRadius: 10, borderLeft: '2px solid rgba(255, 107, 0, 0.4)' }}>
+                      "{c.notes}"
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {session.exercises && session.exercises.length > 0 && (
+        <>
+          <div style={{ fontFamily: '"Inter", sans-serif', fontSize: 12, fontWeight: 800, color: '#ffffff', marginBottom: 16, textTransform: 'uppercase', letterSpacing: '0.05em', display: 'flex', alignItems: 'center', gap: 8 }}>
+            <div style={{ width: 4, height: 16, background: 'var(--primary)', borderRadius: 2 }}></div>
+            Workout Details
+          </div>
       
       <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
         {session.exercises.map((ex, idx) => {
@@ -356,6 +523,8 @@ export default function PostWorkoutSummary({ session, data, persist, onClose, on
           );
         })}
       </div>
+      </>
+      )}
 
       <div style={{ display: 'flex', gap: 12, marginTop: 40 }}>
         {isHistoryView && (

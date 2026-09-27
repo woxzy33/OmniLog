@@ -99,8 +99,11 @@ export default function App() {
           id: s.id,
           name: s.name,
           date: s.date,
-          duration: s.duration,
+          startTime: s.startTime,
+          durationMins: s.durationMins || s.duration || 0,
+          duration: s.durationMins || s.duration || 0,
           exercises: s.exercises,
+          cardioActivities: s.cardioActivities || [],
           notes: s.notes,
           locationId: s.locationId
         })),
@@ -122,7 +125,8 @@ export default function App() {
           thighs: m.thighs,
           note: m.note
         })),
-        customExercises: (dataForExport?.exercises || []).filter(e => e.isCustom || (typeof e.id === 'string' && e.id.startsWith('custom-')))
+        customExercises: (dataForExport?.exercises || []).filter(e => e.isCustom || (typeof e.id === 'string' && e.id.startsWith('custom-'))),
+        customCardioActivities: dataForExport?.customCardioActivities || []
       };
 
       const jsonStr = JSON.stringify(userSafeExport, null, 2);

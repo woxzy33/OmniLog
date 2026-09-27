@@ -1,10 +1,10 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { ResponsiveContainer, AreaChart, Area, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, RadarChart, PolarGrid, PolarAngleAxis, Radar } from 'recharts';
 import { motion, AnimatePresence } from 'framer-motion';
 import MuscleHeatmap from './MuscleHeatmap';
 import { styles } from '../styles';
 import { useAppStore } from '../store';
-import { Plus, X, Check, ChevronLeft, ChevronRight, Search, TrendingUp, Dumbbell, User, Calendar as CalendarIcon, Edit2, Share, Settings, Download, Upload, Filter, Trash2 } from './Icons';
+import { Plus, X, Check, ChevronLeft, ChevronRight, Search, TrendingUp, Dumbbell, User, Calendar as CalendarIcon, Edit2, Share, Settings, Download, Upload, Filter, Trash2, Flame, Footprints } from './Icons';
 import { formatWeight, translateExerciseName, calculate1RM, validateMeasurement, parseVolume, getUserWeightAtDate, calculateStreak } from '../utils';
 import { useTranslation } from 'react-i18next';
 import { uid, CATEGORIES, MACHINES, exerciseRequiresWeight } from '../data/exerciseDb';
@@ -26,6 +26,7 @@ const STATS_RANGES = {
   "Last Year": 365,
   "All Time": 99999
 };
+const STATS_RANGE_KEYS = Object.keys(STATS_RANGES);
 
 function SubViewHeader({ title, onBack }) {
   return (
@@ -60,20 +61,38 @@ function StatBox({ label, value, color }) {
 
 function StatisticsView({ data, onBack, settings }) {
   const [range, setRange] = useState("All Time");
+  const rangeSliderRef = useRef(null);
+  const rangeBtnRefs = useRef({});
+
+  const currentRangeIndex = STATS_RANGE_KEYS.indexOf(range);
+
+  const scrollRangeSlider = (direction) => {
+    if (rangeSliderRef.current) {
+      rangeSliderRef.current.scrollBy({ left: direction * 140, behavior: 'smooth' });
+    }
+  };
+
+  const handleSelectRange = (r) => {
+    setRange(r);
+    if (rangeBtnRefs.current[r]) {
+      rangeBtnRefs.current[r].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+  };
 
   const filteredSessions = useMemo(() => {
     const days = STATS_RANGES[range];
     const now = new Date();
-    return data.sessions.filter(s => Math.abs(now - new Date(s.date)) / (1000 * 60 * 60 * 24) <= days);
-  }, [data.sessions, range]);
+    return (data?.sessions || []).filter(s => Math.abs(now - new Date(s.date)) / (1000 * 60 * 60 * 24) <= days);
+  }, [data?.sessions, range]);
 
   const stats = useMemo(() => {
     let vol = 0, reps = 0, sets = 0, duration = 0;
+    let cardioMins = 0, cardioDist = 0, cardioCals = 0, cardioCount = 0;
     const dict = {};
-    (data.exercises || []).forEach(e => dict[e.id] = e);
+    (data?.exercises || []).forEach(e => dict[e.id] = e);
     filteredSessions.forEach(s => {
       duration += (s.durationMins || 0);
-      const userWeight = getUserWeightAtDate(data.measurements, s.date);
+      const userWeight = getUserWeightAtDate(data?.measurements, s.date);
       (s.exercises || []).forEach(ex => {
         const exObj = dict[ex.exerciseId];
         const requiresWeight = exerciseRequiresWeight(exObj);
@@ -85,42 +104,197 @@ function StatisticsView({ data, onBack, settings }) {
           }
         });
       });
+      (s.cardioActivities || []).forEach(c => {
+        if (c.completed) {
+          cardioCount += 1;
+          cardioMins += (Number(c.durationMinutes) || 0) + (Number(c.durationSeconds) || 0) / 60;
+          cardioDist += (Number(c.distance) || 0);
+          const cals = Number(c.customCalories !== undefined && c.customCalories !== '' ? c.customCalories : c.calories) || 0;
+          cardioCals += cals;
+        }
+      });
     });
-    return { vol, reps, sets, duration, workouts: filteredSessions.length };
-  }, [filteredSessions, data.exercises, data.measurements]);
+    return { 
+      vol, 
+      reps, 
+      sets, 
+      duration, 
+      cardioMins, 
+      cardioDist, 
+      cardioCals, 
+      cardioCount, 
+      workouts: filteredSessions.length 
+    };
+  }, [filteredSessions, data?.exercises, data?.measurements]);
 
   const radarData = useMemo(() => {
     const dict = {};
-    data.exercises.forEach(e => dict[e.id] = e);
+    (data?.exercises || []).forEach(e => dict[e.id] = e);
     const volumes = {};
     RADAR_AXES.forEach(cat => volumes[cat] = 0);
     filteredSessions.forEach(session => {
-      const userWeight = getUserWeightAtDate(data.measurements, session.date);
-      session.exercises.forEach(ex => {
+      const userWeight = getUserWeightAtDate(data?.measurements, session.date);
+      (session.exercises || []).forEach(ex => {
         const exObj = dict[ex.exerciseId];
         if (exObj && volumes[exObj.category] !== undefined) {
           const requiresWeight = exerciseRequiresWeight(exObj);
-          const vol = ex.sets.reduce((acc, s) => acc + (s.completed ? parseVolume(s.weight, s.reps, requiresWeight ? 0 : userWeight) : 0), 0);
+          const vol = (ex.sets || []).reduce((acc, s) => acc + (s.completed ? parseVolume(s.weight, s.reps, requiresWeight ? 0 : userWeight) : 0), 0);
           volumes[exObj.category] += vol;
         }
       });
     });
     return RADAR_AXES.map(cat => ({ subject: cat, Volume: volumes[cat] }));
-  }, [filteredSessions, data.exercises, data.measurements]);
+  }, [filteredSessions, data?.exercises, data?.measurements]);
 
   return (
     <motion.div initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: 20, opacity: 0 }}>
       <SubViewHeader title="Statistics" onBack={onBack} />
-      <div style={{ display: 'flex', gap: 8, overflowX: 'auto', paddingBottom: 12, marginBottom: 16, msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
-        {Object.keys(STATS_RANGES).map(r => (
-          <button key={r} onClick={() => setRange(r)} style={{ background: range === r ? '#e2e2e2' : '#121212', color: range === r ? '#121212' : '#8b90a0', border: 'none', borderRadius: 20, padding: '8px 16px', fontSize: 13, fontWeight: 700, whiteSpace: 'nowrap', cursor: 'pointer' }}>{r}</button>
-        ))}
+      
+      {/* Mobile-Friendly Slider Controls for Time Ranges */}
+      <div style={{ marginBottom: 20 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <button
+            onClick={() => scrollRangeSlider(-1)}
+            aria-label="Scroll left"
+            style={{
+              background: '#161618',
+              border: '1px solid #28282c',
+              color: '#e2e2e2',
+              width: 36,
+              height: 36,
+              borderRadius: 12,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              flexShrink: 0,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.3)'
+            }}
+          >
+            <ChevronLeft size={18} />
+          </button>
+
+          <div
+            ref={rangeSliderRef}
+            style={{
+              display: 'flex',
+              gap: 8,
+              overflowX: 'auto',
+              padding: '6px 2px',
+              scrollBehavior: 'smooth',
+              WebkitOverflowScrolling: 'touch',
+              flex: 1,
+              msOverflowStyle: 'none',
+              scrollbarWidth: 'none'
+            }}
+          >
+            {STATS_RANGE_KEYS.map(r => (
+              <button
+                key={r}
+                ref={el => rangeBtnRefs.current[r] = el}
+                onClick={() => handleSelectRange(r)}
+                style={{
+                  background: range === r ? 'var(--primary)' : '#141416',
+                  color: range === r ? '#fff' : '#8b90a0',
+                  border: range === r ? '1px solid transparent' : '1px solid #242428',
+                  borderRadius: 20,
+                  padding: '9px 18px',
+                  fontSize: 13,
+                  fontWeight: 700,
+                  whiteSpace: 'nowrap',
+                  transition: 'all 0.2s',
+                  cursor: 'pointer',
+                  flexShrink: 0,
+                  boxShadow: range === r ? '0 4px 12px rgba(0, 122, 255, 0.35)' : 'none'
+                }}
+              >
+                {r}
+              </button>
+            ))}
+          </div>
+
+          <button
+            onClick={() => scrollRangeSlider(1)}
+            aria-label="Scroll right"
+            style={{
+              background: '#161618',
+              border: '1px solid #28282c',
+              color: '#e2e2e2',
+              width: 36,
+              height: 36,
+              borderRadius: 12,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              flexShrink: 0,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.3)'
+            }}
+          >
+            <ChevronRight size={18} />
+          </button>
+        </div>
+
+        {/* Range Slider Track */}
+        <div style={{ padding: '12px 6px 0 6px', position: 'relative' }}>
+          <div style={{
+            position: 'relative',
+            height: 6,
+            background: 'rgba(255, 255, 255, 0.06)',
+            borderRadius: 3,
+            overflow: 'hidden'
+          }}>
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              bottom: 0,
+              left: `${(Math.max(0, currentRangeIndex) / (STATS_RANGE_KEYS.length - 1)) * 80}%`,
+              width: `${(1 / STATS_RANGE_KEYS.length) * 100 + 10}%`,
+              background: 'linear-gradient(90deg, var(--primary) 0%, var(--primary-alt) 100%)',
+              borderRadius: 3,
+              boxShadow: '0 0 10px rgba(0, 122, 255, 0.6)',
+              transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)'
+            }} />
+          </div>
+
+          <input
+            type="range"
+            min={0}
+            max={STATS_RANGE_KEYS.length - 1}
+            value={currentRangeIndex >= 0 ? currentRangeIndex : 0}
+            onChange={(e) => {
+              const idx = Number(e.target.value);
+              const r = STATS_RANGE_KEYS[idx];
+              if (r) handleSelectRange(r);
+            }}
+            style={{
+              position: 'absolute',
+              top: 6,
+              left: 4,
+              right: 4,
+              width: 'calc(100% - 8px)',
+              height: 18,
+              opacity: 0,
+              cursor: 'pointer',
+              margin: 0,
+              zIndex: 2
+            }}
+          />
+        </div>
       </div>
+
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 32 }}>
         <StatBox label="Volume" value={`${formatWeight(stats.vol, settings?.unit)} ${settings?.unit || 'kg'}`} color="var(--primary)" />
         <StatBox label="Total Reps" value={stats.reps} color="#E8C12C" />
         <StatBox label="Total Sets" value={stats.sets} color="#e2e2e2" />
         <StatBox label="Time Trained" value={stats.duration < 60 ? `${Math.round(stats.duration)} min` : `${Math.floor(stats.duration/60)}h ${Math.round(stats.duration%60)}m`} color="#e2e2e2" />
+        <StatBox label="Cardio Time" value={stats.cardioMins < 60 ? `${Math.round(stats.cardioMins)} min` : `${Math.floor(stats.cardioMins/60)}h ${Math.round(stats.cardioMins%60)}m`} color="#FF9E40" />
+        <StatBox label="Est. Burn" value={`${Math.round(stats.cardioCals)} kcal`} color="#FF6B00" />
+        {stats.cardioDist > 0 && (
+          <div style={{ gridColumn: '1 / -1' }}>
+            <StatBox label="Cardio Distance" value={`${(Math.round(stats.cardioDist * 100) / 100)} km`} color="#00E5FF" />
+          </div>
+        )}
         <div style={{ gridColumn: '1 / -1' }}>
           <StatBox label="Total Workouts" value={stats.workouts} color="var(--primary)" />
         </div>
@@ -156,6 +330,10 @@ const CustomTooltip = ({ active, payload, label, unit, metricMode }) => {
        const h = Math.floor(val / 60);
        const m = Math.floor(val % 60);
        displayVal = h > 0 ? `${h}h ${m}m` : `${m}m`;
+    } else if (metricMode === 'cardio' || payload[0].name === 'cardio') {
+       const h = Math.floor(val / 60);
+       const m = Math.floor(val % 60);
+       displayVal = h > 0 ? `${h}h ${m}m` : `${Math.round(val)}m`;
     } else if (metricMode === 'volume' || metricMode === 'weight' || payload[0].name === 'Volume' || payload[0].name === 'maxWeight') {
        const finalWeight = unit === 'lbs' ? Math.round(val * 2.20462) : Math.round(val);
        displayVal = `${finalWeight.toLocaleString()} ${unit || 'kg'}`;
@@ -170,7 +348,7 @@ const CustomTooltip = ({ active, payload, label, unit, metricMode }) => {
     return (
       <div style={{ background: '#121212', border: '1px solid #2A2A2A', borderRadius: 8, padding: '8px 12px', color: '#e2e2e2', fontSize: 12, boxShadow: '0 4px 12px rgba(0,0,0,0.5)' }}>
         <div style={{ color: '#8b90a0', marginBottom: 4, fontWeight: 700, textTransform: 'uppercase' }}>{displayLabel}</div>
-        <div style={{ color: 'var(--primary)', fontWeight: 800, fontSize: 14 }}>{displayVal}</div>
+        <div style={{ color: (metricMode === 'cardio' || payload[0].name === 'cardio') ? '#FF9E40' : 'var(--primary)', fontWeight: 800, fontSize: 14 }}>{displayVal}</div>
       </div>
     );
   }
@@ -278,6 +456,14 @@ function MainProfileView({ data, persist, onNavigate, settings }) {
     return vol;
   }, [data.sessions, data.exercises, data.measurements]);
 
+  const lifetimeCardioMins = useMemo(() => {
+    return (data.sessions || []).reduce((acc, s) => {
+      return acc + (s.cardioActivities || []).reduce((cAcc, c) => {
+        return c.completed ? cAcc + (Number(c.durationMinutes) || 0) + (Number(c.durationSeconds) || 0) / 60 : cAcc;
+      }, 0);
+    }, 0);
+  }, [data.sessions]);
+
   const activityData = useMemo(() => {
     const bins = [];
     const now = new Date();
@@ -288,7 +474,7 @@ function MainProfileView({ data, persist, onNavigate, settings }) {
         bins.push({
           date: d,
           label: d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
-          duration: 0, volume: 0, reps: 0
+          duration: 0, volume: 0, reps: 0, cardio: 0
         });
       }
     } else if (activityPeriod === "weekly") {
@@ -297,7 +483,7 @@ function MainProfileView({ data, persist, onNavigate, settings }) {
         bins.push({
           date: d,
           label: d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
-          duration: 0, volume: 0, reps: 0
+          duration: 0, volume: 0, reps: 0, cardio: 0
         });
       }
     } else {
@@ -306,7 +492,7 @@ function MainProfileView({ data, persist, onNavigate, settings }) {
         bins.push({
           date: d,
           label: d.toLocaleDateString('en-US', { month: 'short' }),
-          duration: 0, volume: 0, reps: 0,
+          duration: 0, volume: 0, reps: 0, cardio: 0,
           monthStr: `${d.getFullYear()}-${d.getMonth()}`
         });
       }
@@ -339,6 +525,12 @@ function MainProfileView({ data, persist, onNavigate, settings }) {
             }
           });
         });
+        (session.cardioActivities || []).forEach(c => {
+          if (c.completed) {
+            const mins = (Number(c.durationMinutes) || 0) + (Number(c.durationSeconds) || 0) / 60;
+            bins[matchIdx].cardio += mins;
+          }
+        });
       }
     });
 
@@ -346,6 +538,7 @@ function MainProfileView({ data, persist, onNavigate, settings }) {
       ...b,
       duration: Math.round(b.duration),
       volume: Math.round(b.volume),
+      cardio: Math.round(b.cardio)
     }));
   }, [data.sessions, activityPeriod]);
 
@@ -508,6 +701,14 @@ function MainProfileView({ data, persist, onNavigate, settings }) {
             <div style={{ color: '#8b90a0', fontSize: 12, fontWeight: 700, textTransform: 'uppercase' }}>Volume</div>
             <div style={{ color: 'var(--primary)', fontSize: 24, fontWeight: 800 }}>{Math.round(lifetimeVolume / 1000)}k</div>
           </div>
+          {lifetimeCardioMins > 0 && (
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ color: '#8b90a0', fontSize: 12, fontWeight: 700, textTransform: 'uppercase' }}>Cardio</div>
+              <div style={{ color: '#FF9E40', fontSize: 24, fontWeight: 800 }}>
+                {lifetimeCardioMins < 60 ? `${Math.round(lifetimeCardioMins)}m` : `${(lifetimeCardioMins / 60).toFixed(1)}h`}
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -562,26 +763,27 @@ function MainProfileView({ data, persist, onNavigate, settings }) {
                       <Bar dataKey={chartMetric} fill="url(#barGrad)" radius={[4, 4, 0, 0]} />
                       <defs>
                         <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0%" stopColor="var(--primary)" />
-                          <stop offset="100%" stopColor="#003366" />
+                          <stop offset="0%" stopColor={chartMetric === 'cardio' ? '#FF6B00' : 'var(--primary)'} />
+                          <stop offset="100%" stopColor={chartMetric === 'cardio' ? '#B33C00' : '#003366'} />
                         </linearGradient>
                       </defs>
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
-                <div style={{ display: 'flex', gap: 8 }}>
-                  {["duration", "volume", "reps"].map(m => (
+                <div style={{ display: 'flex', gap: 6 }}>
+                  {["duration", "volume", "reps", "cardio"].map(m => (
                     <button
                       key={m}
                       onClick={() => setChartMetric(m)}
                       style={{
                         flex: 1,
-                        background: chartMetric === m ? '#e2e2e2' : '#1C1C1E',
-                        color: chartMetric === m ? '#121212' : '#8b90a0',
-                        border: 'none', borderRadius: 20, padding: '8px 0', fontSize: 13, fontWeight: 800, textTransform: 'capitalize', transition: 'all 0.2s', cursor: 'pointer'
+                        background: chartMetric === m ? (m === 'cardio' ? '#FF6B00' : '#e2e2e2') : '#1C1C1E',
+                        color: chartMetric === m ? (m === 'cardio' ? '#ffffff' : '#121212') : '#8b90a0',
+                        border: 'none', borderRadius: 20, padding: '8px 0', fontSize: 12, fontWeight: 800, textTransform: 'capitalize', transition: 'all 0.2s', cursor: 'pointer',
+                        boxShadow: chartMetric === m && m === 'cardio' ? '0 2px 10px rgba(255, 107, 0, 0.4)' : 'none'
                       }}
                     >
-                      {m}
+                      {m === "cardio" ? "Cardio" : m}
                     </button>
                   ))}
                 </div>
@@ -884,14 +1086,17 @@ function MeasuresView({ data, persist, onBack, settings }) {
   const [editTarget, setEditTarget] = useState(null);
   const [deleteTargetId, setDeleteTargetId] = useState(null);
 
-  const sliderRef = React.useRef(null);
-  const metricBtnRefs = React.useRef({});
+  const sliderRef = useRef(null);
+  const metricBtnRefs = useRef({});
 
-  const measurements = data.measurements || [];
+  const rawMeasurements = Array.isArray(data?.measurements)
+    ? data.measurements
+    : (data?.measurements && typeof data.measurements === 'object' ? Object.values(data.measurements) : []);
+  const measurements = useMemo(() => rawMeasurements.filter(m => m && typeof m === 'object'), [rawMeasurements]);
 
   // Chronological sort (oldest to newest) for chart and delta comparison
   const chronological = useMemo(() => {
-    return [...measurements].sort((a, b) => new Date(a.date) - new Date(b.date));
+    return [...measurements].sort((a, b) => (new Date(a?.date || 0).getTime()) - (new Date(b?.date || 0).getTime()));
   }, [measurements]);
 
   // Chart data for selected metric with exact unit conversion
@@ -908,8 +1113,10 @@ function MeasuresView({ data, persist, onBack, settings }) {
           } else {
             val = isImperial ? Number((val / 2.54).toFixed(1)) : Number(val.toFixed(1));
           }
+          const d = new Date(m?.date);
+          const validDate = !isNaN(d.getTime());
           return {
-            date: new Date(m.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+            date: validDate ? d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : 'Unknown',
             value: val
           };
         }
@@ -920,7 +1127,7 @@ function MeasuresView({ data, persist, onBack, settings }) {
 
   // Summary stats for the active metric (Current, Start, Net Change)
   const metricSummary = useMemo(() => {
-    const valid = chronological.filter(m => m[selectedMetric] !== undefined && m[selectedMetric] !== null && m[selectedMetric] !== "");
+    const valid = chronological.filter(m => m && m[selectedMetric] !== undefined && m[selectedMetric] !== null && m[selectedMetric] !== "");
     if (valid.length === 0) return null;
     const first = valid[0];
     const latest = valid[valid.length - 1];
@@ -938,8 +1145,8 @@ function MeasuresView({ data, persist, onBack, settings }) {
   // Reverse chronological (newest to oldest) list for the selected metric
   const historyList = useMemo(() => {
     return [...measurements]
-      .filter(m => m[selectedMetric] !== undefined && m[selectedMetric] !== null && m[selectedMetric] !== "")
-      .sort((a, b) => new Date(b.date) - new Date(a.date));
+      .filter(m => m && m[selectedMetric] !== undefined && m[selectedMetric] !== null && m[selectedMetric] !== "")
+      .sort((a, b) => (new Date(b?.date || 0).getTime()) - (new Date(a?.date || 0).getTime()));
   }, [measurements, selectedMetric]);
 
   const handleSelectMetric = (m) => {
@@ -1234,18 +1441,19 @@ function MeasuresView({ data, persist, onBack, settings }) {
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         {historyList.length > 0 ? (
           historyList.map((entry) => {
-            const dateObj = new Date(entry.date);
-            const dateFormatted = dateObj.toLocaleDateString('en-US', {
+            const dateObj = entry?.date ? new Date(entry.date) : new Date();
+            const isValidDate = !isNaN(dateObj.getTime());
+            const dateFormatted = isValidDate ? dateObj.toLocaleDateString('en-US', {
               weekday: 'short',
               month: 'short',
               day: 'numeric',
               year: 'numeric'
-            });
-            const timeFormatted = dateObj.toLocaleTimeString('en-US', {
+            }) : 'Unknown Date';
+            const timeFormatted = isValidDate ? dateObj.toLocaleTimeString('en-US', {
               hour: '2-digit',
               minute: '2-digit',
               hour12: false
-            });
+            }) : '';
 
             const delta = getMetricDelta(entry, selectedMetric);
             const mainVal = formatMetricVal(entry[selectedMetric], selectedMetric);

@@ -3,6 +3,11 @@
   "appName": "OmniLog",
   "webDir": "dist",
   "plugins": {
+    "StatusBar": {
+      "overlaysWebView": false,
+      "style": "DARK",
+      "backgroundColor": "#090A0C"
+    },
     "SplashScreen": {
       "launchShowDuration": 2000,
       "launchAutoHide": true,

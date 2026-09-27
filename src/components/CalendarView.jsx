@@ -279,10 +279,20 @@ export default function CalendarView({ sessions = [], onSessionClick, data, sett
                           <div style={{ fontSize: 15, fontWeight: 800, color: '#fff' }}>{s.name || "Workout Session"}</div>
                           <div style={{ fontSize: 12, color: '#8b90a0', marginTop: 4, display: 'flex', gap: 8, alignItems: 'center' }}>
                             <span>{s.durationMins || 0} min</span>
-                            <span>•</span>
-                            <span>{sessSets} sets</span>
-                            <span>•</span>
-                            <span>{formatWeight(sessVol, unit)} {unit}</span>
+                            {sessSets > 0 && (
+                              <>
+                                <span>•</span>
+                                <span>{sessSets} sets</span>
+                                <span>•</span>
+                                <span>{formatWeight(sessVol, unit)} {unit}</span>
+                              </>
+                            )}
+                            {s.cardioActivities && s.cardioActivities.length > 0 && (
+                              <>
+                                <span>•</span>
+                                <span style={{ color: '#FF9E40', fontWeight: 600 }}>🔥 {s.cardioActivities.length} cardio</span>
+                              </>
+                            )}
                           </div>
                         </div>
 

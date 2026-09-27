@@ -6,6 +6,7 @@ import { useAppStore } from '../../store';
 import { saveUserProfile } from '../../store/Database';
 import WheelPicker from '../ui/WheelPicker';
 import { User, Dumbbell, Trophy, Check, ChevronRight, ChevronLeft, Loader2, Speedometer } from '../Icons';
+import { EXPERIENCE_TIERS } from '../../services/ProgressionEngine';
 
 const MAX_NAME_LENGTH = 18;
 
@@ -50,6 +51,9 @@ export default function OnboardingScreen() {
   // Step 3: Objective
   const [objective, setObjective] = useState('hypertrophy');
 
+  // Step 4: Training Experience (Progressive Overload Calibration)
+  const [experienceLevel, setExperienceLevel] = useState('intermediate');
+
   const [loading, setLoading] = useState(false);
   const [completedAnimation, setCompletedAnimation] = useState(false);
 
@@ -84,6 +88,10 @@ export default function OnboardingScreen() {
     setStep(3);
   };
 
+  const handleNextFromStep3 = () => {
+    setStep(4);
+  };
+
   const handleCompleteRegistration = async () => {
     if (!isNameValid || loading) return;
     setLoading(true);
@@ -94,6 +102,8 @@ export default function OnboardingScreen() {
       height: effectiveHeightCm,
       gender,
       objective,
+      experienceLevel,
+      progressiveOverloadEnabled: true,
       unit,
       createdAt: new Date().toISOString()
     };
@@ -121,7 +131,9 @@ export default function OnboardingScreen() {
         },
         settings: {
           ...(data?.settings || {}),
-          unit
+          unit,
+          experienceLevel,
+          progressiveOverloadEnabled: true
         }
       });
 
@@ -189,14 +201,15 @@ export default function OnboardingScreen() {
           textTransform: 'uppercase',
           marginBottom: 10
         }}>
-          Athlete Calibration • Step {step} of 3
+          Athlete Calibration • Step {step} of 4
         </div>
 
-        {/* 3-Step Progress Bar */}
+        {/* 4-Step Progress Bar */}
         <div style={{ display: 'flex', gap: 6, width: '100%', maxWidth: 280, margin: '0 auto 20px' }}>
           <div style={{ flex: 1, height: 4, borderRadius: 2, background: step >= 1 ? 'var(--primary, #007AFF)' : '#27272A', transition: 'all 0.3s' }} />
           <div style={{ flex: 1, height: 4, borderRadius: 2, background: step >= 2 ? 'var(--primary, #007AFF)' : '#27272A', transition: 'all 0.3s' }} />
           <div style={{ flex: 1, height: 4, borderRadius: 2, background: step >= 3 ? 'var(--primary, #007AFF)' : '#27272A', transition: 'all 0.3s' }} />
+          <div style={{ flex: 1, height: 4, borderRadius: 2, background: step >= 4 ? 'var(--primary, #007AFF)' : '#27272A', transition: 'all 0.3s' }} />
         </div>
       </div>
 
@@ -608,11 +621,143 @@ export default function OnboardingScreen() {
                 })}
               </div>
 
-              {/* Nav & Complete Registration Button */}
+              {/* Nav & Next to Step 4 Button */}
               <div style={{ display: 'flex', gap: 10 }}>
                 <button
                   type="button"
                   onClick={() => setStep(2)}
+                  style={{
+                    padding: '14px',
+                    borderRadius: 14,
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    background: '#0D0E13',
+                    color: '#8B90A0',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
+                >
+                  <ChevronLeft size={20} />
+                </button>
+                <button
+                  type="button"
+                  onClick={handleNextFromStep3}
+                  style={{
+                    flex: 1,
+                    padding: '14px',
+                    borderRadius: 14,
+                    border: 'none',
+                    background: 'linear-gradient(135deg, var(--primary, #007AFF) 0%, var(--primary-light, #00C6FF) 100%)',
+                    color: '#fff',
+                    fontWeight: 800,
+                    fontSize: 14,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.04em',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 8,
+                    boxShadow: '0 4px 20px rgba(0, 122, 255, 0.35)'
+                  }}
+                >
+                  Experience Level <ChevronRight size={18} />
+                </button>
+              </div>
+            </motion.div>
+          )}
+
+          {/* STEP 4: EXPERIENCE & PROGRESSIVE OVERLOAD CALIBRATION */}
+          {step === 4 && (
+            <motion.div
+              key="step-4"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
+              style={{
+                background: 'rgba(18, 20, 28, 0.8)',
+                backdropFilter: 'blur(20px)',
+                borderRadius: 24,
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+                padding: '24px 20px',
+                boxShadow: '0 20px 50px rgba(0,0,0,0.6)'
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                <span style={{ fontSize: 18 }}>⚡</span>
+                <h2 style={{
+                  fontFamily: "'Anton', 'Outfit', sans-serif",
+                  fontSize: 24,
+                  letterSpacing: '0.04em',
+                  margin: 0,
+                  textTransform: 'uppercase',
+                  color: '#fff'
+                }}>
+                  Training Experience
+                </h2>
+              </div>
+              <p style={{ fontSize: 13, color: '#8B90A0', margin: '0 0 16px', lineHeight: '1.4' }}>
+                Calibrates your scientific Progressive Overload pacing and exercise plateau thresholds.
+              </p>
+
+              {/* Tiers List */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 20 }}>
+                {Object.values(EXPERIENCE_TIERS).map(tier => {
+                  const isSelected = experienceLevel === tier.id;
+                  return (
+                    <button
+                      key={tier.id}
+                      type="button"
+                      onClick={() => setExperienceLevel(tier.id)}
+                      style={{
+                        background: isSelected ? 'rgba(0, 122, 255, 0.16)' : '#0D0E13',
+                        border: isSelected ? `1.5px solid ${tier.color || 'var(--primary)'}` : '1px solid rgba(255, 255, 255, 0.08)',
+                        borderRadius: 14,
+                        padding: '12px 14px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 12,
+                        cursor: 'pointer',
+                        textAlign: 'left',
+                        transition: 'all 0.2s',
+                        boxShadow: isSelected ? `0 4px 15px ${tier.color}33` : 'none'
+                      }}
+                    >
+                      <span style={{ fontSize: 22, flexShrink: 0 }}>{tier.icon}</span>
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 6 }}>
+                          <span style={{ fontSize: 14, fontWeight: 800, color: isSelected ? '#fff' : '#D1D5DB' }}>
+                            {tier.label}
+                          </span>
+                          <span style={{
+                            fontSize: 10,
+                            fontWeight: 800,
+                            padding: '2px 7px',
+                            borderRadius: 6,
+                            background: isSelected ? `${tier.color}30` : 'rgba(255,255,255,0.06)',
+                            color: isSelected ? tier.color : '#8B90A0'
+                          }}>
+                            {tier.duration}
+                          </span>
+                        </div>
+                        <div style={{ fontSize: 11, color: '#8B90A0', fontWeight: 500, marginTop: 3, lineHeight: 1.35 }}>
+                          {tier.shortDesc}
+                        </div>
+                      </div>
+                      {isSelected && <Check size={18} color={tier.color || "var(--primary, #007AFF)"} />}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Nav & Complete Registration Button */}
+              <div style={{ display: 'flex', gap: 10 }}>
+                <button
+                  type="button"
+                  onClick={() => setStep(3)}
                   disabled={loading}
                   style={{
                     padding: '14px',

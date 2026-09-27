@@ -6,13 +6,12 @@ export default function MinimizedWorkoutBar({ session, onResume }) {
   const [elapsed, setElapsed] = useState('');
 
   useEffect(() => {
-    if (!session?.startTime) {
-      setElapsed('00:00');
-      return;
-    }
+    const getStartTime = () => {
+      return session?.startTime ? Number(session.startTime) : (session?.date ? new Date(session.date).getTime() : Date.now());
+    };
 
     const updateTimer = () => {
-      const start = new Date(session.startTime).getTime();
+      const start = getStartTime();
       const now = Date.now();
       const diffSec = Math.max(0, Math.floor((now - start) / 1000));
       
@@ -33,8 +32,23 @@ export default function MinimizedWorkoutBar({ session, onResume }) {
 
     updateTimer();
     const interval = setInterval(updateTimer, 1000);
-    return () => clearInterval(interval);
-  }, [session?.startTime]);
+
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible') {
+        updateTimer();
+      }
+    };
+    const handleFocus = () => updateTimer();
+
+    document.addEventListener('visibilitychange', handleVisibility);
+    window.addEventListener('focus', handleFocus);
+
+    return () => {
+      clearInterval(interval);
+      document.removeEventListener('visibilitychange', handleVisibility);
+      window.removeEventListener('focus', handleFocus);
+    };
+  }, [session?.startTime, session?.date]);
 
   const totalExercises = session?.exercises?.length || 0;
   let completedSets = 0;

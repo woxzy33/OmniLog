@@ -1,16 +1,25 @@
 import React, { useRef, useEffect, useState } from 'react';
 
-export default function WheelPicker({ items, value, onChange, label }) {
+export default function WheelPicker({ 
+  items, 
+  value, 
+  onChange, 
+  label, 
+  highlightColor = '#E8622C',
+  width = '100px',
+  formatItem
+}) {
   const containerRef = useRef(null);
   const itemHeight = 44; // Fixed height per item
   const [localVal, setLocalVal] = useState(value);
 
-  // Sync scroll on mount
+  // Sync scroll on mount and when external value changes
   useEffect(() => {
     if (containerRef.current) {
       const idx = items.findIndex(i => i === value);
       if (idx !== -1) {
         containerRef.current.scrollTop = idx * itemHeight;
+        setLocalVal(value);
       }
     }
   }, [value, items]);
@@ -31,13 +40,13 @@ export default function WheelPicker({ items, value, onChange, label }) {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '16px 0' }}>
-      {label && <span style={{ fontSize: 12, color: '#8B8680', marginBottom: 8, fontWeight: 700 }}>{label.toUpperCase()}</span>}
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '8px 0' }}>
+      {label && <span style={{ fontSize: 11, color: '#8B8680', marginBottom: 8, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase' }}>{label}</span>}
       <div 
         style={{
           position: 'relative',
           height: itemHeight * 5, // show 5 items
-          width: '100px',
+          width: width,
           overflow: 'hidden',
           maskImage: 'linear-gradient(to bottom, transparent, black 35%, black 65%, transparent)',
           WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 35%, black 65%, transparent)'
@@ -50,8 +59,8 @@ export default function WheelPicker({ items, value, onChange, label }) {
           left: 0,
           right: 0,
           height: itemHeight,
-          borderTop: '2px solid #E8622C',
-          borderBottom: '2px solid #E8622C',
+          borderTop: `2px solid ${highlightColor}`,
+          borderBottom: `2px solid ${highlightColor}`,
           pointerEvents: 'none',
           zIndex: 10
         }} />
@@ -85,7 +94,7 @@ export default function WheelPicker({ items, value, onChange, label }) {
                 transition: 'all 0.15s ease'
               }}
             >
-              {it}
+              {formatItem ? formatItem(it) : it}
             </div>
           ))}
         </div>

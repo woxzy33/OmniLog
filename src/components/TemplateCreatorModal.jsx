@@ -1,9 +1,10 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence, Reorder, useDragControls } from 'framer-motion';
 import { styles } from '../styles';
-import { Plus, X, Check, GripHorizontal, Trash, ChevronDown, Dumbbell } from './Icons';
+import { Plus, X, Check, GripHorizontal, Trash, ChevronDown, ChevronUp, Dumbbell, ArrowUpDown } from './Icons';
 import useSound from 'use-sound';
 import ExerciseSelectorModal from './ExerciseSelectorModal';
+import ReorderExercisesModal from './ReorderExercisesModal';
 import { uid, exerciseRequiresWeight } from '../data/exerciseDb';
 import { ConfirmCancelModal, ConfirmDeleteModal, ErrorModal } from './WorkoutSafeguards';
 
@@ -34,10 +35,19 @@ const DraggableGroup = ({ groupId, style, children }) => {
 };
 
 export default function TemplateCreatorModal({ data, onClose, onSave, settings, initialTemplate = null }) {
-  const [template, setTemplate] = useState(() => 
-    initialTemplate ? JSON.parse(JSON.stringify(initialTemplate)) : { name: "", exercises: [] }
-  );
+  const [template, setTemplate] = useState(() => {
+    if (initialTemplate) {
+      const copy = JSON.parse(JSON.stringify(initialTemplate));
+      copy.exercises = (copy.exercises || []).map(ex => ({
+        ...ex,
+        id: ex.id || uid()
+      }));
+      return copy;
+    }
+    return { name: "", exercises: [] };
+  });
   const [showAdd, setShowAdd] = useState(false);
+  const [showReorderModal, setShowReorderModal] = useState(false);
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [exToDelete, setExToDelete] = useState(null);
   const [templateNameError, setTemplateNameError] = useState(null);
@@ -115,6 +125,16 @@ export default function TemplateCreatorModal({ data, onClose, onSave, settings, 
       };
       return { ...prev, exercises: next };
     });
+  };
+
+  const moveTemplateExercise = (fromIdx, direction) => {
+    const toIdx = fromIdx + direction;
+    if (toIdx < 0 || toIdx >= template.exercises.length) return;
+    const next = [...template.exercises];
+    const temp = next[fromIdx];
+    next[fromIdx] = next[toIdx];
+    next[toIdx] = temp;
+    setTemplate(prev => ({ ...prev, exercises: next }));
   };
 
   const updateSetType = (typeKey) => {
@@ -294,6 +314,26 @@ export default function TemplateCreatorModal({ data, onClose, onSave, settings, 
 
       {/* EXERCISES LIST */}
       <div style={{ padding: '20px 16px', display: "flex", flexDirection: "column", gap: 14 }}>
+        {template.exercises.length > 1 && (
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 2 }}>
+            <div style={{ fontSize: 13, fontWeight: 800, color: '#8b90a0', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+              Exercises ({template.exercises.length})
+            </div>
+            <button 
+              type="button"
+              onClick={() => setShowReorderModal(true)}
+              style={{
+                display: 'flex', alignItems: 'center', gap: 5,
+                background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.08)',
+                color: '#fff', borderRadius: 8, padding: '5px 12px',
+                fontSize: 12, fontWeight: 700, cursor: 'pointer'
+              }}
+            >
+              <ArrowUpDown size={13} /> Reorder
+            </button>
+          </div>
+        )}
+
         {template.exercises.length === 0 ? (
           <div style={{ 
             textAlign: 'center', padding: '48px 20px', background: '#121214', borderRadius: 20, 
@@ -339,10 +379,15 @@ export default function TemplateCreatorModal({ data, onClose, onSave, settings, 
                       gap: 14
                     }}>
                       {/* CARD HEADER */}
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                         <div 
-                          onPointerDown={(e) => dragControls && dragControls.start(e)}
-                          style={{ cursor: 'grab', padding: 4, display: 'flex', alignItems: 'center', color: '#6b7080', touchAction: 'none' }}
+                          onPointerDown={(e) => {
+                            e.preventDefault();
+                            dragControls && dragControls.start(e);
+                          }}
+                          style={{ cursor: 'grab', padding: '6px 8px', display: 'flex', alignItems: 'center', color: '#8b90a0', touchAction: 'none' }}
+                          title="Drag to reorder"
+                          aria-label="Drag to reorder"
                         >
                           <GripHorizontal size={20} />
                         </div>
@@ -597,6 +642,20 @@ export default function TemplateCreatorModal({ data, onClose, onSave, settings, 
           </motion.div>
         )}
       </AnimatePresence>
+
+      <ReorderExercisesModal
+        isOpen={showReorderModal}
+        onClose={() => setShowReorderModal(false)}
+        groupedExercises={template.exercises.map(ex => [ex])}
+        data={data}
+        onMoveGroup={(gIdx, dir) => moveTemplateExercise(gIdx, dir)}
+        onReorderGroups={(newGroups) => {
+          setTemplate(prev => ({
+            ...prev,
+            exercises: newGroups.map(g => g[0])
+          }));
+        }}
+      />
 
       <ErrorModal
         isOpen={!!templateNameError}

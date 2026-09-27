@@ -106,7 +106,7 @@ export default function HistoryTab() {
                   {s.name} {prCount > 0 ? "🏆" : "🔥"}
                 </div>
                 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12, marginBottom: 20 }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12, marginBottom: 16 }}>
                   <div>
                     <div style={{ fontSize: 13, color: "#8b90a0", marginBottom: 4 }}>Time</div>
                     <div style={{ fontSize: 18, color: "#e2e2e2", fontWeight: 700 }}>
@@ -115,8 +115,15 @@ export default function HistoryTab() {
                     </div>
                   </div>
                   <div>
-                    <div style={{ fontSize: 13, color: "#8b90a0", marginBottom: 4 }}>Volume</div>
-                    <div style={{ fontSize: 18, color: "#e2e2e2", fontWeight: 700 }}>{formatWeight(sessionVolume, settings?.unit)} {settings?.unit || 'kg'}</div>
+                    <div style={{ fontSize: 13, color: "#8b90a0", marginBottom: 4 }}>
+                      {sessionVolume > 0 ? "Volume" : "Cardio"}
+                    </div>
+                    <div style={{ fontSize: 18, color: sessionVolume > 0 ? "#e2e2e2" : "#FF9E40", fontWeight: 700 }}>
+                      {sessionVolume > 0 
+                        ? `${formatWeight(sessionVolume, settings?.unit)} ${settings?.unit || 'kg'}`
+                        : `${(s.cardioActivities || []).reduce((acc, c) => acc + (Number(c.durationMinutes) || 0), 0)}m`
+                      }
+                    </div>
                   </div>
                   <div>
                     <div style={{ fontSize: 13, color: "#8b90a0", marginBottom: 4 }}>Records</div>
@@ -126,8 +133,26 @@ export default function HistoryTab() {
                   </div>
                 </div>
 
-                <div style={{ borderTop: "1px solid #333535", paddingTop: 16, display: 'flex', flexDirection: 'column', gap: 16 }}>
-                  {s.exercises.slice(0, 3).map((ex, exIdx) => {
+                {s.cardioActivities && s.cardioActivities.length > 0 && sessionVolume > 0 && (
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 8,
+                    background: 'rgba(255, 107, 0, 0.08)',
+                    border: '1px solid rgba(255, 107, 0, 0.2)',
+                    padding: '8px 12px',
+                    borderRadius: 10,
+                    marginBottom: 16
+                  }}>
+                    <span style={{ fontSize: 15 }}>🔥</span>
+                    <span style={{ fontSize: 13, fontWeight: 700, color: '#FF9E40' }}>
+                      {s.cardioActivities.map(c => `${c.durationMinutes || 0}m ${c.name}`).join(' • ')}
+                    </span>
+                  </div>
+                )}
+
+                <div style={{ borderTop: "1px solid #333535", paddingTop: 16, display: 'flex', flexDirection: 'column', gap: 14 }}>
+                  {(s.exercises || []).slice(0, 3).map((ex, exIdx) => {
                     const exObj = exerciseDict[ex.exerciseId];
                     return (
                       <div key={ex.id || exIdx} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
@@ -144,11 +169,23 @@ export default function HistoryTab() {
                       </div>
                     );
                   })}
+
+                  {(!s.exercises || s.exercises.length === 0) && (s.cardioActivities || []).slice(0, 3).map((c, cIdx) => (
+                    <div key={c.id || cIdx} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                      <div style={{ width: 44, height: 44, borderRadius: 22, background: 'rgba(255,107,0,0.12)', border: '1px solid rgba(255,107,0,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: 20 }}>
+                        {c.icon || '🏃'}
+                      </div>
+                      <div style={{ fontSize: 15, color: "#e2e2e2", fontWeight: 600 }}>
+                        <span style={{ color: '#FF9E40', fontWeight: 700 }}>{c.durationMinutes || 0}m</span> {c.name}
+                        {c.hasDistance && Number(c.distance) > 0 && <span style={{ color: '#8b90a0', fontSize: 13, marginLeft: 6 }}>({c.distance} km)</span>}
+                      </div>
+                    </div>
+                  ))}
                 </div>
                 
-                {s.exercises.length > 3 && (
+                {((s.exercises?.length || 0) + (!s.exercises?.length ? (s.cardioActivities?.length || 0) : 0)) > 3 && (
                   <div style={{ textAlign: 'center', color: '#8b90a0', fontSize: 14, fontWeight: 600, marginTop: 20 }}>
-                    See {s.exercises.length - 3} more exercises
+                    See more activities
                   </div>
                 )}
               </motion.div>

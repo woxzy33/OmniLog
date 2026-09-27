@@ -35,6 +35,7 @@ export function subscribeToAppData(userId, callback) {
 let saveTimeout = null;
 let pendingData = null;
 let pendingUid = null;
+let pendingOverwrite = false;
 let isSaving = false;
 
 export async function flushSaveAppData() {
@@ -46,29 +47,39 @@ export async function flushSaveAppData() {
 
   const uid = pendingUid;
   const data = pendingData;
+  const shouldOverwrite = pendingOverwrite;
   pendingUid = null;
   pendingData = null;
+  pendingOverwrite = false;
 
   try {
     isSaving = true;
     const docRef = doc(db, 'user_data', uid);
-    await setDoc(docRef, data, { merge: true });
+    if (shouldOverwrite) {
+      await setDoc(docRef, data);
+    } else {
+      await setDoc(docRef, data, { merge: true });
+    }
   } catch (err) {
     console.error("FIRESTORE SAVE ERROR:", err);
     // If write fails, restore pending so next attempt retries
     if (!pendingData) {
       pendingUid = uid;
       pendingData = data;
+      pendingOverwrite = shouldOverwrite;
     }
   } finally {
     isSaving = false;
   }
 }
 
-export function saveAppData(userId, data, immediate = false) {
+export function saveAppData(userId, data, immediate = false, overwrite = false) {
   if (!userId || !data) return Promise.resolve();
   pendingUid = userId;
   pendingData = data;
+  if (overwrite) {
+    pendingOverwrite = true;
+  }
 
   if (immediate) {
     return flushSaveAppData();
@@ -90,10 +101,16 @@ if (typeof window !== 'undefined') {
   window.addEventListener('beforeunload', () => {
     flushSaveAppData();
   });
+  window.addEventListener('pagehide', () => {
+    flushSaveAppData();
+  });
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'hidden') {
       flushSaveAppData();
     }
+  });
+  document.addEventListener('freeze', () => {
+    flushSaveAppData();
   });
 }
 

@@ -12,29 +12,52 @@ export default function FloatingTimer({ endTime: initialEndTime, onClear, onAdd 
 
   useEffect(() => {
     let audio = null;
-    const interval = setInterval(() => {
+    let autoDismissTimer = null;
+
+    const checkTime = () => {
       const remaining = Math.max(0, Math.floor((endTime - Date.now()) / 1000));
-      
       setTimeLeft((prev) => {
         if (prev > 0 && remaining === 0) {
           try {
             audio = new Audio("https://actions.google.com/sounds/v1/alarms/beep_short.ogg");
             audio.play().catch(() => {});
           } catch(e) {}
+          autoDismissTimer = setTimeout(() => {
+            if (onClear) onClear();
+          }, 4000);
+        } else if (remaining === 0 && !autoDismissTimer) {
+          autoDismissTimer = setTimeout(() => {
+            if (onClear) onClear();
+          }, 3000);
         }
         return remaining;
       });
+      return remaining;
+    };
 
+    const interval = setInterval(() => {
+      const remaining = checkTime();
       if (remaining === 0) clearInterval(interval);
     }, 1000);
+
+    const onVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        const remaining = checkTime();
+        if (remaining === 0) clearInterval(interval);
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
     return () => {
       clearInterval(interval);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+      if (autoDismissTimer) clearTimeout(autoDismissTimer);
       if (audio) {
         audio.pause();
         audio.currentTime = 0;
       }
     };
-  }, [endTime]);
+  }, [endTime, onClear]);
 
   const addTime = (seconds) => {
     setEndTime((prev) => prev + seconds * 1000);
@@ -46,7 +69,7 @@ export default function FloatingTimer({ endTime: initialEndTime, onClear, onAdd 
   return (
     <div style={{ position: 'relative', width: 'auto', alignSelf: 'center', margin: '0 auto', display: 'flex', justifyContent: 'center' }}>
       <div style={{ 
-        position: 'fixed', bottom: 100, display: 'flex', justifyContent: 'space-between', alignItems: 'center', 
+        position: 'fixed', bottom: 'calc(80px + env(safe-area-inset-bottom))', display: 'flex', justifyContent: 'space-between', alignItems: 'center', 
         padding: '8px 16px', gap: 16, borderRadius: 32,
         background: 'linear-gradient(90deg, rgba(20,20,22,0.1) 0%, rgba(20,20,22,0.95) 20%, rgba(20,20,22,0.95) 80%, rgba(20,20,22,0.1) 100%)',
         backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)',

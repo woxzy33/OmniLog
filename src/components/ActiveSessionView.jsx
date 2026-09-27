@@ -4,11 +4,15 @@ import PRToast from './PRToast';
 import * as confettiModule from 'canvas-confetti';
 const confetti = confettiModule.default || confettiModule;
 import { styles } from '../styles';
-import { Plus, X, Check, TimerReset, Trash, GripHorizontal, ImageIcon, Trophy, ChevronDown } from './Icons';
+import { Plus, X, Check, TimerReset, Trash, GripHorizontal, ImageIcon, Trophy, ChevronDown, ChevronUp, ArrowUpDown, Flame } from './Icons';
 import useSound from 'use-sound';
 import ExerciseLogger from './ExerciseLogger';
 import ExerciseHistoryModal from './ExerciseHistoryModal';
 import ExerciseSelectorModal from './ExerciseSelectorModal';
+import ReorderExercisesModal from './ReorderExercisesModal';
+import CardioLogger from './CardioLogger';
+import CardioSelectorModal from './CardioSelectorModal';
+import WheelPicker from './ui/WheelPicker';
 import { uid, exerciseRequiresWeight } from '../data/exerciseDb';
 import { getLastSessionSets, parseVolume, formatWeight, evaluatePR, getUserWeightAtDate } from '../utils';
 import { useTooltip } from './TooltipContext';
@@ -32,8 +36,9 @@ const DraggableGroup = ({ groupId, style, children }) => {
   );
 };
 
-export default function ActiveSessionView({ session, setSession, onFinish, onMinimize, data, persist, startTimer, settings }) {
+export default function ActiveSessionView({ session, setSession, onFinish, onMinimize, data, persist, startTimer, clearTimer, settings }) {
   const [showAdd, setShowAdd] = useState(false);
+  const [showCardioModal, setShowCardioModal] = useState(false);
   const [historyExerciseId, setHistoryExerciseId] = useState(null);
   const [searchQ, setSearchQ] = useState("");
   const [eqFilter, setEqFilter] = useState("All");
@@ -42,11 +47,14 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
   const [playFinish] = useSound('/sounds/magic_chime.ogg', { volume: 0.4 });
   const [playDelete] = useSound('/sounds/wood_plank_flick.ogg', { volume: 0.5 });
 
-  const [durationStr, setDurationStr] = useState("00:00");
   const { showTooltip } = useTooltip();
 
   const [showEditTime, setShowEditTime] = useState(false);
-  const [editMins, setEditMins] = useState("");
+  const [editHours, setEditHours] = useState(0);
+  const [editMins, setEditMins] = useState(0);
+
+  const HOURS_OPTIONS = useMemo(() => Array.from({ length: 13 }, (_, i) => i), []); // 0 to 12
+  const MINS_OPTIONS = useMemo(() => Array.from({ length: 60 }, (_, i) => i), []); // 0 to 59
 
   // Safeguards State
   const [showCancelModal, setShowCancelModal] = useState(false);
@@ -54,20 +62,57 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
   const [incompleteList, setIncompleteList] = useState([]);
   const [exToDelete, setExToDelete] = useState(null);
 
-  // Superset State
+  // Superset & Reorder State
+  const [showReorderModal, setShowReorderModal] = useState(false);
   const [selectMode, setSelectMode] = useState(false);
   const [selectedExIds, setSelectedExIds] = useState(new Set()); // Internal index of exercises to group
 
+  const getStartTime = React.useCallback(() => {
+    return session?.startTime ? Number(session.startTime) : (session?.date ? new Date(session.date).getTime() : Date.now());
+  }, [session?.startTime, session?.date]);
+
+  const formatDuration = (totalSec) => {
+    const diff = Math.max(0, totalSec);
+    const hours = Math.floor(diff / 3600);
+    const m = Math.floor((diff % 3600) / 60).toString().padStart(2, '0');
+    const s = (diff % 60).toString().padStart(2, '0');
+    if (hours > 0) {
+      return `${hours}:${m}:${s}`;
+    }
+    return `${m}:${s}`;
+  };
+
+  const [durationStr, setDurationStr] = useState(() => {
+    const start = session?.startTime ? Number(session.startTime) : (session?.date ? new Date(session.date).getTime() : Date.now());
+    return formatDuration(Math.floor((Date.now() - start) / 1000));
+  });
+
   useEffect(() => {
-    const start = new Date(session.date).getTime();
-    const interval = setInterval(() => {
+    const start = getStartTime();
+    const update = () => {
       const diff = Math.floor((Date.now() - start) / 1000);
-      const m = Math.floor(diff / 60).toString().padStart(2, '0');
-      const s = (diff % 60).toString().padStart(2, '0');
-      setDurationStr(`${m}:${s}`);
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [session.date]);
+      setDurationStr(formatDuration(diff));
+    };
+
+    update();
+    const interval = setInterval(update, 1000);
+
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible') {
+        update();
+      }
+    };
+    const handleFocus = () => update();
+
+    document.addEventListener('visibilitychange', handleVisibility);
+    window.addEventListener('focus', handleFocus);
+
+    return () => {
+      clearInterval(interval);
+      document.removeEventListener('visibilitychange', handleVisibility);
+      window.removeEventListener('focus', handleFocus);
+    };
+  }, [getStartTime]);
 
   const userWeight = useMemo(() => {
     return getUserWeightAtDate(data?.measurements, session?.date);
@@ -101,12 +146,63 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
     setShowAdd(false);
   };
 
+  const handleAddCardio = (act) => {
+    playPop();
+    const newCardio = {
+      id: uid(),
+      activityId: act.id,
+      name: act.name,
+      category: act.category,
+      met: act.met || 8.0,
+      icon: act.icon || "🔥",
+      hasDistance: !!act.hasDistance,
+      hasIncline: !!act.hasIncline,
+      hasResistance: !!act.hasResistance,
+      durationMinutes: 20,
+      durationSeconds: 0,
+      distance: act.hasDistance ? 2.5 : null,
+      incline: act.hasIncline ? 0 : null,
+      resistance: act.hasResistance ? 1 : null,
+      calories: 0,
+      notes: '',
+      completed: false
+    };
+    setSession(prev => ({
+      ...prev,
+      cardioActivities: [...(prev.cardioActivities || []), newCardio]
+    }));
+    setShowCardioModal(false);
+  };
+
+  const handleUpdateCardio = React.useCallback((idx, updated) => {
+    setSession(prev => {
+      if (!prev) return prev;
+      const nextCardio = [...(prev.cardioActivities || [])];
+      nextCardio[idx] = updated;
+      return { ...prev, cardioActivities: nextCardio };
+    });
+  }, [setSession]);
+
+  const handleRemoveCardio = React.useCallback((idx) => {
+    playDelete();
+    setSession(prev => {
+      if (!prev) return prev;
+      const nextCardio = [...(prev.cardioActivities || [])];
+      nextCardio.splice(idx, 1);
+      return { ...prev, cardioActivities: nextCardio };
+    });
+  }, [setSession, playDelete]);
+
   const [prNotification, setPrNotification] = useState(null);
   const [prQueue, setPrQueue] = useState([]);
   const [sessionNameError, setSessionNameError] = useState(null);
 
   const isSessionNameTooLong = (session?.name || "").trim().length > MAX_SESSION_NAME_LENGTH;
   const isSessionNameEmpty = (session?.name || "").trim() === "";
+
+  const handleClosePR = React.useCallback(() => {
+    setPrNotification(null);
+  }, []);
 
   useEffect(() => {
     if (!prNotification && prQueue.length > 0) {
@@ -128,9 +224,6 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
           });
         }
       } catch(e) { console.warn("Confetti failed", e); }
-
-      const timer = setTimeout(() => setPrNotification(null), 4000);
-      return () => clearTimeout(timer);
     }
   }, [prQueue, prNotification]);
 
@@ -184,8 +277,8 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
     });
   }, []);
 
-  const handleRemoveExercise = React.useCallback((exIdx, name) => {
-    setExToDelete({ idx: exIdx, name });
+  const handleRemoveExercise = React.useCallback((target, name) => {
+    setExToDelete({ target, name });
   }, []);
 
   const updateExerciseSets = React.useCallback((idx, sets, exerciseId, toggledSetIdx) => {
@@ -224,11 +317,16 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
     }
 
     const incomplete = [];
-    session.exercises.forEach((ex) => {
+    (session.exercises || []).forEach((ex) => {
       const hasUnchecked = ex.sets.some(s => !s.completed);
       if (hasUnchecked) {
         const exObj = data.exercises.find(e => e.id === ex.exerciseId);
         incomplete.push(exObj?.name || "Unknown Exercise");
+      }
+    });
+    (session.cardioActivities || []).forEach((act) => {
+      if (!act.completed) {
+        incomplete.push(act.name || "Cardio Activity");
       }
     });
 
@@ -243,9 +341,10 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
   const executeFinish = () => {
     playFinish();
     setShowIncompleteModal(false);
+    if (clearTimer) clearTimer();
     const endTime = Date.now();
-    const startTime = new Date(session.date).getTime();
-    const durationMins = Math.round((endTime - startTime) / 60000);
+    const startTime = session?.startTime ? Number(session.startTime) : (session?.date ? new Date(session.date).getTime() : endTime);
+    const durationMins = Math.max(1, Math.round((endTime - startTime) / 60000));
 
     const currentSessionUserWeight = getUserWeightAtDate(data.measurements, session.date);
     const allPriorHistoryMap = new Map();
@@ -291,11 +390,14 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
     const cleaned = {
       ...session,
       name: (session.name || "Workout Session").trim(),
+      startTime,
+      date: new Date(startTime).toISOString(),
       durationMins,
       exercises: evaluatedExercises,
+      cardioActivities: session.cardioActivities || []
     };
-    if (cleaned.exercises.length > 0) {
-      persist({ ...data, sessions: [...data.sessions, cleaned] });
+    if (cleaned.exercises.length > 0 || (cleaned.cardioActivities && cleaned.cardioActivities.length > 0)) {
+      persist({ ...data, sessions: [...data.sessions, cleaned] }, true);
       onFinish(cleaned);
       setSession(null);
     } else {
@@ -305,6 +407,7 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
 
   const cancelWorkout = () => {
     setShowCancelModal(false);
+    if (clearTimer) clearTimer();
     setSession(null);
   };
 
@@ -325,12 +428,43 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
 
   const groupedExercises = [];
   session.exercises.forEach((ex, idx) => {
-    if (ex.groupId && idx > 0 && session.exercises[idx - 1].groupId === ex.groupId) {
-      groupedExercises[groupedExercises.length - 1].push({ ...ex, idx });
+    const safeEx = { ...ex, id: ex.id || `sess-ex-${idx}-${ex.exerciseId}`, idx };
+    if (safeEx.groupId && idx > 0 && session.exercises[idx - 1].groupId === safeEx.groupId) {
+      groupedExercises[groupedExercises.length - 1].push(safeEx);
     } else {
-      groupedExercises.push([{ ...ex, idx }]);
+      groupedExercises.push([safeEx]);
     }
   });
+
+  const moveGroup = (groupIdx, direction) => {
+    const targetIdx = groupIdx + direction;
+    if (targetIdx < 0 || targetIdx >= groupedExercises.length) return;
+
+    const newGroups = [...groupedExercises];
+    const temp = newGroups[groupIdx];
+    newGroups[groupIdx] = newGroups[targetIdx];
+    newGroups[targetIdx] = temp;
+
+    const flat = [];
+    newGroups.forEach(g => {
+      g.forEach(ex => {
+        const { idx, ...rest } = ex;
+        flat.push(rest);
+      });
+    });
+    setSession({ ...session, exercises: flat });
+  };
+
+  const handleReorderGroups = (newGroups) => {
+    const flat = [];
+    newGroups.forEach(g => {
+      g.forEach(ex => {
+        const { idx, ...rest } = ex;
+        flat.push(rest);
+      });
+    });
+    setSession({ ...session, exercises: flat });
+  };
 
   // Filter Logic
   const getEquipment = (name) => {
@@ -359,44 +493,205 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
       <AnimatePresence>
         {showEditTime && (
           <motion.div 
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.8)', zIndex: 300, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }}
+            style={{ 
+              position: 'fixed', 
+              inset: 0, 
+              background: 'rgba(0,0,0,0.85)', 
+              backdropFilter: 'blur(8px)',
+              WebkitBackdropFilter: 'blur(8px)',
+              zIndex: 300, 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              padding: 16
+            }}
+            onClick={() => setShowEditTime(false)}
           >
             <motion.div 
-              initial={{ scale: 0.9 }} animate={{ scale: 1 }} exit={{ scale: 0.9 }}
-              style={{ background: '#1c1c1e', padding: 24, borderRadius: 16, width: '80%', maxWidth: 320, border: '1px solid #333535' }}
+              initial={{ scale: 0.92, opacity: 0 }} 
+              animate={{ scale: 1, opacity: 1 }} 
+              exit={{ scale: 0.92, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              style={{ 
+                background: '#141518', 
+                padding: '24px 20px', 
+                borderRadius: 20, 
+                width: '100%', 
+                maxWidth: 340, 
+                border: '1px solid rgba(255, 255, 255, 0.12)',
+                boxShadow: '0 20px 50px rgba(0,0,0,0.7)'
+              }}
             >
-              <div style={{ fontSize: 18, fontWeight: 800, color: '#e2e2e2', marginBottom: 16 }}>Edit Session Time</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginBottom: 24 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <input 
-                    type="number" 
-                    value={editMins} 
-                    onChange={e => setEditMins(Number(e.target.value) || 0)} 
-                    style={{ flex: 1, background: '#121212', border: '1px solid #333535', color: '#e2e2e2', padding: '12px', borderRadius: 8, fontSize: 16, textAlign: 'center' }} 
-                  />
-                  <span style={{ color: '#8b90a0', fontWeight: 600 }}>minutes</span>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <div style={{
+                    width: 38, height: 38, borderRadius: 11,
+                    background: 'rgba(0, 122, 255, 0.15)',
+                    border: '1px solid rgba(0, 122, 255, 0.3)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center'
+                  }}>
+                    <TimerReset size={19} color="var(--primary, #007AFF)" />
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 17, fontWeight: 900, color: '#fff' }}>Edit Session Time</div>
+                    <div style={{ fontSize: 12, color: '#8b90a0', fontWeight: 600 }}>Adjust elapsed workout time</div>
+                  </div>
                 </div>
-                <input 
-                  type="range" 
-                  min="0" 
-                  max="300" 
-                  step="1" 
-                  value={editMins} 
-                  onChange={e => setEditMins(Number(e.target.value))} 
-                  style={{ width: '100%', accentColor: 'var(--primary)', cursor: 'pointer' }}
+                <button
+                  onClick={() => setShowEditTime(false)}
+                  style={{
+                    width: 32, height: 32, borderRadius: 10,
+                    background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)',
+                    color: '#8b90a0', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer'
+                  }}
+                >
+                  <X size={16} />
+                </button>
+              </div>
+
+              {/* Live Preview Display */}
+              <div style={{
+                background: '#0D0E12',
+                borderRadius: 14,
+                padding: '12px 14px',
+                border: '1px solid rgba(255, 255, 255, 0.06)',
+                textAlign: 'center',
+                marginBottom: 16
+              }}>
+                <div style={{ fontSize: 24, fontWeight: 900, color: 'var(--primary, #007AFF)', fontFamily: "'JetBrains Mono', monospace" }}>
+                  {editHours > 0 ? `${editHours}h ${String(editMins).padStart(2, '0')}m` : `${editMins} mins`}
+                </div>
+                <div style={{ fontSize: 11, color: '#8b90a0', fontWeight: 600, marginTop: 4 }}>
+                  Started ~{new Date(Date.now() - (editHours * 60 + editMins) * 60000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} • {editHours * 60 + editMins}m elapsed
+                </div>
+              </div>
+
+              {/* Dual Wheel Pickers */}
+              <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                background: '#0D0E12',
+                borderRadius: 18,
+                border: '1px solid rgba(255, 255, 255, 0.06)',
+                padding: '8px 12px',
+                marginBottom: 16,
+                gap: 8
+              }}>
+                <WheelPicker
+                  items={HOURS_OPTIONS}
+                  value={editHours}
+                  onChange={setEditHours}
+                  label="Hours"
+                  highlightColor="var(--primary, #007AFF)"
+                  formatItem={h => `${h} h`}
+                  width="85px"
+                />
+                <div style={{ fontSize: 22, fontWeight: 900, color: 'var(--primary, #007AFF)', marginTop: 12 }}>:</div>
+                <WheelPicker
+                  items={MINS_OPTIONS}
+                  value={editMins}
+                  onChange={setEditMins}
+                  label="Minutes"
+                  highlightColor="var(--primary, #007AFF)"
+                  formatItem={m => `${String(m).padStart(2, '0')} m`}
+                  width="85px"
                 />
               </div>
-              <div style={{ display: 'flex', gap: 12 }}>
-                <button onClick={() => setShowEditTime(false)} style={{ flex: 1, background: '#333535', color: '#e2e2e2', padding: 12, borderRadius: 8, border: 'none', fontWeight: 700 }}>Cancel</button>
+
+              {/* Quick Presets */}
+              <div style={{ display: 'flex', gap: 6, justifyContent: 'center', marginBottom: 20 }}>
+                {[-15, +15, +30].map(delta => (
+                  <button
+                    key={delta}
+                    type="button"
+                    onClick={() => {
+                      const cur = editHours * 60 + editMins;
+                      const next = Math.max(0, Math.min(12 * 60 + 59, cur + delta));
+                      setEditHours(Math.floor(next / 60));
+                      setEditMins(next % 60);
+                    }}
+                    style={{
+                      padding: '5px 10px',
+                      borderRadius: 8,
+                      background: 'rgba(255,255,255,0.05)',
+                      border: '1px solid rgba(255,255,255,0.1)',
+                      color: '#e2e2e2',
+                      fontSize: 11,
+                      fontWeight: 700,
+                      cursor: 'pointer'
+                    }}
+                  >
+                    {delta > 0 ? `+${delta}m` : `${delta}m`}
+                  </button>
+                ))}
+                <button
+                  type="button"
+                  onClick={() => {
+                    const start = session?.startTime ? Number(session.startTime) : (session?.date ? new Date(session.date).getTime() : Date.now());
+                    const curTotalM = Math.floor(Math.max(0, Date.now() - start) / 60000);
+                    setEditHours(Math.floor(curTotalM / 60));
+                    setEditMins(curTotalM % 60);
+                  }}
+                  style={{
+                    padding: '5px 10px',
+                    borderRadius: 8,
+                    background: 'rgba(0, 122, 255, 0.12)',
+                    border: '1px solid rgba(0, 122, 255, 0.25)',
+                    color: 'var(--primary, #007AFF)',
+                    fontSize: 11,
+                    fontWeight: 700,
+                    cursor: 'pointer'
+                  }}
+                >
+                  Reset
+                </button>
+              </div>
+
+              {/* Action Buttons */}
+              <div style={{ display: 'flex', gap: 10 }}>
+                <button 
+                  onClick={() => setShowEditTime(false)} 
+                  style={{ 
+                    flex: 1, 
+                    background: '#1e2025', 
+                    color: '#e2e2e2', 
+                    padding: '12px 14px', 
+                    borderRadius: 12, 
+                    border: '1px solid rgba(255,255,255,0.08)', 
+                    fontWeight: 700,
+                    cursor: 'pointer'
+                  }}
+                >
+                  Cancel
+                </button>
                 <button 
                   onClick={() => {
-                    const newMins = parseInt(editMins) || 0;
-                    setSession({ ...session, date: new Date(Date.now() - newMins * 60000).toISOString() });
+                    const newTotalMins = editHours * 60 + editMins;
+                    const newStart = Date.now() - newTotalMins * 60000;
+                    setSession({ 
+                      ...session, 
+                      startTime: newStart,
+                      date: new Date(newStart).toISOString() 
+                    });
                     setShowEditTime(false);
                   }} 
-                  style={{ flex: 1, background: 'var(--primary)', color: '#000', padding: 12, borderRadius: 8, border: 'none', fontWeight: 800 }}
-                >Save</button>
+                  style={{ 
+                    flex: 1, 
+                    background: 'var(--primary, #007AFF)', 
+                    color: '#000', 
+                    padding: '12px 14px', 
+                    borderRadius: 12, 
+                    border: 'none', 
+                    fontWeight: 800,
+                    cursor: 'pointer'
+                  }}
+                >
+                  Save Time
+                </button>
               </div>
             </motion.div>
           </motion.div>
@@ -409,7 +704,12 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
         onConfirm={() => {
           if (exToDelete) {
             playDelete();
-            const next = session.exercises.filter((_, idx) => idx !== exToDelete.idx);
+            const next = session.exercises.filter((ex, idx) => {
+              if (typeof exToDelete.target === 'string') {
+                return ex.id !== exToDelete.target;
+              }
+              return idx !== exToDelete.target && ex.id !== exToDelete.target;
+            });
             setSession({ ...session, exercises: next });
             setExToDelete(null);
           }
@@ -417,9 +717,21 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
         itemName={exToDelete?.name} 
       />
 
-      <div style={{ position: 'sticky', top: 0, background: 'rgba(18,20,20,0.85)', backdropFilter: 'blur(12px)', zIndex: 80, padding: '16px', borderBottom: '1px solid transparent', display: 'flex', flexDirection: 'column', gap: 12 }}>
+      <div style={{ 
+        position: 'sticky', 
+        top: 0, 
+        background: 'rgba(18,20,20,0.85)', 
+        backdropFilter: 'blur(12px)', 
+        zIndex: 80, 
+        padding: '12px 16px 14px', 
+        paddingTop: 'calc(14px + env(safe-area-inset-top, 0px))',
+        borderBottom: '1px solid transparent', 
+        display: 'flex', 
+        flexDirection: 'column', 
+        gap: 12 
+      }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-          <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
             <div style={{ flex: 1, position: 'relative' }}>
               <input
                 value={session.name}
@@ -427,11 +739,13 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
                 className="premiumInput" 
                 style={{ 
                   width: '100%', 
-                  fontSize: 22, 
+                  fontSize: 20, 
                   fontWeight: 800, 
                   padding: '12px 16px', 
+                  borderRadius: 12,
                   letterSpacing: '-0.02em',
-                  border: (isSessionNameTooLong || isSessionNameEmpty) ? '1px solid #D94A4A' : '1px solid rgba(255,255,255,0.08)',
+                  background: 'rgba(24, 25, 29, 0.95)',
+                  border: (isSessionNameTooLong || isSessionNameEmpty) ? '1.5px solid #D94A4A' : '1.5px solid rgba(255,255,255,0.12)',
                   color: isSessionNameTooLong ? '#D94A4A' : '#fff'
                 }}
                 placeholder="Session name"
@@ -444,11 +758,53 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
                 }}>!</span>
               )}
             </div>
-            <button style={{ background: 'transparent', border: 'none', color: '#e2e2e2', display: 'flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, cursor: 'pointer' }} onClick={onMinimize}>
-              <ChevronDown size={24} />
+
+            {/* Minimize Button with Outer Layer */}
+            <button 
+              style={{ 
+                background: 'rgba(255, 255, 255, 0.05)', 
+                border: '1.5px solid rgba(255, 255, 255, 0.12)', 
+                borderRadius: 12,
+                color: '#e2e2e2', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center', 
+                width: 44, 
+                height: 44, 
+                cursor: 'pointer',
+                flexShrink: 0,
+                transition: 'all 0.2s',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.25)'
+              }} 
+              onClick={onMinimize}
+              title="Minimize workout"
+              aria-label="Minimize workout"
+            >
+              <ChevronDown size={22} strokeWidth={2.5} />
             </button>
-            <button style={{ background: 'transparent', border: 'none', color: '#E81123', display: 'flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, cursor: 'pointer' }} onClick={() => setShowCancelModal(true)}>
-              <X size={24} />
+
+            {/* Discard / Close Button with High-Visibility Outer Layer */}
+            <button 
+              style={{ 
+                background: 'rgba(232, 17, 35, 0.12)', 
+                border: '1.5px solid rgba(232, 17, 35, 0.45)', 
+                borderRadius: 12,
+                color: '#FF453A', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center', 
+                width: 44, 
+                height: 44, 
+                cursor: 'pointer',
+                flexShrink: 0,
+                transition: 'all 0.2s',
+                boxShadow: '0 2px 10px rgba(232, 17, 35, 0.25)'
+              }} 
+              onClick={() => setShowCancelModal(true)}
+              title="Discard workout"
+              aria-label="Discard workout"
+            >
+              <X size={20} strokeWidth={2.5} />
             </button>
           </div>
           
@@ -464,47 +820,125 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
           )}
         </div>
         
-        <div style={{ display: 'flex', justifyContent: 'space-between', color: '#8b90a0', fontSize: 13, fontWeight: 600 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer' }} onClick={() => {
-            const ms = Date.now() - new Date(session.date).getTime();
-            setEditMins(Math.floor(ms / 60000).toString());
-            setShowEditTime(true);
-          }}>
+        {/* Modern HUD Session Bar */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          background: 'rgba(24, 25, 29, 0.65)',
+          border: '1px solid rgba(255,255,255,0.06)',
+          borderRadius: 12,
+          padding: '8px 12px',
+          gap: 8,
+          flexWrap: 'wrap'
+        }}>
+          {/* Timer Chip */}
+          <div 
+            style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: 7, 
+              cursor: 'pointer',
+              background: 'rgba(0,0,0,0.3)',
+              padding: '4px 10px',
+              borderRadius: 8,
+              border: '1px solid rgba(255,255,255,0.06)'
+            }} 
+            onClick={() => {
+              const start = session?.startTime ? Number(session.startTime) : (session?.date ? new Date(session.date).getTime() : Date.now());
+              const ms = Math.max(0, Date.now() - start);
+              const totalM = Math.floor(ms / 60000);
+              setEditHours(Math.floor(totalM / 60));
+              setEditMins(totalM % 60);
+              setShowEditTime(true);
+            }}
+            title="Click to edit elapsed time"
+          >
             <div style={{ position: 'relative', display: 'flex' }}>
               <TimerReset size={14} color="var(--primary)" />
-              <div style={{ position: 'absolute', top: -1, right: -1, width: 6, height: 6, borderRadius: 3, background: '#30D158' }} />
+              <div style={{ position: 'absolute', top: -1, right: -1, width: 5, height: 5, borderRadius: 3, background: '#30D158' }} />
             </div>
-            <span style={{ color: '#e2e2e2', borderBottom: '1px dashed #e2e2e2' }}>{durationStr}</span>
+            <span style={{ color: '#fff', fontSize: 13, fontWeight: 800, fontFamily: "'JetBrains Mono', monospace" }}>{durationStr}</span>
           </div>
-          <div>Volume: <span style={{ color: '#e2e2e2' }}>{formatWeight(stats.vol, settings?.unit)} {settings?.unit || 'kg'}</span></div>
-          <div>Sets: <span style={{ color: '#e2e2e2' }}>{stats.sets}</span></div>
-        </div>
-        <div style={{ marginTop: 12, display: 'flex', alignItems: 'center', gap: 8, color: '#8b90a0', fontSize: 13, fontWeight: 600 }}>
-          <span>Gym Profile:</span>
-          <select 
-            value={session.locationId || 'loc-default'}
-            onChange={(e) => setSession({ ...session, locationId: e.target.value })}
-            style={{ background: 'transparent', color: 'var(--primary)', border: 'none', fontWeight: 700, fontSize: 14, outline: 'none', cursor: 'pointer', padding: 0 }}
-          >
-            {(data.user?.locations || [{ id: 'loc-default', name: 'Default Gym' }]).map(loc => (
-              <option key={loc.id} value={loc.id}>{loc.name}</option>
-            ))}
-          </select>
+
+          {/* Volume Chip */}
+          <div style={{ fontSize: 12, color: '#8b90a0', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 4 }}>
+            <span>Vol:</span>
+            <span style={{ color: '#e2e2e2', fontWeight: 800 }}>{formatWeight(stats.vol, settings?.unit)} {settings?.unit || 'kg'}</span>
+          </div>
+
+          {/* Sets Chip */}
+          <div style={{ fontSize: 12, color: '#8b90a0', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 4 }}>
+            <span>Sets:</span>
+            <span style={{ color: '#e2e2e2', fontWeight: 800 }}>{stats.sets}</span>
+          </div>
+
+          {/* Cardio Chip (if present) */}
+          {session.cardioActivities && session.cardioActivities.length > 0 && (
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 4,
+              fontSize: 12,
+              fontWeight: 800,
+              color: '#FF8533',
+              background: 'rgba(255, 107, 0, 0.12)',
+              border: '1px solid rgba(255, 107, 0, 0.25)',
+              padding: '3px 8px',
+              borderRadius: 6
+            }}>
+              <Flame size={12} />
+              <span>{session.cardioActivities.filter(c => c.completed).length}/{session.cardioActivities.length}</span>
+            </div>
+          )}
+
+          {/* Location / Gym Profile */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 12, color: '#8b90a0', marginLeft: 'auto' }}>
+            <select 
+              value={session.locationId || 'loc-default'}
+              onChange={(e) => setSession({ ...session, locationId: e.target.value })}
+              style={{
+                background: 'transparent',
+                color: 'var(--primary)',
+                border: 'none',
+                fontWeight: 700,
+                fontSize: 12,
+                outline: 'none',
+                cursor: 'pointer',
+                padding: '2px 4px'
+              }}
+            >
+              {(data.user?.locations || [{ id: 'loc-default', name: 'Default Gym' }]).map(loc => (
+                <option key={loc.id} value={loc.id}>{loc.name}</option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 
-      <div className="pad" style={{ display: "flex", flexDirection: "column", gap: 14  }}>
+      <div className="pad" style={{ display: "flex", flexDirection: "column", gap: 14, paddingBottom: 'calc(260px + env(safe-area-inset-bottom))' }}>
         
         {session.exercises.length > 1 && (
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
             <div className="sectionLabel">EXERCISES</div>
             {selectMode ? (
               <div style={{ display: 'flex', gap: 8 }}>
-                <button className="miniBtn" style={{ border: 'none'  }} onClick={() => { setSelectMode(false); setSelectedExIds(new Set()); }}>Cancel</button>
-                <button className="miniBtn" style={{ background: 'var(--primary)', color: '#fff', border: 'none'  }} onClick={confirmSuperset}>Group Selected</button>
+                <button className="miniBtn" style={{ border: 'none' }} onClick={() => { setSelectMode(false); setSelectedExIds(new Set()); }}>Cancel</button>
+                <button className="miniBtn" style={{ background: 'var(--primary)', color: '#fff', border: 'none' }} onClick={confirmSuperset}>Group Selected</button>
               </div>
             ) : (
-              <button className="miniBtn" onClick={() => setSelectMode(true)}>Group Superset</button>
+              <div style={{ display: 'flex', gap: 8 }}>
+                <button 
+                  className="miniBtn" 
+                  onClick={() => setShowReorderModal(true)}
+                  style={{ display: 'flex', alignItems: 'center', gap: 5 }}
+                >
+                  <ArrowUpDown size={13} /> Reorder
+                </button>
+                <button className="miniBtn" onClick={() => setSelectMode(true)}>
+                  Group Superset
+                </button>
+              </div>
             )}
           </div>
         )}
@@ -579,12 +1013,34 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
                             imageUrl={exObj?.imageUrl}
                             sets={ex.sets}
                             priorSets={priorSets}
+                            allSessions={data?.sessions || []}
+                            allExercises={data?.exercises || []}
+                            currentSessionId={session.id}
+                            activeIntervention={data?.activeInterventions?.[ex.exerciseId] || null}
+                            customPlateauThreshold={settings?.customPlateauThreshold}
+                            onSelectIntervention={(intervention) => {
+                              useAppStore.getState().setActiveIntervention(ex.exerciseId, intervention);
+                            }}
+                            onCancelIntervention={() => {
+                              useAppStore.getState().removeActiveIntervention(ex.exerciseId);
+                            }}
+                            onSwapExercise={(newExId) => {
+                              setSession(prev => {
+                                if (!prev) return prev;
+                                const updatedExercises = [...(prev.exercises || [])];
+                                updatedExercises[ex.idx] = {
+                                  ...updatedExercises[ex.idx],
+                                  exerciseId: newExId
+                                };
+                                return { ...prev, exercises: updatedExercises };
+                              });
+                            }}
                             supersetPrefix={supersetPrefix}
                             notes={ex.notes}
                             dragControls={dragControls}
                             onTitleClick={() => setHistoryExerciseId(ex.exerciseId)}
                             onNotesChange={updateExerciseNotes}
-                            onRemove={handleRemoveExercise}
+                            onRemove={() => handleRemoveExercise(ex.id || ex.idx, exObj?.name || "Exercise")}
                             onSetsChange={updateExerciseSets}
                             startTimer={startTimer}
                             settings={settings}
@@ -601,9 +1057,48 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
         })}
         </Reorder.Group>
 
-        <button className="dashedBtn" onClick={() => setShowAdd(true)}>
-          <Plus size={16} /> Add Exercise
-        </button>
+        {/* Integrated Cardio Activities */}
+        {session.cardioActivities && session.cardioActivities.length > 0 && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginTop: 4 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, paddingLeft: 4 }}>
+              <Flame size={16} color="#FF6B00" />
+              <span style={{ fontSize: 13, fontWeight: 900, color: '#FF8533', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+                Cardio Activities ({session.cardioActivities.length})
+              </span>
+            </div>
+            {session.cardioActivities.map((act, cIdx) => (
+              <CardioLogger
+                key={act.id || `cardio-${cIdx}`}
+                activity={act}
+                index={cIdx}
+                userWeight={userWeight}
+                unit={settings?.unit || 'kg'}
+                onUpdate={handleUpdateCardio}
+                onRemove={handleRemoveCardio}
+              />
+            ))}
+          </div>
+        )}
+
+        <div style={{ display: 'flex', gap: 12 }}>
+          <button className="dashedBtn" style={{ flex: 1, marginTop: 0 }} onClick={() => setShowAdd(true)}>
+            <Plus size={16} /> Add Exercise
+          </button>
+          <button 
+            className="dashedBtn" 
+            style={{ 
+              flex: 1, 
+              marginTop: 0,
+              background: 'rgba(255, 107, 0, 0.08)', 
+              borderColor: 'rgba(255, 107, 0, 0.3)', 
+              color: '#FF8533',
+              boxShadow: '0 4px 14px rgba(255, 107, 0, 0.1)'
+            }} 
+            onClick={() => setShowCardioModal(true)}
+          >
+            <Flame size={16} color="#FF8533" /> Add Cardio
+          </button>
+        </div>
 
         <AnimatePresence>
           {showAdd && (
@@ -614,9 +1109,25 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
               onSelect={addExercise}
             />
           )}
+          {showCardioModal && (
+            <CardioSelectorModal
+              isOpen={showCardioModal}
+              onClose={() => setShowCardioModal(false)}
+              onSelectActivity={handleAddCardio}
+              customActivities={data?.customCardioActivities || []}
+              onAddCustomActivity={(newAct) => {
+                if (persist) {
+                  persist({
+                    ...data,
+                    customCardioActivities: [...(data?.customCardioActivities || []), newAct]
+                  });
+                }
+              }}
+            />
+          )}
         </AnimatePresence>
 
-        {session.exercises.length > 0 && (
+        {(session.exercises.length > 0 || (session.cardioActivities && session.cardioActivities.length > 0)) && (
           <motion.button 
             whileTap={{ scale: 0.95 }}
             className="finishBtn" 
@@ -642,9 +1153,18 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
         <PRToast 
           notification={prNotification} 
           settings={settings} 
-          onClose={() => setPrNotification(null)} 
+          onClose={handleClosePR} 
         />
       </AnimatePresence>
+
+      <ReorderExercisesModal
+        isOpen={showReorderModal}
+        onClose={() => setShowReorderModal(false)}
+        groupedExercises={groupedExercises}
+        data={data}
+        onMoveGroup={moveGroup}
+        onReorderGroups={handleReorderGroups}
+      />
 
       <ErrorModal
         isOpen={!!sessionNameError}

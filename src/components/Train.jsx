@@ -98,7 +98,7 @@ export default function Train({ setShowProfileModal }) {
           if (idx !== -1) {
             const nextSessions = [...data.sessions];
             nextSessions[idx] = updatedSession;
-            persist({ ...data, sessions: nextSessions });
+            persist({ ...data, sessions: nextSessions }, true);
           }
           setSummarySession(updatedSession);
         }}
@@ -121,11 +121,18 @@ export default function Train({ setShowProfileModal }) {
         data={data}
         persist={persist}
         startTimer={startTimer}
+        clearTimer={clearTimer}
       />
     );
   }
 
   const launchTemplate = (template) => {
+    if (activeSession) {
+      if (window.confirm("You have an active workout in progress. Do you want to resume it? (Click OK to resume, or Cancel to discard it and start this routine)")) {
+        setIsSessionMinimized(false);
+        return;
+      }
+    }
     setActiveSession({
       id: uid(),
       name: template.name,
@@ -140,6 +147,25 @@ export default function Train({ setShowProfileModal }) {
         sets: ex.sets ? (ex.sets || []).map(s => ({ ...s, weight: "", reps: "", rpe: "", completed: false, type: s.type || "N" })) : [{ weight: "", reps: "", rpe: "", completed: false, type: "N" }],
       })),
     });
+    setIsSessionMinimized(false);
+  };
+
+  const handleStartNewSession = () => {
+    if (activeSession) {
+      if (window.confirm("You have an active workout in progress. Do you want to resume it? (Click OK to resume, or Cancel to discard it and start fresh)")) {
+        setIsSessionMinimized(false);
+        return;
+      }
+    }
+    setActiveSession({
+      id: uid(),
+      name: "Workout Session",
+      startTime: Date.now(),
+      date: new Date().toISOString(),
+      locationId: data.user?.activeLocationId || 'loc-default',
+      exercises: [],
+    });
+    setIsSessionMinimized(false);
   };
 
   return (
@@ -166,16 +192,7 @@ export default function Train({ setShowProfileModal }) {
 
       <button
         className="bigCta" style={{ background: 'linear-gradient(135deg, var(--primary) 0%, #0056b3 100%)', border: 'none', boxShadow: '0 12px 24px rgba(0, 122, 255, 0.3)', borderRadius: 24, padding: '20px', fontSize: 18, fontWeight: 800 }}
-        onClick={() =>
-          setActiveSession({
-            id: uid(),
-            name: "Workout Session",
-            startTime: Date.now(),
-            date: new Date().toISOString(),
-            locationId: data.user?.activeLocationId || 'loc-default',
-            exercises: [],
-          })
-        }
+        onClick={handleStartNewSession}
       >
         <Plus size={24} /> Create New Session
       </button>

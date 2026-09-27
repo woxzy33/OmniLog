@@ -25,6 +25,20 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (typeof window !== 'undefined' && localStorage.getItem('omnilog_dev_auth') === 'true') {
+      setCurrentUser({ uid: 'dev-athlete-1', email: 'athlete@omnilog.dev' });
+      setUserProfile({
+        name: 'Marcus Vance',
+        weight: 80,
+        height: 180,
+        gender: 'male',
+        experienceLevel: 'intermediate',
+        progressiveOverloadEnabled: true
+      });
+      setLoading(false);
+      return () => {};
+    }
+
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setCurrentUser(user);
       if (user) {

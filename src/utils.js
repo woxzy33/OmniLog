@@ -1,9 +1,47 @@
 export function getLastSessionSets(data, exerciseId, excludeSessionId, locationId = 'loc-default') {
-  const past = (data.sessions || [])
-    .filter((s) => s.id !== excludeSessionId)
-    .filter((s) => (s.locationId || 'loc-default') === locationId)
-    .filter((s) => (s.exercises || []).some((e) => e.exerciseId === exerciseId));
-  return past.length > 0 ? (past[past.length - 1].exercises || []).find((e) => e.exerciseId === exerciseId)?.sets : null;
+  if (!data || !Array.isArray(data.sessions) || !exerciseId) return null;
+
+  // Resolve exercise name if available in data.exercises
+  const exObj = (data.exercises || []).find(e => e.id === exerciseId || e.exerciseId === exerciseId);
+  const targetName = exObj?.name?.trim().toLowerCase();
+
+  // Helper: does an exercise entry in a session match our target?
+  const matchesEx = (e) => {
+    if (!e) return false;
+    if (e.exerciseId === exerciseId || e.id === exerciseId) return true;
+    if (targetName && e.name && e.name.trim().toLowerCase() === targetName) return true;
+    return false;
+  };
+
+  // Helper: does a session have valid (completed or entered) sets for this exercise?
+  const getValidSetsFromSession = (sess) => {
+    const ex = (sess.exercises || []).find(matchesEx);
+    if (!ex || !Array.isArray(ex.sets)) return null;
+    const hasValidSet = ex.sets.some(s => s && (s.completed || Number(s.reps) > 0 || Number(s.weight) > 0));
+    return hasValidSet ? ex.sets : null;
+  };
+
+  // Sort past sessions chronologically (oldest to newest)
+  const pastSessions = data.sessions
+    .filter(s => s && s.id !== excludeSessionId)
+    .sort((a, b) => new Date(a.date || a.startTime || 0) - new Date(b.date || b.startTime || 0));
+
+  // 1. Try finding in the specified gym location first
+  if (locationId) {
+    const sameLocSessions = pastSessions.filter(s => (s.locationId || 'loc-default') === locationId);
+    for (let i = sameLocSessions.length - 1; i >= 0; i--) {
+      const sets = getValidSetsFromSession(sameLocSessions[i]);
+      if (sets) return sets;
+    }
+  }
+
+  // 2. Fallback to any past session across all gym locations!
+  for (let i = pastSessions.length - 1; i >= 0; i--) {
+    const sets = getValidSetsFromSession(pastSessions[i]);
+    if (sets) return sets;
+  }
+
+  return null;
 }
 
 export function getUserWeightAtDate(measurements = [], targetDate, fallback = 75) {
@@ -36,8 +74,10 @@ export function parseVolume(weight, reps, bodyweight = 0) {
 }
 
 export function formatWeight(kgValue, unit) {
-  const kg = Number(kgValue) || 0;
-  if (!kg) return "0";
+  if (kgValue === undefined || kgValue === null || kgValue === "") return "";
+  const kg = Number(kgValue);
+  if (isNaN(kg)) return "";
+  if (kg === 0) return "0";
   const val = unit === 'lbs' ? kg * 2.20462 : kg;
   return Number(Math.round(val * 1000) / 1000).toString();
 }

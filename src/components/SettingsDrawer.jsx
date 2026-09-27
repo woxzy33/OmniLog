@@ -7,13 +7,17 @@ import { useAuth } from '../store/AuthContext';
 import { saveUserProfile } from '../store/Database';
 import { ConfirmModal } from './WorkoutSafeguards';
 import { sendTestNotification, syncTrainingNotifications, requestNotificationPermission } from '../services/NotificationService';
+import { EXPERIENCE_TIERS } from '../services/ProgressionEngine';
+import { loadPlateauTestScenario, fastForwardDeloadTest, clearPlateauTestScenario, isTestScenarioLoaded } from '../services/PlateauTestLab';
 
 export default function SettingsDrawer({ onClose, onExport, onImport }) {
-  const { data, persist } = useAppStore();
+  const { data, persist, wipeAllData } = useAppStore();
   const { currentUser, userProfile, setUserProfile, logout, changePassword, deleteAccount } = useAuth();
   const [showLogoutConfirm, setShowLogoutConfirm] = React.useState(false);
   const [testStatus, setTestStatus] = React.useState(null);
   const [testMessage, setTestMessage] = React.useState('');
+  const [testLabStatus, setTestLabStatus] = React.useState(null);
+  const [testLabMsg, setTestLabMsg] = React.useState('');
 
   // Change Password state
   const [showChangePassword, setShowChangePassword] = React.useState(false);
@@ -37,6 +41,8 @@ export default function SettingsDrawer({ onClose, onExport, onImport }) {
 
   const settings = data?.settings || { unit: 'kg' };
   const notificationsEnabled = settings.notificationsEnabled !== false;
+  const progressiveOverloadEnabled = settings.progressiveOverloadEnabled !== false;
+  const currentExperience = settings.experienceLevel || userProfile?.experienceLevel || 'intermediate';
   
   const updateSettings = (newSettings) => {
     persist({ ...data, settings: { ...settings, ...newSettings } });
@@ -49,21 +55,31 @@ export default function SettingsDrawer({ onClose, onExport, onImport }) {
       await saveUserProfile(currentUser.uid, newProfile);
     }
   };
+
+  const handleExperienceChange = (newLevel) => {
+    updateSettings({ experienceLevel: newLevel });
+    updateProfile({ experienceLevel: newLevel });
+  };
   
-  const wipeData = () => {
-    persist({ ...data, sessions: [], templates: [] });
+  const wipeData = async () => {
+    await wipeAllData();
   };
 
   const { t, i18n } = useTranslation();
   const [wipeStep, setWipeStep] = React.useState(0);
+  const [wipeSuccess, setWipeSuccess] = React.useState(false);
 
-  const handleWipe = () => {
+  const handleWipe = async () => {
     if (wipeStep === 0) setWipeStep(1);
     else if (wipeStep === 1) setWipeStep(2);
     else {
-      wipeData();
+      await wipeAllData();
       setWipeStep(0);
-      onClose();
+      setWipeSuccess(true);
+      setTimeout(() => {
+        setWipeSuccess(false);
+        onClose();
+      }, 1200);
     }
   };
 
@@ -93,7 +109,8 @@ export default function SettingsDrawer({ onClose, onExport, onImport }) {
             style={{
               position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, width: '100%',
               background: settings.theme === 'orange' ? '#1c120c' : '#0a0a0c', boxSizing: 'border-box',
-              zIndex: 1000, padding: 24, overflowY: 'auto', display: 'flex', flexDirection: 'column'
+              zIndex: 1000, padding: 24, paddingTop: 'calc(20px + env(safe-area-inset-top, 0px))', 
+              overflowY: 'auto', display: 'flex', flexDirection: 'column'
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 32 }}>
@@ -147,6 +164,358 @@ export default function SettingsDrawer({ onClose, onExport, onImport }) {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span style={{ color: '#e2e2e2', fontWeight: 600, fontSize: 14 }}>{t('settings.isolationRest')}</span>
                 <input type="number" value={settings.isolationRest} onChange={e => updateSettings({ isolationRest: Number(e.target.value) })} style={{ background: '#1C1C1E', color: '#fff', border: 'none', padding: '8px 12px', borderRadius: 8, width: 60, textAlign: 'right' }} />
+              </div>
+            </div>
+
+            <div style={{ color: '#6b7080', fontSize: 11, fontWeight: 700, textTransform: 'uppercase', marginBottom: 16 }}>PROGRESSIVE OVERLOAD & HYPERTROPHY</div>
+            <div style={{ background: 'rgba(255,255,255,0.03)', borderRadius: 16, padding: 16, marginBottom: 24 }}>
+              {/* On/Off Switch */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+                <div style={{ paddingRight: 16 }}>
+                  <div style={{ color: '#e2e2e2', fontWeight: 600, fontSize: 14 }}>Progressive Overload Targets</div>
+                  <div style={{ color: '#8b90a0', fontSize: 12, marginTop: 4, lineHeight: '1.4' }}>
+                    Suggest adaptive weight & rep targets during active sessions using sports science models.
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => updateSettings({ progressiveOverloadEnabled: !progressiveOverloadEnabled })}
+                  style={{
+                    width: 48,
+                    height: 28,
+                    borderRadius: 14,
+                    background: progressiveOverloadEnabled ? 'var(--primary, #007AFF)' : '#2c2d35',
+                    border: 'none',
+                    position: 'relative',
+                    cursor: 'pointer',
+                    transition: 'background 0.2s',
+                    padding: 2,
+                    display: 'flex',
+                    alignItems: 'center',
+                    flexShrink: 0
+                  }}
+                >
+                  <div
+                    style={{
+                      width: 24,
+                      height: 24,
+                      borderRadius: 12,
+                      background: '#fff',
+                      transform: progressiveOverloadEnabled ? 'translateX(20px)' : 'translateX(0px)',
+                      transition: 'transform 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                      boxShadow: '0 2px 4px rgba(0,0,0,0.3)'
+                    }}
+                  />
+                </button>
+              </div>
+
+              {/* Experience Tier Selector */}
+              <div style={{ paddingTop: 14, borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+                <div style={{ marginBottom: 10 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                    <span style={{ color: '#e2e2e2', fontWeight: 600, fontSize: 13 }}>Experience Level</span>
+                    <span style={{ color: '#8b90a0', fontSize: 11 }}>Calibrates adaptation pacing</span>
+                  </div>
+                  <select
+                    value={currentExperience}
+                    onChange={e => handleExperienceChange(e.target.value)}
+                    style={{
+                      width: '100%',
+                      background: '#1C1C1E',
+                      color: '#fff',
+                      border: '1px solid rgba(255,255,255,0.12)',
+                      padding: '10px 12px',
+                      borderRadius: 8,
+                      fontSize: 13,
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      outline: 'none'
+                    }}
+                  >
+                    {Object.values(EXPERIENCE_TIERS).map(tier => (
+                      <option key={tier.id} value={tier.id}>
+                        {tier.icon} {tier.label} ({tier.duration})
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Dynamic Info Banner */}
+                {EXPERIENCE_TIERS[currentExperience] && (
+                  <div style={{
+                    background: 'rgba(0,0,0,0.35)',
+                    border: `1px solid ${EXPERIENCE_TIERS[currentExperience].color}33`,
+                    borderRadius: 10,
+                    padding: '10px 12px',
+                    marginTop: 8
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+                      <span style={{ fontSize: 14 }}>{EXPERIENCE_TIERS[currentExperience].icon}</span>
+                      <span style={{ fontSize: 12, fontWeight: 800, color: EXPERIENCE_TIERS[currentExperience].color }}>
+                        {EXPERIENCE_TIERS[currentExperience].shortDesc}
+                      </span>
+                    </div>
+                    <div style={{ fontSize: 11, color: '#9CA3AF', lineHeight: '1.45' }}>
+                      {EXPERIENCE_TIERS[currentExperience].longDesc}
+                    </div>
+                    <div style={{ fontSize: 10, color: '#6B7280', fontWeight: 700, marginTop: 6, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                      Plateau Threshold: {settings.customPlateauThreshold != null ? `${settings.customPlateauThreshold} sessions (Custom Override)` : `${EXPERIENCE_TIERS[currentExperience].plateauThreshold} sessions without gain`}
+                    </div>
+                  </div>
+                )}
+
+                {/* Custom Plateau Threshold Customization */}
+                <div style={{ paddingTop: 14, marginTop: 14, borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+                    <div>
+                      <span style={{ color: '#e2e2e2', fontWeight: 600, fontSize: 13 }}>Plateau Sensitivity</span>
+                      <div style={{ color: '#8b90a0', fontSize: 11, marginTop: 2 }}>
+                        Stagnant sessions before triggering intervention
+                      </div>
+                    </div>
+                    {settings.customPlateauThreshold != null && (
+                      <button
+                        type="button"
+                        onClick={() => updateSettings({ customPlateauThreshold: null })}
+                        style={{
+                          background: 'rgba(255,255,255,0.06)',
+                          border: '1px solid rgba(255,255,255,0.12)',
+                          color: '#00C6FF',
+                          padding: '3px 8px',
+                          borderRadius: 6,
+                          fontSize: 10,
+                          fontWeight: 700,
+                          cursor: 'pointer'
+                        }}
+                      >
+                        Reset to Auto
+                      </button>
+                    )}
+                  </div>
+
+                  {(() => {
+                    const defaultThresh = EXPERIENCE_TIERS[currentExperience]?.plateauThreshold || 4;
+                    const activeThresh = settings.customPlateauThreshold != null ? Number(settings.customPlateauThreshold) : defaultThresh;
+                    return (
+                      <>
+                        <div style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          background: '#1C1C1E',
+                          border: '1px solid rgba(255,255,255,0.1)',
+                          borderRadius: 10,
+                          padding: '6px 8px',
+                          marginTop: 8
+                        }}>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const next = Math.max(2, activeThresh - 1);
+                              updateSettings({ customPlateauThreshold: next });
+                            }}
+                            disabled={activeThresh <= 2}
+                            style={{
+                              width: 34,
+                              height: 34,
+                              borderRadius: 8,
+                              background: activeThresh <= 2 ? 'transparent' : 'rgba(255,255,255,0.08)',
+                              border: 'none',
+                              color: activeThresh <= 2 ? '#444' : '#fff',
+                              fontSize: 18,
+                              fontWeight: 800,
+                              cursor: activeThresh <= 2 ? 'not-allowed' : 'pointer',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center'
+                            }}
+                          >
+                            −
+                          </button>
+
+                          <div style={{ textAlign: 'center' }}>
+                            <div style={{ fontSize: 15, fontWeight: 800, color: '#fff' }}>
+                              {activeThresh} Sessions
+                            </div>
+                            <div style={{ fontSize: 10, fontWeight: 700, color: settings.customPlateauThreshold != null ? '#FF9F0A' : '#6B7280', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                              {settings.customPlateauThreshold != null ? 'Custom Setting' : `Auto (${EXPERIENCE_TIERS[currentExperience]?.label || 'Tier'})`}
+                            </div>
+                          </div>
+
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const next = Math.min(10, activeThresh + 1);
+                              updateSettings({ customPlateauThreshold: next });
+                            }}
+                            disabled={activeThresh >= 10}
+                            style={{
+                              width: 34,
+                              height: 34,
+                              borderRadius: 8,
+                              background: activeThresh >= 10 ? 'transparent' : 'rgba(255,255,255,0.08)',
+                              border: 'none',
+                              color: activeThresh >= 10 ? '#444' : '#fff',
+                              fontSize: 18,
+                              fontWeight: 800,
+                              cursor: activeThresh >= 10 ? 'not-allowed' : 'pointer',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center'
+                            }}
+                          >
+                            +
+                          </button>
+                        </div>
+                        <div style={{ fontSize: 10.5, color: '#6B7280', marginTop: 6, lineHeight: 1.4 }}>
+                          {settings.customPlateauThreshold != null
+                            ? `Custom override: Stagnation alert will fire after ${activeThresh} consecutive sessions without volume or 1RM progress.`
+                            : `Scientific default: Based on your ${EXPERIENCE_TIERS[currentExperience]?.label} profile (${defaultThresh} sessions).`}
+                        </div>
+                      </>
+                    );
+                  })()}
+                </div>
+
+                {/* 🧪 Plateau Testing Lab */}
+                <div style={{
+                  paddingTop: 16,
+                  marginTop: 16,
+                  borderTop: '1px solid rgba(255,255,255,0.06)'
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                      <span style={{ fontSize: 15 }}>🧪</span>
+                      <span style={{ color: '#F3F4F6', fontWeight: 700, fontSize: 13 }}>Plateau Testing Lab</span>
+                    </div>
+                    {isTestScenarioLoaded(data) && (
+                      <span style={{
+                        background: 'rgba(16, 185, 129, 0.15)',
+                        border: '1px solid rgba(16, 185, 129, 0.35)',
+                        color: '#34D399',
+                        fontSize: 9.5,
+                        fontWeight: 800,
+                        padding: '3px 7px',
+                        borderRadius: 6,
+                        letterSpacing: '0.04em',
+                        textTransform: 'uppercase'
+                      }}>
+                        ● Test Live
+                      </span>
+                    )}
+                  </div>
+
+                  <div style={{ fontSize: 11, color: '#9CA3AF', lineHeight: '1.45', marginBottom: 12 }}>
+                    Inject a simulated 4-session stagnation scenario on <strong style={{ color: '#E5E7EB' }}>Barbell Bench Press (80kg × 8 reps)</strong> to test plateau badges, diagnostic pathways, deload adaptations, and 7-day expiration.
+                  </div>
+
+                  {testLabMsg && (
+                    <div style={{
+                      padding: '8px 10px',
+                      borderRadius: 8,
+                      marginBottom: 10,
+                      fontSize: 11,
+                      fontWeight: 600,
+                      background: testLabStatus === 'cleared' ? 'rgba(239,68,68,0.12)' : 'rgba(59,130,246,0.15)',
+                      color: testLabStatus === 'cleared' ? '#F87171' : '#60A5FA',
+                      border: `1px solid ${testLabStatus === 'cleared' ? 'rgba(239,68,68,0.3)' : 'rgba(59,130,246,0.3)'}`
+                    }}>
+                      {testLabMsg}
+                    </div>
+                  )}
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        loadPlateauTestScenario();
+                        setTestLabStatus('loaded');
+                        setTestLabMsg('🚀 Scenario loaded! Launching workout session...');
+                        setTimeout(() => {
+                          if (onClose) onClose();
+                        }, 750);
+                      }}
+                      style={{
+                        width: '100%',
+                        padding: '10px 12px',
+                        borderRadius: 10,
+                        background: 'linear-gradient(135deg, #FF9F0A 0%, #D97706 100%)',
+                        color: '#000',
+                        fontWeight: 700,
+                        fontSize: 12,
+                        border: 'none',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 6,
+                        boxShadow: '0 2px 8px rgba(255,159,10,0.25)'
+                      }}
+                    >
+                      <span>⚡</span>
+                      <span>{isTestScenarioLoaded(data) ? 'Reload Scenario & Open Workout' : 'Load Plateau Scenario & Open Workout'}</span>
+                    </button>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          fastForwardDeloadTest();
+                          setTestLabStatus('fast-forwarded');
+                          setTestLabMsg('⏩ Fast-forwarded to Day 8! Deload expired, normal overload targets resumed.');
+                          setTimeout(() => setTestLabMsg(''), 4000);
+                        }}
+                        style={{
+                          padding: '9px 10px',
+                          borderRadius: 8,
+                          background: 'rgba(59, 130, 246, 0.12)',
+                          border: '1px solid rgba(59, 130, 246, 0.3)',
+                          color: '#93C5FD',
+                          fontWeight: 600,
+                          fontSize: 11,
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: 5
+                        }}
+                      >
+                        <span>⏩</span>
+                        <span>Fast-Forward (7d)</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          clearPlateauTestScenario();
+                          setTestLabStatus('cleared');
+                          setTestLabMsg('🧹 Test scenario wiped. Real user data intact.');
+                          setTimeout(() => {
+                            setTestLabMsg('');
+                            setTestLabStatus(null);
+                          }, 3000);
+                        }}
+                        style={{
+                          padding: '9px 10px',
+                          borderRadius: 8,
+                          background: 'rgba(239, 68, 68, 0.1)',
+                          border: '1px solid rgba(239, 68, 68, 0.25)',
+                          color: '#FCA5A5',
+                          fontWeight: 600,
+                          fontSize: 11,
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: 5
+                        }}
+                      >
+                        <span>🧹</span>
+                        <span>Clear Test Data</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -294,9 +663,32 @@ export default function SettingsDrawer({ onClose, onExport, onImport }) {
                 <input type="file" accept=".json" style={{ display: 'none' }} onChange={onImport} />
               </label>
 
-              <button onClick={handleWipe} className="dashedBtn" style={{ marginTop: 0, padding: 12, background: wipeStep > 0 ? '#D94A4A' : 'rgba(217, 74, 74, 0.1)', color: wipeStep > 0 ? '#fff' : '#D94A4A', border: 'none', transition: 'all 0.2s'  }}>
+              <button 
+                onClick={handleWipe} 
+                disabled={wipeSuccess}
+                className="dashedBtn" 
+                style={{ 
+                  marginTop: 0, 
+                  padding: 12, 
+                  background: wipeSuccess ? 'rgba(48, 209, 88, 0.15)' : wipeStep > 0 ? '#D94A4A' : 'rgba(217, 74, 74, 0.1)', 
+                  color: wipeSuccess ? '#30D158' : wipeStep > 0 ? '#fff' : '#D94A4A', 
+                  border: 'none', 
+                  transition: 'all 0.2s',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: 8,
+                  fontWeight: 800
+                }}
+              >
                 <Trash2 size={18} /> 
-                {wipeStep === 0 ? t('settings.wipeData') : wipeStep === 1 ? t('settings.wipeDataConfirm1') : t('settings.wipeDataConfirm2')}
+                {wipeSuccess 
+                  ? 'Factory Reset Complete!' 
+                  : wipeStep === 0 
+                    ? t('settings.wipeData') 
+                    : wipeStep === 1 
+                      ? t('settings.wipeDataConfirm1') 
+                      : t('settings.wipeDataConfirm2')}
               </button>
             </div>
 
