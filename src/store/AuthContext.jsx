@@ -42,9 +42,23 @@ export function AuthProvider({ children }) {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setCurrentUser(user);
       if (user) {
-        // Fetch their onboarding profile
-        const profile = await loadUserProfile(user.uid);
-        setUserProfile(profile);
+        try {
+          const profilePromise = loadUserProfile(user.uid);
+          const timeoutPromise = new Promise((resolve) => setTimeout(() => resolve(null), 3000));
+          const profile = await Promise.race([profilePromise, timeoutPromise]);
+          setUserProfile(profile || {
+            name: user.displayName || user.email?.split('@')[0] || 'Athlete',
+            experienceLevel: 'intermediate',
+            progressiveOverloadEnabled: true
+          });
+        } catch (e) {
+          console.warn("Failed loading user profile:", e);
+          setUserProfile({
+            name: user.displayName || user.email?.split('@')[0] || 'Athlete',
+            experienceLevel: 'intermediate',
+            progressiveOverloadEnabled: true
+          });
+        }
       } else {
         setUserProfile(null);
       }
@@ -54,6 +68,20 @@ export function AuthProvider({ children }) {
     return unsubscribe;
   }, []);
 
+  const continueAsGuest = () => {
+    localStorage.setItem('omnilog_dev_auth', 'true');
+    setCurrentUser({ uid: 'dev-athlete-1', email: 'athlete@omnilog.dev' });
+    setUserProfile({
+      name: 'Marcus Vance',
+      weight: 80,
+      height: 180,
+      gender: 'male',
+      experienceLevel: 'intermediate',
+      progressiveOverloadEnabled: true
+    });
+    setLoading(false);
+  };
+
   const login = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
@@ -62,8 +90,13 @@ export function AuthProvider({ children }) {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  const logout = () => {
-    return signOut(auth);
+  const logout = async () => {
+    localStorage.removeItem('omnilog_dev_auth');
+    try {
+      await signOut(auth);
+    } catch (e) {}
+    setCurrentUser(null);
+    setUserProfile(null);
   };
 
   const resetPassword = (email) => {
@@ -107,6 +140,7 @@ export function AuthProvider({ children }) {
     login,
     register,
     logout,
+    continueAsGuest,
     resetPassword,
     changePassword,
     deleteAccount,

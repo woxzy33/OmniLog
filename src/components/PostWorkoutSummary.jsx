@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import MuscleHeatmap from './MuscleHeatmap';
 import { RadarChart, PolarGrid, PolarAngleAxis, Radar, ResponsiveContainer } from 'recharts';
@@ -8,25 +8,65 @@ import { parseVolume, formatWeight, translateExerciseName, getUserWeightAtDate }
 import { CATEGORIES, uid, exerciseRequiresWeight } from '../data/exerciseDb';
 import { useTranslation } from 'react-i18next';
 import { ErrorModal } from './WorkoutSafeguards';
+import EditWorkoutModal from './EditWorkoutModal';
 
 const MAX_TEMPLATE_NAME_LENGTH = 25;
 
-export default function PostWorkoutSummary({ session, data, persist, onClose, onUpdateDuration, settings, isHistoryView }) {
+export default function PostWorkoutSummary({ session, data, persist, onClose, onUpdateDuration, onUpdateSession, onDeleteSession, settings, isHistoryView }) {
   const { t } = useTranslation();
+  const [currentSession, setCurrentSession] = useState(session);
+  const [showEditModal, setShowEditModal] = useState(false);
   const [showEditTime, setShowEditTime] = useState(false);
   const [activeView, setActiveView] = useState('heatmap');
   const [editMins, setEditMins] = useState(0);
   
+  useEffect(() => {
+    setCurrentSession(session);
+    setTemplateName(session?.name || "My Workout");
+  }, [session]);
+
   const [showTemplatePrompt, setShowTemplatePrompt] = useState(false);
   const [templateAction, setTemplateAction] = useState('none'); // 'none', 'save_new', 'update_existing'
-  const [templateName, setTemplateName] = useState(session.name || "My Workout");
+  const [templateName, setTemplateName] = useState(session?.name || "My Workout");
   const [templateError, setTemplateError] = useState(null);
+
+  const handleSaveEditedSession = (updatedSession) => {
+    const idx = (data?.sessions || []).findIndex(s => s.id === updatedSession.id);
+    let nextSessions = [...(data?.sessions || [])];
+    if (idx !== -1) {
+      nextSessions[idx] = updatedSession;
+    } else {
+      nextSessions.push(updatedSession);
+    }
+
+    if (persist) {
+      persist({ ...data, sessions: nextSessions }, true);
+    }
+
+    setCurrentSession(updatedSession);
+    if (onUpdateSession) {
+      onUpdateSession(updatedSession);
+    }
+    setShowEditModal(false);
+  };
+
+  const handleDeleteWorkout = (sessionId) => {
+    const nextSessions = (data?.sessions || []).filter(s => s.id !== sessionId);
+    if (persist) {
+      persist({ ...data, sessions: nextSessions }, true);
+    }
+    if (onDeleteSession) {
+      onDeleteSession(sessionId);
+    }
+    setShowEditModal(false);
+    onClose();
+  };
 
   const isTemplateNameTooLong = (templateName || "").trim().length > MAX_TEMPLATE_NAME_LENGTH;
   const isTemplateNameEmpty = (templateName || "").trim() === "";
 
   const handleInitialConfirm = () => {
-    if (session.templateId && data.templates.find(t => t.id === session.templateId)) {
+    if (currentSession?.templateId && data.templates.find(t => t.id === currentSession.templateId)) {
       setTemplateAction('update_existing');
       setShowTemplatePrompt(true);
     } else {
@@ -46,14 +86,14 @@ export default function PostWorkoutSummary({ session, data, persist, onClose, on
         return;
       }
     }
-    if (templateAction === 'update_existing' && persist && session.templateId) {
+    if (templateAction === 'update_existing' && persist && currentSession?.templateId) {
        persist(prevData => {
         const nextTemplates = prevData.templates.map(t => {
-          if (t.id === session.templateId) {
+          if (t.id === currentSession.templateId) {
              return {
                ...t,
                name: templateName.trim(),
-               exercises: session.exercises.map(ex => ({
+               exercises: (currentSession.exercises || []).map(ex => ({
                   exerciseId: ex.exerciseId,
                   notes: ex.notes || "",
                   sets: (ex.sets || []).map(s => ({ weight: "", reps: "", rpe: "", type: s.type || "N", completed: false }))
@@ -68,7 +108,7 @@ export default function PostWorkoutSummary({ session, data, persist, onClose, on
       const newTemplate = {
         id: uid(),
         name: templateName.trim(),
-        exercises: session.exercises.map(ex => ({
+        exercises: (currentSession?.exercises || []).map(ex => ({
           exerciseId: ex.exerciseId,
           notes: ex.notes || "",
           sets: (ex.sets || []).map(s => ({ weight: "", reps: "", rpe: "", type: s.type || "N", completed: false }))
@@ -93,8 +133,9 @@ export default function PostWorkoutSummary({ session, data, persist, onClose, on
     const prDetails = [];
     CATEGORIES.forEach(c => muscleMap[c] = 0);
 
-    const userWeight = getUserWeightAtDate(data?.measurements, session.date);
-    session.exercises.forEach(ex => {
+    const activeSessionObj = currentSession || session || {};
+    const userWeight = getUserWeightAtDate(data?.measurements, activeSessionObj.date);
+    (activeSessionObj.exercises || []).forEach(ex => {
       const exObj = exerciseDict[ex.exerciseId];
       const requiresWeight = exerciseRequiresWeight(exObj);
       (ex.sets || []).forEach(s => {
@@ -125,7 +166,7 @@ export default function PostWorkoutSummary({ session, data, persist, onClose, on
     let cardioMins = 0;
     let cardioDist = 0;
     let cardioCals = 0;
-    const completedCardio = (session.cardioActivities || []).filter(c => c.completed);
+    const completedCardio = (activeSessionObj.cardioActivities || []).filter(c => c.completed);
     completedCardio.forEach(c => {
       cardioMins += (Number(c.durationMinutes) || 0) + (Number(c.durationSeconds) || 0) / 60;
       cardioDist += Number(c.distance) || 0;
@@ -140,10 +181,10 @@ export default function PostWorkoutSummary({ session, data, persist, onClose, on
       if (v > maxVol) { maxVol = v; mainMuscle = k; }
     });
 
-    let durationMins = session.durationMins;
+    let durationMins = activeSessionObj.durationMins;
     if (durationMins === undefined || durationMins === null) {
       const endTime = Date.now();
-      const startTime = session?.startTime ? Number(session.startTime) : (session?.date ? new Date(session.date).getTime() : endTime);
+      const startTime = activeSessionObj?.startTime ? Number(activeSessionObj.startTime) : (activeSessionObj?.date ? new Date(activeSessionObj.date).getTime() : endTime);
       durationMins = Math.max(1, Math.round((endTime - startTime) / 60000));
     }
 
@@ -162,7 +203,7 @@ export default function PostWorkoutSummary({ session, data, persist, onClose, on
       cardioCals,
       completedCardio
     };
-  }, [session, data]);
+  }, [currentSession, session, data, exerciseDict]);
 
   const openTimeEditor = () => {
     setEditMins(stats.durationMins);
@@ -218,22 +259,61 @@ export default function PostWorkoutSummary({ session, data, persist, onClose, on
             background: 'linear-gradient(90deg, #ffffff 0%, #a0a5b5 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', 
             letterSpacing: '-0.03em', marginBottom: 4
           }}>
-            {isHistoryView ? "Session Log" : "Workout Complete"}
+            {isHistoryView ? (currentSession?.name || "Session Log") : "Workout Complete"}
           </div>
           {isHistoryView && (
             <>
               <div style={{ color: '#8b90a0', fontSize: 13, fontWeight: 600, fontFamily: '"Inter", sans-serif' }}>
-                {new Date(session.date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                {new Date(currentSession?.date || session?.date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
               </div>
               <div style={{ color: 'var(--primary)', fontSize: 11, marginTop: 6, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', fontFamily: '"Inter", sans-serif', display: 'inline-flex', alignItems: 'center', background: 'rgba(var(--primary-rgb), 0.1)', padding: '4px 8px', borderRadius: 6 }}>
-                <span style={{ marginRight: 4 }}>📍</span> {data.user?.locations?.find(l => l.id === (session.locationId || 'loc-default'))?.name || 'Default Gym'}
+                <span style={{ marginRight: 4 }}>📍</span> {data.user?.locations?.find(l => l.id === (currentSession?.locationId || session?.locationId || 'loc-default'))?.name || 'Default Gym'}
               </div>
             </>
           )}
         </div>
-        <button style={{ background: '#0a0a0c', border: '1px solid #2A2A2A', color: '#8b90a0', cursor: 'pointer', borderRadius: 12, width: 40, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 12px rgba(0,0,0,0.2)' }} onClick={onClose}>
-          <X size={20} />
-        </button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <button 
+            style={{ 
+              background: 'rgba(255, 255, 255, 0.06)', 
+              border: '1px solid rgba(255, 255, 255, 0.12)', 
+              color: '#e2e2e2', 
+              cursor: 'pointer', 
+              borderRadius: 12, 
+              padding: '8px 12px',
+              height: 40,
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: 6,
+              fontSize: 13,
+              fontWeight: 700,
+              boxShadow: '0 4px 12px rgba(0,0,0,0.2)' 
+            }} 
+            onClick={() => setShowEditModal(true)}
+            title="Edit workout details"
+          >
+            <Edit2 size={15} /> Edit
+          </button>
+          <button 
+            style={{ 
+              background: '#0a0a0c', 
+              border: '1px solid #2A2A2A', 
+              color: '#8b90a0', 
+              cursor: 'pointer', 
+              borderRadius: 12, 
+              width: 40, 
+              height: 40, 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center', 
+              boxShadow: '0 4px 12px rgba(0,0,0,0.2)' 
+            }} 
+            onClick={onClose}
+            title="Close summary"
+          >
+            <X size={20} />
+          </button>
+        </div>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8, marginBottom: 24 }}>
@@ -313,7 +393,13 @@ export default function PostWorkoutSummary({ session, data, persist, onClose, on
                 {activeView === 'heatmap' ? (
                   <motion.div key="heatmap" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 0.2 }} style={{ width: '100%' }}>
                     <div style={{ transform: 'scale(0.95)', transformOrigin: 'center top', filter: 'drop-shadow(0 0 20px rgba(var(--primary-rgb), 0.15))' }}>
-                      <MuscleHeatmap sessions={[session]} dataExercises={[...(data.exercises || []), ...(data.customExercises || [])]} ignoreDate={true} />
+                      <MuscleHeatmap 
+                        sessions={[session]} 
+                        dataExercises={[...(data.exercises || []), ...(data.customExercises || [])]} 
+                        ignoreDate={true} 
+                        mode="session" 
+                        gender={data.user?.gender || 'Male'} 
+                      />
                     </div>
                   </motion.div>
                 ) : (
@@ -450,7 +536,7 @@ export default function PostWorkoutSummary({ session, data, persist, onClose, on
         </div>
       )}
 
-      {session.exercises && session.exercises.length > 0 && (
+      {(currentSession?.exercises || session?.exercises) && (currentSession?.exercises || session?.exercises).length > 0 && (
         <>
           <div style={{ fontFamily: '"Inter", sans-serif', fontSize: 12, fontWeight: 800, color: '#ffffff', marginBottom: 16, textTransform: 'uppercase', letterSpacing: '0.05em', display: 'flex', alignItems: 'center', gap: 8 }}>
             <div style={{ width: 4, height: 16, background: 'var(--primary)', borderRadius: 2 }}></div>
@@ -458,15 +544,15 @@ export default function PostWorkoutSummary({ session, data, persist, onClose, on
           </div>
       
       <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-        {session.exercises.map((ex, idx) => {
+        {(currentSession?.exercises || session?.exercises || []).map((ex, idx) => {
           const exObj = exerciseDict[ex.exerciseId];
           const requiresWeight = exerciseRequiresWeight(exObj);
-          const userWeight = getUserWeightAtDate(data?.measurements, session.date);
+          const userWeight = getUserWeightAtDate(data?.measurements, currentSession?.date || session?.date);
           const exVol = ex.sets.reduce((acc, set) => set.completed ? acc + parseVolume(set.weight, set.reps, requiresWeight ? 0 : userWeight) : acc, 0);
           const exReps = ex.sets.reduce((acc, set) => set.completed ? acc + (Number(set.reps) || 0) : acc, 0);
           
           return (
-            <div key={idx} style={{ paddingBottom: 24, borderBottom: idx < session.exercises.length - 1 ? '1px dashed #2A2A2A' : 'none' }}>
+            <div key={idx} style={{ paddingBottom: 24, borderBottom: idx < (currentSession?.exercises || session?.exercises || []).length - 1 ? '1px dashed #2A2A2A' : 'none' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16 }}>
                 <span style={{ fontFamily: '"Inter", sans-serif', fontWeight: 800, fontSize: 16, color: '#ffffff', letterSpacing: '-0.01em' }}>{exObj ? translateExerciseName(exObj.name, t) : "Unknown Move"}</span>
                 <span style={{ fontFamily: '"Inter", sans-serif', fontSize: 13, color: "var(--primary)", fontWeight: 800, background: 'rgba(var(--primary-rgb), 0.1)', padding: '2px 8px', borderRadius: 6 }}>
@@ -526,13 +612,69 @@ export default function PostWorkoutSummary({ session, data, persist, onClose, on
       </>
       )}
 
-      <div style={{ display: 'flex', gap: 12, marginTop: 40 }}>
+      <div style={{ display: 'flex', gap: 12, marginTop: 40, flexWrap: 'wrap' }}>
         {isHistoryView && (
-          <button style={{ flex: 1, background: '#0a0a0c', border: '1px solid #2A2A2A', color: '#e2e2e2', borderRadius: 16, padding: '18px', fontWeight: 800, fontSize: 15, cursor: 'pointer', fontFamily: '"Inter", sans-serif' }} onClick={() => { setTemplateAction('save_new'); setShowTemplatePrompt(true); }}>
-            Save Template
-          </button>
+          <>
+            <button 
+              style={{ 
+                flex: 1, 
+                minWidth: 140,
+                background: '#16181d', 
+                border: '1px solid rgba(255, 255, 255, 0.12)', 
+                color: '#e2e2e2', 
+                borderRadius: 16, 
+                padding: '18px', 
+                fontWeight: 800, 
+                fontSize: 15, 
+                cursor: 'pointer', 
+                fontFamily: '"Inter", sans-serif',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 8
+              }} 
+              onClick={() => setShowEditModal(true)}
+            >
+              <Edit2 size={16} /> Edit Workout
+            </button>
+            <button 
+              style={{ 
+                flex: 1, 
+                minWidth: 140,
+                background: '#0a0a0c', 
+                border: '1px solid #2A2A2A', 
+                color: '#e2e2e2', 
+                borderRadius: 16, 
+                padding: '18px', 
+                fontWeight: 800, 
+                fontSize: 15, 
+                cursor: 'pointer', 
+                fontFamily: '"Inter", sans-serif' 
+              }} 
+              onClick={() => { setTemplateAction('save_new'); setShowTemplatePrompt(true); }}
+            >
+              Save Template
+            </button>
+          </>
         )}
-        <button style={{ flex: isHistoryView ? 1 : 'none', width: isHistoryView ? 'auto' : '100%', background: 'var(--primary)', color: '#000000', borderRadius: 16, padding: '18px', fontWeight: 800, fontSize: 15, border: 'none', cursor: 'pointer', fontFamily: '"Inter", sans-serif', boxShadow: '0 4px 16px rgba(var(--primary-rgb), 0.3)' }} onClick={isHistoryView ? onClose : handleInitialConfirm}>
+        <button 
+          style={{ 
+            flex: isHistoryView ? 1 : 'none', 
+            minWidth: 140,
+            width: isHistoryView ? 'auto' : '100%', 
+            background: 'var(--primary)', 
+            color: '#000000', 
+            borderRadius: 16, 
+            padding: '18px', 
+            fontWeight: 800, 
+            fontSize: 15, 
+            border: 'none', 
+            cursor: 'pointer', 
+            fontFamily: '"Inter", sans-serif', 
+            boxShadow: '0 4px 16px rgba(var(--primary-rgb), 0.3)' 
+          }} 
+          onClick={isHistoryView ? onClose : handleInitialConfirm}
+        >
           {isHistoryView ? "Return" : "Confirm Log"}
         </button>
       </div>
@@ -629,6 +771,19 @@ export default function PostWorkoutSummary({ session, data, persist, onClose, on
         message={templateError}
         title="Template Error"
       />
+
+      <AnimatePresence>
+        {showEditModal && (
+          <EditWorkoutModal
+            session={currentSession || session}
+            data={data}
+            settings={settings}
+            onSave={handleSaveEditedSession}
+            onDelete={handleDeleteWorkout}
+            onClose={() => setShowEditModal(false)}
+          />
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }

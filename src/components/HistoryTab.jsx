@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { styles } from '../styles';
-import { User, Barbell, Calendar as CalendarIcon, List } from './Icons';
+import { User, Barbell, Calendar as CalendarIcon, List, Edit2 } from './Icons';
 import { parseVolume, formatWeight, getUserWeightAtDate } from '../utils';
 import { exerciseRequiresWeight } from '../data/exerciseDb';
 import PostWorkoutSummary from './PostWorkoutSummary';
 import CalendarView from './CalendarView';
+import EditWorkoutModal from './EditWorkoutModal';
 import { useAppStore } from '../store';
 
 const formatRelativeTime = (dateStr, durationMins) => {
@@ -25,6 +26,7 @@ export default function HistoryTab() {
   const { data, persist } = useAppStore();
   const settings = data?.settings || { unit: "kg" };
   const [selectedSession, setSelectedSession] = useState(null);
+  const [editingSession, setEditingSession] = useState(null);
   const [visibleCount, setVisibleCount] = useState(10);
   const [viewMode, setViewMode] = useState('feed'); // 'feed' or 'calendar'
 
@@ -38,6 +40,30 @@ export default function HistoryTab() {
     return dict;
   }, [data.exercises]);
 
+  const handleSaveSession = (updatedSession) => {
+    const idx = (data?.sessions || []).findIndex(s => s.id === updatedSession.id);
+    let nextSessions = [...(data?.sessions || [])];
+    if (idx !== -1) {
+      nextSessions[idx] = updatedSession;
+    } else {
+      nextSessions.push(updatedSession);
+    }
+    persist({ ...data, sessions: nextSessions }, true);
+    if (selectedSession && selectedSession.id === updatedSession.id) {
+      setSelectedSession(updatedSession);
+    }
+    setEditingSession(null);
+  };
+
+  const handleDeleteSession = (sessionId) => {
+    const nextSessions = (data?.sessions || []).filter(s => s.id !== sessionId);
+    persist({ ...data, sessions: nextSessions }, true);
+    if (selectedSession && selectedSession.id === sessionId) {
+      setSelectedSession(null);
+    }
+    setEditingSession(null);
+  };
+
   if (selectedSession) {
     return (
       <PostWorkoutSummary 
@@ -47,6 +73,8 @@ export default function HistoryTab() {
         persist={persist}
         isHistoryView={true}
         onClose={() => setSelectedSession(null)} 
+        onUpdateSession={(updatedSession) => setSelectedSession(updatedSession)}
+        onDeleteSession={() => setSelectedSession(null)}
       />
     );
   }
@@ -96,10 +124,35 @@ export default function HistoryTab() {
                 style={{ background: "#121212", borderRadius: 16, padding: "20px", cursor: 'pointer' }}
                 onClick={() => setSelectedSession(s)}
               >
-                <div style={{ fontSize: 13, color: "#8b90a0", marginBottom: 12, display: 'flex', alignItems: 'center', gap: 6, fontWeight: 600 }}>
-                  <User size={14}/> {formatRelativeTime(s.date, s.durationMins)}
-                  <span style={{ margin: '0 4px', color: '#333535' }}>|</span>
-                  <span style={{ color: 'var(--primary)' }}>{data.user?.locations?.find(l => l.id === (s.locationId || 'loc-default'))?.name || 'Default Gym'}</span>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+                  <div style={{ fontSize: 13, color: "#8b90a0", display: 'flex', alignItems: 'center', gap: 6, fontWeight: 600 }}>
+                    <User size={14}/> {formatRelativeTime(s.date, s.durationMins)}
+                    <span style={{ margin: '0 4px', color: '#333535' }}>|</span>
+                    <span style={{ color: 'var(--primary)' }}>{data.user?.locations?.find(l => l.id === (s.locationId || 'loc-default'))?.name || 'Default Gym'}</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setEditingSession(s);
+                    }}
+                    style={{
+                      background: 'rgba(255, 255, 255, 0.05)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      borderRadius: 8,
+                      color: '#e2e2e2',
+                      padding: '4px 10px',
+                      fontSize: 11,
+                      fontWeight: 700,
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 4,
+                      cursor: 'pointer'
+                    }}
+                    title="Edit workout"
+                  >
+                    <Edit2 size={12} /> Edit
+                  </button>
                 </div>
                 
                 <div className="exCardTitle" style={{ fontSize: 24, color: "#ffffff", marginBottom: 16, textTransform: 'none'  }}>
@@ -202,6 +255,19 @@ export default function HistoryTab() {
           )}
         </div>
       )}
+
+      <AnimatePresence>
+        {editingSession && (
+          <EditWorkoutModal
+            session={editingSession}
+            data={data}
+            settings={settings}
+            onSave={handleSaveSession}
+            onDelete={handleDeleteSession}
+            onClose={() => setEditingSession(null)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

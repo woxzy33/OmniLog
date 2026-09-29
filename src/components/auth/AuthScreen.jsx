@@ -50,7 +50,7 @@ export default function AuthScreen() {
   // Rate Limiter / Lockout state
   const [secondsRemaining, setSecondsRemaining] = useState(0);
 
-  const { login, register, resetPassword } = useAuth();
+  const { login, register, resetPassword, continueAsGuest } = useAuth();
 
   // Check rate limit timer on mount and interval
   useEffect(() => {
@@ -729,6 +729,44 @@ export default function AuthScreen() {
             ) : (
               <span>{isLogin ? 'Enter OmniLog' : 'Create Account'}</span>
             )}
+          </button>
+
+          {/* Offline / Demo Lifter Bypass */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            margin: '18px 0 10px',
+            gap: 12
+          }}>
+            <div style={{ flex: 1, height: 1, background: 'rgba(255, 255, 255, 0.08)' }} />
+            <span style={{ fontSize: 11, fontWeight: 700, color: '#6B7280', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+              OR
+            </span>
+            <div style={{ flex: 1, height: 1, background: 'rgba(255, 255, 255, 0.08)' }} />
+          </div>
+
+          <button
+            type="button"
+            onClick={continueAsGuest}
+            style={{
+              width: '100%',
+              padding: '12px',
+              borderRadius: 14,
+              border: '1px solid rgba(255, 255, 255, 0.12)',
+              background: 'rgba(255, 255, 255, 0.04)',
+              color: '#E2E8F0',
+              fontWeight: 700,
+              fontSize: 13,
+              letterSpacing: '0.04em',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 8,
+              transition: 'background 0.2s'
+            }}
+          >
+            <span>⚡ Continue as Guest (Offline Mode)</span>
           </button>
         </form>
       </motion.div>

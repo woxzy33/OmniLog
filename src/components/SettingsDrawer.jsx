@@ -124,11 +124,9 @@ export default function SettingsDrawer({ onClose, onExport, onImport }) {
             <div style={{ background: 'rgba(255,255,255,0.03)', borderRadius: 16, padding: 16, marginBottom: 24 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
                 <span style={{ color: '#e2e2e2', fontWeight: 600 }}>Gender</span>
-                <select value={userProfile?.gender || 'Prefer not to say'} onChange={e => updateProfile({ gender: e.target.value })} style={{ background: '#1C1C1E', color: '#fff', border: 'none', padding: '8px 12px', borderRadius: 8 }}>
+                <select value={userProfile?.gender || 'Male'} onChange={e => updateProfile({ gender: e.target.value })} style={{ background: '#1C1C1E', color: '#fff', border: 'none', padding: '8px 12px', borderRadius: 8 }}>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
-                  <option value="Other">Other</option>
-                  <option value="Prefer not to say">Prefer not to say</option>
                 </select>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>

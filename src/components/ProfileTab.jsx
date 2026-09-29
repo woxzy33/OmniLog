@@ -1,7 +1,8 @@
-import React, { useState, useMemo, useEffect, useRef } from 'react';
+import React, { useState, useMemo, useEffect, useRef, useDeferredValue } from 'react';
 import { ResponsiveContainer, AreaChart, Area, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, RadarChart, PolarGrid, PolarAngleAxis, Radar } from 'recharts';
 import { motion, AnimatePresence } from 'framer-motion';
 import MuscleHeatmap from './MuscleHeatmap';
+import CreateCustomExerciseModal from './CreateCustomExerciseModal';
 import { styles } from '../styles';
 import { useAppStore } from '../store';
 import { Plus, X, Check, ChevronLeft, ChevronRight, Search, TrendingUp, Dumbbell, User, Calendar as CalendarIcon, Edit2, Share, Settings, Download, Upload, Filter, Trash2, Flame, Footprints } from './Icons';
@@ -85,16 +86,22 @@ function StatisticsView({ data, onBack, settings }) {
     return (data?.sessions || []).filter(s => Math.abs(now - new Date(s.date)) / (1000 * 60 * 60 * 24) <= days);
   }, [data?.sessions, range]);
 
+  const exerciseMap = useMemo(() => {
+    const map = new Map();
+    (data?.exercises || []).forEach(e => {
+      if (e && e.id) map.set(e.id, e);
+    });
+    return map;
+  }, [data?.exercises]);
+
   const stats = useMemo(() => {
     let vol = 0, reps = 0, sets = 0, duration = 0;
     let cardioMins = 0, cardioDist = 0, cardioCals = 0, cardioCount = 0;
-    const dict = {};
-    (data?.exercises || []).forEach(e => dict[e.id] = e);
     filteredSessions.forEach(s => {
       duration += (s.durationMins || 0);
       const userWeight = getUserWeightAtDate(data?.measurements, s.date);
       (s.exercises || []).forEach(ex => {
-        const exObj = dict[ex.exerciseId];
+        const exObj = exerciseMap.get(ex.exerciseId);
         const requiresWeight = exerciseRequiresWeight(exObj);
         (ex.sets || []).forEach(set => {
           if (set.completed) {
@@ -125,17 +132,15 @@ function StatisticsView({ data, onBack, settings }) {
       cardioCount, 
       workouts: filteredSessions.length 
     };
-  }, [filteredSessions, data?.exercises, data?.measurements]);
+  }, [filteredSessions, exerciseMap, data?.measurements]);
 
   const radarData = useMemo(() => {
-    const dict = {};
-    (data?.exercises || []).forEach(e => dict[e.id] = e);
     const volumes = {};
     RADAR_AXES.forEach(cat => volumes[cat] = 0);
     filteredSessions.forEach(session => {
       const userWeight = getUserWeightAtDate(data?.measurements, session.date);
       (session.exercises || []).forEach(ex => {
-        const exObj = dict[ex.exerciseId];
+        const exObj = exerciseMap.get(ex.exerciseId);
         if (exObj && volumes[exObj.category] !== undefined) {
           const requiresWeight = exerciseRequiresWeight(exObj);
           const vol = (ex.sets || []).reduce((acc, s) => acc + (s.completed ? parseVolume(s.weight, s.reps, requiresWeight ? 0 : userWeight) : 0), 0);
@@ -144,7 +149,7 @@ function StatisticsView({ data, onBack, settings }) {
       });
     });
     return RADAR_AXES.map(cat => ({ subject: cat, Volume: volumes[cat] }));
-  }, [filteredSessions, data?.exercises, data?.measurements]);
+  }, [filteredSessions, exerciseMap, data?.measurements]);
 
   return (
     <motion.div initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: 20, opacity: 0 }}>
@@ -394,11 +399,20 @@ export default function ProfileTab() {
 
 function MainProfileView({ data, persist, onNavigate, settings }) {
   const [activeGraph, setActiveGraph] = useState('chart');
+  const [heatmapSubMode, setHeatmapSubMode] = useState('weekly');
   const [chartMetric, setChartMetric] = useState("duration");
   const [isEditingName, setIsEditingName] = useState(false);
   const [tempName, setTempName] = useState(data.user?.name || "Iron Lifter");
   const [activityPeriod, setActivityPeriod] = useState("weekly");
   const fileInputRef = React.useRef(null);
+
+  const exerciseMap = useMemo(() => {
+    const map = new Map();
+    (data?.exercises || []).forEach(e => {
+      if (e && e.id) map.set(e.id, e);
+    });
+    return map;
+  }, [data?.exercises]);
 
   const handleAvatarUpload = (e) => {
     const file = e.target.files?.[0];
@@ -439,12 +453,10 @@ function MainProfileView({ data, persist, onNavigate, settings }) {
   const streak = useMemo(() => calculateStreak(data.sessions), [data.sessions]);
   const lifetimeVolume = useMemo(() => {
     let vol = 0;
-    const dict = {};
-    (data.exercises || []).forEach(e => dict[e.id] = e);
     (data.sessions || []).forEach(s => {
       const userWeight = getUserWeightAtDate(data.measurements, s.date);
       (s.exercises || []).forEach(ex => {
-        const exObj = dict[ex.exerciseId];
+        const exObj = exerciseMap.get(ex.exerciseId);
         const requiresWeight = exerciseRequiresWeight(exObj);
         (ex.sets || []).forEach(set => {
           if (set.completed) {
@@ -454,7 +466,7 @@ function MainProfileView({ data, persist, onNavigate, settings }) {
       });
     });
     return vol;
-  }, [data.sessions, data.exercises, data.measurements]);
+  }, [data.sessions, exerciseMap, data.measurements]);
 
   const lifetimeCardioMins = useMemo(() => {
     return (data.sessions || []).reduce((acc, s) => {
@@ -713,17 +725,17 @@ function MainProfileView({ data, persist, onNavigate, settings }) {
       </div>
 
       {/* Activity Chart */}
-      <div className="card" style={{ padding: '24px 20px', marginBottom: 24  }}>
+      <div className="card" style={{ padding: activeGraph === 'heatmap' ? '24px 8px' : '24px 20px', marginBottom: 24, transition: 'padding 0.2s' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
           <button onClick={() => setActiveGraph(activeGraph === 'chart' ? 'heatmap' : 'chart')} style={{ background: 'transparent', border: 'none', color: '#8b90a0', cursor: 'pointer', padding: 8 }}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
           </button>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <div style={{ fontFamily: '"Inter", sans-serif', fontSize: 13, fontWeight: 900, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-              {activeGraph === 'chart' ? 'Activity Volume' : '3-Day Fatigue'}
+              {activeGraph === 'chart' ? 'Activity Volume' : (heatmapSubMode === 'weekly' ? 'Weekly Volume Landmarks' : 'Recovery Kinetics')}
             </div>
             <div style={{ fontSize: 10, color: '#8b90a0', fontWeight: 600, marginTop: 4 }}>
-              {activeGraph === 'chart' ? 'Past 6 Months' : 'Current System Load'}
+              {activeGraph === 'chart' ? 'Past 6 Months' : (heatmapSubMode === 'weekly' ? 'RP Hypertrophy Landmarks (7-Day)' : 'Recovery Status (Hours Elapsed)')}
             </div>
           </div>
           <button onClick={() => setActiveGraph(activeGraph === 'chart' ? 'heatmap' : 'chart')} style={{ background: 'transparent', border: 'none', color: '#8b90a0', cursor: 'pointer', padding: 8 }}>
@@ -789,8 +801,52 @@ function MainProfileView({ data, persist, onNavigate, settings }) {
                 </div>
               </motion.div>
             ) : (
-              <motion.div key="heatmap" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.2 }} style={{ width: '100%', minHeight: 400, paddingTop: 16 }}>
-                <MuscleHeatmap sessions={data.sessions} dataExercises={[...(data.exercises || []), ...(data.customExercises || [])]} days={3} />
+              <motion.div key="heatmap" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.2 }} style={{ width: '100%', minHeight: 400, paddingTop: 8 }}>
+                <div style={{ display: 'flex', justifyContent: 'center', gap: 6, background: '#121214', padding: 4, borderRadius: 16, marginBottom: 16, maxWidth: 320, margin: '0 auto 16px auto', border: '1px solid rgba(255,255,255,0.06)' }}>
+                  <button
+                    type="button"
+                    onClick={() => setHeatmapSubMode('weekly')}
+                    style={{
+                      flex: 1,
+                      background: heatmapSubMode === 'weekly' ? 'var(--primary)' : 'transparent',
+                      color: heatmapSubMode === 'weekly' ? '#fff' : '#8b90a0',
+                      border: 'none',
+                      borderRadius: 12,
+                      padding: '7px 12px',
+                      fontSize: 11,
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      transition: 'all 0.2s'
+                    }}
+                  >
+                    Weekly Volume (RP)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setHeatmapSubMode('recovery')}
+                    style={{
+                      flex: 1,
+                      background: heatmapSubMode === 'recovery' ? 'var(--primary)' : 'transparent',
+                      color: heatmapSubMode === 'recovery' ? '#fff' : '#8b90a0',
+                      border: 'none',
+                      borderRadius: 12,
+                      padding: '7px 12px',
+                      fontSize: 11,
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      transition: 'all 0.2s'
+                    }}
+                  >
+                    Recovery Status
+                  </button>
+                </div>
+                <MuscleHeatmap
+                  sessions={data.sessions}
+                  dataExercises={[...(data.exercises || []), ...(data.customExercises || [])]}
+                  days={7}
+                  mode={heatmapSubMode}
+                  gender={data.user?.gender || 'Male'}
+                />
               </motion.div>
             )}
           </AnimatePresence>
@@ -812,58 +868,68 @@ function MainProfileView({ data, persist, onNavigate, settings }) {
 function ExercisesView({ data, onBack, onViewDetail, settings }) {
   const { t } = useTranslation();
   const [search, setSearch] = useState("");
+  const deferredSearch = useDeferredValue(search);
   const [sortMode, setSortMode] = useState("recent"); // "recent", "1rm", "maxWeight"
   const [categoryFilter, setCategoryFilter] = useState("All");
   const [equipmentFilter, setEquipmentFilter] = useState("All");
   const [locationFilter, setLocationFilter] = useState("All");
   const [showFilters, setShowFilters] = useState(false);
+  const [showCreateCustom, setShowCreateCustom] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(40);
+
+  // Inverted O(sessions * sets) PR stats aggregation
+  const exerciseStatsMap = useMemo(() => {
+    const statsMap = new Map();
+    (data.sessions || []).forEach(s => {
+      if (locationFilter !== "All" && (s.locationId || 'loc-default') !== locationFilter) return;
+      const sDate = s.date ? new Date(s.date).getTime() : 0;
+      (s.exercises || []).forEach(se => {
+        if (!se.exerciseId) return;
+        let st = statsMap.get(se.exerciseId);
+        if (!st) {
+          st = { prWeight: 0, prWeightReps: 0, best1RM: 0, best1RMWeight: 0, best1RMReps: 0, usageCount: 0, lastDoneDate: 0 };
+          statsMap.set(se.exerciseId, st);
+        }
+        st.usageCount += 1;
+        if (sDate > st.lastDoneDate) st.lastDoneDate = sDate;
+        (se.sets || []).forEach(set => {
+          if (set.completed) {
+            const w = Number(set.weight) || 0;
+            const r = Number(set.reps) || 0;
+            const rm = calculate1RM(w, r);
+            if (w > st.prWeight) {
+              st.prWeight = w;
+              st.prWeightReps = r;
+            }
+            if (rm > st.best1RM) {
+              st.best1RM = rm;
+              st.best1RMWeight = w;
+              st.best1RMReps = r;
+            }
+          }
+        });
+      });
+    });
+    return statsMap;
+  }, [data.sessions, locationFilter]);
 
   const enrichedExercises = useMemo(() => {
-    return data.exercises.map(ex => {
-      let prWeight = 0;
-      let prWeightReps = 0;
-      let best1RM = 0;
-      let best1RMReps = 0;
-      let best1RMWeight = 0;
-      let usageCount = 0;
-      let lastDoneDate = 0;
-
-      data.sessions.forEach(s => {
-        if (locationFilter !== "All" && (s.locationId || 'loc-default') !== locationFilter) return;
-
-        const matchingExs = (s.exercises || []).filter(se => se.exerciseId === ex.id);
-        if (matchingExs.length > 0) {
-          usageCount += matchingExs.length;
-          const sDate = new Date(s.date).getTime();
-          if (sDate > lastDoneDate) lastDoneDate = sDate;
-          
-          matchingExs.forEach(me => me.sets.forEach(set => {
-            if (set.completed) {
-              const w = Number(set.weight) || 0;
-              const r = Number(set.reps) || 0;
-              const rm = calculate1RM(w, r);
-              
-              if (w > prWeight) {
-                prWeight = w;
-                prWeightReps = r;
-              }
-              if (rm > best1RM) {
-                best1RM = rm;
-                best1RMWeight = w;
-                best1RMReps = r;
-              }
-            }
-          }));
-        }
-      });
-      return { ...ex, prWeight, prWeightReps, best1RM, best1RMWeight, best1RMReps, usageCount, lastDoneDate };
+    const emptyStats = { prWeight: 0, prWeightReps: 0, best1RM: 0, best1RMWeight: 0, best1RMReps: 0, usageCount: 0, lastDoneDate: 0 };
+    return (data.exercises || []).map(ex => {
+      const st = exerciseStatsMap.get(ex.id) || emptyStats;
+      return { ...ex, ...st };
     });
-  }, [data.exercises, data.sessions, locationFilter]);
+  }, [data.exercises, exerciseStatsMap]);
 
   const filteredAndSorted = useMemo(() => {
-    const s = search.toLowerCase();
+    const searchTerms = deferredSearch.toLowerCase().split(/\s+/).filter(Boolean);
     const matched = enrichedExercises.filter(e => {
-      const matchSearch = e.name.toLowerCase().includes(s) || (e.category && e.category.toLowerCase().includes(s));
+      const exName = (e.name || "").toLowerCase();
+      const exCat = (e.category || "").toLowerCase();
+      const exEq = (e.equipment || "").toLowerCase();
+      const matchSearch = searchTerms.length === 0 || searchTerms.every(term => 
+        exName.includes(term) || exCat.includes(term) || exEq.includes(term)
+      );
       const matchCat = categoryFilter === "All" || e.category === categoryFilter;
       const matchEq = equipmentFilter === "All" || e.equipment === equipmentFilter;
       return matchSearch && matchCat && matchEq;
@@ -881,11 +947,49 @@ function ExercisesView({ data, onBack, onViewDetail, settings }) {
       if (a.usageCount > 0) return b.lastDoneDate - a.lastDoneDate;
       return a.name.localeCompare(b.name);
     });
-  }, [enrichedExercises, search, sortMode, categoryFilter, equipmentFilter]);
+  }, [enrichedExercises, deferredSearch, sortMode, categoryFilter, equipmentFilter]);
+
+  useEffect(() => {
+    setVisibleCount(40);
+  }, [deferredSearch, categoryFilter, equipmentFilter, locationFilter, sortMode]);
+
+  const visibleExercises = useMemo(() => {
+    return filteredAndSorted.slice(0, visibleCount);
+  }, [filteredAndSorted, visibleCount]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 300) {
+        setVisibleCount(prev => (prev < filteredAndSorted.length ? prev + 40 : prev));
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [filteredAndSorted.length]);
 
   return (
     <motion.div initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: 20, opacity: 0 }}>
-      <SubViewHeader title="Exercises & PRs" onBack={onBack} />
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
+        <SubViewHeader title="Exercises & PRs" onBack={onBack} />
+        <button
+          onClick={() => setShowCreateCustom(true)}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+            background: 'rgba(var(--primary-rgb), 0.15)',
+            border: '1px solid rgba(var(--primary-rgb), 0.4)',
+            borderRadius: 16,
+            padding: '6px 14px',
+            color: 'var(--primary-light)',
+            fontSize: 13,
+            fontWeight: 700,
+            cursor: 'pointer'
+          }}
+        >
+          <Plus size={16} /> Custom
+        </button>
+      </div>
       
       <div style={{ display: 'flex', gap: 12, marginBottom: showFilters ? 12 : 20 }}>
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', background: '#121212', borderRadius: 12, padding: '14px 16px', border: '1px solid #2A2722' }}>
@@ -950,41 +1054,95 @@ function ExercisesView({ data, onBack, onViewDetail, settings }) {
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         {filteredAndSorted.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: 40, color: '#8b90a0', fontSize: 16, fontWeight: 600 }}>No exercises found.</div>
-        ) : (
-          filteredAndSorted.map(e => (
-            <div 
-              key={e.id} 
-              onClick={() => onViewDetail(e.id)}
-              className="exCard" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 20px', borderRadius: 16, background: '#121212', cursor: 'pointer'  }}
+          <div style={{ textAlign: 'center', padding: 40, color: '#8b90a0' }}>
+            <div style={{ fontSize: 16, fontWeight: 700, color: '#e2e2e2', marginBottom: 8 }}>No exercises found.</div>
+            <button
+              onClick={() => setShowCreateCustom(true)}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8,
+                padding: '10px 20px',
+                background: 'var(--primary)',
+                color: '#fff',
+                border: 'none',
+                borderRadius: 20,
+                fontWeight: 700,
+                fontSize: 13,
+                marginTop: 8,
+                cursor: 'pointer'
+              }}
             >
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <span style={{ fontWeight: 800, color: '#e2e2e2', fontSize: 16 }}>{e.name}</span>
-                <span style={{ fontSize: 13, color: '#8b90a0', marginTop: 4, fontWeight: 600 }}>{e.category ? t(`categories.${e.category.toLowerCase()}`, e.category) : ''} {e.usageCount > 0 && `• Done ${e.usageCount}x`}</span>
-              </div>
-              <div style={{ textAlign: 'right' }}>
-                <div style={{ fontSize: 11, color: '#8b90a0', fontWeight: 700, textTransform: 'uppercase' }}>
-                  {sortMode === '1rm' ? 'Est. 1RM' : 'Max Wt'}
-                </div>
-                <div style={{ fontSize: 18, color: e.best1RM > 0 ? '#E8C12C' : '#333535', fontWeight: 800 }}>
-                  {e.best1RM > 0 ? (
-                    sortMode === '1rm' 
-                      ? `${formatWeight(e.best1RM, settings?.unit)} ${settings?.unit || 'kg'}`
-                      : `${formatWeight(e.prWeight, settings?.unit)} ${settings?.unit || 'kg'}`
-                  ) : '-'}
-                </div>
-                {e.best1RM > 0 && (
-                  <div style={{ fontSize: 12, color: '#8b90a0', fontWeight: 600, marginTop: 2 }}>
-                    {sortMode === '1rm' 
-                      ? `(${formatWeight(e.best1RMWeight, settings?.unit)}x${e.best1RMReps})`
-                      : `(${e.prWeightReps} reps)`}
+              <Plus size={15} /> Create Custom Exercise
+            </button>
+          </div>
+        ) : (
+          <>
+            {visibleExercises.map(e => (
+              <div 
+                key={e.id} 
+                onClick={() => onViewDetail(e.id)}
+                className="exCard" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 20px', borderRadius: 16, background: '#121212', cursor: 'pointer'  }}
+              >
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <span style={{ fontWeight: 800, color: '#e2e2e2', fontSize: 16 }}>{e.name}</span>
+                    {e.isCustom && (
+                      <span style={{ background: 'rgba(var(--primary-rgb), 0.2)', color: 'var(--primary-light)', padding: '1px 6px', borderRadius: 4, fontSize: 9, fontWeight: 800 }}>CUSTOM</span>
+                    )}
                   </div>
-                )}
+                  <span style={{ fontSize: 13, color: '#8b90a0', marginTop: 4, fontWeight: 600 }}>{e.category ? t(`categories.${e.category.toLowerCase()}`, e.category) : ''} {e.usageCount > 0 && `• Done ${e.usageCount}x`}</span>
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                  <div style={{ fontSize: 11, color: '#8b90a0', fontWeight: 700, textTransform: 'uppercase' }}>
+                    {sortMode === '1rm' ? 'Est. 1RM' : 'Max Wt'}
+                  </div>
+                  <div style={{ fontSize: 18, color: e.best1RM > 0 ? '#E8C12C' : '#333535', fontWeight: 800 }}>
+                    {e.best1RM > 0 ? (
+                      sortMode === '1rm' 
+                        ? `${formatWeight(e.best1RM, settings?.unit)} ${settings?.unit || 'kg'}`
+                        : `${formatWeight(e.prWeight, settings?.unit)} ${settings?.unit || 'kg'}`
+                    ) : '-'}
+                  </div>
+                  {e.best1RM > 0 && (
+                    <div style={{ fontSize: 12, color: '#8b90a0', fontWeight: 600, marginTop: 2 }}>
+                      {sortMode === '1rm' 
+                        ? `(${formatWeight(e.best1RMWeight, settings?.unit)}x${e.best1RMReps})`
+                        : `(${e.prWeightReps} reps)`}
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          ))
+            ))}
+
+            {visibleCount < filteredAndSorted.length && (
+              <div style={{ textAlign: 'center', padding: '16px 0' }}>
+                <button
+                  onClick={() => setVisibleCount(prev => prev + 40)}
+                  style={{
+                    background: '#1c1e22',
+                    border: '1px solid #2A2A2A',
+                    color: '#e2e2e2',
+                    borderRadius: 12,
+                    padding: '12px 24px',
+                    fontSize: 14,
+                    fontWeight: 700,
+                    cursor: 'pointer'
+                  }}
+                >
+                  Load More ({visibleCount} of {filteredAndSorted.length})
+                </button>
+              </div>
+            )}
+          </>
         )}
       </div>
+
+      <CreateCustomExerciseModal
+        isOpen={showCreateCustom}
+        onClose={() => setShowCreateCustom(false)}
+        initialName={search.trim()}
+      />
     </motion.div>
   );
 }

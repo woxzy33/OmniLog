@@ -9,7 +9,7 @@ import TemplateConfirmModal from "./TemplateConfirmModal";
 import ProgressionTrackerModal from "./ProgressionTrackerModal";
 import { useAppStore, useWorkoutStore } from "../store";
 
-export default function Train({ setShowProfileModal }) {
+export default function Train({ setShowProfileModal, onOpenSettings }) {
   const { data, persist } = useAppStore();
   const { 
     activeSession, setActiveSession, 
@@ -92,6 +92,7 @@ export default function Train({ setShowProfileModal }) {
         data={data} 
         persist={persist}
         onClose={() => setSummarySession(null)} 
+        onUpdateSession={(updatedSession) => setSummarySession(updatedSession)}
         onUpdateDuration={(newMins) => {
           const updatedSession = { ...summarySession, durationMins: newMins };
           const idx = data.sessions.findIndex(s => s.id === summarySession.id);
@@ -118,6 +119,7 @@ export default function Train({ setShowProfileModal }) {
           setIsSessionMinimized(false);
         }}
         onMinimize={() => setIsSessionMinimized(true)}
+        onOpenSettings={onOpenSettings}
         data={data}
         persist={persist}
         startTimer={startTimer}

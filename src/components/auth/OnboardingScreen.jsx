@@ -12,9 +12,7 @@ const MAX_NAME_LENGTH = 18;
 
 const GENDER_OPTIONS = [
   { id: 'Male', label: 'Male', symbol: '♂', desc: 'Standard male physiology' },
-  { id: 'Female', label: 'Female', symbol: '♀', desc: 'Standard female physiology' },
-  { id: 'Other', label: 'Other', symbol: '✦', desc: 'Non-binary / custom' },
-  { id: 'Prefer not to say', label: 'Private', symbol: '•', desc: 'Prefer not to say' }
+  { id: 'Female', label: 'Female', symbol: '♀', desc: 'Standard female physiology' }
 ];
 
 const OBJECTIVES = [

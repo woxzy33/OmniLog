@@ -4,7 +4,7 @@ import PRToast from './PRToast';
 import * as confettiModule from 'canvas-confetti';
 const confetti = confettiModule.default || confettiModule;
 import { styles } from '../styles';
-import { Plus, X, Check, TimerReset, Trash, GripHorizontal, ImageIcon, Trophy, ChevronDown, ChevronUp, ArrowUpDown, Flame } from './Icons';
+import { Plus, X, Check, TimerReset, Trash, GripHorizontal, ImageIcon, Trophy, ChevronDown, ChevronUp, ArrowUpDown, Flame, Settings } from './Icons';
 import useSound from 'use-sound';
 import ExerciseLogger from './ExerciseLogger';
 import ExerciseHistoryModal from './ExerciseHistoryModal';
@@ -36,7 +36,7 @@ const DraggableGroup = ({ groupId, style, children }) => {
   );
 };
 
-export default function ActiveSessionView({ session, setSession, onFinish, onMinimize, data, persist, startTimer, clearTimer, settings }) {
+export default function ActiveSessionView({ session, setSession, onFinish, onMinimize, onOpenSettings, data, persist, startTimer, clearTimer, settings }) {
   const [showAdd, setShowAdd] = useState(false);
   const [showCardioModal, setShowCardioModal] = useState(false);
   const [historyExerciseId, setHistoryExerciseId] = useState(null);
@@ -759,6 +759,32 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
               )}
             </div>
 
+            {/* Settings Button */}
+            {onOpenSettings && (
+              <button 
+                style={{ 
+                  background: 'rgba(255, 255, 255, 0.05)', 
+                  border: '1.5px solid rgba(255, 255, 255, 0.12)', 
+                  borderRadius: 12,
+                  color: '#e2e2e2', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  width: 44, 
+                  height: 44, 
+                  cursor: 'pointer',
+                  flexShrink: 0,
+                  transition: 'all 0.2s',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.25)'
+                }} 
+                onClick={onOpenSettings}
+                title="Settings"
+                aria-label="Settings"
+              >
+                <Settings size={20} strokeWidth={2.2} />
+              </button>
+            )}
+
             {/* Minimize Button with Outer Layer */}
             <button 
               style={{ 
@@ -972,7 +998,7 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
               {(dragControls) => (
                 <>
                   {group.map((ex, internalIdx) => {
-                    const exObj = data.exercises.find((e) => e.id === ex.exerciseId);
+                    const exObj = data.exercises?.find((e) => e.id === ex.exerciseId) || data.exercises?.find((e) => e.name === ex.name);
                     const priorSets = getLastSessionSets(data, ex.exerciseId, session.id, session.locationId || 'loc-default');
                     const supersetPrefix = isSuperset ? String.fromCharCode(65 + internalIdx) : "";
                     
@@ -1007,10 +1033,14 @@ export default function ActiveSessionView({ session, setSession, onFinish, onMin
                           <ExerciseLogger
                             exIdx={ex.idx}
                             exerciseId={ex.exerciseId}
-                            name={exObj?.name || "Unknown Move"}
+                            name={exObj?.name || ex.name || "Unknown Move"}
                             category={exObj?.category}
                             equipment={exObj?.equipment}
                             imageUrl={exObj?.imageUrl}
+                            gifUrl={exObj?.gifUrl}
+                            specificMuscle={exObj?.specificMuscle}
+                            secondaryMuscle={exObj?.secondaryMuscle}
+                            exerciseObj={exObj}
                             sets={ex.sets}
                             priorSets={priorSets}
                             allSessions={data?.sessions || []}

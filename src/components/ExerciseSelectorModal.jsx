@@ -1,8 +1,11 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useDeferredValue, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { styles } from '../styles';
-import { X, Search, Check, Filter } from './Icons';
+import { X, Search, Check, Filter, Plus, Dumbbell, Info } from './Icons';
 import { CATEGORIES, MACHINES } from '../data/exerciseDb';
+import { useAppStore } from '../store';
+import CreateCustomExerciseModal from './CreateCustomExerciseModal';
+import ExerciseDetailModal from './ExerciseDetailModal';
 
 const HighlightText = ({ text = "", highlight = "" }) => {
   if (!text) return null;
@@ -27,18 +30,31 @@ const HighlightText = ({ text = "", highlight = "" }) => {
 };
 
 export default function ExerciseSelectorModal({ data, onClose, onSelect, existingExerciseIds = [] }) {
+  const storeExercises = useAppStore(s => s.data?.exercises);
+  const allExercises = storeExercises || data.exercises || [];
+
   const [search, setSearch] = useState("");
+  const deferredSearch = useDeferredValue(search);
   const [categoryFilter, setCategoryFilter] = useState("All");
   const [equipmentFilter, setEquipmentFilter] = useState("All");
   const [showFilters, setShowFilters] = useState(false);
+  const [showCreateCustom, setShowCreateCustom] = useState(false);
   
   const [selectedIds, setSelectedIds] = useState(new Set());
+  const [previewExercise, setPreviewExercise] = useState(null);
+
+  // Progressive rendering window limit to prevent mounting 1,324 items at once
+  const [visibleCount, setVisibleCount] = useState(40);
+
+  useEffect(() => {
+    setVisibleCount(40);
+  }, [deferredSearch, categoryFilter, equipmentFilter]);
 
   // Determine recent exercises
   const recentExerciseIds = useMemo(() => {
     const recent = new Set();
     // last 20 sessions
-    const recentSessions = [...data.sessions].sort((a,b) => new Date(b.date) - new Date(a.date)).slice(0, 20);
+    const recentSessions = [...(data.sessions || [])].sort((a,b) => new Date(b.date) - new Date(a.date)).slice(0, 20);
     recentSessions.forEach(s => {
       (s.exercises || []).forEach(e => recent.add(e.exerciseId));
     });
@@ -46,9 +62,9 @@ export default function ExerciseSelectorModal({ data, onClose, onSelect, existin
   }, [data.sessions]);
 
   const filteredExercises = useMemo(() => {
-    const searchTerms = search.toLowerCase().split(/\s+/).filter(Boolean);
+    const searchTerms = deferredSearch.toLowerCase().split(/\s+/).filter(Boolean);
     
-    let list = data.exercises.filter(ex => {
+    let list = allExercises.filter(ex => {
       const exName = (ex.name || "").toLowerCase();
       // match all terms (AND logic)
       const matchSearch = searchTerms.length === 0 || searchTerms.every(term => exName.includes(term));
@@ -57,17 +73,32 @@ export default function ExerciseSelectorModal({ data, onClose, onSelect, existin
       return matchSearch && matchCat && matchEq;
     });
 
-    // Sort by recent first, then alphabetical
+    // Sort by recent first, then custom first, then alphabetical
     list.sort((a, b) => {
       const aRec = recentExerciseIds.has(a.id);
       const bRec = recentExerciseIds.has(b.id);
       if (aRec && !bRec) return -1;
       if (!aRec && bRec) return 1;
+      if (a.isCustom && !b.isCustom) return -1;
+      if (!a.isCustom && b.isCustom) return 1;
       return a.name.localeCompare(b.name);
     });
 
     return list;
-  }, [data.exercises, search, categoryFilter, equipmentFilter, recentExerciseIds]);
+  }, [allExercises, deferredSearch, categoryFilter, equipmentFilter, recentExerciseIds]);
+
+  const visibleExercises = useMemo(() => {
+    return filteredExercises.slice(0, visibleCount);
+  }, [filteredExercises, visibleCount]);
+
+  const handleScroll = (e) => {
+    const { scrollTop, scrollHeight, clientHeight } = e.currentTarget;
+    if (scrollHeight - scrollTop - clientHeight < 350) {
+      if (visibleCount < filteredExercises.length) {
+        setVisibleCount(prev => Math.min(prev + 40, filteredExercises.length));
+      }
+    }
+  };
 
   const toggleSelect = (id) => {
     const next = new Set(selectedIds);
@@ -81,7 +112,7 @@ export default function ExerciseSelectorModal({ data, onClose, onSelect, existin
   const handleConfirm = () => {
     const duplicates = Array.from(selectedIds).filter(id => existingExerciseIds.includes(id));
     if (duplicates.length > 0) {
-      const names = duplicates.map(id => data.exercises.find(e => e.id === id)?.name).join(", ");
+      const names = duplicates.map(id => allExercises.find(e => e.id === id)?.name).join(", ");
       setDuplicateWarning(names);
       return;
     }
@@ -111,12 +142,31 @@ export default function ExerciseSelectorModal({ data, onClose, onSelect, existin
           borderTopLeftRadius: 24, borderTopRightRadius: 24, overflow: 'hidden'
         }}
       >
-        <div className="header" style={{ display: 'flex', justifyContent: 'space-between', padding: '20px 24px', background: '#1C1C1E', borderBottom: '1px solid #333535'  }}>
-        <div style={{ fontSize: 20, fontWeight: 800, color: '#fff' }}>Add Exercises</div>
-        <button onClick={onClose} style={{ background: 'none', border: 'none', color: '#8b90a0' }}><X size={24} /></button>
-      </div>
+        <div className="header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '18px 22px', background: '#1C1C1E', borderBottom: '1px solid #333535'  }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <div style={{ fontSize: 20, fontWeight: 800, color: '#fff' }}>Add Exercises</div>
+            <button
+              onClick={() => setShowCreateCustom(true)}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 4,
+                background: 'rgba(var(--primary-rgb), 0.15)',
+                border: '1px solid rgba(var(--primary-rgb), 0.4)',
+                borderRadius: 16,
+                padding: '4px 10px',
+                color: 'var(--primary-light)',
+                fontSize: 12,
+                fontWeight: 700
+              }}
+            >
+              <Plus size={14} /> Custom
+            </button>
+          </div>
+          <button onClick={onClose} style={{ background: 'none', border: 'none', color: '#8b90a0' }}><X size={24} /></button>
+        </div>
 
-      <div style={{ padding: 20, background: '#121212' }}>
+      <div style={{ padding: '16px 20px 12px', background: '#121212' }}>
         <div style={{ display: 'flex', gap: 12 }}>
           <div style={{ flex: 1, position: 'relative' }}>
             <Search size={18} color="#8b90a0" style={{ position: 'absolute', left: 16, top: '50%', transform: 'translateY(-50%)' }} />
@@ -134,6 +184,31 @@ export default function ExerciseSelectorModal({ data, onClose, onSelect, existin
             <Filter size={20} />
           </button>
         </div>
+
+        {/* Quick Custom Exercise Trigger Bar */}
+        <button
+          type="button"
+          onClick={() => setShowCreateCustom(true)}
+          style={{
+            marginTop: 10,
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 8,
+            padding: '9px 14px',
+            background: 'rgba(255,255,255,0.03)',
+            border: '1px dashed rgba(255,255,255,0.15)',
+            borderRadius: 12,
+            color: '#a0a5b5',
+            fontSize: 13,
+            fontWeight: 600,
+            transition: 'all 0.2s'
+          }}
+        >
+          <Plus size={15} color="var(--primary)" />
+          <span>Can't find an exercise? <b>Create Custom Exercise</b></span>
+        </button>
 
         <AnimatePresence>
           {showFilters && (
@@ -183,51 +258,134 @@ export default function ExerciseSelectorModal({ data, onClose, onSelect, existin
         </AnimatePresence>
       </div>
 
-      <div style={{ flex: 1, overflowY: 'auto', padding: '0 20px', paddingBottom: 100 }}>
-        {filteredExercises.map(ex => {
-          const selected = selectedIds.has(ex.id);
-          const isRecent = recentExerciseIds.has(ex.id);
-          return (
-            <div 
-              key={ex.id}
-              onClick={() => toggleSelect(ex.id)}
-              style={{ 
-                display: 'flex', alignItems: 'center', padding: '16px 0', borderBottom: '1px solid #1C1C1E',
-                cursor: 'pointer'
+      <div 
+        onScroll={handleScroll}
+        style={{ flex: 1, overflowY: 'auto', padding: '0 20px', paddingBottom: 100, WebkitOverflowScrolling: 'touch' }}
+      >
+        {filteredExercises.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '48px 20px', color: '#8b90a0' }}>
+            <div style={{ width: 64, height: 64, borderRadius: 32, background: 'rgba(255,255,255,0.04)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+              <Dumbbell size={30} color="#8b90a0" />
+            </div>
+            <div style={{ fontSize: 17, fontWeight: 800, color: '#e2e2e2', marginBottom: 6 }}>
+              No exercises found
+            </div>
+            <div style={{ fontSize: 13, color: '#8b90a0', marginBottom: 20, maxWidth: 280, margin: '0 auto 20px', lineHeight: 1.4 }}>
+              {search.trim() ? `Couldn't find "${search}". Create it as a custom exercise in seconds!` : 'No exercises match the selected filters.'}
+            </div>
+            <button
+              onClick={() => setShowCreateCustom(true)}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8,
+                padding: '12px 24px',
+                background: 'var(--primary)',
+                color: '#fff',
+                border: 'none',
+                borderRadius: 24,
+                fontWeight: 700,
+                fontSize: 14,
+                boxShadow: '0 4px 15px rgba(var(--primary-rgb), 0.35)'
               }}
             >
-              <div style={{ 
-                width: 24, height: 24, borderRadius: 12, border: selected ? 'none' : '2px solid #333535',
-                background: selected ? 'var(--primary)' : 'transparent',
-                display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: 16,
-                flexShrink: 0
-              }}>
-                {selected && <Check size={14} color="#fff" strokeWidth={3} />}
-              </div>
-              {ex.imageUrl ? (
-                <div style={{ width: 48, height: 48, borderRadius: 8, background: '#1C1C1E', marginRight: 12, overflow: 'hidden', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <img src={ex.imageUrl} alt={ex.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                </div>
-              ) : (
-                <div style={{ width: 48, height: 48, borderRadius: 8, background: '#1C1C1E', marginRight: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <span style={{ color: '#8b90a0', fontSize: 10, fontWeight: 700 }}>N/A</span>
-                </div>
-              )}
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontSize: 16, fontWeight: 700, color: '#e2e2e2', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                  <HighlightText text={ex.name} highlight={search} />
-                </div>
-                <div style={{ fontSize: 13, color: '#8b90a0', marginTop: 4, display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
-                  <span style={{ background: '#1C1C1E', padding: '2px 6px', borderRadius: 4, fontSize: 10, fontWeight: 600 }}>{ex.category}</span>
-                  {ex.equipment && <span style={{ background: '#1C1C1E', padding: '2px 6px', borderRadius: 4, fontSize: 10, fontWeight: 600 }}>{ex.equipment}</span>}
-                  {isRecent && (
-                    <span style={{ background: 'rgba(232, 193, 44, 0.1)', color: '#E8C12C', padding: '2px 6px', borderRadius: 4, fontSize: 10, fontWeight: 700 }}>RECENT</span>
+              <Plus size={16} /> Create {search.trim() ? `"${search.trim()}"` : 'Custom Exercise'}
+            </button>
+          </div>
+        ) : (
+          <>
+            {visibleExercises.map(ex => {
+              const selected = selectedIds.has(ex.id);
+              const isRecent = recentExerciseIds.has(ex.id);
+              return (
+                <div 
+                  key={ex.id}
+                  onClick={() => toggleSelect(ex.id)}
+                  style={{ 
+                    display: 'flex', alignItems: 'center', padding: '16px 0', borderBottom: '1px solid #1C1C1E',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <div style={{ 
+                    width: 24, height: 24, borderRadius: 12, border: selected ? 'none' : '2px solid #333535',
+                    background: selected ? 'var(--primary)' : 'transparent',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: 16,
+                    flexShrink: 0
+                  }}>
+                    {selected && <Check size={14} color="#fff" strokeWidth={3} />}
+                  </div>
+                  {ex.imageUrl ? (
+                    <div 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setPreviewExercise(ex);
+                      }}
+                      title="Tap to preview demo GIF"
+                      style={{ width: 48, height: 48, borderRadius: 8, background: '#1C1C1E', marginRight: 12, overflow: 'hidden', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
+                    >
+                      <img 
+                        src={ex.imageUrl} 
+                        alt={ex.name} 
+                        loading="lazy" 
+                        decoding="async" 
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                      />
+                    </div>
+                  ) : (
+                    <div style={{ width: 48, height: 48, borderRadius: 8, background: '#1C1C1E', marginRight: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <Dumbbell size={20} color="#8b90a0" />
+                    </div>
                   )}
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontSize: 16, fontWeight: 700, color: '#e2e2e2', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      <HighlightText text={ex.name} highlight={search} />
+                    </div>
+                    <div style={{ fontSize: 13, color: '#8b90a0', marginTop: 4, display: 'flex', gap: 6, alignItems: 'center', flexWrap: 'wrap' }}>
+                      {ex.isCustom && (
+                        <span style={{ background: 'rgba(var(--primary-rgb), 0.2)', color: 'var(--primary-light)', padding: '2px 6px', borderRadius: 4, fontSize: 10, fontWeight: 800 }}>CUSTOM</span>
+                      )}
+                      <span style={{ background: '#1C1C1E', padding: '2px 6px', borderRadius: 4, fontSize: 10, fontWeight: 600 }}>{ex.category}</span>
+                      {ex.equipment && <span style={{ background: '#1C1C1E', padding: '2px 6px', borderRadius: 4, fontSize: 10, fontWeight: 600 }}>{ex.equipment}</span>}
+                      {isRecent && (
+                        <span style={{ background: 'rgba(232, 193, 44, 0.1)', color: '#E8C12C', padding: '2px 6px', borderRadius: 4, fontSize: 10, fontWeight: 700 }}>RECENT</span>
+                      )}
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setPreviewExercise(ex);
+                    }}
+                    style={{
+                      background: 'rgba(255,255,255,0.04)',
+                      border: '1px solid rgba(255,255,255,0.06)',
+                      width: 34,
+                      height: 34,
+                      borderRadius: 17,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#8b90a0',
+                      cursor: 'pointer',
+                      marginLeft: 10,
+                      flexShrink: 0
+                    }}
+                    title="View animated demo & instructions"
+                  >
+                    <Info size={16} />
+                  </button>
                 </div>
+              );
+            })}
+
+            {visibleCount < filteredExercises.length && (
+              <div style={{ textAlign: 'center', padding: '16px 0', color: '#8b90a0', fontSize: 12, fontWeight: 600 }}>
+                Showing {visibleCount} of {filteredExercises.length} exercises (scroll down for more)
               </div>
-            </div>
-          );
-        })}
+            )}
+          </>
+        )}
       </div>
 
       {selectedIds.size > 0 && (
@@ -267,6 +425,25 @@ export default function ExerciseSelectorModal({ data, onClose, onSelect, existin
         )}
       </AnimatePresence>
       </motion.div>
+
+      {/* Custom Exercise Creator Modal */}
+      <CreateCustomExerciseModal
+        isOpen={showCreateCustom}
+        onClose={() => setShowCreateCustom(false)}
+        initialName={search.trim()}
+        onCreated={(newEx) => {
+          toggleSelect(newEx.id);
+        }}
+      />
+
+      {/* Exercise Detail & Demonstration GIF Modal */}
+      <ExerciseDetailModal
+        isOpen={Boolean(previewExercise)}
+        exercise={previewExercise}
+        isSelected={previewExercise ? selectedIds.has(previewExercise.id) : false}
+        onSelect={(id) => toggleSelect(id)}
+        onClose={() => setPreviewExercise(null)}
+      />
     </>
   );
 }

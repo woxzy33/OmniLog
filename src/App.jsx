@@ -82,7 +82,7 @@ export default function App() {
         userId: currentUser?.uid || "local",
         athleteProfile: {
           name: userProfile?.name || dataForExport?.user?.name || "Athlete",
-          gender: userProfile?.gender || "Prefer not to say",
+          gender: userProfile?.gender || "Male",
           weight: userProfile?.weight || 75,
           height: userProfile?.height || 178
         },
@@ -238,7 +238,7 @@ export default function App() {
                 style={{ paddingBottom: 'calc(80px + env(safe-area-inset-bottom))' }}
               >
                 {tab === "train" && (
-                  <Train setShowProfileModal={setShowProfileModal} />
+                  <Train setShowProfileModal={setShowProfileModal} onOpenSettings={() => setShowSettings(true)} />
                 )}
                 {tab === "profile" && (
                   <WidgetErrorBoundary>

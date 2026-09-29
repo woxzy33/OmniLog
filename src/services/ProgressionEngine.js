@@ -197,6 +197,103 @@ export function getAlternativeExercises(currentExercise, allExercises = [], limi
 }
 
 /**
+ * Calculates scientifically calibrated warm-up targets (weight & reps)
+ * based on working weight / estimated 1RM, equipment constraints, and warm-up set sequence.
+ *
+ * Ramp Table:
+ * - Set 1 (warmupIndex 0): 50% of working weight x 10 reps (Groove & synovial fluid)
+ * - Set 2 (warmupIndex 1): 70% of working weight x 5 reps (Moderate motor recruitment)
+ * - Set 3 (warmupIndex 2): 85% of working weight x 2 reps (High-threshold potentiation)
+ * - Set 4+ (warmupIndex 3+): 90% of working weight x 1 rep (Heavy feeler single)
+ *
+ * Equipment floor & increment rules:
+ * - Barbell: minimum tare weight is 20 kg (45 lbs), step 2.5 kg (5 lbs)
+ * - Dumbbell: minimum tare weight is 4 kg (10 lbs), step 2.0 kg (5 lbs)
+ * - Cable/Machine: minimum tare weight is 5 kg (10 lbs), step 2.5 kg (5 lbs)
+ */
+export function calculateWarmupTargets({
+  workingWeight = 0,
+  workingReps = 8,
+  warmupIndex = 0,
+  unit = 'kg',
+  equipment = '',
+  category = '',
+  requiresWeight = true
+}) {
+  const isLbs = unit === 'lbs';
+  const eq = (equipment || '').toLowerCase();
+
+  // Multi-tier progressive warm-up ramp (NSCA / Wendler / Strong standard)
+  const RAMP_SCHEDULE = [
+    { pct: 0.50, reps: 10, label: 'Groove & blood flow' },
+    { pct: 0.70, reps: 5,  label: 'Motor unit prep' },
+    { pct: 0.85, reps: 2,  label: 'CNS potentiation' },
+    { pct: 0.90, reps: 1,  label: 'Heavy feeler' }
+  ];
+
+  const stage = RAMP_SCHEDULE[Math.min(warmupIndex, RAMP_SCHEDULE.length - 1)];
+  const targetReps = stage.reps;
+  const pct = stage.pct;
+
+  if (!requiresWeight) {
+    const bodyweightReps = Math.max(3, Math.round(Number(workingReps || 10) * pct));
+    return {
+      targetWeight: null,
+      targetReps: bodyweightReps,
+      rationale: `Warm-up #${warmupIndex + 1} (${Math.round(pct * 100)}%): ${bodyweightReps} reps • ${stage.label}`,
+      isWarmup: true,
+      isOverload: false,
+      percentage: pct,
+      warmupIndex
+    };
+  }
+
+  // Equipment specific constraints & plate rounding
+  let minWeight = 0;
+  let increment = 2.5;
+
+  if (eq.includes('barbell')) {
+    minWeight = isLbs ? 45 : 20; // Olympic barbell tare weight
+    increment = isLbs ? 5 : 2.5;
+  } else if (eq.includes('dumbbell')) {
+    minWeight = isLbs ? 10 : 4;
+    increment = isLbs ? 5 : 2.0;
+  } else if (eq.includes('cable') || eq.includes('machine')) {
+    minWeight = isLbs ? 10 : 5;
+    increment = isLbs ? 5 : 2.5;
+  } else {
+    minWeight = isLbs ? 10 : 5;
+    increment = isLbs ? 5 : 2.5;
+  }
+
+  const baseWeight = Number(workingWeight) || 0;
+  let rawWeight = 0;
+
+  if (baseWeight > 0) {
+    rawWeight = baseWeight * pct;
+    // Don't fall below the equipment minimum tare weight if working weight is at or above minimum
+    if (baseWeight >= minWeight) {
+      rawWeight = Math.max(minWeight, rawWeight);
+    }
+  } else {
+    // If no working weight known yet, default to minimum equipment weight
+    rawWeight = minWeight;
+  }
+
+  const targetWeight = roundToIncrement(rawWeight, increment);
+
+  return {
+    targetWeight,
+    targetReps,
+    rationale: `Warm-up #${warmupIndex + 1} (${Math.round(pct * 100)}%): ${targetWeight} ${unit} × ${targetReps} reps • ${stage.label}`,
+    isWarmup: true,
+    isOverload: false,
+    percentage: pct,
+    warmupIndex
+  };
+}
+
+/**
  * Generate set-by-set target suggestions for an active exercise
  *
  * @param {Object} options
@@ -209,7 +306,7 @@ export function getAlternativeExercises(currentExercise, allExercises = [], limi
  * @param {boolean} options.enabled - whether progressive overload suggestions are toggled on
  * @param {boolean} options.requiresWeight - whether this exercise uses external load
  * @param {Object|null} options.activeIntervention - active plateau intervention if selected
- * @returns {Array<{ targetWeight: number|null, targetReps: number|null, rationale: string, isOverload: boolean, isDeload?: boolean }>}
+ * @returns {Array<{ targetWeight: number|null, targetReps: number|null, rationale: string, isOverload: boolean, isDeload?: boolean, isWarmup?: boolean }>}
  */
 export function calculateProgressiveTargets({
   currentSets = [],
@@ -224,9 +321,39 @@ export function calculateProgressiveTargets({
 }) {
   if (!Array.isArray(currentSets) || currentSets.length === 0) return [];
 
-  // If disabled or no prior sets available, fallback to priorSets or defaults
+  // Derive baseline working weight for warm-up calculations and progression
+  const currentWorkingWeights = (currentSets || [])
+    .filter(s => s && s.type !== 'W' && Number(s.weight) > 0)
+    .map(s => Number(s.weight));
+
+  const priorWorkingSets = (priorSets || [])
+    .filter(s => s && s.type !== 'W' && (Number(s.reps) > 0 || (requiresWeight && Number(s.weight) > 0)));
+
+  const priorWorkingWeights = priorWorkingSets
+    .filter(s => Number(s.weight) > 0)
+    .map(s => Number(s.weight));
+
+  const topWorkingWeight = currentWorkingWeights.length > 0 
+    ? Math.max(...currentWorkingWeights) 
+    : (priorWorkingWeights.length > 0 ? Math.max(...priorWorkingWeights) : 0);
+
+  const topWorkingReps = priorWorkingSets.find(s => Number(s.reps) > 0)?.reps || 8;
+
+  // If disabled or no prior sets available, fallback to priorSets or defaults (while still computing warmups)
   if (!enabled || !Array.isArray(priorSets) || priorSets.length === 0) {
     return currentSets.map((s, idx) => {
+      if (s?.type === 'W') {
+        const warmupIdx = currentSets.slice(0, idx).filter(set => set?.type === 'W').length;
+        return calculateWarmupTargets({
+          workingWeight: topWorkingWeight,
+          workingReps: topWorkingReps,
+          warmupIndex: warmupIdx,
+          unit,
+          equipment,
+          category,
+          requiresWeight
+        });
+      }
       const p = priorSets?.[idx] || priorSets?.[priorSets.length - 1];
       return {
         targetWeight: p?.weight != null ? Number(p.weight) : null,
@@ -237,9 +364,23 @@ export function calculateProgressiveTargets({
     });
   }
 
-  const validPrior = priorSets.filter(s => s && (Number(s.reps) > 0 || (requiresWeight && Number(s.weight) > 0)));
+  const validPrior = priorWorkingSets.length > 0 ? priorWorkingSets : priorSets.filter(s => s && (Number(s.reps) > 0 || (requiresWeight && Number(s.weight) > 0)));
   if (validPrior.length === 0) {
-    return currentSets.map(() => ({ targetWeight: null, targetReps: null, rationale: 'Baseline set', isOverload: false }));
+    return currentSets.map((s, idx) => {
+      if (s?.type === 'W') {
+        const warmupIdx = currentSets.slice(0, idx).filter(set => set?.type === 'W').length;
+        return calculateWarmupTargets({
+          workingWeight: topWorkingWeight,
+          workingReps: topWorkingReps,
+          warmupIndex: warmupIdx,
+          unit,
+          equipment,
+          category,
+          requiresWeight
+        });
+      }
+      return { targetWeight: null, targetReps: null, rationale: 'Baseline set', isOverload: false };
+    });
   }
 
   const loadStep = getStandardLoadIncrement(equipment, category, experienceLevel, unit);
@@ -264,7 +405,21 @@ export function calculateProgressiveTargets({
   // 1. ACTIVE INTERVENTION ADAPTATIONS (Move-specific, 7-day window)
   if (isInterventionActive) {
     return currentSets.map((currentSet, i) => {
-      const priorSet = validPrior[i] || validPrior[validPrior.length - 1];
+      if (currentSet?.type === 'W') {
+        const warmupIdx = currentSets.slice(0, i).filter(set => set?.type === 'W').length;
+        return calculateWarmupTargets({
+          workingWeight: topWorkingWeight,
+          workingReps: topWorkingReps,
+          warmupIndex: warmupIdx,
+          unit,
+          equipment,
+          category,
+          requiresWeight
+        });
+      }
+
+      const workingIdx = currentSets.slice(0, i).filter(s => s?.type !== 'W').length;
+      const priorSet = validPrior[workingIdx] || validPrior[validPrior.length - 1];
       const prevWeight = Number(priorSet?.weight) || 0;
       const prevReps = Number(priorSet?.reps) || repBracket.floor;
 
@@ -349,7 +504,21 @@ export function calculateProgressiveTargets({
   const set1HitCeiling = Number(validPrior[0]?.reps) >= repBracket.ceiling;
 
   return currentSets.map((currentSet, i) => {
-    const priorSet = validPrior[i] || validPrior[validPrior.length - 1];
+    if (currentSet?.type === 'W') {
+      const warmupIdx = currentSets.slice(0, i).filter(set => set?.type === 'W').length;
+      return calculateWarmupTargets({
+        workingWeight: topWorkingWeight,
+        workingReps: topWorkingReps,
+        warmupIndex: warmupIdx,
+        unit,
+        equipment,
+        category,
+        requiresWeight
+      });
+    }
+
+    const workingIdx = currentSets.slice(0, i).filter(s => s?.type !== 'W').length;
+    const priorSet = validPrior[workingIdx] || validPrior[validPrior.length - 1];
     const prevWeight = Number(priorSet.weight) || 0;
     const prevReps = Number(priorSet.reps) || repBracket.floor;
 

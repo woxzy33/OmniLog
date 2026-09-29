@@ -1,8 +1,9 @@
 import { create } from 'zustand';
-import { Storage } from '../data/storage';
-import { DEFAULT_EXERCISES, exerciseRequiresWeight } from '../data/exerciseDb';
+import { Storage } from '../data/storage.js';
+import { DEFAULT_EXERCISES, exerciseRequiresWeight } from '../data/exerciseDb.js';
 import { Preferences } from '@capacitor/preferences';
-import { ensureSessionPRs } from '../utils';
+import { ensureSessionPRs } from '../utils.js';
+import { GUEST_SEED_DATA } from '../data/guestSeedData.js';
 
 const emptyData = () => ({
   exercises: [...DEFAULT_EXERCISES],
@@ -27,33 +28,80 @@ const emptyData = () => ({
   }
 });
 
-import { saveAppData, subscribeToAppData, flushSaveAppData } from './Database';
+import { saveAppData, subscribeToAppData, flushSaveAppData } from './Database.js';
+import { EXERCISE_ALIAS_MAP } from '../data/exerciseAliasMap.js';
 
-function sanitizeAppData(raw) {
+const DEFAULT_EXERCISE_ID_MAP = new Map(DEFAULT_EXERCISES.map(e => [e.id, e]));
+const DEFAULT_EXERCISE_IDS = new Set(DEFAULT_EXERCISES.map(e => e.id));
+
+export function preparePersistPayload(data) {
+  if (!data) return data;
+  const { exercises, ...rest } = data;
+  return rest;
+}
+
+export function sanitizeAppData(raw) {
   if (!raw) return emptyData();
-  const defaultMap = new Map(DEFAULT_EXERCISES.map(e => [e.name, e]));
-  const mergedExercises = (raw.exercises || []).map(ex => {
-    if (defaultMap.has(ex.name)) {
-      const defEx = defaultMap.get(ex.name);
-      const merged = { ...defEx, ...ex };
-      if (defEx.bodyPart !== undefined) merged.bodyPart = defEx.bodyPart;
-      merged.requiresWeight = defEx.requiresWeight;
-      return merged;
-    }
+
+  // 1. Schema Version Migration (v1 -> v2)
+  const currentSchemaVersion = raw.schemaVersion || 1;
+  let sessions = raw.sessions || [];
+  let templates = raw.templates || [];
+  let activeInterventions = (raw.activeInterventions && typeof raw.activeInterventions === 'object') ? { ...raw.activeInterventions } : {};
+
+  // Helper to resolve exercise canonical ID and Name
+  const resolveCanonicalExercise = (ex) => {
+    if (!ex) return ex;
+    const legacyId = ex.exerciseId || ex.id;
+    const legacyName = ex.name || ex.exerciseName;
+    const canonicalId = EXERCISE_ALIAS_MAP[legacyId] || EXERCISE_ALIAS_MAP[legacyName] || legacyId;
+    const def = DEFAULT_EXERCISE_ID_MAP.get(canonicalId);
+    const canonicalName = def ? def.name : (legacyName || legacyId || 'Exercise');
     return {
       ...ex,
-      requiresWeight: exerciseRequiresWeight(ex)
+      exerciseId: canonicalId,
+      name: canonicalName,
+      exerciseName: canonicalName
     };
+  };
+
+  // Migrate sessions and templates: map legacy exerciseId and name to new canonical dataset
+  sessions = sessions.map(session => ({
+    ...session,
+    exercises: (session.exercises || []).map(resolveCanonicalExercise)
+  }));
+
+  // Migrate user workout templates
+  templates = templates.map(tpl => ({
+    ...tpl,
+    exercises: (tpl.exercises || []).map(resolveCanonicalExercise)
+  }));
+
+  // Migrate active plateau interventions
+  const migratedInterventions = {};
+  Object.keys(activeInterventions).forEach(k => {
+    const newKey = EXERCISE_ALIAS_MAP[k] || k;
+    migratedInterventions[newKey] = activeInterventions[k];
   });
+  activeInterventions = migratedInterventions;
+
+  // Preserve custom exercises created by user
+  const customExercises = (raw.exercises || []).filter(ex => ex && (ex.isCustom || (ex.id && String(ex.id).startsWith('custom-'))));
+  const mergedExercises = [
+    ...DEFAULT_EXERCISES,
+    ...customExercises
+  ];
 
   const measurements = Array.isArray(raw.measurements) ? raw.measurements : [];
-  const sessions = ensureSessionPRs(raw.sessions || [], mergedExercises, measurements);
+  const processedSessions = ensureSessionPRs(sessions, mergedExercises, measurements);
 
   return {
     ...raw,
+    schemaVersion: 2,
     exercises: mergedExercises,
+    customExercises: customExercises,
     customCardioActivities: raw.customCardioActivities || [],
-    activeInterventions: (raw.activeInterventions && typeof raw.activeInterventions === 'object') ? raw.activeInterventions : {},
+    activeInterventions,
     settings: { 
       unit: "kg", 
       notificationsEnabled: true, 
@@ -64,8 +112,8 @@ function sanitizeAppData(raw) {
       ...(raw.settings || {}) 
     },
     measurements,
-    sessions,
-    templates: raw.templates || [],
+    sessions: processedSessions,
+    templates,
     plannedSessions: raw.plannedSessions || [],
     user: raw.user || { name: "Iron Lifter", locations: [{ id: "loc-default", name: "Default Gym" }], activeLocationId: "loc-default" }
   };
@@ -132,10 +180,11 @@ export function mergeAppData(local, remote) {
   (local.plannedSessions || []).forEach(p => { if (p && p.id) planMap.set(p.id, p); });
 
   // 5. Merge custom exercises
-  const defaultExIds = new Set(DEFAULT_EXERCISES.map(e => e.id));
   const customExMap = new Map();
-  (remote.exercises || []).filter(e => !defaultExIds.has(e.id)).forEach(e => customExMap.set(e.id, e));
-  (local.exercises || []).filter(e => !defaultExIds.has(e.id)).forEach(e => customExMap.set(e.id, e));
+  (remote.customExercises || []).forEach(e => customExMap.set(e.id, e));
+  (local.customExercises || []).forEach(e => customExMap.set(e.id, e));
+  (remote.exercises || []).filter(e => !DEFAULT_EXERCISE_IDS.has(e.id)).forEach(e => customExMap.set(e.id, e));
+  (local.exercises || []).filter(e => !DEFAULT_EXERCISE_IDS.has(e.id)).forEach(e => customExMap.set(e.id, e));
 
   // 6. Merge custom cardio activities
   const customCardioMap = new Map();
@@ -150,7 +199,7 @@ export function mergeAppData(local, remote) {
     templates: Array.from(templateMap.values()),
     measurements: mergedMeasurements,
     plannedSessions: Array.from(planMap.values()),
-    exercises: [...DEFAULT_EXERCISES, ...Array.from(customExMap.values())],
+    customExercises: Array.from(customExMap.values()),
     customCardioActivities: Array.from(customCardioMap.values()),
     activeInterventions: { ...(remote.activeInterventions || {}), ...(local.activeInterventions || {}) }
   });
@@ -202,6 +251,10 @@ export const useAppStore = create((set, get) => ({
       if (cached && get().userId === uid) {
         localData = sanitizeAppData(cached);
         set({ data: localData, isLoaded: true });
+      } else if (uid === 'dev-athlete-1') {
+        localData = sanitizeAppData(GUEST_SEED_DATA);
+        Storage.set(`omnilog_data_${uid}`, preparePersistPayload(localData)).catch(console.warn);
+        set({ data: localData, isLoaded: true });
       }
     } catch (e) {
       console.warn("Local storage cache read error:", e);
@@ -210,27 +263,41 @@ export const useAppStore = create((set, get) => ({
     // Restore in-progress active workout if user quit app while working out
     useWorkoutStore.getState().restoreActiveSession(uid);
 
-    // 2. Realtime Cloud Sync via Firestore with Smart Local Merge
+    // If local guest mode, no Firestore subscription is needed
+    if (uid === 'dev-athlete-1') {
+      set({ isLoaded: true });
+      return;
+    }
+
+    // 2. Safety Fallback Timeout: Guarantee app unblocks even on spotty connections or Firestore latency
+    setTimeout(() => {
+      if (get().userId === uid && !get().isLoaded) {
+        console.info("Cloud sync warmup exceeded 2.5s, unblocking UI with current data...");
+        set({ isLoaded: true });
+      }
+    }, 2500);
+
+    // 3. Realtime Cloud Sync via Firestore with Smart Local Merge
     const unsubscribe = subscribeToAppData(uid, (parsed) => {
       if (get().userId !== uid) return;
 
       if (parsed) {
         const localBeforeSync = get().data;
         const merged = mergeAppData(localBeforeSync, parsed);
-        Storage.set(`omnilog_data_${uid}`, merged).catch(console.warn);
+        Storage.set(`omnilog_data_${uid}`, preparePersistPayload(merged)).catch(console.warn);
         set({ data: merged, isLoaded: true });
 
         // If local had sessions that were missing on cloud (e.g. quit before cloud sync finished), push merged back to cloud
         const localCount = (localBeforeSync?.sessions || []).length;
         const cloudCount = (parsed?.sessions || []).length;
         if (localCount > cloudCount) {
-          saveAppData(uid, merged, true);
+          saveAppData(uid, preparePersistPayload(merged), true);
         }
       } else {
         // Document does not exist yet on Firestore (new user or fresh account)
         const currentData = sanitizeAppData(get().data);
-        saveAppData(uid, currentData, true);
-        Storage.set(`omnilog_data_${uid}`, currentData).catch(console.warn);
+        saveAppData(uid, preparePersistPayload(currentData), true);
+        Storage.set(`omnilog_data_${uid}`, preparePersistPayload(currentData)).catch(console.warn);
         set({ data: currentData, isLoaded: true });
       }
     });
@@ -254,8 +321,9 @@ export const useAppStore = create((set, get) => ({
 
     const uid = get().userId;
     if (uid) {
-      await Storage.set(`omnilog_data_${uid}`, sanitized).catch(console.warn);
-      await saveAppData(uid, sanitized, immediate);
+      const payload = preparePersistPayload(sanitized);
+      await Storage.set(`omnilog_data_${uid}`, payload).catch(console.warn);
+      await saveAppData(uid, payload, immediate);
     }
   },
 
@@ -265,8 +333,9 @@ export const useAppStore = create((set, get) => ({
 
     const uid = get().userId;
     if (uid) {
-      await Storage.set(`omnilog_data_${uid}`, sanitizedData).catch(console.warn);
-      await saveAppData(uid, sanitizedData, true);
+      const payload = preparePersistPayload(sanitizedData);
+      await Storage.set(`omnilog_data_${uid}`, payload).catch(console.warn);
+      await saveAppData(uid, payload, true);
     }
   },
 
@@ -280,13 +349,18 @@ export const useAppStore = create((set, get) => ({
 
     const uid = get().userId;
     if (uid) {
-      await Storage.set(`omnilog_data_${uid}`, clean).catch(console.warn);
+      const payload = preparePersistPayload(clean);
+      await Storage.set(`omnilog_data_${uid}`, payload).catch(console.warn);
       await Storage.remove(`omnilog_active_session_${uid}`).catch(console.warn);
-      await saveAppData(uid, clean, true, true);
+      await saveAppData(uid, payload, true, true);
     }
     await Storage.remove('omnilog_active_session').catch(console.warn);
   }
 }));
+
+if (typeof window !== 'undefined') {
+  window.__useAppStore = useAppStore;
+}
 
 export const useWorkoutStore = create((set, get) => ({
   activeSession: null,

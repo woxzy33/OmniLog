@@ -1,9 +1,10 @@
 import React, { useState, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, X, Check, TimerReset, Settings, GripHorizontal, ChevronDown, ChevronUp, Trash, Trophy } from './Icons';
+import { Plus, X, Check, TimerReset, Settings, GripHorizontal, ChevronDown, ChevronUp, Trash, Trophy, Info } from './Icons';
 import { useKeypad } from './NumericKeypad';
 import PlateCalculatorModal from './PlateCalculatorModal';
+import ExerciseDetailModal from './ExerciseDetailModal';
 import { ErrorModal } from './WorkoutSafeguards';
 import { formatWeight, parseDisplayWeight, validateExerciseSet } from '../utils';
 import { exerciseRequiresWeight } from '../data/exerciseDb';
@@ -26,6 +27,45 @@ const typeStyles = {
   F: { bg: "#8A2BE2", text: "#ffffff", translationKey: 'workout.setFailure', fallback: 'Failure' },
 };
 
+const SET_TYPE_DETAILS = [
+  {
+    key: 'N',
+    title: 'Normal Working Set',
+    description: 'Counts towards progressive overload & hypertrophy volume calculations',
+    accentColor: '#3B82F6',
+    badgeBg: '#1C1C1E',
+    badgeText: '#E5E7EB',
+    badgeBorder: 'rgba(255,255,255,0.15)'
+  },
+  {
+    key: 'W',
+    title: 'Warm-up Set',
+    description: 'Auto-ramped load (50%–90%) to prime nervous system without fatigue',
+    accentColor: '#FF9F0A',
+    badgeBg: 'rgba(255, 159, 10, 0.2)',
+    badgeText: '#FF9F0A',
+    badgeBorder: 'rgba(255, 159, 10, 0.45)'
+  },
+  {
+    key: 'D',
+    title: 'Drop Set',
+    description: 'Immediate load reduction (~20–30%) to recruit fatigued muscle fibers',
+    accentColor: '#EF4444',
+    badgeBg: 'rgba(239, 68, 68, 0.2)',
+    badgeText: '#F87171',
+    badgeBorder: 'rgba(239, 68, 68, 0.4)'
+  },
+  {
+    key: 'F',
+    title: 'Failure Set',
+    description: 'Max-effort set pushed to absolute 0 RIR (concentric failure)',
+    accentColor: '#BF5AF2',
+    badgeBg: 'rgba(191, 90, 242, 0.2)',
+    badgeText: '#BF5AF2',
+    badgeBorder: 'rgba(191, 90, 242, 0.45)'
+  }
+];
+
 const getRpeColor = (rpe) => {
   if (!rpe) return '#6b7080';
   const n = Number(rpe);
@@ -37,44 +77,78 @@ const getRpeColor = (rpe) => {
 };
 
 const SwipeableSetRow = ({ children, onDelete, isCompleted }) => {
+  const [isRevealed, setIsRevealed] = useState(false);
+
   return (
     <motion.div
       layout
       initial={{ opacity: 0, height: 0 }}
       animate={{ opacity: 1, height: 'auto' }}
       exit={{ opacity: 0, height: 0, overflow: 'hidden' }}
-      style={{ position: 'relative', marginBottom: 5 }}
+      style={{ position: 'relative', marginBottom: 5, overflow: 'hidden', borderRadius: 10 }}
     >
       {!isCompleted && (
         <div style={{
-          position: 'absolute', top: 0, right: 0, bottom: 0, width: '100%',
-          background: '#E81123', 
-          display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingRight: 18,
-          borderRadius: 10, zIndex: 0, cursor: 'pointer'
-        }} onClick={onDelete}>
-          <Trash size={18} color="#fff" />
+          position: 'absolute', top: 0, right: 0, bottom: 0, width: 72,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          borderRadius: '0 10px 10px 0', zIndex: 0
+        }}>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete();
+            }}
+            style={{
+              width: '100%',
+              height: '100%',
+              background: 'linear-gradient(135deg, #EF4444 0%, #B91C1C 100%)',
+              border: 'none',
+              borderRadius: '0 10px 10px 0',
+              color: '#fff',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 2,
+              cursor: 'pointer',
+              boxShadow: 'inset 1px 0 0 rgba(255,255,255,0.15)'
+            }}
+            title="Confirm deletion"
+          >
+            <Trash size={15} color="#fff" />
+            <span style={{ fontSize: 9.5, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Delete</span>
+          </button>
         </div>
       )}
 
       <motion.div
         drag={isCompleted ? false : "x"}
-        dragConstraints={{ left: -100, right: 0 }}
-        dragElastic={0.15}
+        dragConstraints={{ left: -72, right: 0 }}
+        dragElastic={{ left: 0.1, right: 0 }}
+        animate={{ x: isRevealed ? -72 : 0 }}
+        transition={{ type: "spring", stiffness: 450, damping: 35 }}
         onDragEnd={(e, info) => {
-          if (info.offset.x < -75 || info.velocity.x < -350) {
-            onDelete();
+          if (info.offset.x < -36 || info.velocity.x < -250) {
+            setIsRevealed(true);
+          } else {
+            setIsRevealed(false);
           }
+        }}
+        onClick={() => {
+          if (isRevealed) setIsRevealed(false);
         }}
         style={{
           display: 'flex', gap: 6, alignItems: 'center', padding: '3px 4px',
           background: isCompleted ? 'rgba(35, 56, 37, 0.45)' : '#141518',
           borderRadius: 10,
           border: isCompleted ? '1px solid rgba(48, 209, 88, 0.25)' : '1px solid transparent',
-          position: 'relative', zIndex: 1
+          position: 'relative', zIndex: 1,
+          touchAction: 'pan-y'
         }}
       >
         {children}
-        {!isCompleted && (
+        {!isCompleted && !isRevealed && (
           <div 
             title="Swipe left to delete"
             style={{
@@ -90,7 +164,7 @@ const SwipeableSetRow = ({ children, onDelete, isCompleted }) => {
 };
 
 const ExerciseLogger = React.memo(({ 
-  exIdx, exerciseId, name, category, equipment, imageUrl, sets, priorSets, 
+  exIdx, exerciseId, name, category, equipment, imageUrl, gifUrl, specificMuscle, secondaryMuscle, exerciseObj, sets, priorSets, 
   allSessions = [], allExercises = [], currentSessionId = null,
   activeIntervention = null, customPlateauThreshold = null,
   onSelectIntervention, onCancelIntervention, onSwapExercise,
@@ -101,6 +175,7 @@ const ExerciseLogger = React.memo(({
   const { openKeypad } = useKeypad();
   const [calcWeight, setCalcWeight] = useState(null);
   const [showPlateauModal, setShowPlateauModal] = useState(false);
+  const [showDetailModal, setShowDetailModal] = useState(false);
 
   const requiresWeight = typeof requiresWeightProp === 'boolean'
     ? requiresWeightProp
@@ -281,9 +356,30 @@ const ExerciseLogger = React.memo(({
     >
       <div style={{ display: 'flex', alignItems: 'center', padding: '14px 14px 10px', gap: 12 }}>
         {imageUrl ? (
-          <img src={imageUrl} alt={name} style={{ width: 38, height: 38, borderRadius: 10, objectFit: 'cover', background: '#0D0E10', border: '1px solid rgba(255,255,255,0.08)' }} />
+          <div
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowDetailModal(true);
+            }}
+            style={{ position: 'relative', cursor: 'pointer', flexShrink: 0 }}
+            title="Tap to preview demo GIF & instructions"
+          >
+            <img src={imageUrl} alt={name} style={{ width: 38, height: 38, borderRadius: 10, objectFit: 'cover', background: '#0D0E10', border: '1px solid rgba(255,255,255,0.08)' }} />
+            {gifUrl && (
+              <div style={{ position: 'absolute', bottom: -2, right: -2, width: 14, height: 14, borderRadius: 7, background: '#30D158', border: '2px solid #141518', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <span style={{ fontSize: 7, fontWeight: 900, color: '#000' }}>▶</span>
+              </div>
+            )}
+          </div>
         ) : (
-          <div style={{ width: 38, height: 38, borderRadius: 10, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div 
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowDetailModal(true);
+            }}
+            style={{ width: 38, height: 38, borderRadius: 10, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0 }}
+            title="Tap to view instructions"
+          >
             <span style={{ fontSize: 16, color: '#8b90a0', fontWeight: 800 }}>{name.charAt(0)}</span>
           </div>
         )}
@@ -343,6 +439,29 @@ const ExerciseLogger = React.memo(({
             </div>
             
             <div style={{ display: 'flex', gap: 4, alignItems: 'center', flexShrink: 0 }}>
+              <button 
+                type="button"
+                style={{ 
+                  background: 'rgba(255,255,255,0.03)', 
+                  border: 'none', 
+                  color: '#8b90a0', 
+                  cursor: 'pointer', 
+                  width: 32, 
+                  height: 32, 
+                  borderRadius: 8, 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center' 
+                }} 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowDetailModal(true);
+                }}
+                title="View form guide & demo GIF"
+                aria-label="View form guide & demo GIF"
+              >
+                <Info size={16} />
+              </button>
               <div 
                 onPointerDown={(e) => {
                   e.preventDefault();
@@ -601,7 +720,24 @@ const ExerciseLogger = React.memo(({
                             : '-'
                           }
                         </div>
-                        {progressiveTargets[i]?.isDeload && !s.completed ? (
+                        {progressiveTargets[i]?.isWarmup && !s.completed ? (
+                          <span style={{ 
+                            fontSize: 8.5, 
+                            fontWeight: 800, 
+                            color: '#FF9F0A', 
+                            background: 'rgba(255, 159, 10, 0.16)', 
+                            border: '1px solid rgba(255, 159, 10, 0.4)', 
+                            padding: '1px 4px', 
+                            borderRadius: 4, 
+                            alignSelf: 'flex-start',
+                            whiteSpace: 'nowrap',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: 2
+                          }}>
+                            🔥 {progressiveTargets[i].targetWeight ? `${formatWeight(progressiveTargets[i].targetWeight, settings?.unit)}×` : ''}{progressiveTargets[i].targetReps}r
+                          </span>
+                        ) : progressiveTargets[i]?.isDeload && !s.completed ? (
                           <span style={{ 
                             fontSize: 8.5, 
                             fontWeight: 800, 
@@ -660,7 +796,7 @@ const ExerciseLogger = React.memo(({
                           border: s.completed ? '1px solid rgba(48, 209, 88, 0.3)' : '1px solid rgba(255,255,255,0.14)',
                           color: s.weight 
                             ? '#ffffff' 
-                            : (progressiveTargets[i]?.isDeload ? 'rgba(255, 159, 10, 0.75)' : (progressiveTargets[i]?.isOverload ? 'rgba(0, 198, 255, 0.65)' : '#6b7080')),
+                            : (progressiveTargets[i]?.isWarmup ? '#FF9F0A' : (progressiveTargets[i]?.isDeload ? 'rgba(255, 159, 10, 0.75)' : (progressiveTargets[i]?.isOverload ? 'rgba(0, 198, 255, 0.65)' : '#6b7080'))),
                           boxShadow: s.completed ? 'none' : 'inset 0 1px 3px rgba(0,0,0,0.4)'
                         }}
                       >
@@ -694,7 +830,7 @@ const ExerciseLogger = React.memo(({
                         border: s.completed ? '1px solid rgba(48, 209, 88, 0.3)' : '1px solid rgba(255,255,255,0.14)',
                         color: s.reps 
                           ? '#ffffff' 
-                          : (progressiveTargets[i]?.isDeload ? 'rgba(255, 159, 10, 0.75)' : (progressiveTargets[i]?.isOverload ? 'rgba(0, 198, 255, 0.65)' : '#6b7080')),
+                          : (progressiveTargets[i]?.isWarmup ? '#FF9F0A' : (progressiveTargets[i]?.isDeload ? 'rgba(255, 159, 10, 0.75)' : (progressiveTargets[i]?.isOverload ? 'rgba(0, 198, 255, 0.65)' : '#6b7080'))),
                         boxShadow: s.completed ? 'none' : 'inset 0 1px 3px rgba(0,0,0,0.4)'
                       }}
                     >
@@ -728,7 +864,7 @@ const ExerciseLogger = React.memo(({
                 </div>
                 
                 <button
-                  className="checkBtn"
+                  className="checkBtn completeSetBtn"
                   style={{
                     width: 40,
                     height: 38,
@@ -744,6 +880,7 @@ const ExerciseLogger = React.memo(({
                     boxShadow: s.completed ? '0 2px 10px rgba(48, 209, 88, 0.3)' : 'none',
                     transition: 'all 0.15s ease'
                   }}
+                  data-testid="complete-set-btn"
                   onClick={() => {
                     const n = [...sets];
                     const completing = !n[i].completed;
@@ -812,52 +949,181 @@ const ExerciseLogger = React.memo(({
         <PlateCalculatorModal weight={calcWeight} onClose={() => setCalcWeight(null)} settings={settings} />
       )}
 
-      <AnimatePresence>
-        {editingSetType !== null && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.85)', zIndex: 300, display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}
-            onClick={() => setEditingSetType(null)}
-          >
+      {/* Set Type Selection Bottom Sheet */}
+      {typeof document !== 'undefined' && createPortal(
+        <AnimatePresence>
+          {editingSetType !== null && (
             <motion.div 
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "100%" }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              onClick={e => e.stopPropagation()}
-              style={{ background: '#121212', width: '100%', maxWidth: 480, borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: '24px 20px', paddingBottom: 40 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              style={{ 
+                position: 'fixed', 
+                top: 0, 
+                left: 0, 
+                right: 0, 
+                bottom: 0, 
+                background: 'rgba(0,0,0,0.75)', 
+                backdropFilter: 'blur(8px)',
+                WebkitBackdropFilter: 'blur(8px)',
+                zIndex: 9999, 
+                display: 'flex', 
+                alignItems: 'flex-end', 
+                justifyContent: 'center' 
+              }}
+              onClick={() => setEditingSetType(null)}
             >
-              <div style={{ width: 40, height: 4, background: '#333535', borderRadius: 2, margin: '0 auto 20px' }} />
-              <div style={{ fontSize: 18, fontWeight: 700, color: '#e2e2e2', textAlign: 'center', marginBottom: 24 }}>Select Set Type</div>
-              
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                {Object.entries(typeStyles).map(([key, info]) => (
+              <motion.div 
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                exit={{ y: "100%" }}
+                transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                onClick={e => e.stopPropagation()}
+                style={{ 
+                  background: '#16171B', 
+                  width: '100%', 
+                  maxWidth: 500, 
+                  borderTopLeftRadius: 24, 
+                  borderTopRightRadius: 24, 
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  borderBottom: 'none',
+                  padding: '16px 20px', 
+                  paddingBottom: 'calc(24px + env(safe-area-inset-bottom))',
+                  boxShadow: '0 -10px 40px rgba(0,0,0,0.6)'
+                }}
+              >
+                {/* Drag Handle Indicator */}
+                <div style={{ width: 38, height: 4, background: 'rgba(255,255,255,0.22)', borderRadius: 2, margin: '0 auto 16px' }} />
+                
+                <div style={{ marginBottom: 18 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <div style={{ fontSize: 17, fontWeight: 800, color: '#F3F4F6' }}>
+                      Set {editingSetType + 1} Type
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setEditingSetType(null)}
+                      style={{
+                        background: 'rgba(255,255,255,0.06)',
+                        border: 'none',
+                        color: '#9CA3AF',
+                        borderRadius: '50%',
+                        width: 28,
+                        height: 28,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      <X size={15} />
+                    </button>
+                  </div>
+                  <div style={{ fontSize: 12, color: '#8b90a0', marginTop: 3 }}>
+                    {name} • Calibrate progression & recovery role
+                  </div>
+                </div>
+                
+                {/* Set Types List */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
+                  {SET_TYPE_DETAILS.map((info) => {
+                    const isSelected = (sets[editingSetType]?.type || 'N') === info.key;
+                    return (
+                      <button 
+                        key={info.key} 
+                        type="button"
+                        style={{ 
+                          background: isSelected ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.03)', 
+                          border: isSelected ? `1.5px solid ${info.accentColor}` : '1px solid rgba(255,255,255,0.07)', 
+                          display: 'flex', 
+                          alignItems: 'center', 
+                          justifyContent: 'space-between',
+                          padding: '12px 14px', 
+                          cursor: 'pointer', 
+                          borderRadius: 14, 
+                          transition: 'all 0.18s ease',
+                          textAlign: 'left'
+                        }}
+                        onClick={() => updateSetType(info.key)}
+                      >
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 12, minWidth: 0 }}>
+                          <span style={{ 
+                            background: info.badgeBg, 
+                            color: info.badgeText, 
+                            border: `1px solid ${info.badgeBorder || 'rgba(255,255,255,0.1)'}`,
+                            fontWeight: 900, 
+                            fontSize: 12, 
+                            width: 26, 
+                            height: 26, 
+                            borderRadius: 7,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            fontFamily: "'JetBrains Mono', monospace",
+                            flexShrink: 0
+                          }}>
+                            {info.key}
+                          </span>
+                          <div style={{ minWidth: 0 }}>
+                            <div style={{ color: '#F3F4F6', fontSize: 14, fontWeight: 700 }}>
+                              {info.title}
+                            </div>
+                            <div style={{ color: '#9CA3AF', fontSize: 11, marginTop: 2, lineHeight: 1.35 }}>
+                              {info.description}
+                            </div>
+                          </div>
+                        </div>
+
+                        {isSelected && (
+                          <div style={{
+                            width: 20,
+                            height: 20,
+                            borderRadius: '50%',
+                            background: info.accentColor,
+                            color: '#000',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            flexShrink: 0,
+                            marginLeft: 8
+                          }}>
+                            <Check size={12} strokeWidth={3} />
+                          </div>
+                        )}
+                      </button>
+                    );
+                  })}
+                  
+                  <div style={{ height: 1, background: 'rgba(255,255,255,0.08)', margin: '6px 0' }} />
+                  
                   <button 
-                    key={key} 
-                    style={{ background: 'transparent', border: 'none', display: 'flex', alignItems: 'center', gap: 16, padding: '16px 12px', cursor: 'pointer', borderRadius: 12, transition: 'background 0.2s' }}
-                    onClick={() => updateSetType(key)}
+                    type="button"
+                    style={{ 
+                      background: 'rgba(239, 68, 68, 0.08)', 
+                      border: '1px solid rgba(239, 68, 68, 0.22)', 
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      justifyContent: 'center', 
+                      gap: 8, 
+                      padding: '12px', 
+                      cursor: 'pointer', 
+                      borderRadius: 12,
+                      color: '#F87171',
+                      fontWeight: 700,
+                      fontSize: 13
+                    }}
+                    onClick={removeSet}
                   >
-                    <span style={{ color: info.bg === '#1C1C1E' ? '#e2e2e2' : info.bg, fontWeight: 700, fontSize: 16, width: 24, textAlign: 'center', fontFamily: "'JetBrains Mono', monospace" }}>{key}</span>
-                    <span style={{ color: '#e2e2e2', fontSize: 16, fontWeight: 600 }}>{t(info.translationKey, info.fallback)}</span>
+                    <Trash size={16} />
+                    <span>Delete Set {editingSetType + 1}</span>
                   </button>
-                ))}
-                
-                <div style={{ height: 1, background: '#1C1C1E', margin: '8px 0' }} />
-                
-                <button 
-                  style={{ background: 'transparent', border: 'none', display: 'flex', alignItems: 'center', gap: 16, padding: '16px 12px', cursor: 'pointer', borderRadius: 12 }}
-                  onClick={removeSet}
-                >
-                  <span style={{ color: '#E81123', fontWeight: 700, fontSize: 16, width: 24, textAlign: 'center' }}><X size={18} /></span>
-                  <span style={{ color: '#e2e2e2', fontSize: 16, fontWeight: 600 }}>Remove Set</span>
-                </button>
-              </div>
+                </div>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
       {/* Plateau Intervention & Strategy Modal */}
       {typeof document !== 'undefined' && createPortal(
         <AnimatePresence>
@@ -1188,6 +1454,26 @@ const ExerciseLogger = React.memo(({
           </motion.div>
         )}
       </AnimatePresence>,
+      document.body
+    )}
+
+    {/* Exercise Detail & Demonstration GIF Modal */}
+    {createPortal(
+      <ExerciseDetailModal
+        isOpen={showDetailModal}
+        exercise={exerciseObj || {
+          id: exerciseId,
+          name,
+          category,
+          equipment,
+          imageUrl,
+          gifUrl,
+          specificMuscle,
+          secondaryMuscle,
+          requiresWeight
+        }}
+        onClose={() => setShowDetailModal(false)}
+      />,
       document.body
     )}
     </motion.div>

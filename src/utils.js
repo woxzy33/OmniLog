@@ -1,15 +1,31 @@
+import { EXERCISE_ALIAS_MAP } from './data/exerciseAliasMap.js';
+
 export function getLastSessionSets(data, exerciseId, excludeSessionId, locationId = 'loc-default') {
   if (!data || !Array.isArray(data.sessions) || !exerciseId) return null;
 
-  // Resolve exercise name if available in data.exercises
-  const exObj = (data.exercises || []).find(e => e.id === exerciseId || e.exerciseId === exerciseId);
+  const canonicalTargetId = EXERCISE_ALIAS_MAP[exerciseId] || exerciseId;
+
+  // Resolve exercise name if available in data.exercises (cached Map for O(1) performance)
+  let exMap = data._exIdMap;
+  if (!exMap && Array.isArray(data.exercises)) {
+    exMap = new Map();
+    data.exercises.forEach(e => {
+      if (e.id) exMap.set(e.id, e);
+      if (e.exerciseId) exMap.set(e.exerciseId, e);
+    });
+    data._exIdMap = exMap;
+  }
+  const exObj = exMap ? (exMap.get(exerciseId) || exMap.get(canonicalTargetId)) : null;
   const targetName = exObj?.name?.trim().toLowerCase();
 
   // Helper: does an exercise entry in a session match our target?
   const matchesEx = (e) => {
     if (!e) return false;
-    if (e.exerciseId === exerciseId || e.id === exerciseId) return true;
+    const eCanonicalId = EXERCISE_ALIAS_MAP[e.exerciseId] || e.exerciseId;
+    if (eCanonicalId === canonicalTargetId || e.exerciseId === exerciseId || e.id === exerciseId || e.id === canonicalTargetId) return true;
     if (targetName && e.name && e.name.trim().toLowerCase() === targetName) return true;
+    const aliasName = EXERCISE_ALIAS_MAP[e.name];
+    if (aliasName && targetName && aliasName.trim().toLowerCase() === targetName) return true;
     return false;
   };
 
@@ -334,9 +350,10 @@ export function ensureSessionPRs(sessions, exercises = [], measurements = []) {
     const sessUserWeight = getUserWeightAtDate(measurements, sess.date);
 
     const updatedExercises = (sess.exercises || []).map(ex => {
-      const exObj = exMap.get(ex.exerciseId);
+      const canonicalId = EXERCISE_ALIAS_MAP[ex.exerciseId] || ex.exerciseId;
+      const exObj = exMap.get(canonicalId) || exMap.get(ex.exerciseId);
       const requiresWeight = exObj ? exObj.requiresWeight !== false : true;
-      const priorSets = exerciseHistory.get(ex.exerciseId) || [];
+      const priorSets = exerciseHistory.get(canonicalId) || exerciseHistory.get(ex.exerciseId) || [];
       const currentExercisePriorSets = [...priorSets];
 
       const updatedSets = (ex.sets || []).map(set => {
@@ -362,7 +379,10 @@ export function ensureSessionPRs(sessions, exercises = [], measurements = []) {
         return set;
       });
 
-      exerciseHistory.set(ex.exerciseId, currentExercisePriorSets);
+      exerciseHistory.set(canonicalId, currentExercisePriorSets);
+      if (canonicalId !== ex.exerciseId) {
+        exerciseHistory.set(ex.exerciseId, currentExercisePriorSets);
+      }
       return { ...ex, sets: updatedSets };
     });
 

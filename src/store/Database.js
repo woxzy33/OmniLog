@@ -1,4 +1,4 @@
-import { db } from '../config/firebase';
+import { db } from '../config/firebase.js';
 import { doc, getDoc, setDoc, deleteDoc, onSnapshot } from 'firebase/firestore';
 
 export async function loadUserProfile(userId) {
@@ -28,6 +28,8 @@ export function subscribeToAppData(userId, callback) {
     }
   }, (error) => {
     console.warn("Firestore snapshot subscription error:", error);
+    // Unblock the app even on error so it falls back to local data
+    callback(null);
   });
 }
 

@@ -3,7057 +3,14608 @@ export function uid() {
 }
 
 export const CATEGORIES = [
-  "Core",
-  "Legs",
-  "Arms",
-  "Shoulders",
   "Chest",
   "Back",
+  "Shoulders",
+  "Arms",
+  "Legs",
+  "Core",
+  "Cardio",
   "Other"
 ];
+
 export const MACHINES = [
-  "Bodyweight",
-  "Machine",
-  "Other",
-  "Foam Roll",
-  "Kettlebell",
+  "Barbell",
   "Dumbbell",
   "Cable",
-  "Barbell",
+  "Machine",
+  "Bodyweight",
+  "Kettlebell",
   "Band",
+  "EZ Bar",
   "Medicine Ball",
-  "Exercise Ball",
-  "EZ Bar"
+  "Other"
 ];
 
 export const DEFAULT_EXERCISES = [
   {
-    "id": "3_4_Sit-Up",
+    "id": "0001",
     "name": "3/4 Sit-Up",
     "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/3_4_Sit-Up/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0001-2gPfomN.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0001-2gPfomN.gif"
   },
   {
-    "id": "90_90_Hamstring",
-    "name": "90/90 Hamstring",
-    "category": "Legs",
+    "id": "0002",
+    "name": "45° Side Bend",
+    "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/90_90_Hamstring/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0002-Hy9D21L.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0002-Hy9D21L.gif"
   },
   {
-    "id": "Ab_Crunch_Machine",
-    "name": "Ab Crunch Machine",
-    "category": "Core",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Ab_Crunch_Machine/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Ab_Roller",
-    "name": "Ab Roller",
-    "category": "Core",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Ab_Roller/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Adductor",
-    "name": "Adductor",
-    "category": "Legs",
-    "equipment": "Foam Roll",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Adductor/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Adductor_Groin",
-    "name": "Adductor/Groin",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Adductor_Groin/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Advanced_Kettlebell_Windmill",
-    "name": "Advanced Kettlebell Windmill",
-    "category": "Core",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Advanced_Kettlebell_Windmill/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Air_Bike",
+    "id": "0003",
     "name": "Air Bike",
     "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Air_Bike/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0003-1ZFqTDN.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0003-1ZFqTDN.gif"
   },
   {
-    "id": "All_Fours_Quad_Stretch",
-    "name": "All Fours Quad Stretch",
+    "id": "1512",
+    "name": "All Fours Squad Stretch",
     "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/All_Fours_Quad_Stretch/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1512-qBcKorM.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1512-qBcKorM.gif"
   },
   {
-    "id": "Alternate_Hammer_Curl",
-    "name": "Alternate Hammer Curl (Dumbbell)",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Alternate_Hammer_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Alternate_Heel_Touchers",
+    "id": "0006",
     "name": "Alternate Heel Touchers",
     "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Alternate_Heel_Touchers/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0006-qaZVsGk.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0006-qaZVsGk.gif"
   },
   {
-    "id": "Alternate_Incline_Dumbbell_Curl",
-    "name": "Alternate Incline Dumbbell Curl",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Alternate_Incline_Dumbbell_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Alternate_Leg_Diagonal_Bound",
-    "name": "Alternate Leg Diagonal Bound",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Alternate_Leg_Diagonal_Bound/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Alternating_Cable_Shoulder_Press",
-    "name": "Alternating Cable Shoulder Pre",
-    "category": "Shoulders",
+    "id": "0007",
+    "name": "Alternate Lateral Pulldown",
+    "category": "Back",
     "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Alternating_Cable_Shoulder_Press/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0007-4IKbhHV.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0007-4IKbhHV.gif"
   },
   {
-    "id": "Alternating_Deltoid_Raise",
-    "name": "Alternating Deltoid Raise (Dumbbell)",
-    "category": "Shoulders",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Alternating_Deltoid_Raise/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Alternating_Floor_Press",
-    "name": "Alternating Floor Pre (Kettlebell)",
-    "category": "Chest",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Alternating_Floor_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Alternating_Hang_Clean",
-    "name": "Alternating Hang Clean (Kettlebell)",
-    "category": "Legs",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Alternating_Hang_Clean/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Alternating_Kettlebell_Press",
-    "name": "Alternating Kettlebell Pre",
-    "category": "Shoulders",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Alternating_Kettlebell_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Alternating_Kettlebell_Row",
-    "name": "Alternating Kettlebell Row",
-    "category": "Back",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Alternating_Kettlebell_Row/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Alternating_Renegade_Row",
-    "name": "Alternating Renegade Row (Kettlebell)",
-    "category": "Back",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Alternating_Renegade_Row/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Ankle_Circles",
+    "id": "1368",
     "name": "Ankle Circles",
     "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Ankle_Circles/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "calves",
+    "secondaryMuscle": "abs",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1368-uL9CsKm.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1368-uL9CsKm.gif"
   },
   {
-    "id": "Ankle_On_The_Knee",
-    "name": "Ankle On The Knee",
-    "category": "Legs",
+    "id": "3293",
+    "name": "Archer Pull Up",
+    "category": "Back",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Ankle_On_The_Knee/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3293-72BC5Za.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3293-72BC5Za.gif"
   },
   {
-    "id": "Anterior_Tibialis-SMR",
-    "name": "Anterior Tibialis-SMR",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Anterior_Tibialis-SMR/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Anti-Gravity_Press",
-    "name": "Anti-Gravity Pre (Barbell)",
-    "category": "Shoulders",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Anti-Gravity_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Arm_Circles",
-    "name": "Arm Circles",
-    "category": "Shoulders",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Arm_Circles/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Arnold_Dumbbell_Press",
-    "name": "Arnold Dumbbell Pre",
-    "category": "Shoulders",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Arnold_Dumbbell_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Around_The_Worlds",
-    "name": "Around The World (Dumbbell)",
+    "id": "3294",
+    "name": "Archer Push Up",
     "category": "Chest",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Around_The_Worlds/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3294-A9qxk2F.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3294-A9qxk2F.gif"
   },
   {
-    "id": "Atlas_Stone_Trainer",
-    "name": "Atlas Stone Trainer",
-    "category": "Back",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Atlas_Stone_Trainer/0.jpg",
-    "requiresWeight": true
+    "id": "2355",
+    "name": "Arm Slingers Hanging Bent Knee Legs",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2355-uWpxD4v.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2355-uWpxD4v.gif"
   },
   {
-    "id": "Atlas_Stones",
-    "name": "Atlas Stones",
-    "category": "Back",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Atlas_Stones/0.jpg",
-    "requiresWeight": true
+    "id": "2333",
+    "name": "Arm Slingers Hanging Straight Legs",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2333-PXTIwgu.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2333-PXTIwgu.gif"
   },
   {
-    "id": "Axle_Deadlift",
-    "name": "Axle Deadlift",
-    "category": "Back",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Axle_Deadlift/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Back_Flyes_-_With_Bands",
-    "name": "Back Flyes - With Band",
-    "category": "Shoulders",
-    "equipment": "Band",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Back_Flyes_-_With_Bands/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Backward_Drag",
-    "name": "Backward Drag",
+    "id": "3214",
+    "name": "Arms Apart Circular Toe Touch (Male)",
     "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Backward_Drag/0.jpg",
-    "requiresWeight": false
+    "equipment": "Bodyweight",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3214-RtyAsy1.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3214-RtyAsy1.gif"
   },
   {
-    "id": "Backward_Medicine_Ball_Throw",
-    "name": "Backward Medicine Ball Throw",
-    "category": "Shoulders",
+    "id": "3204",
+    "name": "Arms Overhead Full Sit-Up (Male)",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3204-NAkmgdx.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3204-NAkmgdx.gif"
+  },
+  {
+    "id": "0009",
+    "name": "Assisted Chest Dip (Kneeling)",
+    "category": "Chest",
+    "equipment": "Machine",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0009-PAgTVaK.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0009-PAgTVaK.gif"
+  },
+  {
+    "id": "0011",
+    "name": "Assisted Hanging Knee Raise",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0011-03lzqwk.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0011-03lzqwk.gif"
+  },
+  {
+    "id": "0010",
+    "name": "Assisted Hanging Knee Raise With Throw Down",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0010-8K0w2yA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0010-8K0w2yA.gif"
+  },
+  {
+    "id": "1708",
+    "name": "Assisted Lying Calves Stretch",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1708-GxDwDX0.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1708-GxDwDX0.gif"
+  },
+  {
+    "id": "1709",
+    "name": "Assisted Lying Glutes Stretch",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1709-yn0LjwL.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1709-yn0LjwL.gif"
+  },
+  {
+    "id": "1710",
+    "name": "Assisted Lying Gluteus And Piriformis Stretch",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1710-RQNVT10.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1710-RQNVT10.gif"
+  },
+  {
+    "id": "0012",
+    "name": "Assisted Lying Leg Raise With Lateral Throw Down",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0012-UGhRD1A.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0012-UGhRD1A.gif"
+  },
+  {
+    "id": "0013",
+    "name": "Assisted Lying Leg Raise With Throw Down",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0013-VX5YKR5.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0013-VX5YKR5.gif"
+  },
+  {
+    "id": "0014",
+    "name": "Assisted Motion Russian Twist",
+    "category": "Core",
     "equipment": "Medicine Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Backward_Medicine_Ball_Throw/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0014-r7cT9YD.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0014-r7cT9YD.gif"
   },
   {
-    "id": "Balance_Board",
+    "id": "0015",
+    "name": "Assisted Parallel Close Grip Pull-Up",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0015-vrhHa6D.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0015-vrhHa6D.gif"
+  },
+  {
+    "id": "0016",
+    "name": "Assisted Prone Hamstring",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "hamstring",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0016-VedGSby.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0016-VedGSby.gif"
+  },
+  {
+    "id": "1713",
+    "name": "Assisted Prone Lying Quads Stretch",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1713-YUYAMEj.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1713-YUYAMEj.gif"
+  },
+  {
+    "id": "1714",
+    "name": "Assisted Prone Rectus Femoris Stretch",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1714-2Ryn564.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1714-2Ryn564.gif"
+  },
+  {
+    "id": "0017",
+    "name": "Assisted Pull-Up",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0017-kiJ4Z2K.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0017-kiJ4Z2K.gif"
+  },
+  {
+    "id": "1716",
+    "name": "Assisted Seated Pectoralis Major Stretch With Stability Ball",
+    "category": "Chest",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1716-RoV1Rfa.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1716-RoV1Rfa.gif"
+  },
+  {
+    "id": "1712",
+    "name": "Assisted Side Lying Adductor Stretch",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "adductor",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1712-hC6oYY5.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1712-hC6oYY5.gif"
+  },
+  {
+    "id": "1758",
+    "name": "Assisted Sit-Up",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1758-aumB2IV.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1758-aumB2IV.gif"
+  },
+  {
+    "id": "1431",
+    "name": "Assisted Standing Chin-Up",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1431-7OeHptV.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1431-7OeHptV.gif"
+  },
+  {
+    "id": "1432",
+    "name": "Assisted Standing Pull-Up",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1432-f4xtKBj.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1432-f4xtKBj.gif"
+  },
+  {
+    "id": "0018",
+    "name": "Assisted Standing Triceps Extension (With Towel)",
+    "category": "Arms",
+    "equipment": "Bodyweight",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0018-7HcfMBP.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0018-7HcfMBP.gif"
+  },
+  {
+    "id": "0019",
+    "name": "Assisted Triceps Dip (Kneeling)",
+    "category": "Arms",
+    "equipment": "Machine",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0019-J60bN17.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0019-J60bN17.gif"
+  },
+  {
+    "id": "2364",
+    "name": "Assisted Wide-Grip Chest Dip (Kneeling)",
+    "category": "Chest",
+    "equipment": "Machine",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2364-PnZJIrk.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2364-PnZJIrk.gif"
+  },
+  {
+    "id": "3220",
+    "name": "Astride Jumps (Male)",
+    "category": "Cardio",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3220-f9lVSSI.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3220-f9lVSSI.gif"
+  },
+  {
+    "id": "3672",
+    "name": "Back And Forth Step",
+    "category": "Cardio",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3672-fNGumX0.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3672-fNGumX0.gif"
+  },
+  {
+    "id": "1314",
+    "name": "Back Extension On Exercise Ball",
+    "category": "Back",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "lower-back",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1314-qLpO4vV.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1314-qLpO4vV.gif"
+  },
+  {
+    "id": "3297",
+    "name": "Back Lever",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3297-GaSzzuh.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3297-GaSzzuh.gif"
+  },
+  {
+    "id": "1405",
+    "name": "Back Pec Stretch",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1405-chfnQnM.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1405-chfnQnM.gif"
+  },
+  {
+    "id": "1473",
+    "name": "Backward Jump",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1473-SaDOwk7.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1473-SaDOwk7.gif"
+  },
+  {
+    "id": "0020",
     "name": "Balance Board",
     "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Balance_Board/0.jpg",
-    "requiresWeight": false
+    "equipment": "Bodyweight",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "calves",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0020-xAySMB0.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0020-xAySMB0.gif"
   },
   {
-    "id": "Ball_Leg_Curl",
-    "name": "Ball Leg Curl",
-    "category": "Legs",
-    "equipment": "Exercise Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Ball_Leg_Curl/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Band_Assisted_Pull-Up",
-    "name": "Band Assisted Pull-Up",
-    "category": "Back",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Band_Assisted_Pull-Up/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Band_Good_Morning",
-    "name": "Band Good Morning",
-    "category": "Legs",
-    "equipment": "Band",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Band_Good_Morning/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Band_Good_Morning_Pull_Through",
-    "name": "Band Good Morning (Pull Through)",
-    "category": "Legs",
-    "equipment": "Band",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Band_Good_Morning_Pull_Through/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Band_Hip_Adductions",
-    "name": "Band Hip Adduction",
-    "category": "Legs",
-    "equipment": "Band",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Band_Hip_Adductions/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Band_Pull_Apart",
-    "name": "Band Pull Apart",
-    "category": "Shoulders",
-    "equipment": "Band",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Band_Pull_Apart/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Band_Skull_Crusher",
-    "name": "Band Skull Crusher",
+    "id": "0968",
+    "name": "Band Alternating Biceps Curl",
     "category": "Arms",
     "equipment": "Band",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Band_Skull_Crusher/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0968-3omWx6P.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0968-3omWx6P.gif"
   },
   {
-    "id": "Barbell_Ab_Rollout",
-    "name": "Barbell Ab Rollout",
+    "id": "0969",
+    "name": "Band Alternating V-Up",
     "category": "Core",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Ab_Rollout/0.jpg",
-    "requiresWeight": true
+    "equipment": "Band",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0969-ztAa1RK.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0969-ztAa1RK.gif"
   },
   {
-    "id": "Barbell_Ab_Rollout_-_On_Knees",
-    "name": "Barbell Ab Rollout - On Knee",
+    "id": "0970",
+    "name": "Band Assisted Pull-Up",
+    "category": "Back",
+    "equipment": "Band",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0970-r1XNRYB.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0970-r1XNRYB.gif"
+  },
+  {
+    "id": "0971",
+    "name": "Band Assisted Wheel Rollerout",
     "category": "Core",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Ab_Rollout_-_On_Knees/0.jpg",
-    "requiresWeight": true
+    "equipment": "Band",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0971-zhF9lW4.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0971-zhF9lW4.gif"
   },
   {
-    "id": "Barbell_Bench_Press_-_Medium_Grip",
-    "name": "Barbell Bench Press - Medium Grip",
+    "id": "1254",
+    "name": "Band Bench Press",
+    "category": "Chest",
+    "equipment": "Band",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1254-khlHMqs.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1254-khlHMqs.gif"
+  },
+  {
+    "id": "0980",
+    "name": "Band Bent-Over Hip Extension",
+    "category": "Legs",
+    "equipment": "Band",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0980-wSScovH.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0980-wSScovH.gif"
+  },
+  {
+    "id": "0972",
+    "name": "Band Bicycle Crunch",
+    "category": "Core",
+    "equipment": "Band",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0972-tZkGYZ9.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0972-tZkGYZ9.gif"
+  },
+  {
+    "id": "0974",
+    "name": "Band Close-Grip Pulldown",
+    "category": "Back",
+    "equipment": "Band",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0974-DptumMx.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0974-DptumMx.gif"
+  },
+  {
+    "id": "0975",
+    "name": "Band Close-Grip Push-Up",
+    "category": "Arms",
+    "equipment": "Band",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0975-ufaxB52.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0975-ufaxB52.gif"
+  },
+  {
+    "id": "0976",
+    "name": "Band Concentration Curl",
+    "category": "Arms",
+    "equipment": "Band",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0976-kmVVAfu.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0976-kmVVAfu.gif"
+  },
+  {
+    "id": "3117",
+    "name": "Band Fixed Back Close Grip Pulldown",
+    "category": "Back",
+    "equipment": "Band",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3117-4LoWllp.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3117-4LoWllp.gif"
+  },
+  {
+    "id": "3116",
+    "name": "Band Fixed Back Underhand Pulldown",
+    "category": "Back",
+    "equipment": "Band",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3116-ZH68exZ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3116-ZH68exZ.gif"
+  },
+  {
+    "id": "0977",
+    "name": "Band Front Lateral Raise",
+    "category": "Shoulders",
+    "equipment": "Band",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0977-sTg7iys.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0977-sTg7iys.gif"
+  },
+  {
+    "id": "0978",
+    "name": "Band Front Raise",
+    "category": "Shoulders",
+    "equipment": "Band",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0978-TFA88iB.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0978-TFA88iB.gif"
+  },
+  {
+    "id": "1408",
+    "name": "Band Hip Lift",
+    "category": "Legs",
+    "equipment": "Band",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1408-E4R8Hz1.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1408-E4R8Hz1.gif"
+  },
+  {
+    "id": "0979",
+    "name": "Band Horizontal Pallof Press",
+    "category": "Core",
+    "equipment": "Band",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0979-9pa4H5m.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0979-9pa4H5m.gif"
+  },
+  {
+    "id": "0981",
+    "name": "Band Jack Knife Sit-Up",
+    "category": "Core",
+    "equipment": "Band",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0981-KCBKjma.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0981-KCBKjma.gif"
+  },
+  {
+    "id": "0983",
+    "name": "Band Kneeling One Arm Pulldown",
+    "category": "Back",
+    "equipment": "Band",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0983-pmnrOp0.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0983-pmnrOp0.gif"
+  },
+  {
+    "id": "0985",
+    "name": "Band Kneeling Twisting Crunch",
+    "category": "Core",
+    "equipment": "Band",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0985-225x2Vd.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0985-225x2Vd.gif"
+  },
+  {
+    "id": "0984",
+    "name": "Band Lying Hip Internal Rotation",
+    "category": "Legs",
+    "equipment": "Band",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0984-vIICElP.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0984-vIICElP.gif"
+  },
+  {
+    "id": "1002",
+    "name": "Band Lying Straight Leg Raise",
+    "category": "Core",
+    "equipment": "Band",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1002-bbLR7fB.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1002-bbLR7fB.gif"
+  },
+  {
+    "id": "0986",
+    "name": "Band One Arm Overhead Biceps Curl",
+    "category": "Arms",
+    "equipment": "Band",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0986-UNAB8ak.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0986-UNAB8ak.gif"
+  },
+  {
+    "id": "0987",
+    "name": "Band One Arm Single Leg Split Squat",
+    "category": "Legs",
+    "equipment": "Band",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0987-arsYEd3.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0987-arsYEd3.gif"
+  },
+  {
+    "id": "0988",
+    "name": "Band One Arm Standing Low Row",
+    "category": "Back",
+    "equipment": "Band",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0988-km0sQC0.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0988-km0sQC0.gif"
+  },
+  {
+    "id": "0989",
+    "name": "Band One Arm Twisting Chest Press",
+    "category": "Chest",
+    "equipment": "Band",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0989-c16nYGA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0989-c16nYGA.gif"
+  },
+  {
+    "id": "0990",
+    "name": "Band One Arm Twisting Seated Row",
+    "category": "Back",
+    "equipment": "Band",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0990-DKBwJrL.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0990-DKBwJrL.gif"
+  },
+  {
+    "id": "0991",
+    "name": "Band Pull Through",
+    "category": "Legs",
+    "equipment": "Band",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0991-VtTbiP3.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0991-VtTbiP3.gif"
+  },
+  {
+    "id": "0992",
+    "name": "Band Push Sit-Up",
+    "category": "Core",
+    "equipment": "Band",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0992-zFzbBfL.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0992-zFzbBfL.gif"
+  },
+  {
+    "id": "0993",
+    "name": "Band Reverse Fly",
+    "category": "Shoulders",
+    "equipment": "Band",
+    "specificMuscle": "back-deltoids",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0993-sTfvVsG.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0993-sTfvVsG.gif"
+  },
+  {
+    "id": "0994",
+    "name": "Band Reverse Wrist Curl",
+    "category": "Arms",
+    "equipment": "Band",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0994-Ezpnw9d.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0994-Ezpnw9d.gif"
+  },
+  {
+    "id": "0996",
+    "name": "Band Seated Hip Internal Rotation",
+    "category": "Legs",
+    "equipment": "Band",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0996-9gbyYKk.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0996-9gbyYKk.gif"
+  },
+  {
+    "id": "1011",
+    "name": "Band Seated Twist",
+    "category": "Core",
+    "equipment": "Band",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1011-S1JXDAG.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1011-S1JXDAG.gif"
+  },
+  {
+    "id": "0997",
+    "name": "Band Shoulder Press",
+    "category": "Shoulders",
+    "equipment": "Band",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0997-peAeMR3.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0997-peAeMR3.gif"
+  },
+  {
+    "id": "1018",
+    "name": "Band Shrug",
+    "category": "Back",
+    "equipment": "Band",
+    "specificMuscle": "trapezius",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1018-trmte8s.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1018-trmte8s.gif"
+  },
+  {
+    "id": "0998",
+    "name": "Band Side Triceps Extension",
+    "category": "Arms",
+    "equipment": "Band",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0998-obe5LMq.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0998-obe5LMq.gif"
+  },
+  {
+    "id": "0999",
+    "name": "Band Single Leg Calf Raise",
+    "category": "Legs",
+    "equipment": "Band",
+    "specificMuscle": "calves",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0999-9JprnPh.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0999-9JprnPh.gif"
+  },
+  {
+    "id": "1000",
+    "name": "Band Single Leg Reverse Calf Raise",
+    "category": "Legs",
+    "equipment": "Band",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1000-QsSQWbf.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1000-QsSQWbf.gif"
+  },
+  {
+    "id": "1001",
+    "name": "Band Single Leg Split Squat",
+    "category": "Legs",
+    "equipment": "Band",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1001-y8bYM8w.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1001-y8bYM8w.gif"
+  },
+  {
+    "id": "1004",
+    "name": "Band Squat",
+    "category": "Legs",
+    "equipment": "Band",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1004-TUZLh71.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1004-TUZLh71.gif"
+  },
+  {
+    "id": "1003",
+    "name": "Band Squat Row",
+    "category": "Legs",
+    "equipment": "Band",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1003-w1NOByi.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1003-w1NOByi.gif"
+  },
+  {
+    "id": "1005",
+    "name": "Band Standing Crunch",
+    "category": "Core",
+    "equipment": "Band",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1005-Kzg30R7.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1005-Kzg30R7.gif"
+  },
+  {
+    "id": "1022",
+    "name": "Band Standing Rear Delt Row",
+    "category": "Shoulders",
+    "equipment": "Band",
+    "specificMuscle": "back-deltoids",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1022-tc5dYrf.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1022-tc5dYrf.gif"
+  },
+  {
+    "id": "1007",
+    "name": "Band Standing Twisting Crunch",
+    "category": "Core",
+    "equipment": "Band",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1007-euq4pwp.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1007-euq4pwp.gif"
+  },
+  {
+    "id": "1008",
+    "name": "Band Step-Up",
+    "category": "Legs",
+    "equipment": "Band",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1008-d5bTEPV.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1008-d5bTEPV.gif"
+  },
+  {
+    "id": "1009",
+    "name": "Band Stiff Leg Deadlift",
+    "category": "Legs",
+    "equipment": "Band",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1009-kuMiR2T.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1009-kuMiR2T.gif"
+  },
+  {
+    "id": "1023",
+    "name": "Band Straight Back Stiff Leg Deadlift",
+    "category": "Legs",
+    "equipment": "Band",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1023-lHeUULr.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1023-lHeUULr.gif"
+  },
+  {
+    "id": "1010",
+    "name": "Band Straight Leg Deadlift",
+    "category": "Back",
+    "equipment": "Band",
+    "specificMuscle": "lower-back",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1010-KUaoUV8.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1010-KUaoUV8.gif"
+  },
+  {
+    "id": "1012",
+    "name": "Band Twisting Overhead Press",
+    "category": "Shoulders",
+    "equipment": "Band",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1012-u4bAmKp.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1012-u4bAmKp.gif"
+  },
+  {
+    "id": "1369",
+    "name": "Band Two Legs Calf Raise - (Band Under Both Legs) V. 2",
+    "category": "Legs",
+    "equipment": "Band",
+    "specificMuscle": "calves",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1369-jl6uxZV.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1369-jl6uxZV.gif"
+  },
+  {
+    "id": "1013",
+    "name": "Band Underhand Pulldown",
+    "category": "Back",
+    "equipment": "Band",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1013-k6tUeqS.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1013-k6tUeqS.gif"
+  },
+  {
+    "id": "1014",
+    "name": "Band V-Up",
+    "category": "Core",
+    "equipment": "Band",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1014-H6ETwO9.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1014-H6ETwO9.gif"
+  },
+  {
+    "id": "1015",
+    "name": "Band Vertical Pallof Press",
+    "category": "Core",
+    "equipment": "Band",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1015-G7PXMlT.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1015-G7PXMlT.gif"
+  },
+  {
+    "id": "1016",
+    "name": "Band Wrist Curl",
+    "category": "Arms",
+    "equipment": "Band",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1016-vUTfFHw.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1016-vUTfFHw.gif"
+  },
+  {
+    "id": "1017",
+    "name": "Band Y-Raise",
+    "category": "Shoulders",
+    "equipment": "Band",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1017-aHDy5O5.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1017-aHDy5O5.gif"
+  },
+  {
+    "id": "0023",
+    "name": "Barbell Alternate Biceps Curl",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0023-Yza7XrQ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0023-Yza7XrQ.gif"
+  },
+  {
+    "id": "0024",
+    "name": "Barbell Bench Front Squat",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0024-Y7YcmIJ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0024-Y7YcmIJ.gif"
+  },
+  {
+    "id": "0025",
+    "name": "Barbell Bench Press",
     "category": "Chest",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Bench_Press_-_Medium_Grip/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0025-EIeI8Vf.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0025-EIeI8Vf.gif"
   },
   {
-    "id": "Barbell_Curl",
+    "id": "0026",
+    "name": "Barbell Bench Squat",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0026-W9pFVv1.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0026-W9pFVv1.gif"
+  },
+  {
+    "id": "1316",
+    "name": "Barbell Bent Arm Pullover",
+    "category": "Back",
+    "equipment": "Barbell",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1316-cA9FuWG.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1316-cA9FuWG.gif"
+  },
+  {
+    "id": "0027",
+    "name": "Barbell Bent Over Row",
+    "category": "Back",
+    "equipment": "Barbell",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0027-eZyBC3j.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0027-eZyBC3j.gif"
+  },
+  {
+    "id": "2407",
+    "name": "Barbell Biceps Curl (With Arm Blaster)",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2407-aee2Fcj.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2407-aee2Fcj.gif"
+  },
+  {
+    "id": "0028",
+    "name": "Barbell Clean And Press",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0028-SGY8Zui.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0028-SGY8Zui.gif"
+  },
+  {
+    "id": "0029",
+    "name": "Barbell Clean-Grip Front Squat",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0029-qi996YS.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0029-qi996YS.gif"
+  },
+  {
+    "id": "0030",
+    "name": "Barbell Close-Grip Bench Press",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0030-J6Dx1Mu.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0030-J6Dx1Mu.gif"
+  },
+  {
+    "id": "0031",
     "name": "Barbell Curl",
     "category": "Arms",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Curl/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0031-25GPyDY.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0031-25GPyDY.gif"
   },
   {
-    "id": "Barbell_Curls_Lying_Against_An_Incline",
-    "name": "Barbell Curls Lying Against An Incline",
-    "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Curls_Lying_Against_An_Incline/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Barbell_Deadlift",
+    "id": "0032",
     "name": "Barbell Deadlift",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0032-ila4NZS.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0032-ila4NZS.gif"
+  },
+  {
+    "id": "0033",
+    "name": "Barbell Decline Bench Press",
+    "category": "Chest",
+    "equipment": "Barbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0033-GrO65fd.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0033-GrO65fd.gif"
+  },
+  {
+    "id": "0034",
+    "name": "Barbell Decline Bent Arm Pullover",
     "category": "Back",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Deadlift/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0034-hMEptv0.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0034-hMEptv0.gif"
   },
   {
-    "id": "Barbell_Full_Squat",
+    "id": "0035",
+    "name": "Barbell Decline Close Grip To Skull Press",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0035-LMGXZn8.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0035-LMGXZn8.gif"
+  },
+  {
+    "id": "1255",
+    "name": "Barbell Decline Pullover",
+    "category": "Chest",
+    "equipment": "Barbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1255-9sgNE2O.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1255-9sgNE2O.gif"
+  },
+  {
+    "id": "0036",
+    "name": "Barbell Decline Wide-Grip Press",
+    "category": "Chest",
+    "equipment": "Barbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0036-hl8DUh8.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0036-hl8DUh8.gif"
+  },
+  {
+    "id": "0037",
+    "name": "Barbell Decline Wide-Grip Pullover",
+    "category": "Back",
+    "equipment": "Barbell",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0037-Hj4FOCd.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0037-Hj4FOCd.gif"
+  },
+  {
+    "id": "0038",
+    "name": "Barbell Drag Curl",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0038-IENzBdA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0038-IENzBdA.gif"
+  },
+  {
+    "id": "1370",
+    "name": "Barbell Floor Calf Raise",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1370-2IHEa2T.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1370-2IHEa2T.gif"
+  },
+  {
+    "id": "0039",
+    "name": "Barbell Front Chest Squat",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0039-IeTIEqg.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0039-IeTIEqg.gif"
+  },
+  {
+    "id": "0041",
+    "name": "Barbell Front Raise",
+    "category": "Shoulders",
+    "equipment": "Barbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0041-b2Uoz54.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0041-b2Uoz54.gif"
+  },
+  {
+    "id": "0040",
+    "name": "Barbell Front Raise And Pullover",
+    "category": "Chest",
+    "equipment": "Barbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0040-33AzZeV.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0040-33AzZeV.gif"
+  },
+  {
+    "id": "0042",
+    "name": "Barbell Front Squat",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0042-zG0zs85.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0042-zG0zs85.gif"
+  },
+  {
+    "id": "0043",
     "name": "Barbell Full Squat",
     "category": "Legs",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Full_Squat/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0043-qXTaZnJ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0043-qXTaZnJ.gif"
   },
   {
-    "id": "Barbell_Glute_Bridge",
+    "id": "1461",
+    "name": "Barbell Full Squat (Back Pov)",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1461-DhMl549.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1461-DhMl549.gif"
+  },
+  {
+    "id": "1462",
+    "name": "Barbell Full Squat (Side Pov)",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1462-iYzB0Cz.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1462-iYzB0Cz.gif"
+  },
+  {
+    "id": "1545",
+    "name": "Barbell Full Zercher Squat",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1545-vR1vold.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1545-vR1vold.gif"
+  },
+  {
+    "id": "1409",
     "name": "Barbell Glute Bridge",
     "category": "Legs",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Glute_Bridge/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1409-qKBpF7I.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1409-qKBpF7I.gif"
   },
   {
-    "id": "Barbell_Guillotine_Bench_Press",
-    "name": "Barbell Guillotine Bench Pre",
+    "id": "3562",
+    "name": "Barbell Glute Bridge Two Legs On Bench (Male)",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3562-qg2PGl6.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3562-qg2PGl6.gif"
+  },
+  {
+    "id": "0044",
+    "name": "Barbell Good Morning",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "hamstring",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0044-XlZ4lAC.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0044-XlZ4lAC.gif"
+  },
+  {
+    "id": "0045",
+    "name": "Barbell Guillotine Bench Press",
     "category": "Chest",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Guillotine_Bench_Press/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0045-GXoaSgn.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0045-GXoaSgn.gif"
   },
   {
-    "id": "Barbell_Hack_Squat",
+    "id": "0046",
     "name": "Barbell Hack Squat",
     "category": "Legs",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Hack_Squat/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0046-5VCj6iH.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0046-5VCj6iH.gif"
   },
   {
-    "id": "Barbell_Hip_Thrust",
-    "name": "Barbell Hip Thrust",
+    "id": "1436",
+    "name": "Barbell High Bar Squat",
     "category": "Legs",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Hip_Thrust/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1436-Gnfo4FM.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1436-Gnfo4FM.gif"
   },
   {
-    "id": "Barbell_Incline_Bench_Press_-_Medium_Grip",
-    "name": "Barbell Incline Bench Press - Medium Grip",
+    "id": "0047",
+    "name": "Barbell Incline Bench Press",
     "category": "Chest",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Incline_Bench_Press_-_Medium_Grip/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0047-3TZduzM.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0047-3TZduzM.gif"
   },
   {
-    "id": "Barbell_Incline_Shoulder_Raise",
-    "name": "Barbell Incline Shoulder Raise",
-    "category": "Shoulders",
+    "id": "1719",
+    "name": "Barbell Incline Close Grip Bench Press",
+    "category": "Arms",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Incline_Shoulder_Raise/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1719-gx7s7uF.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1719-gx7s7uF.gif"
   },
   {
-    "id": "Barbell_Lunge",
+    "id": "0048",
+    "name": "Barbell Incline Reverse-Grip Press",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0048-641mIfk.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0048-641mIfk.gif"
+  },
+  {
+    "id": "0049",
+    "name": "Barbell Incline Row",
+    "category": "Back",
+    "equipment": "Barbell",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0049-dmgMp3n.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0049-dmgMp3n.gif"
+  },
+  {
+    "id": "0050",
+    "name": "Barbell Incline Shoulder Raise",
+    "category": "Chest",
+    "equipment": "Barbell",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0050-xi0yckC.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0050-xi0yckC.gif"
+  },
+  {
+    "id": "0051",
+    "name": "Barbell Jefferson Squat",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0051-pkSoCW9.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0051-pkSoCW9.gif"
+  },
+  {
+    "id": "0052",
+    "name": "Barbell Jm Bench Press",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0052-ZsiqXYa.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0052-ZsiqXYa.gif"
+  },
+  {
+    "id": "0053",
+    "name": "Barbell Jump Squat",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0053-1gFNTZV.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0053-1gFNTZV.gif"
+  },
+  {
+    "id": "1410",
+    "name": "Barbell Lateral Lunge",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1410-py1HSzx.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1410-py1HSzx.gif"
+  },
+  {
+    "id": "1435",
+    "name": "Barbell Low Bar Squat",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1435-bTpEUcm.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1435-bTpEUcm.gif"
+  },
+  {
+    "id": "0054",
     "name": "Barbell Lunge",
     "category": "Legs",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Lunge/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0054-t8iSghb.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0054-t8iSghb.gif"
   },
   {
-    "id": "Barbell_Rear_Delt_Row",
+    "id": "1720",
+    "name": "Barbell Lying Back Of The Head Tricep Extension",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1720-yg8Totb.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1720-yg8Totb.gif"
+  },
+  {
+    "id": "0055",
+    "name": "Barbell Lying Close-Grip Press",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0055-EcaV7aL.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0055-EcaV7aL.gif"
+  },
+  {
+    "id": "0056",
+    "name": "Barbell Lying Close-Grip Triceps Extension",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0056-HJ63mSO.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0056-HJ63mSO.gif"
+  },
+  {
+    "id": "0057",
+    "name": "Barbell Lying Extension",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0057-EMpUwRI.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0057-EMpUwRI.gif"
+  },
+  {
+    "id": "0058",
+    "name": "Barbell Lying Lifting (On Hip)",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0058-SNFfUff.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0058-SNFfUff.gif"
+  },
+  {
+    "id": "0059",
+    "name": "Barbell Lying Preacher Curl",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0059-SYJ4Bkt.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0059-SYJ4Bkt.gif"
+  },
+  {
+    "id": "0061",
+    "name": "Barbell Lying Triceps Extension",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0061-iZop9xO.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0061-iZop9xO.gif"
+  },
+  {
+    "id": "0060",
+    "name": "Barbell Lying Triceps Extension Skull Crusher",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0060-h8LFzo9.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0060-h8LFzo9.gif"
+  },
+  {
+    "id": "0063",
+    "name": "Barbell Narrow Stance Squat",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0063-elhhVgj.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0063-elhhVgj.gif"
+  },
+  {
+    "id": "0064",
+    "name": "Barbell One Arm Bent Over Row",
+    "category": "Back",
+    "equipment": "Barbell",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0064-Jsgsc27.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0064-Jsgsc27.gif"
+  },
+  {
+    "id": "0065",
+    "name": "Barbell One Arm Floor Press",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0065-vtusOWT.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0065-vtusOWT.gif"
+  },
+  {
+    "id": "0066",
+    "name": "Barbell One Arm Side Deadlift",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0066-2DxtqHL.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0066-2DxtqHL.gif"
+  },
+  {
+    "id": "0067",
+    "name": "Barbell One Arm Snatch",
+    "category": "Shoulders",
+    "equipment": "Barbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0067-xHKN2s8.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0067-xHKN2s8.gif"
+  },
+  {
+    "id": "0068",
+    "name": "Barbell One Leg Squat",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0068-uKyN64F.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0068-uKyN64F.gif"
+  },
+  {
+    "id": "0069",
+    "name": "Barbell Overhead Squat",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0069-gfk9kD4.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0069-gfk9kD4.gif"
+  },
+  {
+    "id": "1411",
+    "name": "Barbell Palms Down Wrist Curl Over A Bench",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1411-yzYH9pI.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1411-yzYH9pI.gif"
+  },
+  {
+    "id": "1412",
+    "name": "Barbell Palms Up Wrist Curl Over A Bench",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1412-SJAA2IQ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1412-SJAA2IQ.gif"
+  },
+  {
+    "id": "3017",
+    "name": "Barbell Pendlay Row",
+    "category": "Back",
+    "equipment": "Barbell",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3017-r0z6xzQ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3017-r0z6xzQ.gif"
+  },
+  {
+    "id": "1751",
+    "name": "Barbell Pin Presses",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1751-bndCa3Q.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1751-bndCa3Q.gif"
+  },
+  {
+    "id": "0070",
+    "name": "Barbell Preacher Curl",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0070-qOgPVf6.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0070-qOgPVf6.gif"
+  },
+  {
+    "id": "0071",
+    "name": "Barbell Press Sit-Up",
+    "category": "Core",
+    "equipment": "Barbell",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0071-wnEscH8.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0071-wnEscH8.gif"
+  },
+  {
+    "id": "0072",
+    "name": "Barbell Prone Incline Curl",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0072-WLvTAv5.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0072-WLvTAv5.gif"
+  },
+  {
+    "id": "0073",
+    "name": "Barbell Pullover",
+    "category": "Back",
+    "equipment": "Barbell",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0073-i6LWjok.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0073-i6LWjok.gif"
+  },
+  {
+    "id": "0022",
+    "name": "Barbell Pullover To Press",
+    "category": "Back",
+    "equipment": "Barbell",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0022-znLogoF.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0022-znLogoF.gif"
+  },
+  {
+    "id": "0074",
+    "name": "Barbell Rack Pull",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0074-za9Ni4z.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0074-za9Ni4z.gif"
+  },
+  {
+    "id": "0075",
+    "name": "Barbell Rear Delt Raise",
+    "category": "Shoulders",
+    "equipment": "Barbell",
+    "specificMuscle": "back-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0075-Ln9iTbU.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0075-Ln9iTbU.gif"
+  },
+  {
+    "id": "0076",
     "name": "Barbell Rear Delt Row",
     "category": "Shoulders",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Rear_Delt_Row/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "back-deltoids",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0076-S9zHIvU.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0076-S9zHIvU.gif"
   },
   {
-    "id": "Barbell_Rollout_from_Bench",
-    "name": "Barbell Rollout from Bench",
+    "id": "0078",
+    "name": "Barbell Rear Lunge",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0078-VaP75jl.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0078-VaP75jl.gif"
+  },
+  {
+    "id": "0077",
+    "name": "Barbell Rear Lunge V. 2",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0077-62Nw60O.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0077-62Nw60O.gif"
+  },
+  {
+    "id": "0079",
+    "name": "Barbell Revers Wrist Curl V. 2",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0079-qDnGfDb.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0079-qDnGfDb.gif"
+  },
+  {
+    "id": "2187",
+    "name": "Barbell Reverse Close-Grip Bench Press",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2187-YqJw82s.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2187-YqJw82s.gif"
+  },
+  {
+    "id": "0080",
+    "name": "Barbell Reverse Curl",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0080-xNrS20v.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0080-xNrS20v.gif"
+  },
+  {
+    "id": "0118",
+    "name": "Barbell Reverse Grip Bent Over Row",
+    "category": "Back",
+    "equipment": "Barbell",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0118-SzX3uzM.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0118-SzX3uzM.gif"
+  },
+  {
+    "id": "1256",
+    "name": "Barbell Reverse Grip Decline Bench Press",
+    "category": "Chest",
+    "equipment": "Barbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1256-DotAgEF.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1256-DotAgEF.gif"
+  },
+  {
+    "id": "1257",
+    "name": "Barbell Reverse Grip Incline Bench Press",
+    "category": "Chest",
+    "equipment": "Barbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1257-DU7I633.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1257-DU7I633.gif"
+  },
+  {
+    "id": "1317",
+    "name": "Barbell Reverse Grip Incline Bench Row",
+    "category": "Back",
+    "equipment": "Barbell",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1317-8d8qJQI.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1317-8d8qJQI.gif"
+  },
+  {
+    "id": "1721",
+    "name": "Barbell Reverse Grip Skullcrusher",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1721-yRLPCLu.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1721-yRLPCLu.gif"
+  },
+  {
+    "id": "0081",
+    "name": "Barbell Reverse Preacher Curl",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0081-4LIG9xr.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0081-4LIG9xr.gif"
+  },
+  {
+    "id": "0082",
+    "name": "Barbell Reverse Wrist Curl",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0082-LsZkfU6.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0082-LsZkfU6.gif"
+  },
+  {
+    "id": "0084",
+    "name": "Barbell Rollerout",
     "category": "Core",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Rollout_from_Bench/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0084-7M66AVi.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0084-7M66AVi.gif"
   },
   {
-    "id": "Barbell_Seated_Calf_Raise",
+    "id": "0083",
+    "name": "Barbell Rollerout From Bench",
+    "category": "Core",
+    "equipment": "Barbell",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0083-Gxg9lDc.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0083-Gxg9lDc.gif"
+  },
+  {
+    "id": "0085",
+    "name": "Barbell Romanian Deadlift",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0085-wQ2c4XD.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0085-wQ2c4XD.gif"
+  },
+  {
+    "id": "0086",
+    "name": "Barbell Seated Behind Head Military Press",
+    "category": "Shoulders",
+    "equipment": "Barbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0086-ngPpyRS.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0086-ngPpyRS.gif"
+  },
+  {
+    "id": "0087",
+    "name": "Barbell Seated Bradford Rocky Press",
+    "category": "Shoulders",
+    "equipment": "Barbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0087-0dCyly0.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0087-0dCyly0.gif"
+  },
+  {
+    "id": "0088",
     "name": "Barbell Seated Calf Raise",
     "category": "Legs",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Seated_Calf_Raise/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0088-ktsFQAZ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0088-ktsFQAZ.gif"
   },
   {
-    "id": "Barbell_Shoulder_Press",
-    "name": "Barbell Shoulder Pre",
+    "id": "1371",
+    "name": "Barbell Seated Calf Raise",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1371-ipvgBnC.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1371-ipvgBnC.gif"
+  },
+  {
+    "id": "1718",
+    "name": "Barbell Seated Close Grip Behind Neck Triceps Extension",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1718-4CBIBOM.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1718-4CBIBOM.gif"
+  },
+  {
+    "id": "0089",
+    "name": "Barbell Seated Close-Grip Concentration Curl",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0089-1V1gj1u.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0089-1V1gj1u.gif"
+  },
+  {
+    "id": "0090",
+    "name": "Barbell Seated Good Morning",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0090-d960PgE.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0090-d960PgE.gif"
+  },
+  {
+    "id": "0091",
+    "name": "Barbell Seated Overhead Press",
     "category": "Shoulders",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Shoulder_Press/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0091-kTbSH9h.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0091-kTbSH9h.gif"
   },
   {
-    "id": "Barbell_Shrug",
+    "id": "0092",
+    "name": "Barbell Seated Overhead Triceps Extension",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0092-5uFK1xr.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0092-5uFK1xr.gif"
+  },
+  {
+    "id": "0094",
+    "name": "Barbell Seated Twist",
+    "category": "Core",
+    "equipment": "Barbell",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0094-dFSNDOA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0094-dFSNDOA.gif"
+  },
+  {
+    "id": "0095",
     "name": "Barbell Shrug",
     "category": "Back",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Shrug/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "trapezius",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0095-dG7tG5y.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0095-dG7tG5y.gif"
   },
   {
-    "id": "Barbell_Shrug_Behind_The_Back",
-    "name": "Barbell Shrug Behind The Back",
-    "category": "Back",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Shrug_Behind_The_Back/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Barbell_Side_Bend",
-    "name": "Barbell Side Bend",
+    "id": "0096",
+    "name": "Barbell Side Bent V. 2",
     "category": "Core",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Side_Bend/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0096-i4JkUaL.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0096-i4JkUaL.gif"
   },
   {
-    "id": "Barbell_Side_Split_Squat",
+    "id": "0098",
     "name": "Barbell Side Split Squat",
     "category": "Legs",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Side_Split_Squat/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0098-W31mMjd.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0098-W31mMjd.gif"
   },
   {
-    "id": "Barbell_Squat",
-    "name": "Barbell Squat",
+    "id": "0097",
+    "name": "Barbell Side Split Squat V. 2",
     "category": "Legs",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Squat/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0097-HUEqZ1y.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0097-HUEqZ1y.gif"
   },
   {
-    "id": "Barbell_Squat_To_A_Bench",
-    "name": "Barbell Squat To A Bench",
+    "id": "1756",
+    "name": "Barbell Single Leg Deadlift",
     "category": "Legs",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Squat_To_A_Bench/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1756-gEyURal.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1756-gEyURal.gif"
   },
   {
-    "id": "Barbell_Step_Ups",
-    "name": "Barbell Step Up",
+    "id": "0099",
+    "name": "Barbell Single Leg Split Squat",
     "category": "Legs",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Step_Ups/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0099-gGNQmVt.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0099-gGNQmVt.gif"
   },
   {
-    "id": "Barbell_Walking_Lunge",
-    "name": "Barbell Walking Lunge",
+    "id": "2799",
+    "name": "Barbell Sitted Alternate Leg Raise",
+    "category": "Core",
+    "equipment": "Barbell",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2799-G7xoEzr.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2799-G7xoEzr.gif"
+  },
+  {
+    "id": "2800",
+    "name": "Barbell Sitted Alternate Leg Raise (Female)",
+    "category": "Core",
+    "equipment": "Barbell",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2800-BCs0G2F.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2800-BCs0G2F.gif"
+  },
+  {
+    "id": "0100",
+    "name": "Barbell Skier",
+    "category": "Shoulders",
+    "equipment": "Barbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0100-4Leypho.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0100-4Leypho.gif"
+  },
+  {
+    "id": "0101",
+    "name": "Barbell Speed Squat",
     "category": "Legs",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Walking_Lunge/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0101-euI1BwR.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0101-euI1BwR.gif"
   },
   {
-    "id": "Battling_Ropes",
+    "id": "2810",
+    "name": "Barbell Split Squat V. 2",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2810-HBYyX94.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2810-HBYyX94.gif"
+  },
+  {
+    "id": "0102",
+    "name": "Barbell Squat (On Knees)",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0102-oR7O9LW.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0102-oR7O9LW.gif"
+  },
+  {
+    "id": "2798",
+    "name": "Barbell Squat Jump Step Rear Lunge",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2798-RYcV1kH.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2798-RYcV1kH.gif"
+  },
+  {
+    "id": "0103",
+    "name": "Barbell Standing Ab Rollerout",
+    "category": "Core",
+    "equipment": "Barbell",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0103-xnInPfE.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0103-xnInPfE.gif"
+  },
+  {
+    "id": "0104",
+    "name": "Barbell Standing Back Wrist Curl",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0104-2qTvJAZ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0104-2qTvJAZ.gif"
+  },
+  {
+    "id": "0105",
+    "name": "Barbell Standing Bradford Press",
+    "category": "Shoulders",
+    "equipment": "Barbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0105-dCPESfR.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0105-dCPESfR.gif"
+  },
+  {
+    "id": "1372",
+    "name": "Barbell Standing Calf Raise",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1372-8ozhUIZ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1372-8ozhUIZ.gif"
+  },
+  {
+    "id": "0106",
+    "name": "Barbell Standing Close Grip Curl",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0106-4dUn2iv.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0106-4dUn2iv.gif"
+  },
+  {
+    "id": "1456",
+    "name": "Barbell Standing Close Grip Military Press",
+    "category": "Shoulders",
+    "equipment": "Barbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1456-wdRZISl.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1456-wdRZISl.gif"
+  },
+  {
+    "id": "2414",
+    "name": "Barbell Standing Concentration Curl",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2414-vsMcDi9.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2414-vsMcDi9.gif"
+  },
+  {
+    "id": "0107",
+    "name": "Barbell Standing Front Raise Over Head",
+    "category": "Shoulders",
+    "equipment": "Barbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0107-S8mo30S.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0107-S8mo30S.gif"
+  },
+  {
+    "id": "0108",
+    "name": "Barbell Standing Leg Calf Raise",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0108-rGwhJ5o.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0108-rGwhJ5o.gif"
+  },
+  {
+    "id": "0109",
+    "name": "Barbell Standing Overhead Triceps Extension",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0109-dZl9Q27.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0109-dZl9Q27.gif"
+  },
+  {
+    "id": "0110",
+    "name": "Barbell Standing Reverse Grip Curl",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0110-LWuA3aZ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0110-LWuA3aZ.gif"
+  },
+  {
+    "id": "0111",
+    "name": "Barbell Standing Rocking Leg Calf Raise",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0111-6HiHHe0.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0111-6HiHHe0.gif"
+  },
+  {
+    "id": "0112",
+    "name": "Barbell Standing Twist",
+    "category": "Core",
+    "equipment": "Barbell",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0112-yQe5HpE.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0112-yQe5HpE.gif"
+  },
+  {
+    "id": "1629",
+    "name": "Barbell Standing Wide Grip Biceps Curl",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1629-faHKVkK.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1629-faHKVkK.gif"
+  },
+  {
+    "id": "1457",
+    "name": "Barbell Standing Wide Military Press",
+    "category": "Shoulders",
+    "equipment": "Barbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1457-Kyd9Rz5.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1457-Kyd9Rz5.gif"
+  },
+  {
+    "id": "0113",
+    "name": "Barbell Standing Wide-Grip Curl",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0113-NdIb5Z1.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0113-NdIb5Z1.gif"
+  },
+  {
+    "id": "0114",
+    "name": "Barbell Step-Up",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0114-Kxquu2E.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0114-Kxquu2E.gif"
+  },
+  {
+    "id": "0115",
+    "name": "Barbell Stiff Leg Good Morning",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0115-JrOHAZc.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0115-JrOHAZc.gif"
+  },
+  {
+    "id": "0116",
+    "name": "Barbell Straight Leg Deadlift",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "hamstring",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0116-hrVQWvE.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0116-hrVQWvE.gif"
+  },
+  {
+    "id": "0117",
+    "name": "Barbell Sumo Deadlift",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0117-KgI0tqW.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0117-KgI0tqW.gif"
+  },
+  {
+    "id": "3305",
+    "name": "Barbell Thruster",
+    "category": "Shoulders",
+    "equipment": "Barbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3305-f7Y9eDZ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3305-f7Y9eDZ.gif"
+  },
+  {
+    "id": "0120",
+    "name": "Barbell Upright Row",
+    "category": "Shoulders",
+    "equipment": "Barbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0120-UDlhcO8.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0120-UDlhcO8.gif"
+  },
+  {
+    "id": "0119",
+    "name": "Barbell Upright Row V. 2",
+    "category": "Shoulders",
+    "equipment": "Barbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0119-83HoW9X.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0119-83HoW9X.gif"
+  },
+  {
+    "id": "0121",
+    "name": "Barbell Upright Row V. 3",
+    "category": "Shoulders",
+    "equipment": "Barbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0121-fI18Rbc.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0121-fI18Rbc.gif"
+  },
+  {
+    "id": "0122",
+    "name": "Barbell Wide Bench Press",
+    "category": "Chest",
+    "equipment": "Barbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0122-JsKq9so.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0122-JsKq9so.gif"
+  },
+  {
+    "id": "1258",
+    "name": "Barbell Wide Reverse Grip Bench Press",
+    "category": "Chest",
+    "equipment": "Barbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1258-945zpRg.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1258-945zpRg.gif"
+  },
+  {
+    "id": "0124",
+    "name": "Barbell Wide Squat",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0124-s7HX1BY.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0124-s7HX1BY.gif"
+  },
+  {
+    "id": "0123",
+    "name": "Barbell Wide-Grip Upright Row",
+    "category": "Shoulders",
+    "equipment": "Barbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0123-RgJDRR1.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0123-RgJDRR1.gif"
+  },
+  {
+    "id": "0126",
+    "name": "Barbell Wrist Curl",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0126-82LxxkW.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0126-82LxxkW.gif"
+  },
+  {
+    "id": "0125",
+    "name": "Barbell Wrist Curl V. 2",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0125-6kSxYnw.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0125-6kSxYnw.gif"
+  },
+  {
+    "id": "0127",
+    "name": "Barbell Zercher Squat",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0127-LSTChY9.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0127-LSTChY9.gif"
+  },
+  {
+    "id": "3212",
+    "name": "Basic Toe Touch (Male)",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3212-BbfB8Gb.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3212-BbfB8Gb.gif"
+  },
+  {
+    "id": "0128",
     "name": "Battling Ropes",
     "category": "Shoulders",
     "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Battling_Ropes/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0128-RJa4tCo.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0128-RJa4tCo.gif"
   },
   {
-    "id": "Bear_Crawl_Sled_Drags",
-    "name": "Bear Crawl Sled Drags",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bear_Crawl_Sled_Drags/0.jpg",
-    "requiresWeight": true
+    "id": "3360",
+    "name": "Bear Crawl",
+    "category": "Cardio",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "abs",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3360-0Yz8WdV.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3360-0Yz8WdV.gif"
   },
   {
-    "id": "Behind_Head_Chest_Stretch",
+    "id": "1259",
     "name": "Behind Head Chest Stretch",
     "category": "Chest",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Behind_Head_Chest_Stretch/0.jpg",
-    "requiresWeight": false
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1259-QoHIhPl.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1259-QoHIhPl.gif"
   },
   {
-    "id": "Bench_Dips",
-    "name": "Bench Dips",
+    "id": "0129",
+    "name": "Bench Dip (Knees Bent)",
     "category": "Arms",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bench_Dips/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0129-RrLske5.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0129-RrLske5.gif"
   },
   {
-    "id": "Bench_Jump",
-    "name": "Bench Jump",
+    "id": "1399",
+    "name": "Bench Dip On Floor",
+    "category": "Arms",
+    "equipment": "Bodyweight",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1399-9RT8oQW.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1399-9RT8oQW.gif"
+  },
+  {
+    "id": "0130",
+    "name": "Bench Hip Extension",
     "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bench_Jump/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0130-u27Kcdz.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0130-u27Kcdz.gif"
   },
   {
-    "id": "Bench_Press_-_Powerlifting",
-    "name": "Bench Press - Powerlifting (Barbell)",
-    "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bench_Press_-_Powerlifting/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Bench_Press_-_With_Bands",
-    "name": "Bench Press - With Band",
-    "category": "Chest",
-    "equipment": "Band",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bench_Press_-_With_Bands/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Bench_Press_with_Chains",
-    "name": "Bench Press with Chain (Barbell)",
-    "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bench_Press_with_Chains/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Bench_Sprint",
-    "name": "Bench Sprint",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bench_Sprint/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Bent-Arm_Barbell_Pullover",
-    "name": "Bent-Arm Barbell Pullover",
+    "id": "3019",
+    "name": "Bench Pull-Ups",
     "category": "Back",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bent-Arm_Barbell_Pullover/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Bent-Arm_Dumbbell_Pullover",
-    "name": "Bent-Arm Dumbbell Pullover",
-    "category": "Chest",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bent-Arm_Dumbbell_Pullover/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Bent-Knee_Hip_Raise",
-    "name": "Bent-Knee Hip Raise",
-    "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bent-Knee_Hip_Raise/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3019-mExgrF9.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3019-mExgrF9.gif"
   },
   {
-    "id": "Bent_Over_Barbell_Row",
-    "name": "Bent Over Barbell Row",
-    "category": "Back",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bent_Over_Barbell_Row/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Bent_Over_Dumbbell_Rear_Delt_Raise_With_Head_On_Bench",
-    "name": "Bent Over Dumbbell Rear Delt Raise With Head On Bench",
-    "category": "Shoulders",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bent_Over_Dumbbell_Rear_Delt_Raise_With_Head_On_Bench/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Bent_Over_Low-Pulley_Side_Lateral",
-    "name": "Bent Over Low-Pulley Side Lateral (Cable)",
-    "category": "Shoulders",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bent_Over_Low-Pulley_Side_Lateral/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Bent_Over_One-Arm_Long_Bar_Row",
-    "name": "Bent Over One-Arm Long Bar Row (Barbell)",
-    "category": "Back",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bent_Over_One-Arm_Long_Bar_Row/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Bent_Over_Two-Arm_Long_Bar_Row",
-    "name": "Bent Over Two-Arm Long Bar Row (Barbell)",
-    "category": "Back",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bent_Over_Two-Arm_Long_Bar_Row/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Bent_Over_Two-Dumbbell_Row",
-    "name": "Bent Over Two-Dumbbell Row",
-    "category": "Back",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bent_Over_Two-Dumbbell_Row/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Bent_Over_Two-Dumbbell_Row_With_Palms_In",
-    "name": "Bent Over Two-Dumbbell Row With Palms In",
-    "category": "Back",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bent_Over_Two-Dumbbell_Row_With_Palms_In/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Bent_Press",
-    "name": "Bent Pre (Kettlebell)",
-    "category": "Core",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bent_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Bicycling",
-    "name": "Bicycling",
+    "id": "3639",
+    "name": "Bent Knee Lying Twist (Male)",
     "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bicycling/0.jpg",
-    "requiresWeight": false
+    "equipment": "Bodyweight",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3639-6sYyrRX.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3639-6sYyrRX.gif"
   },
   {
-    "id": "Bicycling_Stationary",
-    "name": "Bicycling, Stationary (Machine)",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bicycling_Stationary/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Board_Press",
-    "name": "Board Pre (Barbell)",
+    "id": "1770",
+    "name": "Biceps Leg Concentration Curl",
     "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Board_Press/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1770-sJFIDIp.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1770-sJFIDIp.gif"
   },
   {
-    "id": "Body-Up",
+    "id": "0139",
+    "name": "Biceps Narrow Pull-Ups",
+    "category": "Arms",
+    "equipment": "Bodyweight",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0139-50BETrz.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0139-50BETrz.gif"
+  },
+  {
+    "id": "0140",
+    "name": "Biceps Pull-Up",
+    "category": "Arms",
+    "equipment": "Bodyweight",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0140-guT8YnS.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0140-guT8YnS.gif"
+  },
+  {
+    "id": "0137",
     "name": "Body-Up",
     "category": "Arms",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Body-Up/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0137-U6G2gk9.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0137-U6G2gk9.gif"
   },
   {
-    "id": "Body_Tricep_Press",
-    "name": "Body Tricep Press",
+    "id": "3543",
+    "name": "Bodyweight Drop Jump Squat",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3543-wfotm7S.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3543-wfotm7S.gif"
+  },
+  {
+    "id": "3544",
+    "name": "Bodyweight Incline Side Plank",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3544-5VXmnV5.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3544-5VXmnV5.gif"
+  },
+  {
+    "id": "1771",
+    "name": "Bodyweight Kneeling Triceps Extension",
     "category": "Arms",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Body_Tricep_Press/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1771-s0HKO2I.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1771-s0HKO2I.gif"
   },
   {
-    "id": "Bodyweight_Flyes",
-    "name": "Bodyweight Flye (EZ Bar)",
-    "category": "Chest",
-    "equipment": "EZ Bar",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bodyweight_Flyes/0.jpg",
-    "requiresWeight": false
+    "id": "1769",
+    "name": "Bodyweight Side Lying Biceps Curl",
+    "category": "Arms",
+    "equipment": "Bodyweight",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1769-gscGLOU.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1769-gscGLOU.gif"
   },
   {
-    "id": "Bodyweight_Mid_Row",
-    "name": "Bodyweight Mid Row",
+    "id": "3168",
+    "name": "Bodyweight Squatting Row",
     "category": "Back",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bodyweight_Mid_Row/0.jpg",
-    "requiresWeight": false
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3168-3xK09Sk.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3168-3xK09Sk.gif"
   },
   {
-    "id": "Bodyweight_Squat",
-    "name": "Bodyweight Squat",
+    "id": "3167",
+    "name": "Bodyweight Squatting Row (With Towel)",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3167-BReCuOn.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3167-BReCuOn.gif"
+  },
+  {
+    "id": "1373",
+    "name": "Bodyweight Standing Calf Raise",
     "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bodyweight_Squat/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "calves",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1373-bJYHBIN.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1373-bJYHBIN.gif"
   },
   {
-    "id": "Bodyweight_Walking_Lunge",
-    "name": "Bodyweight Walking Lunge",
-    "category": "Legs",
+    "id": "3156",
+    "name": "Bodyweight Standing Close-Grip One Arm Row",
+    "category": "Back",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bodyweight_Walking_Lunge/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3156-v2DfH14.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3156-v2DfH14.gif"
   },
   {
-    "id": "Bosu_Ball_Cable_Crunch_With_Side_Bends",
-    "name": "Bosu Ball Cable Crunch With Side Bend",
+    "id": "3158",
+    "name": "Bodyweight Standing Close-Grip Row",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3158-tig3PXb.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3158-tig3PXb.gif"
+  },
+  {
+    "id": "3162",
+    "name": "Bodyweight Standing One Arm Row",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3162-xbkPfaw.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3162-xbkPfaw.gif"
+  },
+  {
+    "id": "3161",
+    "name": "Bodyweight Standing One Arm Row (With Towel)",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3161-O4oIqQD.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3161-O4oIqQD.gif"
+  },
+  {
+    "id": "3166",
+    "name": "Bodyweight Standing Row",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3166-wd4ds3s.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3166-wd4ds3s.gif"
+  },
+  {
+    "id": "3165",
+    "name": "Bodyweight Standing Row (With Towel)",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3165-uTv34oq.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3165-uTv34oq.gif"
+  },
+  {
+    "id": "0138",
+    "name": "Bottoms-Up",
     "category": "Core",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bosu_Ball_Cable_Crunch_With_Side_Bends/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0138-CI6baTY.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0138-CI6baTY.gif"
   },
   {
-    "id": "Bottoms-Up_Clean_From_The_Hang_Position",
-    "name": "Bottoms-Up Clean From The Hang Position (Kettlebell)",
-    "category": "Arms",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bottoms-Up_Clean_From_The_Hang_Position/0.jpg",
-    "requiresWeight": true
+    "id": "1374",
+    "name": "Box Jump Down With One Leg Stabilization",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1374-iPm26QU.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1374-iPm26QU.gif"
   },
   {
-    "id": "Bottoms_Up",
-    "name": "Bottoms Up",
+    "id": "2466",
+    "name": "Bridge - Mountain Climber (Cross Body)",
     "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bottoms_Up/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2466-9c6T1YX.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2466-9c6T1YX.gif"
   },
   {
-    "id": "Box_Jump_Multiple_Response",
-    "name": "Box Jump (Multiple Response)",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Box_Jump_Multiple_Response/0.jpg",
-    "requiresWeight": false
+    "id": "1160",
+    "name": "Burpee",
+    "category": "Cardio",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1160-dK9394r.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1160-dK9394r.gif"
   },
   {
-    "id": "Box_Skip",
-    "name": "Box Skip",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Box_Skip/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Box_Squat",
-    "name": "Box Squat (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Box_Squat/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Box_Squat_with_Bands",
-    "name": "Box Squat with Band (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Box_Squat_with_Bands/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Box_Squat_with_Chains",
-    "name": "Box Squat with Chain (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Box_Squat_with_Chains/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Brachialis-SMR",
-    "name": "Brachialis-SMR",
-    "category": "Arms",
-    "equipment": "Foam Roll",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Brachialis-SMR/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Bradford_Rocky_Presses",
-    "name": "Bradford/Rocky Presse (Barbell)",
-    "category": "Shoulders",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bradford_Rocky_Presses/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Butt-Ups",
+    "id": "0870",
     "name": "Butt-Ups",
     "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Butt-Ups/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0870-qcNN2FN.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0870-qcNN2FN.gif"
   },
   {
-    "id": "Butt_Lift_Bridge",
-    "name": "Butt Lift (Bridge)",
+    "id": "1494",
+    "name": "Butterfly Yoga Pose",
     "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Butt_Lift_Bridge/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "adductor",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1494-bWlZvXh.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1494-bWlZvXh.gif"
   },
   {
-    "id": "Butterfly",
-    "name": "Butterfly (Machine)",
-    "category": "Chest",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Butterfly/0.jpg",
-    "requiresWeight": true
+    "id": "0148",
+    "name": "Cable Alternate Shoulder Press",
+    "category": "Shoulders",
+    "equipment": "Cable",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0148-KHPZL0b.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0148-KHPZL0b.gif"
   },
   {
-    "id": "Cable_Chest_Press",
-    "name": "Cable Chest Pre",
+    "id": "0149",
+    "name": "Cable Alternate Triceps Extension",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0149-Gchi5Tr.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0149-Gchi5Tr.gif"
+  },
+  {
+    "id": "3235",
+    "name": "Cable Assisted Inverse Leg Curl",
+    "category": "Legs",
+    "equipment": "Cable",
+    "specificMuscle": "hamstring",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3235-zHEpuuc.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3235-zHEpuuc.gif"
+  },
+  {
+    "id": "0150",
+    "name": "Cable Bar Lateral Pulldown",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0150-eYnzaCm.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0150-eYnzaCm.gif"
+  },
+  {
+    "id": "0151",
+    "name": "Cable Bench Press",
     "category": "Chest",
     "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Chest_Press/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0151-7xI5MXA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0151-7xI5MXA.gif"
   },
   {
-    "id": "Cable_Crossover",
-    "name": "Cable Crossover",
+    "id": "1630",
+    "name": "Cable Close Grip Curl",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1630-BCGQ6J5.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1630-BCGQ6J5.gif"
+  },
+  {
+    "id": "1631",
+    "name": "Cable Concentration Curl",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1631-NvfE43H.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1631-NvfE43H.gif"
+  },
+  {
+    "id": "0152",
+    "name": "Cable Concentration Extension (On Knee)",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0152-Db7eEgw.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0152-Db7eEgw.gif"
+  },
+  {
+    "id": "0153",
+    "name": "Cable Cross-Over Lateral Pulldown",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0153-OQ1otBN.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0153-OQ1otBN.gif"
+  },
+  {
+    "id": "0154",
+    "name": "Cable Cross-Over Revers Fly",
+    "category": "Shoulders",
+    "equipment": "Cable",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0154-aqvSOQE.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0154-aqvSOQE.gif"
+  },
+  {
+    "id": "0155",
+    "name": "Cable Cross-Over Variation",
     "category": "Chest",
     "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Crossover/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0155-0CXGHya.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0155-0CXGHya.gif"
   },
   {
-    "id": "Cable_Crunch",
-    "name": "Cable Crunch",
-    "category": "Core",
+    "id": "0868",
+    "name": "Cable Curl",
+    "category": "Arms",
     "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Crunch/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0868-G08RZcQ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0868-G08RZcQ.gif"
   },
   {
-    "id": "Cable_Deadlifts",
+    "id": "0157",
     "name": "Cable Deadlift",
     "category": "Legs",
     "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Deadlifts/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0157-eGDudUV.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0157-eGDudUV.gif"
   },
   {
-    "id": "Cable_Hammer_Curls_-_Rope_Attachment",
-    "name": "Cable Hammer Curls - Rope Attachment",
+    "id": "0158",
+    "name": "Cable Decline Fly",
+    "category": "Chest",
+    "equipment": "Cable",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0158-7saC5zz.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0158-7saC5zz.gif"
+  },
+  {
+    "id": "1260",
+    "name": "Cable Decline One Arm Press",
+    "category": "Chest",
+    "equipment": "Cable",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1260-KHGNa16.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1260-KHGNa16.gif"
+  },
+  {
+    "id": "1261",
+    "name": "Cable Decline Press",
+    "category": "Chest",
+    "equipment": "Cable",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1261-2Pya1cP.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1261-2Pya1cP.gif"
+  },
+  {
+    "id": "0159",
+    "name": "Cable Decline Seated Wide-Grip Row",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0159-kesXOpB.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0159-kesXOpB.gif"
+  },
+  {
+    "id": "1632",
+    "name": "Cable Drag Curl",
     "category": "Arms",
     "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Hammer_Curls_-_Rope_Attachment/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1632-dXz8zjF.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1632-dXz8zjF.gif"
   },
   {
-    "id": "Cable_Hip_Adduction",
+    "id": "0160",
+    "name": "Cable Floor Seated Wide-Grip Row",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0160-veXwo0D.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0160-veXwo0D.gif"
+  },
+  {
+    "id": "0161",
+    "name": "Cable Forward Raise",
+    "category": "Shoulders",
+    "equipment": "Cable",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0161-hvHhCv8.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0161-hvHhCv8.gif"
+  },
+  {
+    "id": "0162",
+    "name": "Cable Front Raise",
+    "category": "Shoulders",
+    "equipment": "Cable",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0162-u2X71Np.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0162-u2X71Np.gif"
+  },
+  {
+    "id": "0164",
+    "name": "Cable Front Shoulder Raise",
+    "category": "Shoulders",
+    "equipment": "Cable",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0164-mTT3KLn.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0164-mTT3KLn.gif"
+  },
+  {
+    "id": "0165",
+    "name": "Cable Hammer Curl (With Rope)",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0165-HPlPoQA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0165-HPlPoQA.gif"
+  },
+  {
+    "id": "1722",
+    "name": "Cable High Pulley Overhead Tricep Extension",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1722-1xHyxys.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1722-1xHyxys.gif"
+  },
+  {
+    "id": "0167",
+    "name": "Cable High Row (Kneeling)",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0167-ZSJNetl.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0167-ZSJNetl.gif"
+  },
+  {
+    "id": "0168",
     "name": "Cable Hip Adduction",
     "category": "Legs",
     "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Hip_Adduction/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "adductor",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0168-hBGWILP.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0168-hBGWILP.gif"
   },
   {
-    "id": "Cable_Incline_Pushdown",
+    "id": "0169",
+    "name": "Cable Incline Bench Press",
+    "category": "Chest",
+    "equipment": "Cable",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0169-Vh0GsK4.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0169-Vh0GsK4.gif"
+  },
+  {
+    "id": "1318",
+    "name": "Cable Incline Bench Row",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1318-yaMIo4D.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1318-yaMIo4D.gif"
+  },
+  {
+    "id": "0171",
+    "name": "Cable Incline Fly",
+    "category": "Chest",
+    "equipment": "Cable",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0171-tBWXbIT.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0171-tBWXbIT.gif"
+  },
+  {
+    "id": "0170",
+    "name": "Cable Incline Fly (On Stability Ball)",
+    "category": "Chest",
+    "equipment": "Cable",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0170-27NNGFr.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0170-27NNGFr.gif"
+  },
+  {
+    "id": "0172",
     "name": "Cable Incline Pushdown",
     "category": "Back",
     "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Incline_Pushdown/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0172-1PK5Uo3.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0172-1PK5Uo3.gif"
   },
   {
-    "id": "Cable_Incline_Triceps_Extension",
+    "id": "0173",
     "name": "Cable Incline Triceps Extension",
     "category": "Arms",
     "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Incline_Triceps_Extension/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0173-Hx1WC8I.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0173-Hx1WC8I.gif"
   },
   {
-    "id": "Cable_Internal_Rotation",
-    "name": "Cable Internal Rotation",
-    "category": "Shoulders",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Internal_Rotation/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Cable_Iron_Cross",
-    "name": "Cable Iron Cro",
-    "category": "Chest",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Iron_Cross/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Cable_Judo_Flip",
+    "id": "0174",
     "name": "Cable Judo Flip",
     "category": "Core",
     "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Judo_Flip/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0174-MvQPqVW.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0174-MvQPqVW.gif"
   },
   {
-    "id": "Cable_Lying_Triceps_Extension",
-    "name": "Cable Lying Triceps Extension",
+    "id": "0860",
+    "name": "Cable Kickback",
     "category": "Arms",
     "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Lying_Triceps_Extension/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0860-HEJ6DIX.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0860-HEJ6DIX.gif"
   },
   {
-    "id": "Cable_One_Arm_Tricep_Extension",
-    "name": "Cable One Arm Tricep Extension",
+    "id": "0175",
+    "name": "Cable Kneeling Crunch",
+    "category": "Core",
+    "equipment": "Cable",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0175-WW95auq.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0175-WW95auq.gif"
+  },
+  {
+    "id": "3697",
+    "name": "Cable Kneeling Rear Delt Row (With Rope) (Male)",
+    "category": "Shoulders",
+    "equipment": "Cable",
+    "specificMuscle": "back-deltoids",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3697-G61cXLk.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3697-G61cXLk.gif"
+  },
+  {
+    "id": "0176",
+    "name": "Cable Kneeling Triceps Extension",
     "category": "Arms",
     "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_One_Arm_Tricep_Extension/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0176-KWdF2JI.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0176-KWdF2JI.gif"
   },
   {
-    "id": "Cable_Preacher_Curl",
+    "id": "2330",
+    "name": "Cable Lat Pulldown Full Range Of Motion",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2330-LEprlgG.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2330-LEprlgG.gif"
+  },
+  {
+    "id": "0177",
+    "name": "Cable Lateral Pulldown (With Rope Attachment)",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0177-CuaWCmC.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0177-CuaWCmC.gif"
+  },
+  {
+    "id": "2616",
+    "name": "Cable Lateral Pulldown With V-Bar",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2616-4c9BhzB.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2616-4c9BhzB.gif"
+  },
+  {
+    "id": "0178",
+    "name": "Cable Lateral Raise",
+    "category": "Shoulders",
+    "equipment": "Cable",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0178-goJ6ezq.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0178-goJ6ezq.gif"
+  },
+  {
+    "id": "0179",
+    "name": "Cable Low Fly",
+    "category": "Chest",
+    "equipment": "Cable",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0179-FVmZVhk.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0179-FVmZVhk.gif"
+  },
+  {
+    "id": "0180",
+    "name": "Cable Low Seated Row",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0180-hvV79Si.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0180-hvV79Si.gif"
+  },
+  {
+    "id": "1634",
+    "name": "Cable Lying Bicep Curl",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1634-otqIxU4.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1634-otqIxU4.gif"
+  },
+  {
+    "id": "0182",
+    "name": "Cable Lying Close-Grip Curl",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0182-61GrD55.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0182-61GrD55.gif"
+  },
+  {
+    "id": "0184",
+    "name": "Cable Lying Extension Pullover (With Rope Attachment)",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0184-Q2Eu1Ax.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0184-Q2Eu1Ax.gif"
+  },
+  {
+    "id": "0185",
+    "name": "Cable Lying Fly",
+    "category": "Chest",
+    "equipment": "Cable",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0185-lJJ7Yq8.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0185-lJJ7Yq8.gif"
+  },
+  {
+    "id": "0186",
+    "name": "Cable Lying Triceps Extension V. 2",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0186-uxJcFUU.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0186-uxJcFUU.gif"
+  },
+  {
+    "id": "0188",
+    "name": "Cable Middle Fly",
+    "category": "Chest",
+    "equipment": "Cable",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0188-xLYSdtg.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0188-xLYSdtg.gif"
+  },
+  {
+    "id": "0189",
+    "name": "Cable One Arm Bent Over Row",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0189-EIsE3u8.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0189-EIsE3u8.gif"
+  },
+  {
+    "id": "0190",
+    "name": "Cable One Arm Curl",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0190-YTur5nR.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0190-YTur5nR.gif"
+  },
+  {
+    "id": "1262",
+    "name": "Cable One Arm Decline Chest Fly",
+    "category": "Chest",
+    "equipment": "Cable",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1262-w4dLzSx.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1262-w4dLzSx.gif"
+  },
+  {
+    "id": "1263",
+    "name": "Cable One Arm Fly On Exercise Ball",
+    "category": "Chest",
+    "equipment": "Cable",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1263-hHy8tQG.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1263-hHy8tQG.gif"
+  },
+  {
+    "id": "1264",
+    "name": "Cable One Arm Incline Fly On Exercise Ball",
+    "category": "Chest",
+    "equipment": "Cable",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1264-P14Dz9D.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1264-P14Dz9D.gif"
+  },
+  {
+    "id": "1265",
+    "name": "Cable One Arm Incline Press",
+    "category": "Chest",
+    "equipment": "Cable",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1265-GKEH6jj.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1265-GKEH6jj.gif"
+  },
+  {
+    "id": "1266",
+    "name": "Cable One Arm Incline Press On Exercise Ball",
+    "category": "Chest",
+    "equipment": "Cable",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1266-6t00BsF.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1266-6t00BsF.gif"
+  },
+  {
+    "id": "0191",
+    "name": "Cable One Arm Lateral Bent-Over",
+    "category": "Chest",
+    "equipment": "Cable",
+    "specificMuscle": "chest",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0191-dB07vDu.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0191-dB07vDu.gif"
+  },
+  {
+    "id": "0192",
+    "name": "Cable One Arm Lateral Raise",
+    "category": "Shoulders",
+    "equipment": "Cable",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0192-wEulIzp.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0192-wEulIzp.gif"
+  },
+  {
+    "id": "1633",
+    "name": "Cable One Arm Preacher Curl",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1633-eHBlPsa.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1633-eHBlPsa.gif"
+  },
+  {
+    "id": "1267",
+    "name": "Cable One Arm Press On Exercise Ball",
+    "category": "Chest",
+    "equipment": "Cable",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1267-MKIelrR.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1267-MKIelrR.gif"
+  },
+  {
+    "id": "3563",
+    "name": "Cable One Arm Pulldown",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3563-U5INZY6.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3563-U5INZY6.gif"
+  },
+  {
+    "id": "1635",
+    "name": "Cable One Arm Reverse Preacher Curl",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1635-ZXnjcOQ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1635-ZXnjcOQ.gif"
+  },
+  {
+    "id": "0193",
+    "name": "Cable One Arm Straight Back High Row (Kneeling)",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0193-WrYPP2g.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0193-WrYPP2g.gif"
+  },
+  {
+    "id": "1723",
+    "name": "Cable One Arm Tricep Pushdown",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1723-qRZ5S1N.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1723-qRZ5S1N.gif"
+  },
+  {
+    "id": "1636",
+    "name": "Cable Overhead Curl",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1636-wDUqY2u.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1636-wDUqY2u.gif"
+  },
+  {
+    "id": "1637",
+    "name": "Cable Overhead Curl On Exercise Ball",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1637-ioTf098.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1637-ioTf098.gif"
+  },
+  {
+    "id": "0194",
+    "name": "Cable Overhead Triceps Extension (Rope Attachment)",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0194-2IxROQ1.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0194-2IxROQ1.gif"
+  },
+  {
+    "id": "1319",
+    "name": "Cable Palm Rotational Row",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1319-OmQ8w0p.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1319-OmQ8w0p.gif"
+  },
+  {
+    "id": "0195",
     "name": "Cable Preacher Curl",
     "category": "Arms",
     "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Preacher_Curl/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0195-P2lNrGL.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0195-P2lNrGL.gif"
   },
   {
-    "id": "Cable_Rear_Delt_Fly",
-    "name": "Cable Rear Delt Fly",
+    "id": "1268",
+    "name": "Cable Press On Exercise Ball",
+    "category": "Chest",
+    "equipment": "Cable",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1268-vAwm6rK.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1268-vAwm6rK.gif"
+  },
+  {
+    "id": "0196",
+    "name": "Cable Pull Through (With Rope)",
+    "category": "Legs",
+    "equipment": "Cable",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0196-OM46QHm.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0196-OM46QHm.gif"
+  },
+  {
+    "id": "0198",
+    "name": "Cable Pulldown",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0198-RVwzP10.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0198-RVwzP10.gif"
+  },
+  {
+    "id": "0197",
+    "name": "Cable Pulldown (Pro Lat Bar)",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0197-qdRxqCj.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0197-qdRxqCj.gif"
+  },
+  {
+    "id": "1638",
+    "name": "Cable Pulldown Bicep Curl",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1638-QTXKWPh.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1638-QTXKWPh.gif"
+  },
+  {
+    "id": "0201",
+    "name": "Cable Pushdown",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0201-3ZflifB.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0201-3ZflifB.gif"
+  },
+  {
+    "id": "0199",
+    "name": "Cable Pushdown (Straight Arm) V. 2",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0199-PskORrA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0199-PskORrA.gif"
+  },
+  {
+    "id": "0200",
+    "name": "Cable Pushdown (With Rope Attachment)",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0200-dU605di.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0200-dU605di.gif"
+  },
+  {
+    "id": "0202",
+    "name": "Cable Rear Delt Row (Stirrups)",
     "category": "Shoulders",
     "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Rear_Delt_Fly/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "back-deltoids",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0202-yUdIGNs.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0202-yUdIGNs.gif"
   },
   {
-    "id": "Cable_Reverse_Crunch",
+    "id": "0203",
+    "name": "Cable Rear Delt Row (With Rope)",
+    "category": "Shoulders",
+    "equipment": "Cable",
+    "specificMuscle": "back-deltoids",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0203-wqNPGCg.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0203-wqNPGCg.gif"
+  },
+  {
+    "id": "0204",
+    "name": "Cable Rear Drive",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0204-c3QQLPi.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0204-c3QQLPi.gif"
+  },
+  {
+    "id": "0205",
+    "name": "Cable Rear Pulldown",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0205-SpsOSXk.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0205-SpsOSXk.gif"
+  },
+  {
+    "id": "0873",
     "name": "Cable Reverse Crunch",
     "category": "Core",
     "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Reverse_Crunch/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0873-RqOtqD7.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0873-RqOtqD7.gif"
   },
   {
-    "id": "Cable_Rope_Overhead_Triceps_Extension",
-    "name": "Cable Rope Overhead Triceps Extension",
+    "id": "0206",
+    "name": "Cable Reverse Curl",
     "category": "Arms",
     "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Rope_Overhead_Triceps_Extension/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0206-eOG0r6v.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0206-eOG0r6v.gif"
   },
   {
-    "id": "Cable_Rope_Rear-Delt_Rows",
-    "name": "Cable Rope Rear-Delt Row",
-    "category": "Shoulders",
+    "id": "2406",
+    "name": "Cable Reverse Grip Triceps Pushdown (Sz-bar) (With Arm Blaster)",
+    "category": "Arms",
     "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Rope_Rear-Delt_Rows/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2406-ThKP69G.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2406-ThKP69G.gif"
   },
   {
-    "id": "Cable_Russian_Twists",
-    "name": "Cable Russian Twist",
+    "id": "1413",
+    "name": "Cable Reverse One Arm Curl",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1413-gVlnLIJ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1413-gVlnLIJ.gif"
+  },
+  {
+    "id": "0209",
+    "name": "Cable Reverse Preacher Curl",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0209-IwX5NqK.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0209-IwX5NqK.gif"
+  },
+  {
+    "id": "0210",
+    "name": "Cable Reverse Wrist Curl",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0210-eYmsEPR.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0210-eYmsEPR.gif"
+  },
+  {
+    "id": "0207",
+    "name": "Cable Reverse-Grip Pushdown",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0207-VjYliFZ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0207-VjYliFZ.gif"
+  },
+  {
+    "id": "0208",
+    "name": "Cable Reverse-Grip Straight Back Seated High Row",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0208-PNtsX17.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0208-PNtsX17.gif"
+  },
+  {
+    "id": "1320",
+    "name": "Cable Rope Crossover Seated Row",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1320-UFGF6gk.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1320-UFGF6gk.gif"
+  },
+  {
+    "id": "1321",
+    "name": "Cable Rope Elevated Seated Row",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1321-c8oybX6.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1321-c8oybX6.gif"
+  },
+  {
+    "id": "1322",
+    "name": "Cable Rope Extension Incline Bench Row",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1322-MgKwAAo.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1322-MgKwAAo.gif"
+  },
+  {
+    "id": "1639",
+    "name": "Cable Rope Hammer Preacher Curl",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1639-PcPe0P5.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1639-PcPe0P5.gif"
+  },
+  {
+    "id": "1724",
+    "name": "Cable Rope High Pulley Overhead Tricep Extension",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1724-NN8nSNT.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1724-NN8nSNT.gif"
+  },
+  {
+    "id": "1725",
+    "name": "Cable Rope Incline Tricep Extension",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1725-ZujAdR9.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1725-ZujAdR9.gif"
+  },
+  {
+    "id": "1726",
+    "name": "Cable Rope Lying On Floor Tricep Extension",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1726-U3ffHlY.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1726-U3ffHlY.gif"
+  },
+  {
+    "id": "1640",
+    "name": "Cable Rope One Arm Hammer Preacher Curl",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1640-4hATdoB.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1640-4hATdoB.gif"
+  },
+  {
+    "id": "1323",
+    "name": "Cable Rope Seated Row",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1323-SJqRxOt.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1323-SJqRxOt.gif"
+  },
+  {
+    "id": "0211",
+    "name": "Cable Russian Twists (On Stability Ball)",
     "category": "Core",
     "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Russian_Twists/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0211-d9Xaxq6.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0211-d9Xaxq6.gif"
   },
   {
-    "id": "Cable_Seated_Crunch",
+    "id": "2144",
+    "name": "Cable Seated Chest Press",
+    "category": "Chest",
+    "equipment": "Cable",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2144-nIR4Rwl.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2144-nIR4Rwl.gif"
+  },
+  {
+    "id": "0212",
     "name": "Cable Seated Crunch",
     "category": "Core",
     "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Seated_Crunch/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0212-8xUv4J7.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0212-8xUv4J7.gif"
   },
   {
-    "id": "Cable_Seated_Lateral_Raise",
-    "name": "Cable Seated Lateral Raise",
+    "id": "1641",
+    "name": "Cable Seated Curl",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1641-8oYqOt9.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1641-8oYqOt9.gif"
+  },
+  {
+    "id": "0213",
+    "name": "Cable Seated High Row (V-bar)",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0213-pwt0pnM.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0213-pwt0pnM.gif"
+  },
+  {
+    "id": "0214",
+    "name": "Cable Seated One Arm Alternate Row",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0214-vpp9Ku2.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0214-vpp9Ku2.gif"
+  },
+  {
+    "id": "1642",
+    "name": "Cable Seated One Arm Concentration Curl",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1642-rZ80Gbp.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1642-rZ80Gbp.gif"
+  },
+  {
+    "id": "1643",
+    "name": "Cable Seated Overhead Curl",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1643-DpWMFP5.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1643-DpWMFP5.gif"
+  },
+  {
+    "id": "0215",
+    "name": "Cable Seated Rear Lateral Raise",
     "category": "Shoulders",
     "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Seated_Lateral_Raise/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "back-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0215-x825CZm.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0215-x825CZm.gif"
   },
   {
-    "id": "Cable_Shoulder_Press",
-    "name": "Cable Shoulder Pre",
+    "id": "0861",
+    "name": "Cable Seated Row",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0861-fUBheHs.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0861-fUBheHs.gif"
+  },
+  {
+    "id": "0216",
+    "name": "Cable Seated Shoulder Internal Rotation",
     "category": "Shoulders",
     "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Shoulder_Press/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0216-YPoVrBi.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0216-YPoVrBi.gif"
   },
   {
-    "id": "Cable_Shrugs",
+    "id": "2399",
+    "name": "Cable Seated Twist",
+    "category": "Core",
+    "equipment": "Cable",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2399-UEjSrKI.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2399-UEjSrKI.gif"
+  },
+  {
+    "id": "0218",
+    "name": "Cable Seated Wide-Grip Row",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0218-qcY50ZD.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0218-qcY50ZD.gif"
+  },
+  {
+    "id": "0219",
+    "name": "Cable Shoulder Press",
+    "category": "Shoulders",
+    "equipment": "Cable",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0219-PzQanLE.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0219-PzQanLE.gif"
+  },
+  {
+    "id": "0220",
     "name": "Cable Shrug",
     "category": "Back",
     "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Shrugs/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "trapezius",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0220-Eg98Ft9.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0220-Eg98Ft9.gif"
   },
   {
-    "id": "Cable_Wrist_Curl",
+    "id": "0222",
+    "name": "Cable Side Bend",
+    "category": "Core",
+    "equipment": "Cable",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0222-wPypxFY.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0222-wPypxFY.gif"
+  },
+  {
+    "id": "0221",
+    "name": "Cable Side Bend Crunch (Bosu Ball)",
+    "category": "Core",
+    "equipment": "Cable",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0221-qatbkEd.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0221-qatbkEd.gif"
+  },
+  {
+    "id": "0223",
+    "name": "Cable Side Crunch",
+    "category": "Core",
+    "equipment": "Cable",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0223-q2ADGqV.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0223-q2ADGqV.gif"
+  },
+  {
+    "id": "1717",
+    "name": "Cable Squat Row (With Rope Attachment)",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1717-f7fnAIB.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1717-f7fnAIB.gif"
+  },
+  {
+    "id": "1644",
+    "name": "Cable Squatting Curl",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1644-3XFdb1Z.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1644-3XFdb1Z.gif"
+  },
+  {
+    "id": "0224",
+    "name": "Cable Standing Back Wrist Curl",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0224-VhX2JdE.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0224-VhX2JdE.gif"
+  },
+  {
+    "id": "1375",
+    "name": "Cable Standing Calf Raise",
+    "category": "Legs",
+    "equipment": "Cable",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1375-yl2IYyy.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1375-yl2IYyy.gif"
+  },
+  {
+    "id": "0225",
+    "name": "Cable Standing Cross-Over High Reverse Fly",
+    "category": "Shoulders",
+    "equipment": "Cable",
+    "specificMuscle": "back-deltoids",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0225-P5p0j8B.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0225-P5p0j8B.gif"
+  },
+  {
+    "id": "0226",
+    "name": "Cable Standing Crunch",
+    "category": "Core",
+    "equipment": "Cable",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0226-jpgqxiS.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0226-jpgqxiS.gif"
+  },
+  {
+    "id": "0874",
+    "name": "Cable Standing Crunch (With Rope Attachment)",
+    "category": "Core",
+    "equipment": "Cable",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0874-XU3ePuv.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0874-XU3ePuv.gif"
+  },
+  {
+    "id": "0227",
+    "name": "Cable Standing Fly",
+    "category": "Chest",
+    "equipment": "Cable",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0227-Pr9Rhf4.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0227-Pr9Rhf4.gif"
+  },
+  {
+    "id": "0228",
+    "name": "Cable Standing Hip Extension",
+    "category": "Legs",
+    "equipment": "Cable",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0228-Kpajagk.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0228-Kpajagk.gif"
+  },
+  {
+    "id": "0229",
+    "name": "Cable Standing Inner Curl",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0229-YwnI4ja.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0229-YwnI4ja.gif"
+  },
+  {
+    "id": "0230",
+    "name": "Cable Standing Lift",
+    "category": "Core",
+    "equipment": "Cable",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0230-qFpAkpP.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0230-qFpAkpP.gif"
+  },
+  {
+    "id": "0231",
+    "name": "Cable Standing One Arm Triceps Extension",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0231-sYCcnon.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0231-sYCcnon.gif"
+  },
+  {
+    "id": "1376",
+    "name": "Cable Standing One Leg Calf Raise",
+    "category": "Legs",
+    "equipment": "Cable",
+    "specificMuscle": "calves",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1376-fgc9Xdl.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1376-fgc9Xdl.gif"
+  },
+  {
+    "id": "0232",
+    "name": "Cable Standing Pulldown (With Rope)",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0232-CvPn9WV.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0232-CvPn9WV.gif"
+  },
+  {
+    "id": "0233",
+    "name": "Cable Standing Rear Delt Row (With Rope)",
+    "category": "Shoulders",
+    "equipment": "Cable",
+    "specificMuscle": "back-deltoids",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0233-ZfyAGhK.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0233-ZfyAGhK.gif"
+  },
+  {
+    "id": "1727",
+    "name": "Cable Standing Reverse Grip One Arm Overhead Tricep Extension",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1727-i11JWU7.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1727-i11JWU7.gif"
+  },
+  {
+    "id": "0234",
+    "name": "Cable Standing Row (V-bar)",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0234-4f8RXP8.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0234-4f8RXP8.gif"
+  },
+  {
+    "id": "0235",
+    "name": "Cable Standing Shoulder External Rotation",
+    "category": "Shoulders",
+    "equipment": "Cable",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0235-FWdVhcW.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0235-FWdVhcW.gif"
+  },
+  {
+    "id": "0236",
+    "name": "Cable Standing Twist Row (V-bar)",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0236-JOZhu2h.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0236-JOZhu2h.gif"
+  },
+  {
+    "id": "1269",
+    "name": "Cable Standing Up Straight Crossovers",
+    "category": "Chest",
+    "equipment": "Cable",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1269-UKWTJWR.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1269-UKWTJWR.gif"
+  },
+  {
+    "id": "0238",
+    "name": "Cable Straight Arm Pulldown",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0238-x69MAlq.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0238-x69MAlq.gif"
+  },
+  {
+    "id": "0237",
+    "name": "Cable Straight Arm Pulldown (With Rope)",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0237-DT14T9T.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0237-DT14T9T.gif"
+  },
+  {
+    "id": "0239",
+    "name": "Cable Straight Back Seated Row",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0239-Tq6gbK6.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0239-Tq6gbK6.gif"
+  },
+  {
+    "id": "0240",
+    "name": "Cable Supine Reverse Fly",
+    "category": "Shoulders",
+    "equipment": "Cable",
+    "specificMuscle": "back-deltoids",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0240-PQcUlDi.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0240-PQcUlDi.gif"
+  },
+  {
+    "id": "2464",
+    "name": "Cable Thibaudeau Kayak Row",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2464-ZgwWBoC.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2464-ZgwWBoC.gif"
+  },
+  {
+    "id": "0241",
+    "name": "Cable Triceps Pushdown (V-bar)",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0241-gAwDzB3.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0241-gAwDzB3.gif"
+  },
+  {
+    "id": "2405",
+    "name": "Cable Triceps Pushdown (V-bar) (With Arm Blaster)",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2405-OxJk1fg.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2405-OxJk1fg.gif"
+  },
+  {
+    "id": "0242",
+    "name": "Cable Tuck Reverse Crunch",
+    "category": "Core",
+    "equipment": "Cable",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0242-TXtXc84.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0242-TXtXc84.gif"
+  },
+  {
+    "id": "0243",
+    "name": "Cable Twist",
+    "category": "Core",
+    "equipment": "Cable",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0243-aVs3BR3.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0243-aVs3BR3.gif"
+  },
+  {
+    "id": "0862",
+    "name": "Cable Twist (Up-down)",
+    "category": "Core",
+    "equipment": "Cable",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0862-fhZQPlV.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0862-fhZQPlV.gif"
+  },
+  {
+    "id": "0244",
+    "name": "Cable Twisting Pull",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0244-zCgxPbV.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0244-zCgxPbV.gif"
+  },
+  {
+    "id": "1645",
+    "name": "Cable Two Arm Curl On Incline Bench",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1645-H9y3Dkr.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1645-H9y3Dkr.gif"
+  },
+  {
+    "id": "1728",
+    "name": "Cable Two Arm Tricep Kickback",
+    "category": "Arms",
+    "equipment": "Cable",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1728-vvNjDJS.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1728-vvNjDJS.gif"
+  },
+  {
+    "id": "0245",
+    "name": "Cable Underhand Pulldown",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0245-xBYcQHj.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0245-xBYcQHj.gif"
+  },
+  {
+    "id": "1270",
+    "name": "Cable Upper Chest Crossovers",
+    "category": "Chest",
+    "equipment": "Cable",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1270-j7XMAyn.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1270-j7XMAyn.gif"
+  },
+  {
+    "id": "1324",
+    "name": "Cable Upper Row",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1324-PQStVXH.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1324-PQStVXH.gif"
+  },
+  {
+    "id": "0246",
+    "name": "Cable Upright Row",
+    "category": "Shoulders",
+    "equipment": "Cable",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0246-cALKspW.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0246-cALKspW.gif"
+  },
+  {
+    "id": "1325",
+    "name": "Cable Wide Grip Rear Pulldown Behind Neck",
+    "category": "Back",
+    "equipment": "Cable",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1325-CmEr4pM.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1325-CmEr4pM.gif"
+  },
+  {
+    "id": "0247",
     "name": "Cable Wrist Curl",
     "category": "Arms",
     "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Wrist_Curl/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0247-LrV4s90.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0247-LrV4s90.gif"
   },
   {
-    "id": "Calf-Machine_Shoulder_Shrug",
-    "name": "Calf-Machine Shoulder Shrug",
-    "category": "Back",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Calf-Machine_Shoulder_Shrug/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Calf_Press",
-    "name": "Calf Pre (Machine)",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Calf_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Calf_Press_On_The_Leg_Press_Machine",
-    "name": "Calf Press On The Leg Press Machine",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Calf_Press_On_The_Leg_Press_Machine/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Calf_Raise_On_A_Dumbbell",
-    "name": "Calf Raise On A Dumbbell",
-    "category": "Legs",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Calf_Raise_On_A_Dumbbell/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Calf_Raises_-_With_Bands",
-    "name": "Calf Raises - With Band",
-    "category": "Legs",
-    "equipment": "Band",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Calf_Raises_-_With_Bands/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Calf_Stretch_Elbows_Against_Wall",
-    "name": "Calf Stretch Elbows Against Wall",
+    "id": "1407",
+    "name": "Calf Push Stretch With Hands Against Wall",
     "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Calf_Stretch_Elbows_Against_Wall/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1407-PzNxakt.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1407-PzNxakt.gif"
   },
   {
-    "id": "Calf_Stretch_Hands_Against_Wall",
-    "name": "Calf Stretch Hands Against Wall",
+    "id": "1377",
+    "name": "Calf Stretch With Hands Against Wall",
     "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Calf_Stretch_Hands_Against_Wall/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1377-m0tCHqc.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1377-m0tCHqc.gif"
   },
   {
-    "id": "Calves-SMR",
-    "name": "Calves-SMR",
-    "category": "Legs",
-    "equipment": "Foam Roll",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Calves-SMR/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Car_Deadlift",
-    "name": "Car Deadlift",
+    "id": "1378",
+    "name": "Calf Stretch With Rope",
     "category": "Legs",
     "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Car_Deadlift/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1378-1LVFcEn.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1378-1LVFcEn.gif"
   },
   {
-    "id": "Car_Drivers",
-    "name": "Car Driver (Barbell)",
-    "category": "Shoulders",
+    "id": "0248",
+    "name": "Cambered Bar Lying Row",
+    "category": "Back",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Car_Drivers/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0248-R5swFnc.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0248-R5swFnc.gif"
   },
   {
-    "id": "Carioca_Quick_Step",
-    "name": "Carioca Quick Step",
-    "category": "Legs",
+    "id": "2963",
+    "name": "Captains Chair Straight Leg Raise",
+    "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Carioca_Quick_Step/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2963-weoDEpH.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2963-weoDEpH.gif"
   },
   {
-    "id": "Cat_Stretch",
-    "name": "Cat Stretch",
-    "category": "Back",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cat_Stretch/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Catch_and_Overhead_Throw",
-    "name": "Catch and Overhead Throw (Medicine Ball)",
-    "category": "Back",
-    "equipment": "Medicine Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Catch_and_Overhead_Throw/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Chain_Handle_Extension",
-    "name": "Chain Handle Extension",
-    "category": "Arms",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Chain_Handle_Extension/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Chain_Press",
-    "name": "Chain Press",
-    "category": "Chest",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Chain_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Chair_Leg_Extended_Stretch",
+    "id": "1548",
     "name": "Chair Leg Extended Stretch",
     "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Chair_Leg_Extended_Stretch/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Chair_Lower_Back_Stretch",
-    "name": "Chair Lower Back Stretch",
-    "category": "Back",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Chair_Lower_Back_Stretch/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1548-xGgAGPm.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1548-xGgAGPm.gif"
   },
   {
-    "id": "Chair_Squat",
-    "name": "Chair Squat (Machine)",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Chair_Squat/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Chair_Upper_Body_Stretch",
-    "name": "Chair Upper Body Stretch",
-    "category": "Shoulders",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Chair_Upper_Body_Stretch/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Chest_And_Front_Of_Shoulder_Stretch",
+    "id": "1271",
     "name": "Chest And Front Of Shoulder Stretch",
     "category": "Chest",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Chest_And_Front_Of_Shoulder_Stretch/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Chest_Push_from_3_point_stance",
-    "name": "Chest Push from 3 point stance (Medicine Ball)",
-    "category": "Chest",
-    "equipment": "Medicine Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Chest_Push_from_3_point_stance/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Chest_Push_multiple_response",
-    "name": "Chest Push (multiple response) (Medicine Ball)",
-    "category": "Chest",
-    "equipment": "Medicine Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Chest_Push_multiple_response/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Chest_Push_single_response",
-    "name": "Chest Push (single response) (Medicine Ball)",
-    "category": "Chest",
-    "equipment": "Medicine Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Chest_Push_single_response/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Chest_Push_with_Run_Release",
-    "name": "Chest Push with Run Release (Medicine Ball)",
-    "category": "Chest",
-    "equipment": "Medicine Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Chest_Push_with_Run_Release/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Chest_Stretch_on_Stability_Ball",
-    "name": "Chest Stretch on Stability Ball",
-    "category": "Chest",
-    "equipment": "Exercise Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Chest_Stretch_on_Stability_Ball/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Childs_Pose",
-    "name": "Child's Pose",
-    "category": "Back",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Childs_Pose/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "chest",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1271-Uto7l43.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1271-Uto7l43.gif"
   },
   {
-    "id": "Chin-Up",
+    "id": "0251",
+    "name": "Chest Dip",
+    "category": "Chest",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0251-9WTm7dq.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0251-9WTm7dq.gif"
+  },
+  {
+    "id": "1430",
+    "name": "Chest Dip (On Dip-Pull-Up Cage)",
+    "category": "Chest",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1430-XgWyAiA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1430-XgWyAiA.gif"
+  },
+  {
+    "id": "2462",
+    "name": "Chest Dip On Straight Bar",
+    "category": "Chest",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2462-LQFOrMn.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2462-LQFOrMn.gif"
+  },
+  {
+    "id": "1272",
+    "name": "Chest Stretch With Exercise Ball",
+    "category": "Chest",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1272-ykA5tU7.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1272-ykA5tU7.gif"
+  },
+  {
+    "id": "3216",
+    "name": "Chest Tap Push-Up (Male)",
+    "category": "Chest",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3216-7E06s6d.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3216-7E06s6d.gif"
+  },
+  {
+    "id": "1326",
     "name": "Chin-Up",
     "category": "Back",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Chin-Up/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1326-T2mxWqc.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1326-T2mxWqc.gif"
   },
   {
-    "id": "Chin_To_Chest_Stretch",
-    "name": "Chin To Chest Stretch",
-    "category": "Shoulders",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Chin_To_Chest_Stretch/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Circus_Bell",
-    "name": "Circus Bell",
-    "category": "Shoulders",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Circus_Bell/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Clean",
-    "name": "Clean (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Clean/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Clean_Deadlift",
-    "name": "Clean Deadlift (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Clean_Deadlift/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Clean_Pull",
-    "name": "Clean Pull (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Clean_Pull/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Clean_Shrug",
-    "name": "Clean Shrug (Barbell)",
+    "id": "0253",
+    "name": "Chin-Ups (Narrow Parallel Grip)",
     "category": "Back",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Clean_Shrug/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0253-G70mEAJ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0253-G70mEAJ.gif"
   },
   {
-    "id": "Clean_and_Jerk",
-    "name": "Clean and Jerk (Barbell)",
-    "category": "Shoulders",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Clean_and_Jerk/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Clean_and_Press",
-    "name": "Clean and Pre (Barbell)",
-    "category": "Shoulders",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Clean_and_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Clean_from_Blocks",
-    "name": "Clean from Block (Barbell)",
+    "id": "0257",
+    "name": "Circles Knee Stretch",
     "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Clean_from_Blocks/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0257-X7jbxra.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0257-X7jbxra.gif"
   },
   {
-    "id": "Clock_Push-Up",
+    "id": "1273",
+    "name": "Clap Push Up",
+    "category": "Chest",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1273-wigSg76.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1273-wigSg76.gif"
+  },
+  {
+    "id": "0258",
     "name": "Clock Push-Up",
     "category": "Chest",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Clock_Push-Up/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0258-CMAxnsG.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0258-CMAxnsG.gif"
   },
   {
-    "id": "Close-Grip_Barbell_Bench_Press",
-    "name": "Close-Grip Barbell Bench Pre",
-    "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Close-Grip_Barbell_Bench_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Close-Grip_Dumbbell_Press",
-    "name": "Close-Grip Dumbbell Pre",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Close-Grip_Dumbbell_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Close-Grip_EZ-Bar_Curl_with_Band",
-    "name": "Close-Grip EZ-Bar Curl with Band (EZ Bar)",
-    "category": "Arms",
-    "equipment": "EZ Bar",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Close-Grip_EZ-Bar_Curl_with_Band/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Close-Grip_EZ-Bar_Press",
-    "name": "Close-Grip EZ-Bar Pre (EZ Bar)",
-    "category": "Arms",
-    "equipment": "EZ Bar",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Close-Grip_EZ-Bar_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Close-Grip_EZ_Bar_Curl",
-    "name": "Close-Grip EZ Bar Curl (Barbell)",
-    "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Close-Grip_EZ_Bar_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Close-Grip_Front_Lat_Pulldown",
-    "name": "Close-Grip Front Lat Pulldown (Cable)",
+    "id": "1327",
+    "name": "Close Grip Chin-Up",
     "category": "Back",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Close-Grip_Front_Lat_Pulldown/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1327-VnfUNW7.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1327-VnfUNW7.gif"
   },
   {
-    "id": "Close-Grip_Push-Up_off_of_a_Dumbbell",
-    "name": "Close-Grip Push-Up off of a Dumbbell",
+    "id": "0259",
+    "name": "Close-Grip Push-Up",
     "category": "Arms",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Close-Grip_Push-Up_off_of_a_Dumbbell/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0259-x6KpKpq.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0259-x6KpKpq.gif"
   },
   {
-    "id": "Close-Grip_Standing_Barbell_Curl",
-    "name": "Close-Grip Standing Barbell Curl",
+    "id": "2398",
+    "name": "Close-Grip Push-Up (On Knees)",
     "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Close-Grip_Standing_Barbell_Curl/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2398-v3vLFW0.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2398-v3vLFW0.gif"
   },
   {
-    "id": "Cocoons",
+    "id": "0260",
     "name": "Cocoons",
     "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cocoons/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0260-SLKj2pX.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0260-SLKj2pX.gif"
   },
   {
-    "id": "Conans_Wheel",
-    "name": "Conan's Wheel",
+    "id": "1468",
+    "name": "Crab Twist Toe Touch",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1468-xgsGFVM.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1468-xgsGFVM.gif"
+  },
+  {
+    "id": "0262",
+    "name": "Cross Body Crunch",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0262-rbu5UUb.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0262-rbu5UUb.gif"
+  },
+  {
+    "id": "0267",
+    "name": "Crunch (Hands Overhead)",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0267-kjJ3VoQ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0267-kjJ3VoQ.gif"
+  },
+  {
+    "id": "0271",
+    "name": "Crunch (On Stability Ball)",
+    "category": "Core",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0271-MCUhf1F.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0271-MCUhf1F.gif"
+  },
+  {
+    "id": "0272",
+    "name": "Crunch (On Stability Ball, Arms Straight)",
+    "category": "Core",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0272-Sn8wxAI.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0272-Sn8wxAI.gif"
+  },
+  {
+    "id": "0274",
+    "name": "Crunch Floor",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0274-TFqbd8t.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0274-TFqbd8t.gif"
+  },
+  {
+    "id": "3016",
+    "name": "Curl-Up",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3016-g2oKspu.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3016-g2oKspu.gif"
+  },
+  {
+    "id": "3769",
+    "name": "Curtsey Squat",
     "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Conans_Wheel/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Concentration_Curls",
-    "name": "Concentration Curl (Dumbbell)",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Concentration_Curls/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Cross-Body_Crunch",
-    "name": "Cross-Body Crunch",
-    "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cross-Body_Crunch/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3769-gUjqdei.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3769-gUjqdei.gif"
   },
   {
-    "id": "Cross_Body_Hammer_Curl",
-    "name": "Cross Body Hammer Curl (Dumbbell)",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cross_Body_Hammer_Curl/0.jpg",
-    "requiresWeight": true
+    "id": "2331",
+    "name": "Cycle Cross Trainer",
+    "category": "Cardio",
+    "equipment": "Machine",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2331-XSCHmiI.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2331-XSCHmiI.gif"
   },
   {
-    "id": "Cross_Over_-_With_Bands",
-    "name": "Cross Over - With Band",
-    "category": "Chest",
-    "equipment": "Band",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cross_Over_-_With_Bands/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Crossover_Reverse_Lunge",
-    "name": "Crossover Reverse Lunge",
-    "category": "Back",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Crossover_Reverse_Lunge/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Crucifix",
-    "name": "Crucifix",
-    "category": "Shoulders",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Crucifix/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Crunch_-_Hands_Overhead",
-    "name": "Crunch - Hands Overhead",
-    "category": "Core",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Crunch_-_Hands_Overhead/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Crunch_-_Legs_On_Exercise_Ball",
-    "name": "Crunch - Legs On Exercise Ball",
-    "category": "Core",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Crunch_-_Legs_On_Exercise_Ball/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Crunches",
-    "name": "Crunches",
-    "category": "Core",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Crunches/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Cuban_Press",
-    "name": "Cuban Pre (Dumbbell)",
-    "category": "Shoulders",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cuban_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Dancers_Stretch",
-    "name": "Dancer's Stretch",
-    "category": "Back",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dancers_Stretch/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Dead_Bug",
+    "id": "0276",
     "name": "Dead Bug",
     "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dead_Bug/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0276-iny3m5y.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0276-iny3m5y.gif"
   },
   {
-    "id": "Deadlift_with_Bands",
-    "name": "Deadlift with Band (Barbell)",
-    "category": "Back",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Deadlift_with_Bands/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Deadlift_with_Chains",
-    "name": "Deadlift with Chain (Barbell)",
-    "category": "Back",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Deadlift_with_Chains/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Decline_Barbell_Bench_Press",
-    "name": "Decline Barbell Bench Pre",
-    "category": "Chest",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Decline_Barbell_Bench_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Decline_Close-Grip_Bench_To_Skull_Crusher",
-    "name": "Decline Close-Grip Bench To Skull Crusher (Barbell)",
-    "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Decline_Close-Grip_Bench_To_Skull_Crusher/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Decline_Crunch",
+    "id": "0277",
     "name": "Decline Crunch",
     "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Decline_Crunch/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0277-9Ap7miY.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0277-9Ap7miY.gif"
   },
   {
-    "id": "Decline_Dumbbell_Bench_Press",
-    "name": "Decline Dumbbell Bench Pre",
-    "category": "Chest",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Decline_Dumbbell_Bench_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Decline_Dumbbell_Flyes",
-    "name": "Decline Dumbbell Flye",
-    "category": "Chest",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Decline_Dumbbell_Flyes/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Decline_Dumbbell_Triceps_Extension",
-    "name": "Decline Dumbbell Triceps Extension",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Decline_Dumbbell_Triceps_Extension/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Decline_EZ_Bar_Triceps_Extension",
-    "name": "Decline EZ Bar Triceps Extension (Barbell)",
-    "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Decline_EZ_Bar_Triceps_Extension/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Decline_Oblique_Crunch",
-    "name": "Decline Oblique Crunch",
-    "category": "Core",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Decline_Oblique_Crunch/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Decline_Push-Up",
+    "id": "0279",
     "name": "Decline Push-Up",
     "category": "Chest",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Decline_Push-Up/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0279-i5cEhka.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0279-i5cEhka.gif"
   },
   {
-    "id": "Decline_Reverse_Crunch",
-    "name": "Decline Reverse Crunch",
+    "id": "0282",
+    "name": "Decline Sit-Up",
     "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Decline_Reverse_Crunch/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0282-QLL2gdc.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0282-QLL2gdc.gif"
   },
   {
-    "id": "Decline_Smith_Press",
-    "name": "Decline Smith Pre (Machine)",
+    "id": "1274",
+    "name": "Deep Push Up",
     "category": "Chest",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Decline_Smith_Press/0.jpg",
-    "requiresWeight": true
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1274-vptOQ4N.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1274-vptOQ4N.gif"
   },
   {
-    "id": "Deficit_Deadlift",
-    "name": "Deficit Deadlift (Barbell)",
+    "id": "0283",
+    "name": "Diamond Push-Up",
+    "category": "Arms",
+    "equipment": "Bodyweight",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0283-soIB2rj.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0283-soIB2rj.gif"
+  },
+  {
+    "id": "0284",
+    "name": "Donkey Calf Raise",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0284-u5ESqzH.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0284-u5ESqzH.gif"
+  },
+  {
+    "id": "1275",
+    "name": "Drop Push Up",
+    "category": "Chest",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1275-Q497lAE.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1275-Q497lAE.gif"
+  },
+  {
+    "id": "0285",
+    "name": "Dumbbell Alternate Biceps Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0285-BU15nH4.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0285-BU15nH4.gif"
+  },
+  {
+    "id": "2403",
+    "name": "Dumbbell Alternate Biceps Curl (With Arm Blaster)",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2403-CfKsRbG.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2403-CfKsRbG.gif"
+  },
+  {
+    "id": "1646",
+    "name": "Dumbbell Alternate Hammer Preacher Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1646-fy7Tgy4.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1646-fy7Tgy4.gif"
+  },
+  {
+    "id": "1647",
+    "name": "Dumbbell Alternate Preacher Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1647-NlfIbzq.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1647-NlfIbzq.gif"
+  },
+  {
+    "id": "1648",
+    "name": "Dumbbell Alternate Seated Hammer Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1648-6em2Dxj.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1648-6em2Dxj.gif"
+  },
+  {
+    "id": "0286",
+    "name": "Dumbbell Alternate Side Press",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0286-izMnLqz.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0286-izMnLqz.gif"
+  },
+  {
+    "id": "1649",
+    "name": "Dumbbell Alternating Bicep Curl With Leg Raised On Exercise Ball",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1649-Zwiw7XR.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1649-Zwiw7XR.gif"
+  },
+  {
+    "id": "1650",
+    "name": "Dumbbell Alternating Seated Bicep Curl On Exercise Ball",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1650-J74XlNf.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1650-J74XlNf.gif"
+  },
+  {
+    "id": "2137",
+    "name": "Dumbbell Arnold Press",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2137-Xy4jlWA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2137-Xy4jlWA.gif"
+  },
+  {
+    "id": "0287",
+    "name": "Dumbbell Arnold Press V. 2",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0287-eOrFCnx.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0287-eOrFCnx.gif"
+  },
+  {
+    "id": "0288",
+    "name": "Dumbbell Around Pullover",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0288-vi8EhoE.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0288-vi8EhoE.gif"
+  },
+  {
+    "id": "0289",
+    "name": "Dumbbell Bench Press",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0289-SpYC0Kp.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0289-SpYC0Kp.gif"
+  },
+  {
+    "id": "0290",
+    "name": "Dumbbell Bench Seated Press",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0290-3d7wHyd.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0290-3d7wHyd.gif"
+  },
+  {
+    "id": "0291",
+    "name": "Dumbbell Bench Squat",
+    "category": "Legs",
+    "equipment": "Dumbbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0291-mnzcrIB.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0291-mnzcrIB.gif"
+  },
+  {
+    "id": "0293",
+    "name": "Dumbbell Bent Over Row",
     "category": "Back",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Deficit_Deadlift/0.jpg",
-    "requiresWeight": true
+    "equipment": "Dumbbell",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0293-BJ0Hz5L.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0293-BJ0Hz5L.gif"
   },
   {
-    "id": "Depth_Jump_Leap",
-    "name": "Depth Jump Leap",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Depth_Jump_Leap/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Dip_Machine",
-    "name": "Dip Machine",
-    "category": "Arms",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dip_Machine/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Dips_-_Chest_Version",
-    "name": "Dips - Chest Version",
-    "category": "Chest",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dips_-_Chest_Version/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Dips_-_Triceps_Version",
-    "name": "Dips - Triceps Version",
-    "category": "Arms",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dips_-_Triceps_Version/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Donkey_Calf_Raises",
-    "name": "Donkey Calf Raises",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Donkey_Calf_Raises/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Double_Kettlebell_Alternating_Hang_Clean",
-    "name": "Double Kettlebell Alternating Hang Clean",
-    "category": "Legs",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Double_Kettlebell_Alternating_Hang_Clean/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Double_Kettlebell_Jerk",
-    "name": "Double Kettlebell Jerk",
-    "category": "Shoulders",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Double_Kettlebell_Jerk/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Double_Kettlebell_Push_Press",
-    "name": "Double Kettlebell Push Pre",
-    "category": "Shoulders",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Double_Kettlebell_Push_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Double_Kettlebell_Snatch",
-    "name": "Double Kettlebell Snatch",
-    "category": "Shoulders",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Double_Kettlebell_Snatch/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Double_Kettlebell_Windmill",
-    "name": "Double Kettlebell Windmill",
-    "category": "Core",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Double_Kettlebell_Windmill/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Double_Leg_Butt_Kick",
-    "name": "Double Leg Butt Kick",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Double_Leg_Butt_Kick/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Downward_Facing_Balance",
-    "name": "Downward Facing Balance",
-    "category": "Legs",
-    "equipment": "Exercise Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Downward_Facing_Balance/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Drag_Curl",
-    "name": "Drag Curl (Barbell)",
-    "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Drag_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Drop_Push",
-    "name": "Drop Push",
-    "category": "Chest",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Drop_Push/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Dumbbell_Alternate_Bicep_Curl",
-    "name": "Dumbbell Alternate Bicep Curl",
+    "id": "1651",
+    "name": "Dumbbell Bicep Curl Lunge With Bowling Motion",
     "category": "Arms",
     "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Alternate_Bicep_Curl/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1651-1VpF8db.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1651-1VpF8db.gif"
   },
   {
-    "id": "Dumbbell_Bench_Press",
-    "name": "Dumbbell Bench Pre",
-    "category": "Chest",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Bench_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Dumbbell_Bench_Press_with_Neutral_Grip",
-    "name": "Dumbbell Bench Press with Neutral Grip",
-    "category": "Chest",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Bench_Press_with_Neutral_Grip/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Dumbbell_Bicep_Curl",
-    "name": "Dumbbell Bicep Curl",
+    "id": "1652",
+    "name": "Dumbbell Bicep Curl On Exercise Ball With Leg Raised",
     "category": "Arms",
     "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Bicep_Curl/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1652-2NImIAG.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1652-2NImIAG.gif"
   },
   {
-    "id": "Dumbbell_Clean",
+    "id": "1653",
+    "name": "Dumbbell Bicep Curl With Stork Stance",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1653-uSkDMYl.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1653-uSkDMYl.gif"
+  },
+  {
+    "id": "0294",
+    "name": "Dumbbell Biceps Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0294-NbVPDMW.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0294-NbVPDMW.gif"
+  },
+  {
+    "id": "2401",
+    "name": "Dumbbell Biceps Curl (With Arm Blaster)",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2401-nlJsbkW.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2401-nlJsbkW.gif"
+  },
+  {
+    "id": "1654",
+    "name": "Dumbbell Biceps Curl Reverse",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1654-nFc4FyV.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1654-nFc4FyV.gif"
+  },
+  {
+    "id": "1655",
+    "name": "Dumbbell Biceps Curl Squat",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1655-niXESDw.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1655-niXESDw.gif"
+  },
+  {
+    "id": "1656",
+    "name": "Dumbbell Biceps Curl V Sit On Bosu Ball",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1656-H1XAdpk.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1656-H1XAdpk.gif"
+  },
+  {
+    "id": "1201",
+    "name": "Dumbbell Burpee",
+    "category": "Cardio",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1201-0JtKWum.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1201-0JtKWum.gif"
+  },
+  {
+    "id": "0295",
     "name": "Dumbbell Clean",
     "category": "Legs",
     "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Clean/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0295-7Hg55JG.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0295-7Hg55JG.gif"
   },
   {
-    "id": "Dumbbell_Floor_Press",
-    "name": "Dumbbell Floor Pre",
+    "id": "1731",
+    "name": "Dumbbell Close Grip Press",
     "category": "Arms",
     "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Floor_Press/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1731-7jGOBF3.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1731-7jGOBF3.gif"
   },
   {
-    "id": "Dumbbell_Flyes",
-    "name": "Dumbbell Flye",
+    "id": "0296",
+    "name": "Dumbbell Close-Grip Press",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0296-RxayqAZ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0296-RxayqAZ.gif"
+  },
+  {
+    "id": "0297",
+    "name": "Dumbbell Concentration Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0297-gvsWLQw.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0297-gvsWLQw.gif"
+  },
+  {
+    "id": "3635",
+    "name": "Dumbbell Contralateral Forward Lunge",
+    "category": "Legs",
+    "equipment": "Dumbbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3635-ecl28tP.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3635-ecl28tP.gif"
+  },
+  {
+    "id": "0298",
+    "name": "Dumbbell Cross Body Hammer Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0298-Qyk5J3p.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0298-Qyk5J3p.gif"
+  },
+  {
+    "id": "1657",
+    "name": "Dumbbell Cross Body Hammer Curl V. 2",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1657-HDYiZcY.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1657-HDYiZcY.gif"
+  },
+  {
+    "id": "0299",
+    "name": "Dumbbell Cuban Press",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0299-QfAKy1G.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0299-QfAKy1G.gif"
+  },
+  {
+    "id": "2136",
+    "name": "Dumbbell Cuban Press V. 2",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2136-BqgCRif.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2136-BqgCRif.gif"
+  },
+  {
+    "id": "0300",
+    "name": "Dumbbell Deadlift",
+    "category": "Legs",
+    "equipment": "Dumbbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0300-nUwVh7b.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0300-nUwVh7b.gif"
+  },
+  {
+    "id": "0301",
+    "name": "Dumbbell Decline Bench Press",
     "category": "Chest",
     "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Flyes/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0301-DwhEmmE.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0301-DwhEmmE.gif"
   },
   {
-    "id": "Dumbbell_Incline_Row",
+    "id": "0302",
+    "name": "Dumbbell Decline Fly",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0302-xXm4nYq.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0302-xXm4nYq.gif"
+  },
+  {
+    "id": "0303",
+    "name": "Dumbbell Decline Hammer Press",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0303-1qrWgZ2.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0303-1qrWgZ2.gif"
+  },
+  {
+    "id": "1276",
+    "name": "Dumbbell Decline One Arm Fly",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1276-NL6YBwN.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1276-NL6YBwN.gif"
+  },
+  {
+    "id": "1617",
+    "name": "Dumbbell Decline One Arm Hammer Press",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1617-SHUMp5H.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1617-SHUMp5H.gif"
+  },
+  {
+    "id": "0305",
+    "name": "Dumbbell Decline Shrug",
+    "category": "Back",
+    "equipment": "Dumbbell",
+    "specificMuscle": "trapezius",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0305-cwsAI4G.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0305-cwsAI4G.gif"
+  },
+  {
+    "id": "0304",
+    "name": "Dumbbell Decline Shrug V. 2",
+    "category": "Back",
+    "equipment": "Dumbbell",
+    "specificMuscle": "trapezius",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0304-bRlbdjK.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0304-bRlbdjK.gif"
+  },
+  {
+    "id": "0306",
+    "name": "Dumbbell Decline Triceps Extension",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0306-OTgkHwR.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0306-OTgkHwR.gif"
+  },
+  {
+    "id": "0307",
+    "name": "Dumbbell Decline Twist Fly",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0307-reFHapa.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0307-reFHapa.gif"
+  },
+  {
+    "id": "1437",
+    "name": "Dumbbell Finger Curls",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1437-mtXengz.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1437-mtXengz.gif"
+  },
+  {
+    "id": "0308",
+    "name": "Dumbbell Fly",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0308-yz9nUhF.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0308-yz9nUhF.gif"
+  },
+  {
+    "id": "1277",
+    "name": "Dumbbell Fly On Exercise Ball",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1277-Lt3iWnf.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1277-Lt3iWnf.gif"
+  },
+  {
+    "id": "1732",
+    "name": "Dumbbell Forward Lunge Triceps Extension",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1732-XalXcvM.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1732-XalXcvM.gif"
+  },
+  {
+    "id": "0310",
+    "name": "Dumbbell Front Raise",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0310-3eGE2JC.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0310-3eGE2JC.gif"
+  },
+  {
+    "id": "0309",
+    "name": "Dumbbell Front Raise V. 2",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0309-Rr7S3yg.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0309-Rr7S3yg.gif"
+  },
+  {
+    "id": "0311",
+    "name": "Dumbbell Full Can Lateral Raise",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0311-AQ0mC4Y.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0311-AQ0mC4Y.gif"
+  },
+  {
+    "id": "1760",
+    "name": "Dumbbell Goblet Squat",
+    "category": "Legs",
+    "equipment": "Dumbbell",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1760-yn8yg1r.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1760-yn8yg1r.gif"
+  },
+  {
+    "id": "0313",
+    "name": "Dumbbell Hammer Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0313-slDvUAU.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0313-slDvUAU.gif"
+  },
+  {
+    "id": "1659",
+    "name": "Dumbbell Hammer Curl On Exercise Ball",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1659-fY68AyX.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1659-fY68AyX.gif"
+  },
+  {
+    "id": "0312",
+    "name": "Dumbbell Hammer Curl V. 2",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0312-2NpxjC1.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0312-2NpxjC1.gif"
+  },
+  {
+    "id": "2402",
+    "name": "Dumbbell Hammer Curls (With Arm Blaster)",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2402-GNhAeJ0.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2402-GNhAeJ0.gif"
+  },
+  {
+    "id": "1664",
+    "name": "Dumbbell High Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1664-qAmNMJY.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1664-qAmNMJY.gif"
+  },
+  {
+    "id": "3545",
+    "name": "Dumbbell Incline Alternate Press",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3545-TVdivgY.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3545-TVdivgY.gif"
+  },
+  {
+    "id": "0314",
+    "name": "Dumbbell Incline Bench Press",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0314-ns0SIbU.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0314-ns0SIbU.gif"
+  },
+  {
+    "id": "0315",
+    "name": "Dumbbell Incline Biceps Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0315-F3xgbjF.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0315-F3xgbjF.gif"
+  },
+  {
+    "id": "0316",
+    "name": "Dumbbell Incline Breeding",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0316-B3Rxp6L.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0316-B3Rxp6L.gif"
+  },
+  {
+    "id": "0318",
+    "name": "Dumbbell Incline Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0318-ae9UoXQ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0318-ae9UoXQ.gif"
+  },
+  {
+    "id": "0317",
+    "name": "Dumbbell Incline Curl V. 2",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0317-RaflbWD.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0317-RaflbWD.gif"
+  },
+  {
+    "id": "0319",
+    "name": "Dumbbell Incline Fly",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0319-ESOd5Pl.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0319-ESOd5Pl.gif"
+  },
+  {
+    "id": "1278",
+    "name": "Dumbbell Incline Fly On Exercise Ball",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1278-HYe1ZqR.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1278-HYe1ZqR.gif"
+  },
+  {
+    "id": "0320",
+    "name": "Dumbbell Incline Hammer Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0320-ByX0WxV.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0320-ByX0WxV.gif"
+  },
+  {
+    "id": "0321",
+    "name": "Dumbbell Incline Hammer Press",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0321-PG1kcIb.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0321-PG1kcIb.gif"
+  },
+  {
+    "id": "1618",
+    "name": "Dumbbell Incline Hammer Press On Exercise Ball",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1618-wkgnGfb.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1618-wkgnGfb.gif"
+  },
+  {
+    "id": "0322",
+    "name": "Dumbbell Incline Inner Biceps Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0322-LCtQPn8.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0322-LCtQPn8.gif"
+  },
+  {
+    "id": "1279",
+    "name": "Dumbbell Incline One Arm Fly",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1279-Gw2HFvW.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1279-Gw2HFvW.gif"
+  },
+  {
+    "id": "1280",
+    "name": "Dumbbell Incline One Arm Fly On Exercise Ball",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1280-LLNh6q5.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1280-LLNh6q5.gif"
+  },
+  {
+    "id": "1619",
+    "name": "Dumbbell Incline One Arm Hammer Press",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1619-LL1UiTX.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1619-LL1UiTX.gif"
+  },
+  {
+    "id": "1620",
+    "name": "Dumbbell Incline One Arm Hammer Press On Exercise Ball",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1620-jDnrkar.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1620-jDnrkar.gif"
+  },
+  {
+    "id": "0323",
+    "name": "Dumbbell Incline One Arm Lateral Raise",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0323-aTNKZiC.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0323-aTNKZiC.gif"
+  },
+  {
+    "id": "1281",
+    "name": "Dumbbell Incline One Arm Press",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1281-rDAiRf9.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1281-rDAiRf9.gif"
+  },
+  {
+    "id": "1282",
+    "name": "Dumbbell Incline One Arm Press On Exercise Ball",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1282-Bg5JKSH.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1282-Bg5JKSH.gif"
+  },
+  {
+    "id": "0324",
+    "name": "Dumbbell Incline Palm-In Press",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0324-OVLmUuL.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0324-OVLmUuL.gif"
+  },
+  {
+    "id": "1283",
+    "name": "Dumbbell Incline Press On Exercise Ball",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1283-bfiHMpI.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1283-bfiHMpI.gif"
+  },
+  {
+    "id": "0325",
+    "name": "Dumbbell Incline Raise",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0325-nxW6BkN.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0325-nxW6BkN.gif"
+  },
+  {
+    "id": "0326",
+    "name": "Dumbbell Incline Rear Lateral Raise",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "back-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0326-vYk8lqw.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0326-vYk8lqw.gif"
+  },
+  {
+    "id": "0327",
     "name": "Dumbbell Incline Row",
     "category": "Back",
     "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Incline_Row/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0327-7vG5o25.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0327-7vG5o25.gif"
   },
   {
-    "id": "Dumbbell_Incline_Shoulder_Raise",
+    "id": "0328",
     "name": "Dumbbell Incline Shoulder Raise",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0328-6e2DcYX.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0328-6e2DcYX.gif"
+  },
+  {
+    "id": "0329",
+    "name": "Dumbbell Incline Shrug",
+    "category": "Back",
+    "equipment": "Dumbbell",
+    "specificMuscle": "trapezius",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0329-JymLInS.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0329-JymLInS.gif"
+  },
+  {
+    "id": "3542",
+    "name": "Dumbbell Incline T-Raise",
     "category": "Shoulders",
     "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Incline_Shoulder_Raise/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3542-jgbvVJ0.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3542-jgbvVJ0.gif"
   },
   {
-    "id": "Dumbbell_Lunges",
+    "id": "0330",
+    "name": "Dumbbell Incline Triceps Extension",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0330-OVIKwsd.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0330-OVIKwsd.gif"
+  },
+  {
+    "id": "0331",
+    "name": "Dumbbell Incline Twisted Flyes",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0331-1PLE8e9.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0331-1PLE8e9.gif"
+  },
+  {
+    "id": "1733",
+    "name": "Dumbbell Incline Two Arm Extension",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1733-U7D9Fx3.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1733-U7D9Fx3.gif"
+  },
+  {
+    "id": "3541",
+    "name": "Dumbbell Incline Y-Raise",
+    "category": "Back",
+    "equipment": "Dumbbell",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3541-PbzNu7c.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3541-PbzNu7c.gif"
+  },
+  {
+    "id": "0332",
+    "name": "Dumbbell Iron Cross",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0332-cALkHHX.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0332-cALkHHX.gif"
+  },
+  {
+    "id": "0333",
+    "name": "Dumbbell Kickback",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0333-W6PxUkg.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0333-W6PxUkg.gif"
+  },
+  {
+    "id": "1734",
+    "name": "Dumbbell Kickbacks On Exercise Ball",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1734-cAvTaSg.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1734-cAvTaSg.gif"
+  },
+  {
+    "id": "1660",
+    "name": "Dumbbell Kneeling Bicep Curl Exercise Ball",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1660-2JCuFTU.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1660-2JCuFTU.gif"
+  },
+  {
+    "id": "0334",
+    "name": "Dumbbell Lateral Raise",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0334-DsgkuIt.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0334-DsgkuIt.gif"
+  },
+  {
+    "id": "0335",
+    "name": "Dumbbell Lateral To Front Raise",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0335-xMjBKwn.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0335-xMjBKwn.gif"
+  },
+  {
+    "id": "0336",
     "name": "Dumbbell Lunge",
     "category": "Legs",
     "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Lunges/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0336-RRWFUcw.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0336-RRWFUcw.gif"
   },
   {
-    "id": "Dumbbell_Lying_One-Arm_Rear_Lateral_Raise",
-    "name": "Dumbbell Lying One-Arm Rear Lateral Raise",
+    "id": "1658",
+    "name": "Dumbbell Lunge With Bicep Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1658-Mz6lLcW.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1658-Mz6lLcW.gif"
+  },
+  {
+    "id": "0337",
+    "name": "Dumbbell Lying Extension (Across Face)",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0337-L2V5Nan.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0337-L2V5Nan.gif"
+  },
+  {
+    "id": "1729",
+    "name": "Dumbbell Lying Alternate Extension",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1729-NfP83rA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1729-NfP83rA.gif"
+  },
+  {
+    "id": "0338",
+    "name": "Dumbbell Lying Elbow Press",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0338-eOCOwIR.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0338-eOCOwIR.gif"
+  },
+  {
+    "id": "0863",
+    "name": "Dumbbell Lying External Shoulder Rotation",
     "category": "Shoulders",
     "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Lying_One-Arm_Rear_Lateral_Raise/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0863-bmBf7LN.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0863-bmBf7LN.gif"
   },
   {
-    "id": "Dumbbell_Lying_Pronation",
+    "id": "0339",
+    "name": "Dumbbell Lying Femoral",
+    "category": "Legs",
+    "equipment": "Dumbbell",
+    "specificMuscle": "hamstring",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0339-FkBIE6a.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0339-FkBIE6a.gif"
+  },
+  {
+    "id": "0340",
+    "name": "Dumbbell Lying Hammer Press",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0340-7gdLIXa.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0340-7gdLIXa.gif"
+  },
+  {
+    "id": "2470",
+    "name": "Dumbbell Lying On Floor Rear Delt Raise",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "back-deltoids",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2470-Ion0XWz.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2470-Ion0XWz.gif"
+  },
+  {
+    "id": "0341",
+    "name": "Dumbbell Lying One Arm Deltoid Rear",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "back-deltoids",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0341-gSw59a4.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0341-gSw59a4.gif"
+  },
+  {
+    "id": "0343",
+    "name": "Dumbbell Lying One Arm Press",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0343-zGSIWQi.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0343-zGSIWQi.gif"
+  },
+  {
+    "id": "0342",
+    "name": "Dumbbell Lying One Arm Press V. 2",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0342-K3dIO25.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0342-K3dIO25.gif"
+  },
+  {
+    "id": "0344",
+    "name": "Dumbbell Lying One Arm Pronated Triceps Extension",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0344-wyaqzOS.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0344-wyaqzOS.gif"
+  },
+  {
+    "id": "0345",
+    "name": "Dumbbell Lying One Arm Rear Lateral Raise",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "back-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0345-KwFGiEP.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0345-KwFGiEP.gif"
+  },
+  {
+    "id": "0346",
+    "name": "Dumbbell Lying One Arm Supinated Triceps Extension",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0346-zZlORz6.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0346-zZlORz6.gif"
+  },
+  {
+    "id": "0347",
     "name": "Dumbbell Lying Pronation",
     "category": "Arms",
     "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Lying_Pronation/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0347-mym4hJo.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0347-mym4hJo.gif"
   },
   {
-    "id": "Dumbbell_Lying_Rear_Lateral_Raise",
+    "id": "2705",
+    "name": "Dumbbell Lying Pronation On Floor",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2705-7RWNjiB.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2705-7RWNjiB.gif"
+  },
+  {
+    "id": "1284",
+    "name": "Dumbbell Lying Pullover On Exercise Ball",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1284-iK59oEA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1284-iK59oEA.gif"
+  },
+  {
+    "id": "1328",
+    "name": "Dumbbell Lying Rear Delt Row",
+    "category": "Back",
+    "equipment": "Dumbbell",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1328-XUUD0Fs.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1328-XUUD0Fs.gif"
+  },
+  {
+    "id": "0348",
     "name": "Dumbbell Lying Rear Lateral Raise",
     "category": "Shoulders",
     "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Lying_Rear_Lateral_Raise/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "back-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0348-53Ttlck.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0348-53Ttlck.gif"
   },
   {
-    "id": "Dumbbell_Lying_Supination",
+    "id": "1735",
+    "name": "Dumbbell Lying Single Extension",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1735-6MfS53i.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1735-6MfS53i.gif"
+  },
+  {
+    "id": "0349",
     "name": "Dumbbell Lying Supination",
     "category": "Arms",
     "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Lying_Supination/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0349-M2Pm3zj.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0349-M2Pm3zj.gif"
   },
   {
-    "id": "Dumbbell_One-Arm_Shoulder_Press",
-    "name": "Dumbbell One-Arm Shoulder Pre",
-    "category": "Shoulders",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_One-Arm_Shoulder_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Dumbbell_One-Arm_Triceps_Extension",
-    "name": "Dumbbell One-Arm Triceps Extension",
+    "id": "2706",
+    "name": "Dumbbell Lying Supination On Floor",
     "category": "Arms",
     "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_One-Arm_Triceps_Extension/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2706-rEhi2o5.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2706-rEhi2o5.gif"
   },
   {
-    "id": "Dumbbell_One-Arm_Upright_Row",
-    "name": "Dumbbell One-Arm Upright Row",
+    "id": "1661",
+    "name": "Dumbbell Lying Supine Biceps Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1661-XVzF3iZ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1661-XVzF3iZ.gif"
+  },
+  {
+    "id": "0350",
+    "name": "Dumbbell Lying Supine Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0350-KUaZst7.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0350-KUaZst7.gif"
+  },
+  {
+    "id": "0351",
+    "name": "Dumbbell Lying Triceps Extension",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0351-mpKZGWz.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0351-mpKZGWz.gif"
+  },
+  {
+    "id": "1662",
+    "name": "Dumbbell Lying Wide Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1662-qm9veZw.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1662-qm9veZw.gif"
+  },
+  {
+    "id": "0352",
+    "name": "Dumbbell Neutral Grip Bench Press",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0352-pP8wP2P.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0352-pP8wP2P.gif"
+  },
+  {
+    "id": "1285",
+    "name": "Dumbbell One Arm Bench Fly",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1285-o5Jsk92.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1285-o5Jsk92.gif"
+  },
+  {
+    "id": "0292",
+    "name": "Dumbbell One Arm Bent-Over Row",
+    "category": "Back",
+    "equipment": "Dumbbell",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0292-C0MA9bC.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0292-C0MA9bC.gif"
+  },
+  {
+    "id": "1286",
+    "name": "Dumbbell One Arm Chest Fly On Exercise Ball",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1286-Bpkf41o.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1286-Bpkf41o.gif"
+  },
+  {
+    "id": "0353",
+    "name": "Dumbbell One Arm Concentration Curl (On Stability Ball)",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0353-k5IpyHg.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0353-k5IpyHg.gif"
+  },
+  {
+    "id": "1287",
+    "name": "Dumbbell One Arm Decline Chest Press",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1287-REGM1dE.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1287-REGM1dE.gif"
+  },
+  {
+    "id": "1288",
+    "name": "Dumbbell One Arm Fly On Exercise Ball",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1288-Am02iPd.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1288-Am02iPd.gif"
+  },
+  {
+    "id": "1736",
+    "name": "Dumbbell One Arm French Press On Exercise Ball",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1736-ziFKQXP.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1736-ziFKQXP.gif"
+  },
+  {
+    "id": "1663",
+    "name": "Dumbbell One Arm Hammer Preacher Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1663-4dF3maG.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1663-4dF3maG.gif"
+  },
+  {
+    "id": "1621",
+    "name": "Dumbbell One Arm Hammer Press On Exercise Ball",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1621-VYmYxK5.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1621-VYmYxK5.gif"
+  },
+  {
+    "id": "1289",
+    "name": "Dumbbell One Arm Incline Chest Press",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1289-PDaMuyV.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1289-PDaMuyV.gif"
+  },
+  {
+    "id": "0354",
+    "name": "Dumbbell One Arm Kickback",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0354-bQy2Eni.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0354-bQy2Eni.gif"
+  },
+  {
+    "id": "0355",
+    "name": "Dumbbell One Arm Lateral Raise",
     "category": "Shoulders",
     "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_One-Arm_Upright_Row/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0355-n5cWCsI.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0355-n5cWCsI.gif"
   },
   {
-    "id": "Dumbbell_Prone_Incline_Curl",
+    "id": "0356",
+    "name": "Dumbbell One Arm Lateral Raise With Support",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0356-Yg7MJAT.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0356-Yg7MJAT.gif"
+  },
+  {
+    "id": "1290",
+    "name": "Dumbbell One Arm Press On Exercise Ball",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1290-QZFv5ui.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1290-QZFv5ui.gif"
+  },
+  {
+    "id": "1665",
+    "name": "Dumbbell One Arm Prone Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1665-JWjujiY.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1665-JWjujiY.gif"
+  },
+  {
+    "id": "1666",
+    "name": "Dumbbell One Arm Prone Hammer Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1666-LIGZSTA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1666-LIGZSTA.gif"
+  },
+  {
+    "id": "1291",
+    "name": "Dumbbell One Arm Pullover On Exercise Ball",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1291-bQHPBU3.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1291-bQHPBU3.gif"
+  },
+  {
+    "id": "0358",
+    "name": "Dumbbell One Arm Reverse Wrist Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0358-BwSNDGt.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0358-BwSNDGt.gif"
+  },
+  {
+    "id": "0359",
+    "name": "Dumbbell One Arm Reverse Fly (With Support)",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "back-deltoids",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0359-e25F58f.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0359-e25F58f.gif"
+  },
+  {
+    "id": "1622",
+    "name": "Dumbbell One Arm Reverse Grip Press",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1622-Ze7MoIb.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1622-Ze7MoIb.gif"
+  },
+  {
+    "id": "1414",
+    "name": "Dumbbell One Arm Reverse Preacher Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1414-bWxq4op.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1414-bWxq4op.gif"
+  },
+  {
+    "id": "1667",
+    "name": "Dumbbell One Arm Reverse Spider Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1667-VdLZ3nB.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1667-VdLZ3nB.gif"
+  },
+  {
+    "id": "1668",
+    "name": "Dumbbell One Arm Seated Bicep Curl On Exercise Ball",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1668-s999Hdo.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1668-s999Hdo.gif"
+  },
+  {
+    "id": "1669",
+    "name": "Dumbbell One Arm Seated Hammer Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1669-jK2hZ6n.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1669-jK2hZ6n.gif"
+  },
+  {
+    "id": "1415",
+    "name": "Dumbbell One Arm Seated Neutral Wrist Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1415-YtaCTYl.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1415-YtaCTYl.gif"
+  },
+  {
+    "id": "0361",
+    "name": "Dumbbell One Arm Shoulder Press",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0361-84RyJf8.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0361-84RyJf8.gif"
+  },
+  {
+    "id": "0360",
+    "name": "Dumbbell One Arm Shoulder Press V. 2",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0360-1TkiAFK.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0360-1TkiAFK.gif"
+  },
+  {
+    "id": "3888",
+    "name": "Dumbbell One Arm Snatch",
+    "category": "Legs",
+    "equipment": "Dumbbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3888-6pTkI99.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3888-6pTkI99.gif"
+  },
+  {
+    "id": "1670",
+    "name": "Dumbbell One Arm Standing Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1670-ffQsyBj.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1670-ffQsyBj.gif"
+  },
+  {
+    "id": "1671",
+    "name": "Dumbbell One Arm Standing Hammer Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1671-2sQGZ5b.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1671-2sQGZ5b.gif"
+  },
+  {
+    "id": "0362",
+    "name": "Dumbbell One Arm Triceps Extension (On Bench)",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0362-nAuHPcD.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0362-nAuHPcD.gif"
+  },
+  {
+    "id": "0363",
+    "name": "Dumbbell One Arm Upright Row",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0363-6cKQC5E.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0363-6cKQC5E.gif"
+  },
+  {
+    "id": "0364",
+    "name": "Dumbbell One Arm Wrist Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0364-q8aHNoF.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0364-q8aHNoF.gif"
+  },
+  {
+    "id": "1672",
+    "name": "Dumbbell One Arm Zottman Preacher Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1672-sxY5Biu.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1672-sxY5Biu.gif"
+  },
+  {
+    "id": "1292",
+    "name": "Dumbbell One Leg Fly On Exercise Ball",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1292-pH2x2jj.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1292-pH2x2jj.gif"
+  },
+  {
+    "id": "0365",
+    "name": "Dumbbell Over Bench Neutral Wrist Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0365-BKa8dmT.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0365-BKa8dmT.gif"
+  },
+  {
+    "id": "0366",
+    "name": "Dumbbell Over Bench One Arm Neutral Wrist Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0366-IvV6C9M.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0366-IvV6C9M.gif"
+  },
+  {
+    "id": "1441",
+    "name": "Dumbbell Over Bench One Arm Reverse Wrist Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1441-4Jc36XM.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1441-4Jc36XM.gif"
+  },
+  {
+    "id": "0367",
+    "name": "Dumbbell Over Bench One Arm Wrist Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0367-KI1DjNN.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0367-KI1DjNN.gif"
+  },
+  {
+    "id": "0368",
+    "name": "Dumbbell Over Bench Revers Wrist Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0368-3tAXPQ6.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0368-3tAXPQ6.gif"
+  },
+  {
+    "id": "0369",
+    "name": "Dumbbell Over Bench Wrist Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0369-D1xYJAU.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0369-D1xYJAU.gif"
+  },
+  {
+    "id": "1329",
+    "name": "Dumbbell Palm Rotational Bent Over Row",
+    "category": "Back",
+    "equipment": "Dumbbell",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1329-wt6rwjk.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1329-wt6rwjk.gif"
+  },
+  {
+    "id": "1623",
+    "name": "Dumbbell Palms In Incline Bench Press",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1623-8eqjhOl.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1623-8eqjhOl.gif"
+  },
+  {
+    "id": "0370",
+    "name": "Dumbbell Peacher Hammer Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0370-F1KxjBa.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0370-F1KxjBa.gif"
+  },
+  {
+    "id": "0371",
+    "name": "Dumbbell Plyo Squat",
+    "category": "Legs",
+    "equipment": "Dumbbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0371-S4pwGlc.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0371-S4pwGlc.gif"
+  },
+  {
+    "id": "0372",
+    "name": "Dumbbell Preacher Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0372-jivWf8n.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0372-jivWf8n.gif"
+  },
+  {
+    "id": "1673",
+    "name": "Dumbbell Preacher Curl Over Exercise Ball",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1673-hwygydB.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1673-hwygydB.gif"
+  },
+  {
+    "id": "1293",
+    "name": "Dumbbell Press On Exercise Ball",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1293-O8o7q4d.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1293-O8o7q4d.gif"
+  },
+  {
+    "id": "0373",
+    "name": "Dumbbell Pronate-Grip Triceps Extension",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0373-bpJL2Qs.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0373-bpJL2Qs.gif"
+  },
+  {
+    "id": "0374",
     "name": "Dumbbell Prone Incline Curl",
     "category": "Arms",
     "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Prone_Incline_Curl/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0374-mwpPcr1.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0374-mwpPcr1.gif"
   },
   {
-    "id": "Dumbbell_Raise",
+    "id": "1674",
+    "name": "Dumbbell Prone Incline Hammer Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1674-cWemPG8.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1674-cWemPG8.gif"
+  },
+  {
+    "id": "0375",
+    "name": "Dumbbell Pullover",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0375-9XjtHvS.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0375-9XjtHvS.gif"
+  },
+  {
+    "id": "1294",
+    "name": "Dumbbell Pullover Hip Extension On Exercise Ball",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1294-lI7easp.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1294-lI7easp.gif"
+  },
+  {
+    "id": "1295",
+    "name": "Dumbbell Pullover On Exercise Ball",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1295-FSD6PGL.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1295-FSD6PGL.gif"
+  },
+  {
+    "id": "1700",
+    "name": "Dumbbell Push Press",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1700-FS63wTN.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1700-FS63wTN.gif"
+  },
+  {
+    "id": "0376",
     "name": "Dumbbell Raise",
     "category": "Shoulders",
     "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Raise/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0376-c9MnDRp.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0376-c9MnDRp.gif"
   },
   {
-    "id": "Dumbbell_Rear_Lunge",
+    "id": "2292",
+    "name": "Dumbbell Rear Delt Raise",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "back-deltoids",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2292-mu5Guxt.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2292-mu5Guxt.gif"
+  },
+  {
+    "id": "0377",
+    "name": "Dumbbell Rear Delt Row_shoulder",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "back-deltoids",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0377-EKXOMEh.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0377-EKXOMEh.gif"
+  },
+  {
+    "id": "0378",
+    "name": "Dumbbell Rear Fly",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "back-deltoids",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0378-8DiFDVA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0378-8DiFDVA.gif"
+  },
+  {
+    "id": "0380",
+    "name": "Dumbbell Rear Lateral Raise",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "back-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0380-v1qBec9.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0380-v1qBec9.gif"
+  },
+  {
+    "id": "0379",
+    "name": "Dumbbell Rear Lateral Raise (Support Head)",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "back-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0379-UzkLrem.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0379-UzkLrem.gif"
+  },
+  {
+    "id": "0381",
     "name": "Dumbbell Rear Lunge",
     "category": "Legs",
     "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Rear_Lunge/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0381-SSsBDwB.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0381-SSsBDwB.gif"
   },
   {
-    "id": "Dumbbell_Scaption",
-    "name": "Dumbbell Scaption",
+    "id": "0382",
+    "name": "Dumbbell Revers Grip Biceps Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0382-e4ojVhP.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0382-e4ojVhP.gif"
+  },
+  {
+    "id": "1624",
+    "name": "Dumbbell Reverse Bench Press",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1624-UIbGx6H.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1624-UIbGx6H.gif"
+  },
+  {
+    "id": "0383",
+    "name": "Dumbbell Reverse Fly",
     "category": "Shoulders",
     "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Scaption/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "back-deltoids",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0383-EAs3xL9.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0383-EAs3xL9.gif"
   },
   {
-    "id": "Dumbbell_Seated_Box_Jump",
-    "name": "Dumbbell Seated Box Jump",
+    "id": "1330",
+    "name": "Dumbbell Reverse Grip Incline Bench One Arm Row",
+    "category": "Back",
+    "equipment": "Dumbbell",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1330-ZIViNh1.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1330-ZIViNh1.gif"
+  },
+  {
+    "id": "1331",
+    "name": "Dumbbell Reverse Grip Incline Bench Two Arm Row",
+    "category": "Back",
+    "equipment": "Dumbbell",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1331-9pQSkH8.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1331-9pQSkH8.gif"
+  },
+  {
+    "id": "2327",
+    "name": "Dumbbell Reverse Grip Row (Female)",
+    "category": "Back",
+    "equipment": "Dumbbell",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2327-Nh3mvOO.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2327-Nh3mvOO.gif"
+  },
+  {
+    "id": "0384",
+    "name": "Dumbbell Reverse Preacher Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0384-O8Aq69u.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0384-O8Aq69u.gif"
+  },
+  {
+    "id": "1675",
+    "name": "Dumbbell Reverse Spider Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1675-6sMAmNv.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1675-6sMAmNv.gif"
+  },
+  {
+    "id": "0385",
+    "name": "Dumbbell Reverse Wrist Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0385-BLCvwr2.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0385-BLCvwr2.gif"
+  },
+  {
+    "id": "1459",
+    "name": "Dumbbell Romanian Deadlift",
     "category": "Legs",
     "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Seated_Box_Jump/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1459-rR0LJzx.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1459-rR0LJzx.gif"
   },
   {
-    "id": "Dumbbell_Seated_One-Leg_Calf_Raise",
-    "name": "Dumbbell Seated One-Leg Calf Raise",
-    "category": "Legs",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Seated_One-Leg_Calf_Raise/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Dumbbell_Shoulder_Press",
-    "name": "Dumbbell Shoulder Pre",
+    "id": "0386",
+    "name": "Dumbbell Rotation Reverse Fly",
     "category": "Shoulders",
     "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Shoulder_Press/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "back-deltoids",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0386-prbWx1D.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0386-prbWx1D.gif"
   },
   {
-    "id": "Dumbbell_Shrug",
+    "id": "2397",
+    "name": "Dumbbell Scott Press",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2397-5vfAI0I.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2397-5vfAI0I.gif"
+  },
+  {
+    "id": "0387",
+    "name": "Dumbbell Seated Alternate Front Raise",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0387-gH5fRsC.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0387-gH5fRsC.gif"
+  },
+  {
+    "id": "1676",
+    "name": "Dumbbell Seated Alternate Hammer Curl On Exercise Ball",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1676-QLRmNeT.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1676-QLRmNeT.gif"
+  },
+  {
+    "id": "0388",
+    "name": "Dumbbell Seated Alternate Press",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0388-QT5Q0nK.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0388-QT5Q0nK.gif"
+  },
+  {
+    "id": "3546",
+    "name": "Dumbbell Seated Alternate Shoulder",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3546-q7qkONO.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3546-q7qkONO.gif"
+  },
+  {
+    "id": "0389",
+    "name": "Dumbbell Seated Bench Extension",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0389-JhYSVwT.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0389-JhYSVwT.gif"
+  },
+  {
+    "id": "2317",
+    "name": "Dumbbell Seated Bent Arm Lateral Raise",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2317-JzQbv7J.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2317-JzQbv7J.gif"
+  },
+  {
+    "id": "1730",
+    "name": "Dumbbell Seated Bent Over Alternate Kickback",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1730-x0lwvfq.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1730-x0lwvfq.gif"
+  },
+  {
+    "id": "1737",
+    "name": "Dumbbell Seated Bent Over Triceps Extension",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1737-4ievMJ9.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1737-4ievMJ9.gif"
+  },
+  {
+    "id": "1677",
+    "name": "Dumbbell Seated Bicep Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1677-xiA6lRr.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1677-xiA6lRr.gif"
+  },
+  {
+    "id": "0390",
+    "name": "Dumbbell Seated Biceps Curl (On Stability Ball)",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0390-WgJnBH5.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0390-WgJnBH5.gif"
+  },
+  {
+    "id": "3547",
+    "name": "Dumbbell Seated Biceps Curl To Shoulder Press",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3547-OeL23VY.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3547-OeL23VY.gif"
+  },
+  {
+    "id": "1379",
+    "name": "Dumbbell Seated Calf Raise",
+    "category": "Legs",
+    "equipment": "Dumbbell",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1379-r29jP7S.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1379-r29jP7S.gif"
+  },
+  {
+    "id": "0391",
+    "name": "Dumbbell Seated Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0391-TiaZTxx.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0391-TiaZTxx.gif"
+  },
+  {
+    "id": "0392",
+    "name": "Dumbbell Seated Front Raise",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0392-Ys97II0.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0392-Ys97II0.gif"
+  },
+  {
+    "id": "1678",
+    "name": "Dumbbell Seated Hammer Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1678-IGtBdNT.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1678-IGtBdNT.gif"
+  },
+  {
+    "id": "0393",
+    "name": "Dumbbell Seated Inner Biceps Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0393-KXyoEtA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0393-KXyoEtA.gif"
+  },
+  {
+    "id": "0394",
+    "name": "Dumbbell Seated Kickback",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0394-en550rk.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0394-en550rk.gif"
+  },
+  {
+    "id": "0396",
+    "name": "Dumbbell Seated Lateral Raise",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0396-hxyTtWj.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0396-hxyTtWj.gif"
+  },
+  {
+    "id": "0395",
+    "name": "Dumbbell Seated Lateral Raise V. 2",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0395-hrrS0Ed.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0395-hrrS0Ed.gif"
+  },
+  {
+    "id": "0397",
+    "name": "Dumbbell Seated Neutral Wrist Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0397-uJmK7Z1.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0397-uJmK7Z1.gif"
+  },
+  {
+    "id": "1679",
+    "name": "Dumbbell Seated One Arm Bicep Curl On Exercise Ball With Leg Raised",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1679-84sESNy.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1679-84sESNy.gif"
+  },
+  {
+    "id": "0398",
+    "name": "Dumbbell Seated One Arm Kickback",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0398-VQ3sNCn.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0398-VQ3sNCn.gif"
+  },
+  {
+    "id": "0399",
+    "name": "Dumbbell Seated One Arm Rotate",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0399-7f2jsqP.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0399-7f2jsqP.gif"
+  },
+  {
+    "id": "0400",
+    "name": "Dumbbell Seated One Leg Calf Raise",
+    "category": "Legs",
+    "equipment": "Dumbbell",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0400-Ia7tumC.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0400-Ia7tumC.gif"
+  },
+  {
+    "id": "1380",
+    "name": "Dumbbell Seated One Leg Calf Raise - Hammer Grip",
+    "category": "Legs",
+    "equipment": "Dumbbell",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1380-FxhcxUW.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1380-FxhcxUW.gif"
+  },
+  {
+    "id": "1381",
+    "name": "Dumbbell Seated One Leg Calf Raise - Palm Up",
+    "category": "Legs",
+    "equipment": "Dumbbell",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1381-VW88JNd.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1381-VW88JNd.gif"
+  },
+  {
+    "id": "0401",
+    "name": "Dumbbell Seated Palms Up Wrist Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0401-2dImyQ8.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0401-2dImyQ8.gif"
+  },
+  {
+    "id": "0402",
+    "name": "Dumbbell Seated Preacher Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0402-7D5bgLT.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0402-7D5bgLT.gif"
+  },
+  {
+    "id": "0403",
+    "name": "Dumbbell Seated Revers Grip Concentration Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0403-lyKCLmK.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0403-lyKCLmK.gif"
+  },
+  {
+    "id": "1738",
+    "name": "Dumbbell Seated Reverse Grip One Arm Overhead Tricep Extension",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1738-5fKX7wi.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1738-5fKX7wi.gif"
+  },
+  {
+    "id": "0405",
+    "name": "Dumbbell Seated Shoulder Press",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0405-znQUdHY.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0405-znQUdHY.gif"
+  },
+  {
+    "id": "0404",
+    "name": "Dumbbell Seated Shoulder Press (Parallel Grip)",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0404-f1jf47L.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0404-f1jf47L.gif"
+  },
+  {
+    "id": "2188",
+    "name": "Dumbbell Seated Triceps Extension",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2188-kont8Ut.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2188-kont8Ut.gif"
+  },
+  {
+    "id": "0406",
     "name": "Dumbbell Shrug",
     "category": "Back",
     "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Shrug/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "trapezius",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0406-NJzBsGJ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0406-NJzBsGJ.gif"
   },
   {
-    "id": "Dumbbell_Side_Bend",
+    "id": "0407",
     "name": "Dumbbell Side Bend",
     "category": "Core",
     "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Side_Bend/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0407-IpONWYv.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0407-IpONWYv.gif"
   },
   {
-    "id": "Dumbbell_Squat",
+    "id": "0408",
+    "name": "Dumbbell Side Lying One Hand Raise",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0408-fTlkJop.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0408-fTlkJop.gif"
+  },
+  {
+    "id": "3664",
+    "name": "Dumbbell Side Plank With Rear Fly",
+    "category": "Back",
+    "equipment": "Dumbbell",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3664-X6ytgYZ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3664-X6ytgYZ.gif"
+  },
+  {
+    "id": "3548",
+    "name": "Dumbbell Single Arm Overhead Carry",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3548-mWBtgmb.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3548-mWBtgmb.gif"
+  },
+  {
+    "id": "0409",
+    "name": "Dumbbell Single Leg Calf Raise",
+    "category": "Legs",
+    "equipment": "Dumbbell",
+    "specificMuscle": "calves",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0409-1kB3Wmk.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0409-1kB3Wmk.gif"
+  },
+  {
+    "id": "1757",
+    "name": "Dumbbell Single Leg Deadlift",
+    "category": "Legs",
+    "equipment": "Dumbbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1757-gKozT8X.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1757-gKozT8X.gif"
+  },
+  {
+    "id": "2805",
+    "name": "Dumbbell Single Leg Deadlift With Stepbox Support",
+    "category": "Legs",
+    "equipment": "Dumbbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2805-daBmy1Y.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2805-daBmy1Y.gif"
+  },
+  {
+    "id": "0410",
+    "name": "Dumbbell Single Leg Split Squat",
+    "category": "Legs",
+    "equipment": "Dumbbell",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0410-qx4fgX7.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0410-qx4fgX7.gif"
+  },
+  {
+    "id": "0411",
+    "name": "Dumbbell Single Leg Squat",
+    "category": "Legs",
+    "equipment": "Dumbbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0411-H6ybluc.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0411-H6ybluc.gif"
+  },
+  {
+    "id": "0413",
     "name": "Dumbbell Squat",
     "category": "Legs",
     "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Squat/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0413-HsvHqgf.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0413-HsvHqgf.gif"
   },
   {
-    "id": "Dumbbell_Squat_To_A_Bench",
-    "name": "Dumbbell Squat To A Bench",
-    "category": "Legs",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Squat_To_A_Bench/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Dumbbell_Step_Ups",
-    "name": "Dumbbell Step Up",
-    "category": "Legs",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Step_Ups/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Dumbbell_Tricep_Extension_-Pronated_Grip",
-    "name": "Dumbbell Tricep Extension -Pronated Grip",
+    "id": "3560",
+    "name": "Dumbbell Standing Alternate Hammer Curl And Press",
     "category": "Arms",
     "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Tricep_Extension_-Pronated_Grip/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3560-LeaZOIz.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3560-LeaZOIz.gif"
   },
   {
-    "id": "Dynamic_Back_Stretch",
-    "name": "Dynamic Back Stretch",
+    "id": "0414",
+    "name": "Dumbbell Standing Alternate Overhead Press",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0414-bBi35y3.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0414-bBi35y3.gif"
+  },
+  {
+    "id": "0415",
+    "name": "Dumbbell Standing Alternate Raise",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0415-SxHteRW.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0415-SxHteRW.gif"
+  },
+  {
+    "id": "1739",
+    "name": "Dumbbell Standing Alternating Tricep Kickback",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1739-Gi2BXfK.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1739-Gi2BXfK.gif"
+  },
+  {
+    "id": "2143",
+    "name": "Dumbbell Standing Around World",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2143-RSOsp5d.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2143-RSOsp5d.gif"
+  },
+  {
+    "id": "1740",
+    "name": "Dumbbell Standing Bent Over One Arm Triceps Extension",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1740-CJwa0vD.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1740-CJwa0vD.gif"
+  },
+  {
+    "id": "1741",
+    "name": "Dumbbell Standing Bent Over Two Arm Triceps Extension",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1741-3T12T87.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1741-3T12T87.gif"
+  },
+  {
+    "id": "0416",
+    "name": "Dumbbell Standing Biceps Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0416-3s4NnTh.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0416-3s4NnTh.gif"
+  },
+  {
+    "id": "0417",
+    "name": "Dumbbell Standing Calf Raise",
+    "category": "Legs",
+    "equipment": "Dumbbell",
+    "specificMuscle": "calves",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0417-dPmaUaU.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0417-dPmaUaU.gif"
+  },
+  {
+    "id": "0418",
+    "name": "Dumbbell Standing Concentration Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0418-7inpWch.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0418-7inpWch.gif"
+  },
+  {
+    "id": "0419",
+    "name": "Dumbbell Standing Front Raise Above Head",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0419-laVRfDf.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0419-laVRfDf.gif"
+  },
+  {
+    "id": "2321",
+    "name": "Dumbbell Standing Inner Biceps Curl V. 2",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2321-vKilzz3.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2321-vKilzz3.gif"
+  },
+  {
+    "id": "0420",
+    "name": "Dumbbell Standing Kickback",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0420-UmpPAAe.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0420-UmpPAAe.gif"
+  },
+  {
+    "id": "0421",
+    "name": "Dumbbell Standing One Arm Concentration Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0421-8fgqP5a.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0421-8fgqP5a.gif"
+  },
+  {
+    "id": "0422",
+    "name": "Dumbbell Standing One Arm Curl (Over Incline Bench)",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0422-BIb1tGo.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0422-BIb1tGo.gif"
+  },
+  {
+    "id": "1680",
+    "name": "Dumbbell Standing One Arm Curl Over Incline Bench",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1680-EmlJR2y.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1680-EmlJR2y.gif"
+  },
+  {
+    "id": "0423",
+    "name": "Dumbbell Standing One Arm Extension",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0423-BCUR88E.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0423-BCUR88E.gif"
+  },
+  {
+    "id": "0424",
+    "name": "Dumbbell Standing One Arm Palm In Press",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0424-ocYc6Db.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0424-ocYc6Db.gif"
+  },
+  {
+    "id": "0425",
+    "name": "Dumbbell Standing One Arm Reverse Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0425-DU5Kkj2.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0425-DU5Kkj2.gif"
+  },
+  {
+    "id": "0426",
+    "name": "Dumbbell Standing Overhead Press",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0426-A6wtbuL.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0426-A6wtbuL.gif"
+  },
+  {
+    "id": "0427",
+    "name": "Dumbbell Standing Palms In Press",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0427-UilDHSs.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0427-UilDHSs.gif"
+  },
+  {
+    "id": "0428",
+    "name": "Dumbbell Standing Preacher Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0428-hq2hyDH.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0428-hq2hyDH.gif"
+  },
+  {
+    "id": "0429",
+    "name": "Dumbbell Standing Reverse Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0429-0IgNjSM.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0429-0IgNjSM.gif"
+  },
+  {
+    "id": "0430",
+    "name": "Dumbbell Standing Triceps Extension",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0430-PdmaD0N.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0430-PdmaD0N.gif"
+  },
+  {
+    "id": "2293",
+    "name": "Dumbbell Standing Zottman Preacher Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2293-P2nRiUa.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2293-P2nRiUa.gif"
+  },
+  {
+    "id": "1684",
+    "name": "Dumbbell Step Up Single Leg Balance With Bicep Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1684-76vfTdU.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1684-76vfTdU.gif"
+  },
+  {
+    "id": "0431",
+    "name": "Dumbbell Step-Up",
+    "category": "Legs",
+    "equipment": "Dumbbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0431-aXtJhlg.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0431-aXtJhlg.gif"
+  },
+  {
+    "id": "2796",
+    "name": "Dumbbell Step-Up Lunge",
+    "category": "Legs",
+    "equipment": "Dumbbell",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2796-gFyFj9z.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2796-gFyFj9z.gif"
+  },
+  {
+    "id": "2812",
+    "name": "Dumbbell Step-Up Split Squat",
+    "category": "Legs",
+    "equipment": "Dumbbell",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2812-QjE2DcA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2812-QjE2DcA.gif"
+  },
+  {
+    "id": "0432",
+    "name": "Dumbbell Stiff Leg Deadlift",
+    "category": "Legs",
+    "equipment": "Dumbbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0432-5eLRITT.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0432-5eLRITT.gif"
+  },
+  {
+    "id": "0433",
+    "name": "Dumbbell Straight Arm Pullover",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0433-i8BdLTK.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0433-i8BdLTK.gif"
+  },
+  {
+    "id": "0434",
+    "name": "Dumbbell Straight Leg Deadlift",
+    "category": "Legs",
+    "equipment": "Dumbbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0434-oom75KC.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0434-oom75KC.gif"
+  },
+  {
+    "id": "2808",
+    "name": "Dumbbell Sumo Pull Through",
+    "category": "Legs",
+    "equipment": "Dumbbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2808-BmrwWzo.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2808-BmrwWzo.gif"
+  },
+  {
+    "id": "2803",
+    "name": "Dumbbell Supported Squat",
+    "category": "Legs",
+    "equipment": "Dumbbell",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2803-r5DgrW9.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2803-r5DgrW9.gif"
+  },
+  {
+    "id": "0436",
+    "name": "Dumbbell Tate Press",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0436-s5PdDyY.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0436-s5PdDyY.gif"
+  },
+  {
+    "id": "1742",
+    "name": "Dumbbell Tricep Kickback With Stork Stance",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1742-wOLmCXc.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1742-wOLmCXc.gif"
+  },
+  {
+    "id": "1743",
+    "name": "Dumbbell Twisting Bench Press",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1743-z6TAHoT.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1743-z6TAHoT.gif"
+  },
+  {
+    "id": "0437",
+    "name": "Dumbbell Upright Row",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0437-ainizkb.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0437-ainizkb.gif"
+  },
+  {
+    "id": "1765",
+    "name": "Dumbbell Upright Row (Back Pov)",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1765-Iptlv6x.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1765-Iptlv6x.gif"
+  },
+  {
+    "id": "0864",
+    "name": "Dumbbell Upright Shoulder External Rotation",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0864-x306lCW.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0864-x306lCW.gif"
+  },
+  {
+    "id": "5201",
+    "name": "Dumbbell Waiter Biceps Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/5201-KOpzGBL.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/5201-KOpzGBL.gif"
+  },
+  {
+    "id": "0438",
+    "name": "Dumbbell W-Press",
+    "category": "Shoulders",
+    "equipment": "Dumbbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0438-vmwLyCg.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0438-vmwLyCg.gif"
+  },
+  {
+    "id": "0439",
+    "name": "Dumbbell Zottman Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0439-kXaIn5A.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0439-kXaIn5A.gif"
+  },
+  {
+    "id": "2294",
+    "name": "Dumbbell Zottman Preacher Curl",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2294-y5U5B9Y.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2294-y5U5B9Y.gif"
+  },
+  {
+    "id": "2189",
+    "name": "Dumbbells Seated Triceps Extension",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2189-FQXdXzY.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2189-FQXdXzY.gif"
+  },
+  {
+    "id": "1167",
+    "name": "Dynamic Chest Stretch (Male)",
+    "category": "Chest",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1167-3uj0Ozg.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1167-3uj0Ozg.gif"
+  },
+  {
+    "id": "3287",
+    "name": "Elbow Dips",
+    "category": "Arms",
+    "equipment": "Bodyweight",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3287-LkoAWAE.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3287-LkoAWAE.gif"
+  },
+  {
+    "id": "1772",
+    "name": "Elbow Lift - Reverse Push-Up",
     "category": "Back",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dynamic_Back_Stretch/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1772-wbUYILZ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1772-wbUYILZ.gif"
   },
   {
-    "id": "Dynamic_Chest_Stretch",
-    "name": "Dynamic Chest Stretch",
-    "category": "Chest",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dynamic_Chest_Stretch/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "EZ-Bar_Curl",
-    "name": "EZ-Bar Curl (EZ Bar)",
-    "category": "Arms",
-    "equipment": "EZ Bar",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/EZ-Bar_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "EZ-Bar_Skullcrusher",
-    "name": "EZ-Bar Skullcrusher (EZ Bar)",
-    "category": "Arms",
-    "equipment": "EZ Bar",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/EZ-Bar_Skullcrusher/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Elbow_Circles",
-    "name": "Elbow Circles",
-    "category": "Shoulders",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Elbow_Circles/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Elbow_to_Knee",
-    "name": "Elbow to Knee",
+    "id": "0443",
+    "name": "Elbow-To-Knee",
     "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Elbow_to_Knee/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0443-jvp6DiD.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0443-jvp6DiD.gif"
   },
   {
-    "id": "Elbows_Back",
-    "name": "Elbows Back",
-    "category": "Chest",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Elbows_Back/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Elevated_Back_Lunge",
-    "name": "Elevated Back Lunge (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Elevated_Back_Lunge/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Elevated_Cable_Rows",
-    "name": "Elevated Cable Row",
+    "id": "3292",
+    "name": "Elevator",
     "category": "Back",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Elevated_Cable_Rows/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3292-zYmNaoY.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3292-zYmNaoY.gif"
   },
   {
-    "id": "Elliptical_Trainer",
-    "name": "Elliptical Trainer (Machine)",
+    "id": "1332",
+    "name": "Exercise Ball Alternating Arm Ups",
+    "category": "Back",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1332-EyLrNC2.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1332-EyLrNC2.gif"
+  },
+  {
+    "id": "1333",
+    "name": "Exercise Ball Back Extension With Arms Extended",
+    "category": "Back",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "lower-back",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1333-PERjVm8.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1333-PERjVm8.gif"
+  },
+  {
+    "id": "1334",
+    "name": "Exercise Ball Back Extension With Hands Behind Head",
+    "category": "Back",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "lower-back",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1334-o1HGDSq.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1334-o1HGDSq.gif"
+  },
+  {
+    "id": "1335",
+    "name": "Exercise Ball Back Extension With Knees Off Ground",
+    "category": "Back",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "lower-back",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1335-WME869U.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1335-WME869U.gif"
+  },
+  {
+    "id": "1336",
+    "name": "Exercise Ball Back Extension With Rotation",
+    "category": "Back",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "lower-back",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1336-WVD66ff.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1336-WVD66ff.gif"
+  },
+  {
+    "id": "1744",
+    "name": "Exercise Ball Dip",
+    "category": "Arms",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1744-kprile3.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1744-kprile3.gif"
+  },
+  {
+    "id": "1559",
+    "name": "Exercise Ball Hip Flexor Stretch",
     "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Elliptical_Trainer/0.jpg",
-    "requiresWeight": true
+    "equipment": "Medicine Ball",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1559-2LQkNPW.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1559-2LQkNPW.gif"
   },
   {
-    "id": "Exercise_Ball_Crunch",
-    "name": "Exercise Ball Crunch",
-    "category": "Core",
-    "equipment": "Exercise Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Exercise_Ball_Crunch/0.jpg",
-    "requiresWeight": false
+    "id": "1338",
+    "name": "Exercise Ball Hug",
+    "category": "Back",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "lower-back",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1338-d7z1Y7V.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1338-d7z1Y7V.gif"
   },
   {
-    "id": "Exercise_Ball_Pull-In",
-    "name": "Exercise Ball Pull-In",
-    "category": "Core",
-    "equipment": "Exercise Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Exercise_Ball_Pull-In/0.jpg",
-    "requiresWeight": false
+    "id": "1339",
+    "name": "Exercise Ball Lat Stretch",
+    "category": "Back",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1339-sM84pE4.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1339-sM84pE4.gif"
   },
   {
-    "id": "Extended_Range_One-Arm_Kettlebell_Floor_Press",
-    "name": "Extended Range One-Arm Kettlebell Floor Pre",
-    "category": "Chest",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Extended_Range_One-Arm_Kettlebell_Floor_Press/0.jpg",
-    "requiresWeight": true
+    "id": "1341",
+    "name": "Exercise Ball Lower Back Stretch (Pyramid)",
+    "category": "Back",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1341-yU7w7CA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1341-yU7w7CA.gif"
   },
   {
-    "id": "External_Rotation",
-    "name": "External Rotation (Dumbbell)",
-    "category": "Shoulders",
+    "id": "1342",
+    "name": "Exercise Ball Lying Side Lat Stretch",
+    "category": "Back",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1342-rTbyBYV.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1342-rTbyBYV.gif"
+  },
+  {
+    "id": "1382",
+    "name": "Exercise Ball On The Wall Calf Raise",
+    "category": "Legs",
     "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/External_Rotation/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1382-xo6sENf.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1382-xo6sENf.gif"
   },
   {
-    "id": "External_Rotation_with_Band",
-    "name": "External Rotation with Band",
-    "category": "Shoulders",
-    "equipment": "Band",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/External_Rotation_with_Band/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "External_Rotation_with_Cable",
-    "name": "External Rotation with Cable",
-    "category": "Shoulders",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/External_Rotation_with_Cable/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Face_Pull",
-    "name": "Face Pull (Cable)",
-    "category": "Shoulders",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Face_Pull/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Farmers_Walk",
-    "name": "Farmer's Walk",
-    "category": "Arms",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Farmers_Walk/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Fast_Skipping",
-    "name": "Fast Skipping",
+    "id": "3241",
+    "name": "Exercise Ball On The Wall Calf Raise (Tennis Ball Between Ankles)",
     "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Fast_Skipping/0.jpg",
-    "requiresWeight": false
+    "equipment": "Dumbbell",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3241-FY3UdNT.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3241-FY3UdNT.gif"
   },
   {
-    "id": "Finger_Curls",
-    "name": "Finger Curl (Barbell)",
-    "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Finger_Curls/0.jpg",
-    "requiresWeight": true
+    "id": "3240",
+    "name": "Exercise Ball On The Wall Calf Raise (Tennis Ball Between Knees)",
+    "category": "Legs",
+    "equipment": "Dumbbell",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3240-j74M6Zn.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3240-j74M6Zn.gif"
   },
   {
-    "id": "Flat_Bench_Cable_Flyes",
-    "name": "Flat Bench Cable Flye",
+    "id": "1416",
+    "name": "Exercise Ball One Leg Prone Lower Body Rotation",
+    "category": "Legs",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1416-M72BExt.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1416-M72BExt.gif"
+  },
+  {
+    "id": "1417",
+    "name": "Exercise Ball One Legged Diagonal Kick Hamstring Curl",
+    "category": "Legs",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1417-GOJKFfO.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1417-GOJKFfO.gif"
+  },
+  {
+    "id": "1296",
+    "name": "Exercise Ball Pike Push Up",
     "category": "Chest",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Flat_Bench_Cable_Flyes/0.jpg",
-    "requiresWeight": true
+    "equipment": "Medicine Ball",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1296-sVvXT5J.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1296-sVvXT5J.gif"
   },
   {
-    "id": "Flat_Bench_Leg_Pull-In",
-    "name": "Flat Bench Leg Pull-In",
-    "category": "Core",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Flat_Bench_Leg_Pull-In/0.jpg",
-    "requiresWeight": false
+    "id": "1343",
+    "name": "Exercise Ball Prone Leg Raise",
+    "category": "Back",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "lower-back",
+    "secondaryMuscle": "abs",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1343-lCKm4Rs.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1343-lCKm4Rs.gif"
   },
   {
-    "id": "Flat_Bench_Lying_Leg_Raise",
-    "name": "Flat Bench Lying Leg Raise",
-    "category": "Core",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Flat_Bench_Lying_Leg_Raise/0.jpg",
-    "requiresWeight": false
+    "id": "1560",
+    "name": "Exercise Ball Seated Hamstring Stretch",
+    "category": "Legs",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "hamstring",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1560-yRYyfdA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1560-yRYyfdA.gif"
   },
   {
-    "id": "Flexor_Incline_Dumbbell_Curls",
-    "name": "Flexor Incline Dumbbell Curl",
+    "id": "1745",
+    "name": "Exercise Ball Seated Triceps Stretch",
+    "category": "Arms",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1745-7ePTw4B.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1745-7ePTw4B.gif"
+  },
+  {
+    "id": "1746",
+    "name": "Exercise Ball Supine Triceps Extension",
     "category": "Arms",
     "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Flexor_Incline_Dumbbell_Curls/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1746-Gm2Uv1z.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1746-Gm2Uv1z.gif"
   },
   {
-    "id": "Floor_Glute-Ham_Raise",
-    "name": "Floor Glute-Ham Raise",
+    "id": "1747",
+    "name": "Ez Bar French Press On Exercise Ball",
+    "category": "Arms",
+    "equipment": "EZ Bar",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1747-CFN9P8G.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1747-CFN9P8G.gif"
+  },
+  {
+    "id": "3010",
+    "name": "Ez Bar Lying Bent Arms Pullover",
+    "category": "Back",
+    "equipment": "EZ Bar",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3010-nDK1HJ0.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3010-nDK1HJ0.gif"
+  },
+  {
+    "id": "1748",
+    "name": "Ez Bar Lying Close Grip Triceps Extension Behind Head",
+    "category": "Arms",
+    "equipment": "EZ Bar",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1748-6CKUx7o.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1748-6CKUx7o.gif"
+  },
+  {
+    "id": "1344",
+    "name": "Ez Bar Reverse Grip Bent Over Row",
+    "category": "Back",
+    "equipment": "EZ Bar",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1344-G8dXpNG.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1344-G8dXpNG.gif"
+  },
+  {
+    "id": "1682",
+    "name": "Ez Bar Seated Close Grip Concentration Curl",
+    "category": "Arms",
+    "equipment": "EZ Bar",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1682-Dsfz0Id.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1682-Dsfz0Id.gif"
+  },
+  {
+    "id": "1749",
+    "name": "Ez Bar Standing French Press",
+    "category": "Arms",
+    "equipment": "EZ Bar",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1749-1cTf2Ux.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1749-1cTf2Ux.gif"
+  },
+  {
+    "id": "0445",
+    "name": "Ez Barbell Anti Gravity Press",
+    "category": "Shoulders",
+    "equipment": "EZ Bar",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0445-fprd84i.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0445-fprd84i.gif"
+  },
+  {
+    "id": "1627",
+    "name": "Ez Barbell Close Grip Preacher Curl",
+    "category": "Arms",
+    "equipment": "EZ Bar",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1627-hacCyUv.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1627-hacCyUv.gif"
+  },
+  {
+    "id": "0446",
+    "name": "Ez Barbell Close-Grip Curl",
+    "category": "Arms",
+    "equipment": "EZ Bar",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0446-V4ryaZa.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0446-V4ryaZa.gif"
+  },
+  {
+    "id": "0447",
+    "name": "Ez Barbell Curl",
+    "category": "Arms",
+    "equipment": "EZ Bar",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0447-6TG6x2w.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0447-6TG6x2w.gif"
+  },
+  {
+    "id": "0448",
+    "name": "Ez Barbell Decline Close Grip Face Press",
+    "category": "Arms",
+    "equipment": "EZ Bar",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0448-DgZQ11d.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0448-DgZQ11d.gif"
+  },
+  {
+    "id": "2186",
+    "name": "Ez Barbell Decline Triceps Extension",
+    "category": "Arms",
+    "equipment": "EZ Bar",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2186-CQHoDm0.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2186-CQHoDm0.gif"
+  },
+  {
+    "id": "0449",
+    "name": "Ez Barbell Incline Triceps Extension",
+    "category": "Arms",
+    "equipment": "EZ Bar",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0449-KyLtiLT.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0449-KyLtiLT.gif"
+  },
+  {
+    "id": "0450",
+    "name": "Ez Barbell Jm Bench Press",
+    "category": "Arms",
+    "equipment": "EZ Bar",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0450-hnOYgH3.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0450-hnOYgH3.gif"
+  },
+  {
+    "id": "0451",
+    "name": "Ez Barbell Reverse Grip Curl",
+    "category": "Arms",
+    "equipment": "EZ Bar",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0451-Y5X65IB.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0451-Y5X65IB.gif"
+  },
+  {
+    "id": "0452",
+    "name": "Ez Barbell Reverse Grip Preacher Curl",
+    "category": "Arms",
+    "equipment": "EZ Bar",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0452-vBNyir7.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0452-vBNyir7.gif"
+  },
+  {
+    "id": "1458",
+    "name": "Ez Barbell Seated Curls",
+    "category": "Arms",
+    "equipment": "EZ Bar",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1458-jtFKbt5.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1458-jtFKbt5.gif"
+  },
+  {
+    "id": "0453",
+    "name": "Ez Barbell Seated Triceps Extension",
+    "category": "Arms",
+    "equipment": "EZ Bar",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0453-iaapw0g.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0453-iaapw0g.gif"
+  },
+  {
+    "id": "0454",
+    "name": "Ez Barbell Spider Curl",
+    "category": "Arms",
+    "equipment": "EZ Bar",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0454-Ye5Qxb0.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0454-Ye5Qxb0.gif"
+  },
+  {
+    "id": "1628",
+    "name": "Ez Barbell Spider Curl",
+    "category": "Arms",
+    "equipment": "EZ Bar",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1628-2kattbR.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1628-2kattbR.gif"
+  },
+  {
+    "id": "2404",
+    "name": "Ez-Bar Biceps Curl (With Arm Blaster)",
+    "category": "Arms",
+    "equipment": "EZ Bar",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2404-tJ5nYqo.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2404-tJ5nYqo.gif"
+  },
+  {
+    "id": "2432",
+    "name": "Ez-Bar Close-Grip Bench Press",
+    "category": "Arms",
+    "equipment": "EZ Bar",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2432-da4cXST.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2432-da4cXST.gif"
+  },
+  {
+    "id": "2741",
+    "name": "Ez-Barbell Standing Wide Grip Biceps Curl",
+    "category": "Arms",
+    "equipment": "EZ Bar",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2741-OVTZ65k.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2741-OVTZ65k.gif"
+  },
+  {
+    "id": "2133",
+    "name": "Farmers Walk",
     "category": "Legs",
+    "equipment": "Dumbbell",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "calves",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2133-qPEzJjA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2133-qPEzJjA.gif"
+  },
+  {
+    "id": "0455",
+    "name": "Finger Curls",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0455-awG04cF.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0455-awG04cF.gif"
+  },
+  {
+    "id": "3303",
+    "name": "Flag",
+    "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Floor_Glute-Ham_Raise/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3303-pQ0Mx1Z.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3303-pQ0Mx1Z.gif"
   },
   {
-    "id": "Floor_Press",
-    "name": "Floor Pre (Barbell)",
-    "category": "Arms",
+    "id": "0456",
+    "name": "Flexion Leg Sit Up (Bent Knee)",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0456-AR0ig3o.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0456-AR0ig3o.gif"
+  },
+  {
+    "id": "0457",
+    "name": "Flexion Leg Sit Up (Straight Arm)",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0457-KZn52RC.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0457-KZn52RC.gif"
+  },
+  {
+    "id": "0458",
+    "name": "Floor Fly (With Barbell)",
+    "category": "Chest",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Floor_Press/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0458-neonEDL.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0458-neonEDL.gif"
   },
   {
-    "id": "Floor_Press_with_Chains",
-    "name": "Floor Press with Chain (Barbell)",
-    "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Floor_Press_with_Chains/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Flutter_Kicks",
+    "id": "0459",
     "name": "Flutter Kicks",
     "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Flutter_Kicks/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "abs",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0459-UVo2Qs2.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0459-UVo2Qs2.gif"
   },
   {
-    "id": "Foot-SMR",
-    "name": "Foot-SMR",
+    "id": "1472",
+    "name": "Forward Jump",
     "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Foot-SMR/0.jpg",
-    "requiresWeight": false
+    "equipment": "Bodyweight",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "calves",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1472-uZKq7lo.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1472-uZKq7lo.gif"
   },
   {
-    "id": "Forward_Drag_with_Press",
-    "name": "Forward Drag with Press",
-    "category": "Chest",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Forward_Drag_with_Press/0.jpg",
-    "requiresWeight": false
+    "id": "3470",
+    "name": "Forward Lunge (Male)",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3470-kMzUs9Y.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3470-kMzUs9Y.gif"
   },
   {
-    "id": "Frankenstein_Squat",
-    "name": "Frankenstein Squat (Barbell)",
+    "id": "3194",
+    "name": "Frankenstein Squat",
     "category": "Legs",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Frankenstein_Squat/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3194-bdWcbaU.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3194-bdWcbaU.gif"
   },
   {
-    "id": "Freehand_Jump_Squat",
-    "name": "Freehand Jump Squat",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Freehand_Jump_Squat/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Frog_Hops",
-    "name": "Frog Hops",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Frog_Hops/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Frog_Sit-Ups",
-    "name": "Frog Sit-Ups",
+    "id": "2429",
+    "name": "Frog Crunch",
     "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Frog_Sit-Ups/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2429-FFRP97T.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2429-FFRP97T.gif"
   },
   {
-    "id": "Front_Barbell_Squat",
-    "name": "Front Barbell Squat",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Front_Barbell_Squat/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Front_Barbell_Squat_To_A_Bench",
-    "name": "Front Barbell Squat To A Bench",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Front_Barbell_Squat_To_A_Bench/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Front_Box_Jump",
-    "name": "Front Box Jump",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Front_Box_Jump/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Front_Cable_Raise",
-    "name": "Front Cable Raise",
-    "category": "Shoulders",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Front_Cable_Raise/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Front_Cone_Hops_or_hurdle_hops",
-    "name": "Front Cone Hops (or hurdle hops)",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Front_Cone_Hops_or_hurdle_hops/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Front_Dumbbell_Raise",
-    "name": "Front Dumbbell Raise",
-    "category": "Shoulders",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Front_Dumbbell_Raise/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Front_Incline_Dumbbell_Raise",
-    "name": "Front Incline Dumbbell Raise",
-    "category": "Shoulders",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Front_Incline_Dumbbell_Raise/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Front_Leg_Raises",
-    "name": "Front Leg Raises",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Front_Leg_Raises/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Front_Plate_Raise",
-    "name": "Front Plate Raise",
-    "category": "Shoulders",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Front_Plate_Raise/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Front_Raise_And_Pullover",
-    "name": "Front Raise And Pullover (Barbell)",
-    "category": "Chest",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Front_Raise_And_Pullover/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Front_Squat_Clean_Grip",
-    "name": "Front Squat (Clean Grip) (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Front_Squat_Clean_Grip/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Front_Squats_With_Two_Kettlebells",
-    "name": "Front Squats With Two Kettlebell",
-    "category": "Legs",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Front_Squats_With_Two_Kettlebells/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Front_Two-Dumbbell_Raise",
-    "name": "Front Two-Dumbbell Raise",
-    "category": "Shoulders",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Front_Two-Dumbbell_Raise/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Full_Range-Of-Motion_Lat_Pulldown",
-    "name": "Full Range-Of-Motion Lat Pulldown (Cable)",
-    "category": "Back",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Full_Range-Of-Motion_Lat_Pulldown/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Gironda_Sternum_Chins",
-    "name": "Gironda Sternum Chins",
-    "category": "Back",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Gironda_Sternum_Chins/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Glute_Ham_Raise",
-    "name": "Glute Ham Raise (Machine)",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Glute_Ham_Raise/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Glute_Kickback",
-    "name": "Glute Kickback",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Glute_Kickback/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Goblet_Squat",
-    "name": "Goblet Squat (Kettlebell)",
-    "category": "Legs",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Goblet_Squat/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Good_Morning",
-    "name": "Good Morning (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Good_Morning/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Good_Morning_off_Pins",
-    "name": "Good Morning off Pin (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Good_Morning_off_Pins/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Gorilla_Chin_Crunch",
-    "name": "Gorilla Chin/Crunch",
+    "id": "3301",
+    "name": "Frog Planche",
     "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Gorilla_Chin_Crunch/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3301-rQhGcin.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3301-rQhGcin.gif"
   },
   {
-    "id": "Groin_and_Back_Stretch",
-    "name": "Groin and Back Stretch",
+    "id": "3296",
+    "name": "Front Lever",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3296-PkCN2lv.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3296-PkCN2lv.gif"
+  },
+  {
+    "id": "3295",
+    "name": "Front Lever Reps",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "abs",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3295-hbY9wqG.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3295-hbY9wqG.gif"
+  },
+  {
+    "id": "0464",
+    "name": "Front Plank With Twist",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0464-CosupLu.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0464-CosupLu.gif"
+  },
+  {
+    "id": "3315",
+    "name": "Full Maltese",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3315-YRaCa5Y.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3315-YRaCa5Y.gif"
+  },
+  {
+    "id": "3299",
+    "name": "Full Planche",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3299-YZ4961r.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3299-YZ4961r.gif"
+  },
+  {
+    "id": "3327",
+    "name": "Full Planche Push-Up",
+    "category": "Chest",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3327-gw9PqGk.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3327-gw9PqGk.gif"
+  },
+  {
+    "id": "0466",
+    "name": "Gironda Sternum Chin",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0466-IL0JUxR.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0466-IL0JUxR.gif"
+  },
+  {
+    "id": "3561",
+    "name": "Glute Bridge March",
     "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Groin_and_Back_Stretch/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3561-GibBPPg.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3561-GibBPPg.gif"
   },
   {
-    "id": "Groiners",
-    "name": "Groiners",
+    "id": "3523",
+    "name": "Glute Bridge Two Legs On Bench (Male)",
     "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Groiners/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3523-aWedzZX.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3523-aWedzZX.gif"
   },
   {
-    "id": "Hack_Squat",
-    "name": "Hack Squat (Machine)",
+    "id": "3193",
+    "name": "Glute-Ham Raise",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "hamstring",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3193-Vvwjz6N.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3193-Vvwjz6N.gif"
+  },
+  {
+    "id": "0467",
+    "name": "Gorilla Chin",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0467-bmwlYvD.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0467-bmwlYvD.gif"
+  },
+  {
+    "id": "0469",
+    "name": "Groin Crunch",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0469-mWppALS.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0469-mWppALS.gif"
+  },
+  {
+    "id": "1383",
+    "name": "Hack Calf Raise",
     "category": "Legs",
     "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hack_Squat/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1383-2ORFMoR.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1383-2ORFMoR.gif"
   },
   {
-    "id": "Hammer_Curls",
-    "name": "Hammer Curl (Dumbbell)",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hammer_Curls/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Hammer_Grip_Incline_DB_Bench_Press",
-    "name": "Hammer Grip Incline DB Bench Pre (Dumbbell)",
-    "category": "Chest",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hammer_Grip_Incline_DB_Bench_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Hamstring-SMR",
-    "name": "Hamstring-SMR",
+    "id": "1384",
+    "name": "Hack One Leg Calf Raise",
     "category": "Legs",
-    "equipment": "Foam Roll",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hamstring-SMR/0.jpg",
-    "requiresWeight": false
+    "equipment": "Machine",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1384-AxFoqAD.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1384-AxFoqAD.gif"
   },
   {
-    "id": "Hamstring_Stretch",
+    "id": "3221",
+    "name": "Half Knee Bends (Male)",
+    "category": "Cardio",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3221-ia6kIIl.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3221-ia6kIIl.gif"
+  },
+  {
+    "id": "3202",
+    "name": "Half Sit-Up (Male)",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3202-iQ241UP.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3202-iQ241UP.gif"
+  },
+  {
+    "id": "1511",
     "name": "Hamstring Stretch",
     "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hamstring_Stretch/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "hamstring",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1511-99rWm7w.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1511-99rWm7w.gif"
   },
   {
-    "id": "Handstand_Push-Ups",
-    "name": "Handstand Push-Ups",
-    "category": "Shoulders",
+    "id": "2139",
+    "name": "Hands Bike",
+    "category": "Chest",
+    "equipment": "Other",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2139-pAIWRGu.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2139-pAIWRGu.gif"
+  },
+  {
+    "id": "3218",
+    "name": "Hands Clasped Circular Toe Touch (Male)",
+    "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Handstand_Push-Ups/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3218-B5xca8s.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3218-B5xca8s.gif"
   },
   {
-    "id": "Hang_Clean",
-    "name": "Hang Clean (Barbell)",
+    "id": "3215",
+    "name": "Hands Reversed Clasped Circular Toe Touch (Male)",
     "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hang_Clean/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3215-yq3GAJX.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3215-yq3GAJX.gif"
   },
   {
-    "id": "Hang_Clean_-_Below_the_Knees",
-    "name": "Hang Clean - Below the Knee (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hang_Clean_-_Below_the_Knees/0.jpg",
-    "requiresWeight": true
+    "id": "3302",
+    "name": "Handstand",
+    "category": "Arms",
+    "equipment": "Bodyweight",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3302-XooAdhl.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3302-XooAdhl.gif"
   },
   {
-    "id": "Hang_Snatch",
-    "name": "Hang Snatch (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hang_Snatch/0.jpg",
-    "requiresWeight": true
+    "id": "0471",
+    "name": "Handstand Push-Up",
+    "category": "Arms",
+    "equipment": "Bodyweight",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0471-rQxwMxO.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0471-rQxwMxO.gif"
   },
   {
-    "id": "Hang_Snatch_-_Below_Knees",
-    "name": "Hang Snatch - Below Knee (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hang_Snatch_-_Below_Knees/0.jpg",
-    "requiresWeight": true
+    "id": "1764",
+    "name": "Hanging Leg Hip Raise",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1764-VEcJRo2.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1764-VEcJRo2.gif"
   },
   {
-    "id": "Hanging_Bar_Good_Morning",
-    "name": "Hanging Bar Good Morning (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hanging_Bar_Good_Morning/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Hanging_Leg_Raise",
+    "id": "0472",
     "name": "Hanging Leg Raise",
     "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hanging_Leg_Raise/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0472-I3tsCnC.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0472-I3tsCnC.gif"
   },
   {
-    "id": "Hanging_Pike",
+    "id": "1761",
+    "name": "Hanging Oblique Knee Raise",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1761-BaE7O6U.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1761-BaE7O6U.gif"
+  },
+  {
+    "id": "0473",
     "name": "Hanging Pike",
     "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hanging_Pike/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0473-nuBF9MO.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0473-nuBF9MO.gif"
   },
   {
-    "id": "Heaving_Snatch_Balance",
-    "name": "Heaving Snatch Balance (Barbell)",
+    "id": "0474",
+    "name": "Hanging Straight Leg Hip Raise",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0474-pj0X0tF.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0474-pj0X0tF.gif"
+  },
+  {
+    "id": "0475",
+    "name": "Hanging Straight Leg Raise",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0475-4Ml7QFO.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0475-4Ml7QFO.gif"
+  },
+  {
+    "id": "0476",
+    "name": "Hanging Straight Twisting Leg Hip Raise",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0476-Q6bvyen.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0476-Q6bvyen.gif"
+  },
+  {
+    "id": "3636",
+    "name": "High Knee Against Wall",
+    "category": "Cardio",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3636-ealLwvX.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3636-ealLwvX.gif"
+  },
+  {
+    "id": "0484",
+    "name": "Hip Raise (Bent Knee)",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0484-196HJGw.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0484-196HJGw.gif"
+  },
+  {
+    "id": "1418",
+    "name": "Hug Keens To Chest",
     "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Heaving_Snatch_Balance/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1418-znP9SIh.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1418-znP9SIh.gif"
   },
   {
-    "id": "Heavy_Bag_Thrust",
-    "name": "Heavy Bag Thrust",
+    "id": "3234",
+    "name": "Hyght Dumbbell Fly",
     "category": "Chest",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Heavy_Bag_Thrust/0.jpg",
-    "requiresWeight": false
+    "equipment": "Dumbbell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3234-P9ZRyLT.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3234-P9ZRyLT.gif"
   },
   {
-    "id": "High_Cable_Curls",
-    "name": "High Cable Curl",
+    "id": "0489",
+    "name": "Hyperextension",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "lower-back",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0489-zhMwOwE.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0489-zhMwOwE.gif"
+  },
+  {
+    "id": "0488",
+    "name": "Hyperextension (On Bench)",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "lower-back",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0488-zkgRrbK.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0488-zkgRrbK.gif"
+  },
+  {
+    "id": "3289",
+    "name": "Impossible Dips",
     "category": "Arms",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/High_Cable_Curls/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Hip_Circles_prone",
-    "name": "Hip Circles (prone)",
-    "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hip_Circles_prone/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3289-05Cf2v8.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3289-05Cf2v8.gif"
   },
   {
-    "id": "Hip_Extension_with_Bands",
-    "name": "Hip Extension with Band",
-    "category": "Legs",
-    "equipment": "Band",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hip_Extension_with_Bands/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Hip_Flexion_with_Band",
-    "name": "Hip Flexion with Band",
-    "category": "Legs",
-    "equipment": "Band",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hip_Flexion_with_Band/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Hip_Lift_with_Band",
-    "name": "Hip Lift with Band",
-    "category": "Legs",
-    "equipment": "Band",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hip_Lift_with_Band/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Hug_A_Ball",
-    "name": "Hug A Ball",
-    "category": "Back",
-    "equipment": "Exercise Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hug_A_Ball/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Hug_Knees_To_Chest",
-    "name": "Hug Knees To Chest",
-    "category": "Back",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hug_Knees_To_Chest/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Hurdle_Hops",
-    "name": "Hurdle Hops",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hurdle_Hops/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Hyperextensions_Back_Extensions",
-    "name": "Hyperextensions (Back Extensions)",
-    "category": "Back",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hyperextensions_Back_Extensions/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Hyperextensions_With_No_Hyperextension_Bench",
-    "name": "Hyperextensions With No Hyperextension Bench",
-    "category": "Back",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hyperextensions_With_No_Hyperextension_Bench/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "IT_Band_and_Glute_Stretch",
-    "name": "IT Band and Glute Stretch",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/IT_Band_and_Glute_Stretch/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Iliotibial_Tract-SMR",
-    "name": "Iliotibial Tract-SMR",
-    "category": "Legs",
-    "equipment": "Foam Roll",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Iliotibial_Tract-SMR/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Inchworm",
+    "id": "1471",
     "name": "Inchworm",
-    "category": "Legs",
+    "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Inchworm/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1471-ZgsNQ6d.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1471-ZgsNQ6d.gif"
   },
   {
-    "id": "Incline_Barbell_Triceps_Extension",
-    "name": "Incline Barbell Triceps Extension",
+    "id": "3698",
+    "name": "Inchworm V. 2",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3698-TV87DNB.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3698-TV87DNB.gif"
+  },
+  {
+    "id": "0490",
+    "name": "Incline Close-Grip Push-Up",
     "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Barbell_Triceps_Extension/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0490-1YB40kg.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0490-1YB40kg.gif"
   },
   {
-    "id": "Incline_Bench_Pull",
-    "name": "Incline Bench Pull (Barbell)",
-    "category": "Back",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Bench_Pull/0.jpg",
-    "requiresWeight": true
+    "id": "0491",
+    "name": "Incline Leg Hip Raise (Leg Straight)",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0491-eVxAzgz.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0491-eVxAzgz.gif"
   },
   {
-    "id": "Incline_Cable_Chest_Press",
-    "name": "Incline Cable Chest Pre",
+    "id": "0492",
+    "name": "Incline Push Up Depth Jump",
     "category": "Chest",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Cable_Chest_Press/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0492-CB8WET1.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0492-CB8WET1.gif"
   },
   {
-    "id": "Incline_Cable_Flye",
-    "name": "Incline Cable Flye",
-    "category": "Chest",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Cable_Flye/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Incline_Dumbbell_Bench_With_Palms_Facing_In",
-    "name": "Incline Dumbbell Bench With Palms Facing In",
-    "category": "Chest",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Dumbbell_Bench_With_Palms_Facing_In/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Incline_Dumbbell_Curl",
-    "name": "Incline Dumbbell Curl",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Dumbbell_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Incline_Dumbbell_Flyes",
-    "name": "Incline Dumbbell Flye",
-    "category": "Chest",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Dumbbell_Flyes/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Incline_Dumbbell_Flyes_-_With_A_Twist",
-    "name": "Incline Dumbbell Flyes - With A Twist",
-    "category": "Chest",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Dumbbell_Flyes_-_With_A_Twist/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Incline_Dumbbell_Press",
-    "name": "Incline Dumbbell Pre",
-    "category": "Chest",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Dumbbell_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Incline_Hammer_Curls",
-    "name": "Incline Hammer Curl (Dumbbell)",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Hammer_Curls/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Incline_Inner_Biceps_Curl",
-    "name": "Incline Inner Biceps Curl (Dumbbell)",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Inner_Biceps_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Incline_Push-Up",
+    "id": "0493",
     "name": "Incline Push-Up",
     "category": "Chest",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Push-Up/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0493-B1EVP9F.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0493-B1EVP9F.gif"
   },
   {
-    "id": "Incline_Push-Up_Close-Grip",
-    "name": "Incline Push-Up Close-Grip",
-    "category": "Arms",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Push-Up_Close-Grip/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Incline_Push-Up_Depth_Jump",
-    "name": "Incline Push-Up Depth Jump",
-    "category": "Chest",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Push-Up_Depth_Jump/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Incline_Push-Up_Medium",
-    "name": "Incline Push-Up Medium",
+    "id": "3785",
+    "name": "Incline Push-Up (On Box)",
     "category": "Chest",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Push-Up_Medium/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3785-F7vjXqT.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3785-F7vjXqT.gif"
   },
   {
-    "id": "Incline_Push-Up_Reverse_Grip",
-    "name": "Incline Push-Up Reverse Grip",
+    "id": "0494",
+    "name": "Incline Reverse Grip Push-Up",
     "category": "Chest",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Push-Up_Reverse_Grip/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0494-XaaRnRn.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0494-XaaRnRn.gif"
   },
   {
-    "id": "Incline_Push-Up_Wide",
-    "name": "Incline Push-Up Wide",
+    "id": "3011",
+    "name": "Incline Scapula Push Up",
     "category": "Chest",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Push-Up_Wide/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3011-GdMa1ET.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3011-GdMa1ET.gif"
   },
   {
-    "id": "Intermediate_Groin_Stretch",
-    "name": "Intermediate Groin Stretch",
+    "id": "0495",
+    "name": "Incline Twisting Sit-Up",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0495-9ZGZuOD.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0495-9ZGZuOD.gif"
+  },
+  {
+    "id": "1564",
+    "name": "Intermediate Hip Flexor And Quad Stretch",
     "category": "Legs",
     "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Intermediate_Groin_Stretch/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1564-tFGKm99.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1564-tFGKm99.gif"
   },
   {
-    "id": "Intermediate_Hip_Flexor_and_Quad_Stretch",
-    "name": "Intermediate Hip Flexor and Quad Stretch",
+    "id": "0496",
+    "name": "Inverse Leg Curl (Bench Support)",
     "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Intermediate_Hip_Flexor_and_Quad_Stretch/0.jpg",
-    "requiresWeight": false
+    "equipment": "Bodyweight",
+    "specificMuscle": "hamstring",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0496-ms7tjSG.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0496-ms7tjSG.gif"
   },
   {
-    "id": "Internal_Rotation_with_Band",
-    "name": "Internal Rotation with Band",
-    "category": "Shoulders",
-    "equipment": "Band",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Internal_Rotation_with_Band/0.jpg",
-    "requiresWeight": false
+    "id": "2400",
+    "name": "Inverse Leg Curl (On Pull-Up Cable Machine)",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "hamstring",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2400-0rHfvy9.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2400-0rHfvy9.gif"
   },
   {
-    "id": "Inverted_Row",
+    "id": "0499",
     "name": "Inverted Row",
     "category": "Back",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Inverted_Row/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0499-bZGHsAZ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0499-bZGHsAZ.gif"
   },
   {
-    "id": "Inverted_Row_with_Straps",
-    "name": "Inverted Row with Straps",
+    "id": "2300",
+    "name": "Inverted Row Bent Knees",
     "category": "Back",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Inverted_Row_with_Straps/0.jpg",
-    "requiresWeight": false
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2300-VPPtusI.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2300-VPPtusI.gif"
   },
   {
-    "id": "Iron_Cross",
-    "name": "Iron Cro (Dumbbell)",
-    "category": "Shoulders",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Iron_Cross/0.jpg",
-    "requiresWeight": true
+    "id": "2298",
+    "name": "Inverted Row On Bench",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2298-Mxa7Cr8.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2298-Mxa7Cr8.gif"
   },
   {
-    "id": "Iron_Crosses_stretch",
-    "name": "Iron Crosses (stretch)",
+    "id": "0497",
+    "name": "Inverted Row V. 2",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0497-uX3sUBz.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0497-uX3sUBz.gif"
+  },
+  {
+    "id": "0498",
+    "name": "Inverted Row With Straps",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0498-jdiExfW.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0498-jdiExfW.gif"
+  },
+  {
+    "id": "1419",
+    "name": "Iron Cross Stretch",
     "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Iron_Crosses_stretch/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1419-pZwUsKB.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1419-pZwUsKB.gif"
   },
   {
-    "id": "Isometric_Chest_Squeezes",
-    "name": "Isometric Chest Squeezes",
+    "id": "1297",
+    "name": "Isometric Chest Squeeze",
     "category": "Chest",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Isometric_Chest_Squeezes/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1297-HbSG1Pw.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1297-HbSG1Pw.gif"
   },
   {
-    "id": "Isometric_Neck_Exercise_-_Front_And_Back",
-    "name": "Isometric Neck Exercise - Front And Back",
-    "category": "Shoulders",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Isometric_Neck_Exercise_-_Front_And_Back/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Isometric_Neck_Exercise_-_Sides",
-    "name": "Isometric Neck Exercise - Sides",
-    "category": "Shoulders",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Isometric_Neck_Exercise_-_Sides/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Isometric_Wipers",
+    "id": "0500",
     "name": "Isometric Wipers",
     "category": "Chest",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Isometric_Wipers/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0500-11wrviz.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0500-11wrviz.gif"
   },
   {
-    "id": "JM_Press",
-    "name": "JM Pre (Barbell)",
-    "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/JM_Press/0.jpg",
-    "requiresWeight": true
+    "id": "0501",
+    "name": "Jack Burpee",
+    "category": "Cardio",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0501-mr7pkqP.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0501-mr7pkqP.gif"
   },
   {
-    "id": "Jackknife_Sit-Up",
+    "id": "3224",
+    "name": "Jack Jump (Male)",
+    "category": "Cardio",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3224-1g5bPpA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3224-1g5bPpA.gif"
+  },
+  {
+    "id": "0507",
     "name": "Jackknife Sit-Up",
     "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Jackknife_Sit-Up/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0507-mbkgB44.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0507-mbkgB44.gif"
   },
   {
-    "id": "Janda_Sit-Up",
+    "id": "0508",
     "name": "Janda Sit-Up",
     "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Janda_Sit-Up/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0508-1GPHRyK.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0508-1GPHRyK.gif"
   },
   {
-    "id": "Jefferson_Squats",
-    "name": "Jefferson Squat (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Jefferson_Squats/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Jerk_Balance",
-    "name": "Jerk Balance (Barbell)",
-    "category": "Shoulders",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Jerk_Balance/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Jerk_Dip_Squat",
-    "name": "Jerk Dip Squat (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Jerk_Dip_Squat/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Jogging_Treadmill",
-    "name": "Jogging, Treadmill (Machine)",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Jogging_Treadmill/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Keg_Load",
-    "name": "Keg Load",
-    "category": "Back",
+    "id": "2612",
+    "name": "Jump Rope",
+    "category": "Cardio",
     "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Keg_Load/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "chest",
+    "secondaryMuscle": "calves",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2612-e1e76I2.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2612-e1e76I2.gif"
   },
   {
-    "id": "Kettlebell_Arnold_Press",
-    "name": "Kettlebell Arnold Pre",
+    "id": "0514",
+    "name": "Jump Squat",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0514-LIlE5Tn.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0514-LIlE5Tn.gif"
+  },
+  {
+    "id": "0513",
+    "name": "Jump Squat V. 2",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0513-TDYiji6.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0513-TDYiji6.gif"
+  },
+  {
+    "id": "0517",
+    "name": "Kettlebell Advanced Windmill",
+    "category": "Core",
+    "equipment": "Kettlebell",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0517-Kal9cQQ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0517-Kal9cQQ.gif"
+  },
+  {
+    "id": "0518",
+    "name": "Kettlebell Alternating Hang Clean",
+    "category": "Arms",
+    "equipment": "Kettlebell",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0518-I4tibZG.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0518-I4tibZG.gif"
+  },
+  {
+    "id": "0520",
+    "name": "Kettlebell Alternating Press",
     "category": "Shoulders",
     "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kettlebell_Arnold_Press/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0520-5KLbZWx.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0520-5KLbZWx.gif"
   },
   {
-    "id": "Kettlebell_Dead_Clean",
-    "name": "Kettlebell Dead Clean",
-    "category": "Legs",
+    "id": "0519",
+    "name": "Kettlebell Alternating Press On Floor",
+    "category": "Chest",
     "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kettlebell_Dead_Clean/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0519-7w6i0vE.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0519-7w6i0vE.gif"
   },
   {
-    "id": "Kettlebell_Figure_8",
+    "id": "0521",
+    "name": "Kettlebell Alternating Renegade Row",
+    "category": "Back",
+    "equipment": "Kettlebell",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "abs",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0521-b9kqlBy.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0521-b9kqlBy.gif"
+  },
+  {
+    "id": "0522",
+    "name": "Kettlebell Alternating Row",
+    "category": "Back",
+    "equipment": "Kettlebell",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0522-Ca76jUE.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0522-Ca76jUE.gif"
+  },
+  {
+    "id": "0523",
+    "name": "Kettlebell Arnold Press",
+    "category": "Shoulders",
+    "equipment": "Kettlebell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0523-UM8mgyG.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0523-UM8mgyG.gif"
+  },
+  {
+    "id": "0524",
+    "name": "Kettlebell Bent Press",
+    "category": "Core",
+    "equipment": "Kettlebell",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0524-kjE55n5.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0524-kjE55n5.gif"
+  },
+  {
+    "id": "0525",
+    "name": "Kettlebell Bottoms Up Clean From The Hang Position",
+    "category": "Arms",
+    "equipment": "Kettlebell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0525-4KJEpzb.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0525-4KJEpzb.gif"
+  },
+  {
+    "id": "0526",
+    "name": "Kettlebell Double Alternating Hang Clean",
+    "category": "Arms",
+    "equipment": "Kettlebell",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0526-a4F9Oyc.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0526-a4F9Oyc.gif"
+  },
+  {
+    "id": "0527",
+    "name": "Kettlebell Double Jerk",
+    "category": "Shoulders",
+    "equipment": "Kettlebell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0527-tznL2Ad.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0527-tznL2Ad.gif"
+  },
+  {
+    "id": "0528",
+    "name": "Kettlebell Double Push Press",
+    "category": "Shoulders",
+    "equipment": "Kettlebell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0528-I4KkPdl.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0528-I4KkPdl.gif"
+  },
+  {
+    "id": "0529",
+    "name": "Kettlebell Double Snatch",
+    "category": "Shoulders",
+    "equipment": "Kettlebell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0529-M74kdvm.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0529-M74kdvm.gif"
+  },
+  {
+    "id": "0530",
+    "name": "Kettlebell Double Windmill",
+    "category": "Core",
+    "equipment": "Kettlebell",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0530-OaE7CpD.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0530-OaE7CpD.gif"
+  },
+  {
+    "id": "0531",
+    "name": "Kettlebell Extended Range One Arm Press On Floor",
+    "category": "Chest",
+    "equipment": "Kettlebell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0531-rseLfH3.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0531-rseLfH3.gif"
+  },
+  {
+    "id": "0532",
     "name": "Kettlebell Figure 8",
     "category": "Core",
     "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kettlebell_Figure_8/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0532-L4ay0PW.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0532-L4ay0PW.gif"
   },
   {
-    "id": "Kettlebell_Halo",
-    "name": "Kettlebell Halo",
-    "category": "Shoulders",
+    "id": "0533",
+    "name": "Kettlebell Front Squat",
+    "category": "Legs",
     "equipment": "Kettlebell",
-    "imageUrl": "",
-    "requiresWeight": true
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0533-DB0n8AG.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0533-DB0n8AG.gif"
   },
   {
-    "id": "Kettlebell_Halo_With_Overhead_Extension",
-    "name": "Kettlebell Halo with Overhead Extension",
-    "category": "Shoulders",
+    "id": "0534",
+    "name": "Kettlebell Goblet Squat",
+    "category": "Legs",
     "equipment": "Kettlebell",
-    "imageUrl": "",
-    "requiresWeight": true
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0534-ZA8b5hc.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0534-ZA8b5hc.gif"
   },
   {
-    "id": "Kettlebell_Hang_Clean",
+    "id": "0535",
     "name": "Kettlebell Hang Clean",
     "category": "Legs",
     "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kettlebell_Hang_Clean/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "hamstring",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0535-LHWF7us.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0535-LHWF7us.gif"
   },
   {
-    "id": "Kettlebell_One-Legged_Deadlift",
-    "name": "Kettlebell One-Legged Deadlift",
+    "id": "0536",
+    "name": "Kettlebell Lunge Pass Through",
     "category": "Legs",
     "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kettlebell_One-Legged_Deadlift/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0536-WKMQzCD.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0536-WKMQzCD.gif"
   },
   {
-    "id": "Kettlebell_Overhead_Triceps_Extension",
-    "name": "Kettlebell Overhead Triceps Extension",
-    "category": "Arms",
-    "equipment": "Kettlebell",
-    "imageUrl": "",
-    "requiresWeight": true
-  },
-  {
-    "id": "Kettlebell_Pass_Between_The_Legs",
-    "name": "Kettlebell Pass Between The Leg",
-    "category": "Core",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kettlebell_Pass_Between_The_Legs/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Kettlebell_Pirate_Ships",
-    "name": "Kettlebell Pirate Ship",
+    "id": "0537",
+    "name": "Kettlebell One Arm Clean And Jerk",
     "category": "Shoulders",
     "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kettlebell_Pirate_Ships/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0537-vzAxBtt.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0537-vzAxBtt.gif"
   },
   {
-    "id": "Kettlebell_Pistol_Squat",
+    "id": "1298",
+    "name": "Kettlebell One Arm Floor Press",
+    "category": "Chest",
+    "equipment": "Kettlebell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1298-rg59QCH.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1298-rg59QCH.gif"
+  },
+  {
+    "id": "0538",
+    "name": "Kettlebell One Arm Jerk",
+    "category": "Shoulders",
+    "equipment": "Kettlebell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0538-S37C94C.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0538-S37C94C.gif"
+  },
+  {
+    "id": "0539",
+    "name": "Kettlebell One Arm Military Press To The Side",
+    "category": "Shoulders",
+    "equipment": "Kettlebell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0539-yCvYdi7.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0539-yCvYdi7.gif"
+  },
+  {
+    "id": "0540",
+    "name": "Kettlebell One Arm Push Press",
+    "category": "Shoulders",
+    "equipment": "Kettlebell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0540-osdXT3K.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0540-osdXT3K.gif"
+  },
+  {
+    "id": "0541",
+    "name": "Kettlebell One Arm Row",
+    "category": "Back",
+    "equipment": "Kettlebell",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0541-g9AsZ8P.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0541-g9AsZ8P.gif"
+  },
+  {
+    "id": "0542",
+    "name": "Kettlebell One Arm Snatch",
+    "category": "Shoulders",
+    "equipment": "Kettlebell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0542-aXcUyKb.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0542-aXcUyKb.gif"
+  },
+  {
+    "id": "0543",
+    "name": "Kettlebell Pirate Supper Legs",
+    "category": "Shoulders",
+    "equipment": "Kettlebell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0543-kuXhl0o.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0543-kuXhl0o.gif"
+  },
+  {
+    "id": "0544",
     "name": "Kettlebell Pistol Squat",
     "category": "Legs",
     "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kettlebell_Pistol_Squat/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0544-5bpPTHv.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0544-5bpPTHv.gif"
   },
   {
-    "id": "Kettlebell_Seated_Press",
-    "name": "Kettlebell Seated Pre",
+    "id": "0545",
+    "name": "Kettlebell Plyo Push-Up",
+    "category": "Chest",
+    "equipment": "Kettlebell",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0545-ktf3nvW.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0545-ktf3nvW.gif"
+  },
+  {
+    "id": "0546",
+    "name": "Kettlebell Seated Press",
     "category": "Shoulders",
     "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kettlebell_Seated_Press/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0546-BkxB8LW.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0546-BkxB8LW.gif"
   },
   {
-    "id": "Kettlebell_Seesaw_Press",
-    "name": "Kettlebell Seesaw Pre",
+    "id": "1438",
+    "name": "Kettlebell Seated Two Arm Military Press",
     "category": "Shoulders",
     "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kettlebell_Seesaw_Press/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1438-ZEkjZDi.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1438-ZEkjZDi.gif"
   },
   {
-    "id": "Kettlebell_Sumo_High_Pull",
+    "id": "0547",
+    "name": "Kettlebell Seesaw Press",
+    "category": "Shoulders",
+    "equipment": "Kettlebell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0547-UDm6cGl.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0547-UDm6cGl.gif"
+  },
+  {
+    "id": "0548",
     "name": "Kettlebell Sumo High Pull",
     "category": "Back",
     "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kettlebell_Sumo_High_Pull/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "trapezius",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0548-8ARQ9Hw.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0548-8ARQ9Hw.gif"
   },
   {
-    "id": "Kettlebell_Thruster",
+    "id": "0549",
+    "name": "Kettlebell Swing",
+    "category": "Legs",
+    "equipment": "Kettlebell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0549-UHJlbu3.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0549-UHJlbu3.gif"
+  },
+  {
+    "id": "0550",
     "name": "Kettlebell Thruster",
     "category": "Shoulders",
     "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kettlebell_Thruster/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0550-yWxMvB5.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0550-yWxMvB5.gif"
   },
   {
-    "id": "Kettlebell_Turkish_Get-Up_Lunge_style",
-    "name": "Kettlebell Turkish Get-Up (Lunge style)",
+    "id": "0551",
+    "name": "Kettlebell Turkish Get Up (Squat Style)",
+    "category": "Legs",
+    "equipment": "Kettlebell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0551-Ha7SZ3y.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0551-Ha7SZ3y.gif"
+  },
+  {
+    "id": "0552",
+    "name": "Kettlebell Two Arm Clean",
     "category": "Shoulders",
     "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kettlebell_Turkish_Get-Up_Lunge_style/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0552-7Ba7bQ2.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0552-7Ba7bQ2.gif"
   },
   {
-    "id": "Kettlebell_Turkish_Get-Up_Squat_style",
-    "name": "Kettlebell Turkish Get-Up (Squat style)",
+    "id": "0553",
+    "name": "Kettlebell Two Arm Military Press",
     "category": "Shoulders",
     "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kettlebell_Turkish_Get-Up_Squat_style/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0553-blBXysN.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0553-blBXysN.gif"
   },
   {
-    "id": "Kettlebell_Windmill",
+    "id": "1345",
+    "name": "Kettlebell Two Arm Row",
+    "category": "Back",
+    "equipment": "Kettlebell",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1345-wf24o8S.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1345-wf24o8S.gif"
+  },
+  {
+    "id": "0554",
     "name": "Kettlebell Windmill",
     "category": "Core",
     "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kettlebell_Windmill/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0554-9Tkqa9O.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0554-9Tkqa9O.gif"
   },
   {
-    "id": "Kipping_Muscle_Up",
+    "id": "0555",
+    "name": "Kick Out Sit",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "hamstring",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0555-v7p5bYl.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0555-v7p5bYl.gif"
+  },
+  {
+    "id": "0558",
     "name": "Kipping Muscle Up",
     "category": "Back",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kipping_Muscle_Up/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Knee_Across_The_Body",
-    "name": "Knee Across The Body",
-    "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Knee_Across_The_Body/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0558-pM07UxU.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0558-pM07UxU.gif"
   },
   {
-    "id": "Knee_Circles",
-    "name": "Knee Circles",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Knee_Circles/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Knee_Hip_Raise_On_Parallel_Bars",
-    "name": "Knee/Hip Raise On Parallel Bars",
+    "id": "3640",
+    "name": "Knee Touch Crunch",
     "category": "Core",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Knee_Hip_Raise_On_Parallel_Bars/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Knee_Tuck_Jump",
-    "name": "Knee Tuck Jump",
-    "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Knee_Tuck_Jump/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3640-dTg95eZ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3640-dTg95eZ.gif"
   },
   {
-    "id": "Kneeling_Arm_Drill",
-    "name": "Kneeling Arm Drill",
+    "id": "1420",
+    "name": "Kneeling Jump Squat",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1420-UgDm3oy.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1420-UgDm3oy.gif"
+  },
+  {
+    "id": "1346",
+    "name": "Kneeling Lat Stretch",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1346-f38OEuO.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1346-f38OEuO.gif"
+  },
+  {
+    "id": "3239",
+    "name": "Kneeling Plank Tap Shoulder (Male)",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3239-h1ezqSu.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3239-h1ezqSu.gif"
+  },
+  {
+    "id": "3211",
+    "name": "Kneeling Push-Up (Male)",
+    "category": "Chest",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3211-ZOuKWir.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3211-ZOuKWir.gif"
+  },
+  {
+    "id": "3288",
+    "name": "Korean Dips",
+    "category": "Chest",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3288-rWoBmi5.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3288-rWoBmi5.gif"
+  },
+  {
+    "id": "3418",
+    "name": "L-Pull-Up",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3418-d1GgzTU.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3418-d1GgzTU.gif"
+  },
+  {
+    "id": "3419",
+    "name": "L-Sit On Floor",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3419-UpWmA5E.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3419-UpWmA5E.gif"
+  },
+  {
+    "id": "0562",
+    "name": "Landmine 180",
+    "category": "Core",
+    "equipment": "Barbell",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0562-QYysSLV.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0562-QYysSLV.gif"
+  },
+  {
+    "id": "3237",
+    "name": "Landmine Lateral Raise",
+    "category": "Shoulders",
+    "equipment": "Barbell",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3237-eXMFHww.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3237-eXMFHww.gif"
+  },
+  {
+    "id": "3300",
+    "name": "Lean Planche",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3300-LYJodFS.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3300-LYJodFS.gif"
+  },
+  {
+    "id": "2271",
+    "name": "Left Hook. Boxing",
     "category": "Shoulders",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kneeling_Arm_Drill/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2271-hoXt6wv.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2271-hoXt6wv.gif"
   },
   {
-    "id": "Kneeling_Cable_Crunch_With_Alternating_Oblique_Twists",
-    "name": "Kneeling Cable Crunch With Alternating Oblique Twist",
+    "id": "0570",
+    "name": "Leg Pull In Flat Bench",
     "category": "Core",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kneeling_Cable_Crunch_With_Alternating_Oblique_Twists/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0570-OyoZ3Pu.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0570-OyoZ3Pu.gif"
   },
   {
-    "id": "Kneeling_Cable_Triceps_Extension",
-    "name": "Kneeling Cable Triceps Extension",
+    "id": "1576",
+    "name": "Leg Up Hamstring Stretch",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "hamstring",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1576-sU5BrfP.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1576-sU5BrfP.gif"
+  },
+  {
+    "id": "2287",
+    "name": "Lever Alternate Leg Press",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2287-V07qpXy.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2287-V07qpXy.gif"
+  },
+  {
+    "id": "0571",
+    "name": "Lever Alternating Narrow Grip Seated Row",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0571-w2oRpuH.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0571-w2oRpuH.gif"
+  },
+  {
+    "id": "0572",
+    "name": "Lever Assisted Chin-Up",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0572-MaMuGH6.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0572-MaMuGH6.gif"
+  },
+  {
+    "id": "0573",
+    "name": "Lever Back Extension",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "lower-back",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0573-rUXfn3R.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0573-rUXfn3R.gif"
+  },
+  {
+    "id": "0574",
+    "name": "Lever Bent Over Row",
+    "category": "Back",
+    "equipment": "Barbell",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0574-X3cqyXz.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0574-X3cqyXz.gif"
+  },
+  {
+    "id": "3200",
+    "name": "Lever Bent-Over Row With V-Bar",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3200-LuBEORI.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3200-LuBEORI.gif"
+  },
+  {
+    "id": "0575",
+    "name": "Lever Bicep Curl",
     "category": "Arms",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kneeling_Cable_Triceps_Extension/0.jpg",
-    "requiresWeight": true
+    "equipment": "Machine",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0575-q6y3OhV.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0575-q6y3OhV.gif"
   },
   {
-    "id": "Kneeling_Forearm_Stretch",
-    "name": "Kneeling Forearm Stretch",
+    "id": "2289",
+    "name": "Lever Calf Press",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2289-7B4F5nZ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2289-7B4F5nZ.gif"
+  },
+  {
+    "id": "0577",
+    "name": "Lever Chest Press",
+    "category": "Chest",
+    "equipment": "Machine",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0577-T0yTjgW.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0577-T0yTjgW.gif"
+  },
+  {
+    "id": "0576",
+    "name": "Lever Chest Press",
+    "category": "Chest",
+    "equipment": "Machine",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0576-DOoWcnA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0576-DOoWcnA.gif"
+  },
+  {
+    "id": "0578",
+    "name": "Lever Deadlift",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0578-GUT8I22.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0578-GUT8I22.gif"
+  },
+  {
+    "id": "1300",
+    "name": "Lever Decline Chest Press",
+    "category": "Chest",
+    "equipment": "Machine",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1300-vsVoPHt.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1300-vsVoPHt.gif"
+  },
+  {
+    "id": "1253",
+    "name": "Lever Donkey Calf Raise",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1253-C9LuR4A.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1253-C9LuR4A.gif"
+  },
+  {
+    "id": "0579",
+    "name": "Lever Front Pulldown",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0579-7F1DVzn.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0579-7F1DVzn.gif"
+  },
+  {
+    "id": "0580",
+    "name": "Lever Gripless Shrug",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "trapezius",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0580-f91FwXG.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0580-f91FwXG.gif"
+  },
+  {
+    "id": "1439",
+    "name": "Lever Gripless Shrug V. 2",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "trapezius",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1439-cbuFJrn.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1439-cbuFJrn.gif"
+  },
+  {
+    "id": "2288",
+    "name": "Lever Gripper Hands",
     "category": "Arms",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kneeling_Forearm_Stretch/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Kneeling_High_Pulley_Row",
-    "name": "Kneeling High Pulley Row (Cable)",
-    "category": "Back",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kneeling_High_Pulley_Row/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Kneeling_Hip_Flexor",
-    "name": "Kneeling Hip Flexor",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kneeling_Hip_Flexor/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Kneeling_Jump_Squat",
-    "name": "Kneeling Jump Squat (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kneeling_Jump_Squat/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Kneeling_Single-Arm_High_Pulley_Row",
-    "name": "Kneeling Single-Arm High Pulley Row (Cable)",
-    "category": "Back",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kneeling_Single-Arm_High_Pulley_Row/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Kneeling_Squat",
-    "name": "Kneeling Squat (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kneeling_Squat/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Landmine_180s",
-    "name": "Landmine 180' (Barbell)",
-    "category": "Core",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Landmine_180s/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Landmine_Linear_Jammer",
-    "name": "Landmine Linear Jammer (Barbell)",
-    "category": "Shoulders",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Landmine_Linear_Jammer/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Lateral_Bound",
-    "name": "Lateral Bound",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lateral_Bound/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Lateral_Box_Jump",
-    "name": "Lateral Box Jump",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lateral_Box_Jump/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Lateral_Cone_Hops",
-    "name": "Lateral Cone Hops",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lateral_Cone_Hops/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Lateral_Raise_-_With_Bands",
-    "name": "Lateral Raise - With Band",
-    "category": "Shoulders",
-    "equipment": "Band",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lateral_Raise_-_With_Bands/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Latissimus_Dorsi-SMR",
-    "name": "Latissimus Dorsi-SMR",
-    "category": "Back",
-    "equipment": "Foam Roll",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Latissimus_Dorsi-SMR/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Leg-Over_Floor_Press",
-    "name": "Leg-Over Floor Pre (Kettlebell)",
-    "category": "Chest",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leg-Over_Floor_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Leg-Up_Hamstring_Stretch",
-    "name": "Leg-Up Hamstring Stretch",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leg-Up_Hamstring_Stretch/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Leg_Extensions",
-    "name": "Leg Extension (Machine)",
-    "category": "Legs",
     "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leg_Extensions/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2288-mKwcrHn.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2288-mKwcrHn.gif"
   },
   {
-    "id": "Leg_Lift",
-    "name": "Leg Lift",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leg_Lift/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Leg_Press",
-    "name": "Leg Pre (Machine)",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leg_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Leg_Pull-In",
-    "name": "Leg Pull-In",
-    "category": "Core",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leg_Pull-In/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Leverage_Chest_Press",
-    "name": "Leverage Chest Pre (Machine)",
-    "category": "Chest",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leverage_Chest_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Leverage_Deadlift",
-    "name": "Leverage Deadlift (Machine)",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leverage_Deadlift/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Leverage_Decline_Chest_Press",
-    "name": "Leverage Decline Chest Pre (Machine)",
-    "category": "Chest",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leverage_Decline_Chest_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Leverage_High_Row",
-    "name": "Leverage High Row (Machine)",
-    "category": "Back",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leverage_High_Row/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Leverage_Incline_Chest_Press",
-    "name": "Leverage Incline Chest Pre (Machine)",
-    "category": "Chest",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leverage_Incline_Chest_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Leverage_Iso_Row",
-    "name": "Leverage Iso Row (Machine)",
-    "category": "Back",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leverage_Iso_Row/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Leverage_Shoulder_Press",
-    "name": "Leverage Shoulder Pre (Machine)",
-    "category": "Shoulders",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leverage_Shoulder_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Leverage_Shrug",
-    "name": "Leverage Shrug (Machine)",
-    "category": "Back",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leverage_Shrug/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Linear_3-Part_Start_Technique",
-    "name": "Linear 3-Part Start Technique",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Linear_3-Part_Start_Technique/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Linear_Acceleration_Wall_Drill",
-    "name": "Linear Acceleration Wall Drill",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Linear_Acceleration_Wall_Drill/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Linear_Depth_Jump",
-    "name": "Linear Depth Jump",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Linear_Depth_Jump/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Log_Lift",
-    "name": "Log Lift",
-    "category": "Shoulders",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Log_Lift/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "London_Bridges",
-    "name": "London Bridges",
-    "category": "Back",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/London_Bridges/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Looking_At_Ceiling",
-    "name": "Looking At Ceiling",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Looking_At_Ceiling/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Low_Cable_Crossover",
-    "name": "Low Cable Crossover",
-    "category": "Chest",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Low_Cable_Crossover/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Low_Cable_Triceps_Extension",
-    "name": "Low Cable Triceps Extension",
+    "id": "1615",
+    "name": "Lever Hammer Grip Preacher Curl",
     "category": "Arms",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Low_Cable_Triceps_Extension/0.jpg",
-    "requiresWeight": true
+    "equipment": "Machine",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1615-OAguZoG.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1615-OAguZoG.gif"
   },
   {
-    "id": "Low_Pulley_Row_To_Neck",
-    "name": "Low Pulley Row To Neck (Cable)",
-    "category": "Shoulders",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Low_Pulley_Row_To_Neck/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Lower_Back-SMR",
-    "name": "Lower Back-SMR",
+    "id": "0581",
+    "name": "Lever High Row",
     "category": "Back",
-    "equipment": "Foam Roll",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lower_Back-SMR/0.jpg",
-    "requiresWeight": false
+    "equipment": "Machine",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0581-nZZZy9m.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0581-nZZZy9m.gif"
   },
   {
-    "id": "Lower_Back_Curl",
+    "id": "2286",
+    "name": "Lever Hip Extension V. 2",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2286-OPqShYN.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2286-OPqShYN.gif"
+  },
+  {
+    "id": "2611",
+    "name": "Lever Horizontal One Leg Press",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2611-9KU9TYF.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2611-9KU9TYF.gif"
+  },
+  {
+    "id": "1299",
+    "name": "Lever Incline Chest Press",
+    "category": "Chest",
+    "equipment": "Machine",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1299-jHAnWmT.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1299-jHAnWmT.gif"
+  },
+  {
+    "id": "1479",
+    "name": "Lever Incline Chest Press V. 2",
+    "category": "Chest",
+    "equipment": "Machine",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1479-o17Jfkt.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1479-o17Jfkt.gif"
+  },
+  {
+    "id": "0582",
+    "name": "Lever Kneeling Leg Curl",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "hamstring",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0582-nnmCTLN.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0582-nnmCTLN.gif"
+  },
+  {
+    "id": "0583",
+    "name": "Lever Kneeling Twist",
+    "category": "Core",
+    "equipment": "Machine",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0583-sZOR9EV.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0583-sZOR9EV.gif"
+  },
+  {
+    "id": "0584",
+    "name": "Lever Lateral Raise",
+    "category": "Shoulders",
+    "equipment": "Machine",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0584-dRTfGZT.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0584-dRTfGZT.gif"
+  },
+  {
+    "id": "0585",
+    "name": "Lever Leg Extension",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0585-my33uHU.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0585-my33uHU.gif"
+  },
+  {
+    "id": "0586",
+    "name": "Lever Lying Leg Curl",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "hamstring",
+    "secondaryMuscle": "calves",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0586-17lJ1kr.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0586-17lJ1kr.gif"
+  },
+  {
+    "id": "3195",
+    "name": "Lever Lying Two-One Leg Curl",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "hamstring",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3195-UXpKJoq.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3195-UXpKJoq.gif"
+  },
+  {
+    "id": "0587",
+    "name": "Lever Military Press",
+    "category": "Shoulders",
+    "equipment": "Machine",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0587-CggQhII.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0587-CggQhII.gif"
+  },
+  {
+    "id": "0588",
+    "name": "Lever Narrow Grip Seated Row",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0588-IGjKj1v.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0588-IGjKj1v.gif"
+  },
+  {
+    "id": "0589",
+    "name": "Lever One Arm Bent Over Row",
+    "category": "Back",
+    "equipment": "Barbell",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0589-Fhdtwf3.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0589-Fhdtwf3.gif"
+  },
+  {
+    "id": "1356",
+    "name": "Lever One Arm Lateral High Row",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1356-OIFMAp1.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1356-OIFMAp1.gif"
+  },
+  {
+    "id": "1347",
+    "name": "Lever One Arm Lateral Wide Pulldown",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1347-tTuZSDT.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1347-tTuZSDT.gif"
+  },
+  {
+    "id": "0590",
+    "name": "Lever One Arm Shoulder Press",
+    "category": "Shoulders",
+    "equipment": "Machine",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0590-2KGnL6M.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0590-2KGnL6M.gif"
+  },
+  {
+    "id": "0591",
+    "name": "Lever Overhand Triceps Dip",
+    "category": "Arms",
+    "equipment": "Machine",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0591-D5yqP2p.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0591-D5yqP2p.gif"
+  },
+  {
+    "id": "0592",
+    "name": "Lever Preacher Curl",
+    "category": "Arms",
+    "equipment": "Machine",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0592-b6hQYMb.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0592-b6hQYMb.gif"
+  },
+  {
+    "id": "1614",
+    "name": "Lever Preacher Curl V. 2",
+    "category": "Arms",
+    "equipment": "Machine",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1614-ye84CTU.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1614-ye84CTU.gif"
+  },
+  {
+    "id": "2285",
+    "name": "Lever Pullover",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2285-4U7iLb5.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2285-4U7iLb5.gif"
+  },
+  {
+    "id": "2736",
+    "name": "Lever Reverse Grip Lateral Pulldown",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2736-ky8FLU8.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2736-ky8FLU8.gif"
+  },
+  {
+    "id": "1616",
+    "name": "Lever Reverse Grip Preacher Curl",
+    "category": "Arms",
+    "equipment": "Machine",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1616-kj3hy6W.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1616-kj3hy6W.gif"
+  },
+  {
+    "id": "1348",
+    "name": "Lever Reverse Grip Vertical Row",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1348-ZqNOWQ6.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1348-ZqNOWQ6.gif"
+  },
+  {
+    "id": "0593",
+    "name": "Lever Reverse Hyperextension",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0593-Krmb3cB.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0593-Krmb3cB.gif"
+  },
+  {
+    "id": "1349",
+    "name": "Lever Reverse T-Bar Row",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1349-BgljGjd.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1349-BgljGjd.gif"
+  },
+  {
+    "id": "2315",
+    "name": "Lever Rotary Calf",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "abs",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2315-MrgP9L6.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2315-MrgP9L6.gif"
+  },
+  {
+    "id": "2335",
+    "name": "Lever Seated Calf Press",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2335-Ie9UGty.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2335-Ie9UGty.gif"
+  },
+  {
+    "id": "0594",
+    "name": "Lever Seated Calf Raise",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "abs",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0594-bOOdeyc.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0594-bOOdeyc.gif"
+  },
+  {
+    "id": "1452",
+    "name": "Lever Seated Crunch",
+    "category": "Core",
+    "equipment": "Machine",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1452-Wgaz7pm.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1452-Wgaz7pm.gif"
+  },
+  {
+    "id": "0595",
+    "name": "Lever Seated Crunch (Chest Pad)",
+    "category": "Core",
+    "equipment": "Machine",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0595-ZnJHhMk.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0595-ZnJHhMk.gif"
+  },
+  {
+    "id": "3760",
+    "name": "Lever Seated Crunch V. 2",
+    "category": "Core",
+    "equipment": "Machine",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3760-eXFXCY0.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3760-eXFXCY0.gif"
+  },
+  {
+    "id": "1451",
+    "name": "Lever Seated Dip",
+    "category": "Arms",
+    "equipment": "Machine",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1451-BRImeP8.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1451-BRImeP8.gif"
+  },
+  {
+    "id": "0596",
+    "name": "Lever Seated Fly",
+    "category": "Chest",
+    "equipment": "Machine",
+    "specificMuscle": "chest",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0596-v3xmPAR.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0596-v3xmPAR.gif"
+  },
+  {
+    "id": "3759",
+    "name": "Lever Seated Good Morning",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3759-XsCcxCC.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3759-XsCcxCC.gif"
+  },
+  {
+    "id": "0597",
+    "name": "Lever Seated Hip Abduction",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0597-CHpahtl.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0597-CHpahtl.gif"
+  },
+  {
+    "id": "0598",
+    "name": "Lever Seated Hip Adduction",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "adductor",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0598-oHsrypV.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0598-oHsrypV.gif"
+  },
+  {
+    "id": "0599",
+    "name": "Lever Seated Leg Curl",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "hamstring",
+    "secondaryMuscle": "calves",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0599-Zg3XY7P.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0599-Zg3XY7P.gif"
+  },
+  {
+    "id": "0600",
+    "name": "Lever Seated Leg Raise Crunch",
+    "category": "Core",
+    "equipment": "Machine",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0600-PQ2AtC3.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0600-PQ2AtC3.gif"
+  },
+  {
+    "id": "0602",
+    "name": "Lever Seated Reverse Fly",
+    "category": "Shoulders",
+    "equipment": "Machine",
+    "specificMuscle": "back-deltoids",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0602-myfUsKf.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0602-myfUsKf.gif"
+  },
+  {
+    "id": "0601",
+    "name": "Lever Seated Reverse Fly (Parallel Grip)",
+    "category": "Shoulders",
+    "equipment": "Machine",
+    "specificMuscle": "back-deltoids",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0601-xiHiJcA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0601-xiHiJcA.gif"
+  },
+  {
+    "id": "1350",
+    "name": "Lever Seated Row",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1350-7I6LNUG.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1350-7I6LNUG.gif"
+  },
+  {
+    "id": "1385",
+    "name": "Lever Seated Squat Calf Raise On Leg Press Machine",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1385-IeDEXTe.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1385-IeDEXTe.gif"
+  },
+  {
+    "id": "0603",
+    "name": "Lever Shoulder Press",
+    "category": "Shoulders",
+    "equipment": "Machine",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0603-67n3r98.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0603-67n3r98.gif"
+  },
+  {
+    "id": "0869",
+    "name": "Lever Shoulder Press V. 2",
+    "category": "Shoulders",
+    "equipment": "Machine",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0869-vqsbmL0.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0869-vqsbmL0.gif"
+  },
+  {
+    "id": "2318",
+    "name": "Lever Shoulder Press V. 3",
+    "category": "Shoulders",
+    "equipment": "Machine",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2318-dNFYIU1.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2318-dNFYIU1.gif"
+  },
+  {
+    "id": "0604",
+    "name": "Lever Shrug",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "trapezius",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0604-ZZKbeMw.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0604-ZZKbeMw.gif"
+  },
+  {
+    "id": "0605",
+    "name": "Lever Standing Calf Raise",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "abs",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0605-ykUOVze.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0605-ykUOVze.gif"
+  },
+  {
+    "id": "3758",
+    "name": "Lever Standing Chest Press",
+    "category": "Chest",
+    "equipment": "Machine",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3758-WbNq5Xu.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3758-WbNq5Xu.gif"
+  },
+  {
+    "id": "0606",
+    "name": "Lever T Bar Row",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0606-aaXr7ld.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0606-aaXr7ld.gif"
+  },
+  {
+    "id": "1351",
+    "name": "Lever T-Bar Reverse Grip Row",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1351-FVM1AUZ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1351-FVM1AUZ.gif"
+  },
+  {
+    "id": "0607",
+    "name": "Lever Triceps Extension",
+    "category": "Arms",
+    "equipment": "Machine",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0607-Ser9eQp.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0607-Ser9eQp.gif"
+  },
+  {
+    "id": "1313",
+    "name": "Lever Unilateral Row",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1313-oROuvrX.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1313-oROuvrX.gif"
+  },
+  {
+    "id": "0609",
+    "name": "London Bridge",
+    "category": "Back",
+    "equipment": "Other",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0609-bLyQokI.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0609-bLyQokI.gif"
+  },
+  {
+    "id": "3013",
+    "name": "Low Glute Bridge On Floor",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3013-u0cNiij.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3013-u0cNiij.gif"
+  },
+  {
+    "id": "1352",
     "name": "Lower Back Curl",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "lower-back",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1352-ANbbry2.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1352-ANbbry2.gif"
+  },
+  {
+    "id": "3582",
+    "name": "Lunge With Jump",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3582-PM1PZjg.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3582-PM1PZjg.gif"
+  },
+  {
+    "id": "1688",
+    "name": "Lunge With Twist",
     "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lower_Back_Curl/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1688-K9VL0Jq.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1688-K9VL0Jq.gif"
   },
   {
-    "id": "Lunge_Pass_Through",
-    "name": "Lunge Pass Through (Kettlebell)",
-    "category": "Legs",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lunge_Pass_Through/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Lunge_Sprint",
-    "name": "Lunge Sprint (Machine)",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lunge_Sprint/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Lying_Bent_Leg_Groin",
-    "name": "Lying Bent Leg Groin",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_Bent_Leg_Groin/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Lying_Cable_Curl",
-    "name": "Lying Cable Curl",
-    "category": "Arms",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_Cable_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Lying_Cambered_Barbell_Row",
-    "name": "Lying Cambered Barbell Row",
-    "category": "Back",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_Cambered_Barbell_Row/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Lying_Close-Grip_Bar_Curl_On_High_Pulley",
-    "name": "Lying Close-Grip Bar Curl On High Pulley (Cable)",
-    "category": "Arms",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_Close-Grip_Bar_Curl_On_High_Pulley/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Lying_Close-Grip_Barbell_Triceps_Extension_Behind_The_Head",
-    "name": "Lying Close-Grip Barbell Triceps Extension Behind The Head",
-    "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_Close-Grip_Barbell_Triceps_Extension_Behind_The_Head/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Lying_Close-Grip_Barbell_Triceps_Press_To_Chin",
-    "name": "Lying Close-Grip Barbell Triceps Press To Chin (EZ Bar)",
-    "category": "Arms",
-    "equipment": "EZ Bar",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_Close-Grip_Barbell_Triceps_Press_To_Chin/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Lying_Crossover",
-    "name": "Lying Crossover",
+    "id": "0613",
+    "name": "Lying (Side) Quads Stretch",
     "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_Crossover/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0613-BWnJR72.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0613-BWnJR72.gif"
   },
   {
-    "id": "Lying_Dumbbell_Tricep_Extension",
-    "name": "Lying Dumbbell Tricep Extension",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_Dumbbell_Tricep_Extension/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Lying_Face_Down_Plate_Neck_Resistance",
-    "name": "Lying Face Down Plate Neck Resistance",
-    "category": "Shoulders",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_Face_Down_Plate_Neck_Resistance/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Lying_Face_Up_Plate_Neck_Resistance",
-    "name": "Lying Face Up Plate Neck Resistance",
-    "category": "Shoulders",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_Face_Up_Plate_Neck_Resistance/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Lying_Glute",
-    "name": "Lying Glute",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_Glute/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Lying_Hamstring",
-    "name": "Lying Hamstring",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_Hamstring/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Lying_High_Bench_Barbell_Curl",
-    "name": "Lying High Bench Barbell Curl",
-    "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_High_Bench_Barbell_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Lying_Leg_Curls",
-    "name": "Lying Leg Curl (Machine)",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_Leg_Curls/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Lying_Machine_Squat",
-    "name": "Lying Machine Squat",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_Machine_Squat/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Lying_One-Arm_Lateral_Raise",
-    "name": "Lying One-Arm Lateral Raise (Dumbbell)",
-    "category": "Shoulders",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_One-Arm_Lateral_Raise/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Lying_Prone_Quadriceps",
-    "name": "Lying Prone Quadriceps",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_Prone_Quadriceps/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Lying_Rear_Delt_Raise",
-    "name": "Lying Rear Delt Raise (Dumbbell)",
-    "category": "Shoulders",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_Rear_Delt_Raise/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Lying_Supine_Dumbbell_Curl",
-    "name": "Lying Supine Dumbbell Curl",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_Supine_Dumbbell_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Lying_T-Bar_Row",
-    "name": "Lying T-Bar Row (Machine)",
-    "category": "Back",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_T-Bar_Row/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Lying_Triceps_Press",
-    "name": "Lying Triceps Pre (EZ Bar)",
-    "category": "Arms",
-    "equipment": "EZ Bar",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_Triceps_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Machine_Bench_Press",
-    "name": "Machine Bench Pre",
-    "category": "Chest",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Machine_Bench_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Machine_Bicep_Curl",
-    "name": "Machine Bicep Curl",
-    "category": "Arms",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Machine_Bicep_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Machine_Preacher_Curls",
-    "name": "Machine Preacher Curl",
-    "category": "Arms",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Machine_Preacher_Curls/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Machine_Shoulder_Military_Press",
-    "name": "Machine Shoulder (Military) Pre",
-    "category": "Shoulders",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Machine_Shoulder_Military_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Machine_Triceps_Extension",
-    "name": "Machine Triceps Extension",
-    "category": "Arms",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Machine_Triceps_Extension/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Medicine_Ball_Chest_Pass",
-    "name": "Medicine Ball Chest Pa",
-    "category": "Chest",
-    "equipment": "Medicine Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Medicine_Ball_Chest_Pass/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Medicine_Ball_Full_Twist",
-    "name": "Medicine Ball Full Twist",
+    "id": "2312",
+    "name": "Lying Elbow To Knee",
     "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2312-AQIhRjM.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2312-AQIhRjM.gif"
+  },
+  {
+    "id": "0620",
+    "name": "Lying Leg Raise Flat Bench",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0620-WhuFnR7.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0620-WhuFnR7.gif"
+  },
+  {
+    "id": "0865",
+    "name": "Lying Leg-Hip Raise",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0865-9IxJdtC.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0865-9IxJdtC.gif"
+  },
+  {
+    "id": "1301",
+    "name": "Machine Inner Chest Press",
+    "category": "Chest",
+    "equipment": "Machine",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1301-wDN97Ca.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1301-wDN97Ca.gif"
+  },
+  {
+    "id": "0624",
+    "name": "March Sit (Wall)",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0624-sVQCCeG.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0624-sVQCCeG.gif"
+  },
+  {
+    "id": "1353",
+    "name": "Medicine Ball Catch And Overhead Throw",
+    "category": "Back",
     "equipment": "Medicine Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Medicine_Ball_Full_Twist/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1353-PsVS1QP.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1353-PsVS1QP.gif"
   },
   {
-    "id": "Medicine_Ball_Scoop_Throw",
-    "name": "Medicine Ball Scoop Throw",
-    "category": "Shoulders",
+    "id": "1302",
+    "name": "Medicine Ball Chest Pass",
+    "category": "Chest",
     "equipment": "Medicine Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Medicine_Ball_Scoop_Throw/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1302-aDoFKrE.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1302-aDoFKrE.gif"
   },
   {
-    "id": "Middle_Back_Shrug",
-    "name": "Middle Back Shrug (Dumbbell)",
+    "id": "1303",
+    "name": "Medicine Ball Chest Push From 3 Point Stance",
+    "category": "Chest",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1303-dCJnuVq.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1303-dCJnuVq.gif"
+  },
+  {
+    "id": "1304",
+    "name": "Medicine Ball Chest Push Multiple Response",
+    "category": "Chest",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1304-7aolH9D.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1304-7aolH9D.gif"
+  },
+  {
+    "id": "1305",
+    "name": "Medicine Ball Chest Push Single Response",
+    "category": "Chest",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1305-jeHtrlO.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1305-jeHtrlO.gif"
+  },
+  {
+    "id": "1312",
+    "name": "Medicine Ball Chest Push With Run Release",
+    "category": "Chest",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1312-pX9Elbe.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1312-pX9Elbe.gif"
+  },
+  {
+    "id": "1701",
+    "name": "Medicine Ball Close Grip Push Up",
+    "category": "Arms",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1701-8K7m2SS.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1701-8K7m2SS.gif"
+  },
+  {
+    "id": "1354",
+    "name": "Medicine Ball Overhead Slam",
     "category": "Back",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Middle_Back_Shrug/0.jpg",
-    "requiresWeight": true
+    "equipment": "Medicine Ball",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1354-oHg8eop.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1354-oHg8eop.gif"
   },
   {
-    "id": "Middle_Back_Stretch",
-    "name": "Middle Back Stretch",
+    "id": "1750",
+    "name": "Medicine Ball Supine Chest Throw",
+    "category": "Arms",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1750-Al3tP0D.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1750-Al3tP0D.gif"
+  },
+  {
+    "id": "0627",
+    "name": "Mixed Grip Chin-Up",
     "category": "Back",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Middle_Back_Stretch/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0627-T8UpLkb.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0627-T8UpLkb.gif"
   },
   {
-    "id": "Mixed_Grip_Chin",
-    "name": "Mixed Grip Chin",
-    "category": "Back",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Mixed_Grip_Chin/0.jpg",
-    "requiresWeight": false
+    "id": "3217",
+    "name": "Modified Hindu Push-Up (Male)",
+    "category": "Chest",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3217-epOSYUZ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3217-epOSYUZ.gif"
   },
   {
-    "id": "Monster_Walk",
-    "name": "Monster Walk (Band)",
-    "category": "Legs",
-    "equipment": "Band",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Monster_Walk/0.jpg",
-    "requiresWeight": false
+    "id": "1421",
+    "name": "Modified Push Up To Lower Arms",
+    "category": "Arms",
+    "equipment": "Bodyweight",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1421-arvaszz.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1421-arvaszz.gif"
   },
   {
-    "id": "Mountain_Climbers",
-    "name": "Mountain Climbers",
+    "id": "0628",
+    "name": "Monster Walk",
     "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Mountain_Climbers/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0628-O95afRA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0628-O95afRA.gif"
   },
   {
-    "id": "Moving_Claw_Series",
-    "name": "Moving Claw Series",
-    "category": "Legs",
+    "id": "0630",
+    "name": "Mountain Climber",
+    "category": "Cardio",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Moving_Claw_Series/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "chest",
+    "secondaryMuscle": "abs",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0630-RJgzwny.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0630-RJgzwny.gif"
   },
   {
-    "id": "Muscle_Snatch",
-    "name": "Muscle Snatch (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Muscle_Snatch/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Muscle_Up",
+    "id": "0631",
     "name": "Muscle Up",
     "category": "Back",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Muscle_Up/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Narrow_Stance_Hack_Squats",
-    "name": "Narrow Stance Hack Squat (Machine)",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Narrow_Stance_Hack_Squats/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Narrow_Stance_Leg_Press",
-    "name": "Narrow Stance Leg Pre (Machine)",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Narrow_Stance_Leg_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Narrow_Stance_Squats",
-    "name": "Narrow Stance Squat (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Narrow_Stance_Squats/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Natural_Glute_Ham_Raise",
-    "name": "Natural Glute Ham Raise",
-    "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Natural_Glute_Ham_Raise/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0631-yJUHKTn.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0631-yJUHKTn.gif"
   },
   {
-    "id": "Neck-SMR",
-    "name": "Neck-SMR",
-    "category": "Shoulders",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Neck-SMR/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Neck_Press",
-    "name": "Neck Pre (Barbell)",
-    "category": "Chest",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Neck_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Oblique_Crunches",
-    "name": "Oblique Crunches",
-    "category": "Core",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Oblique_Crunches/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Oblique_Crunches_-_On_The_Floor",
-    "name": "Oblique Crunches - On The Floor",
-    "category": "Core",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Oblique_Crunches_-_On_The_Floor/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Olympic_Squat",
-    "name": "Olympic Squat (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Olympic_Squat/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "On-Your-Back_Quad_Stretch",
-    "name": "On-Your-Back Quad Stretch",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/On-Your-Back_Quad_Stretch/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "On_Your_Side_Quad_Stretch",
-    "name": "On Your Side Quad Stretch",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/On_Your_Side_Quad_Stretch/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "One-Arm_Dumbbell_Row",
-    "name": "One-Arm Dumbbell Row",
+    "id": "1401",
+    "name": "Muscle-Up (On Vertical Bar)",
     "category": "Back",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Dumbbell_Row/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1401-Af0EW2I.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1401-Af0EW2I.gif"
   },
   {
-    "id": "One-Arm_Flat_Bench_Dumbbell_Flye",
-    "name": "One-Arm Flat Bench Dumbbell Flye",
-    "category": "Chest",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Flat_Bench_Dumbbell_Flye/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "One-Arm_High-Pulley_Cable_Side_Bends",
-    "name": "One-Arm High-Pulley Cable Side Bend",
-    "category": "Core",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_High-Pulley_Cable_Side_Bends/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "One-Arm_Incline_Lateral_Raise",
-    "name": "One-Arm Incline Lateral Raise (Dumbbell)",
-    "category": "Shoulders",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Incline_Lateral_Raise/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "One-Arm_Kettlebell_Clean",
-    "name": "One-Arm Kettlebell Clean",
-    "category": "Legs",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Kettlebell_Clean/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "One-Arm_Kettlebell_Clean_and_Jerk",
-    "name": "One-Arm Kettlebell Clean and Jerk",
-    "category": "Shoulders",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Kettlebell_Clean_and_Jerk/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "One-Arm_Kettlebell_Floor_Press",
-    "name": "One-Arm Kettlebell Floor Pre",
-    "category": "Chest",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Kettlebell_Floor_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "One-Arm_Kettlebell_Jerk",
-    "name": "One-Arm Kettlebell Jerk",
-    "category": "Shoulders",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Kettlebell_Jerk/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "One-Arm_Kettlebell_Military_Press_To_The_Side",
-    "name": "One-Arm Kettlebell Military Press To The Side",
-    "category": "Shoulders",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Kettlebell_Military_Press_To_The_Side/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "One-Arm_Kettlebell_Para_Press",
-    "name": "One-Arm Kettlebell Para Pre",
-    "category": "Shoulders",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Kettlebell_Para_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "One-Arm_Kettlebell_Push_Press",
-    "name": "One-Arm Kettlebell Push Pre",
-    "category": "Shoulders",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Kettlebell_Push_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "One-Arm_Kettlebell_Row",
-    "name": "One-Arm Kettlebell Row",
-    "category": "Back",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Kettlebell_Row/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "One-Arm_Kettlebell_Snatch",
-    "name": "One-Arm Kettlebell Snatch",
-    "category": "Shoulders",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Kettlebell_Snatch/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "One-Arm_Kettlebell_Split_Jerk",
-    "name": "One-Arm Kettlebell Split Jerk",
-    "category": "Shoulders",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Kettlebell_Split_Jerk/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "One-Arm_Kettlebell_Split_Snatch",
-    "name": "One-Arm Kettlebell Split Snatch",
-    "category": "Shoulders",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Kettlebell_Split_Snatch/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "One-Arm_Kettlebell_Swings",
-    "name": "One-Arm Kettlebell Swing",
-    "category": "Legs",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Kettlebell_Swings/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "One-Arm_Long_Bar_Row",
-    "name": "One-Arm Long Bar Row (Barbell)",
-    "category": "Back",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Long_Bar_Row/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "One-Arm_Medicine_Ball_Slam",
-    "name": "One-Arm Medicine Ball Slam",
-    "category": "Core",
+    "id": "2328",
+    "name": "Narrow Push-Up On Exercise Ball",
+    "category": "Arms",
     "equipment": "Medicine Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Medicine_Ball_Slam/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2328-4cWjYEN.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2328-4cWjYEN.gif"
   },
   {
-    "id": "One-Arm_Open_Palm_Kettlebell_Clean",
-    "name": "One-Arm Open Palm Kettlebell Clean",
-    "category": "Legs",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Open_Palm_Kettlebell_Clean/0.jpg",
-    "requiresWeight": true
+    "id": "1403",
+    "name": "Neck Side Stretch",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "trapezius",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1403-x2chWLO.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1403-x2chWLO.gif"
   },
   {
-    "id": "One-Arm_Overhead_Kettlebell_Squats",
-    "name": "One-Arm Overhead Kettlebell Squat",
-    "category": "Legs",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Overhead_Kettlebell_Squats/0.jpg",
-    "requiresWeight": true
+    "id": "0634",
+    "name": "Negative Crunch",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0634-szIn2UK.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0634-szIn2UK.gif"
   },
   {
-    "id": "One-Arm_Side_Deadlift",
-    "name": "One-Arm Side Deadlift (Barbell)",
-    "category": "Legs",
+    "id": "1495",
+    "name": "Oblique Crunch V. 2",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1495-cJgSTmh.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1495-cJgSTmh.gif"
+  },
+  {
+    "id": "0635",
+    "name": "Oblique Crunches Floor",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0635-QUDd8WS.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0635-QUDd8WS.gif"
+  },
+  {
+    "id": "0636",
+    "name": "Olympic Barbell Hammer Curl",
+    "category": "Arms",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Side_Deadlift/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0636-o1ntciW.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0636-o1ntciW.gif"
   },
   {
-    "id": "One-Arm_Side_Laterals",
-    "name": "One-Arm Side Lateral (Dumbbell)",
-    "category": "Shoulders",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Side_Laterals/0.jpg",
-    "requiresWeight": true
+    "id": "0637",
+    "name": "Olympic Barbell Triceps Extension",
+    "category": "Arms",
+    "equipment": "Barbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0637-wu5LXwz.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0637-wu5LXwz.gif"
   },
   {
-    "id": "One-Legged_Cable_Kickback",
-    "name": "One-Legged Cable Kickback",
-    "category": "Legs",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Legged_Cable_Kickback/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "One_Arm_Against_Wall",
+    "id": "1355",
     "name": "One Arm Against Wall",
     "category": "Back",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One_Arm_Against_Wall/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1355-ZZTGMKh.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1355-ZZTGMKh.gif"
   },
   {
-    "id": "One_Arm_Chin-Up",
+    "id": "0638",
     "name": "One Arm Chin-Up",
     "category": "Back",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One_Arm_Chin-Up/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "One_Arm_Dumbbell_Bench_Press",
-    "name": "One Arm Dumbbell Bench Pre",
-    "category": "Chest",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One_Arm_Dumbbell_Bench_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "One_Arm_Dumbbell_Preacher_Curl",
-    "name": "One Arm Dumbbell Preacher Curl",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One_Arm_Dumbbell_Preacher_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "One_Arm_Floor_Press",
-    "name": "One Arm Floor Pre (Barbell)",
-    "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One_Arm_Floor_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "One_Arm_Lat_Pulldown",
-    "name": "One Arm Lat Pulldown (Cable)",
-    "category": "Back",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One_Arm_Lat_Pulldown/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "One_Arm_Pronated_Dumbbell_Triceps_Extension",
-    "name": "One Arm Pronated Dumbbell Triceps Extension",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One_Arm_Pronated_Dumbbell_Triceps_Extension/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "One_Arm_Supinated_Dumbbell_Triceps_Extension",
-    "name": "One Arm Supinated Dumbbell Triceps Extension",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One_Arm_Supinated_Dumbbell_Triceps_Extension/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "One_Half_Locust",
-    "name": "One Half Locust",
-    "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One_Half_Locust/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0638-HjdqmZa.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0638-HjdqmZa.gif"
   },
   {
-    "id": "One_Handed_Hang",
-    "name": "One Handed Hang",
-    "category": "Back",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One_Handed_Hang/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "One_Knee_To_Chest",
-    "name": "One Knee To Chest",
-    "category": "Legs",
+    "id": "0639",
+    "name": "One Arm Dip",
+    "category": "Arms",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One_Knee_To_Chest/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0639-FAoIFMw.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0639-FAoIFMw.gif"
   },
   {
-    "id": "One_Leg_Barbell_Squat",
-    "name": "One Leg Barbell Squat",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One_Leg_Barbell_Squat/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Open_Palm_Kettlebell_Clean",
-    "name": "Open Palm Kettlebell Clean",
-    "category": "Legs",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Open_Palm_Kettlebell_Clean/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Otis-Up",
-    "name": "Otis-Up",
+    "id": "0640",
+    "name": "One Arm Slam (With Medicine Ball)",
     "category": "Core",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Otis-Up/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Overhead_Cable_Curl",
-    "name": "Overhead Cable Curl",
-    "category": "Arms",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Overhead_Cable_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Overhead_Lat",
-    "name": "Overhead Lat",
-    "category": "Back",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Overhead_Lat/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Overhead_Slam",
-    "name": "Overhead Slam (Medicine Ball)",
-    "category": "Back",
     "equipment": "Medicine Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Overhead_Slam/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0640-jCrtE9b.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0640-jCrtE9b.gif"
   },
   {
-    "id": "Overhead_Squat",
-    "name": "Overhead Squat (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Overhead_Squat/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Overhead_Stretch",
-    "name": "Overhead Stretch",
-    "category": "Core",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Overhead_Stretch/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Overhead_Triceps",
-    "name": "Overhead Triceps",
-    "category": "Arms",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Overhead_Triceps/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Pallof_Press",
-    "name": "Pallof Pre (Cable)",
-    "category": "Core",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Pallof_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Pallof_Press_With_Rotation",
-    "name": "Pallof Press With Rotation (Cable)",
-    "category": "Core",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Pallof_Press_With_Rotation/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Palms-Down_Dumbbell_Wrist_Curl_Over_A_Bench",
-    "name": "Palms-Down Dumbbell Wrist Curl Over A Bench",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Palms-Down_Dumbbell_Wrist_Curl_Over_A_Bench/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Palms-Down_Wrist_Curl_Over_A_Bench",
-    "name": "Palms-Down Wrist Curl Over A Bench (Barbell)",
-    "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Palms-Down_Wrist_Curl_Over_A_Bench/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Palms-Up_Barbell_Wrist_Curl_Over_A_Bench",
-    "name": "Palms-Up Barbell Wrist Curl Over A Bench",
-    "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Palms-Up_Barbell_Wrist_Curl_Over_A_Bench/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Palms-Up_Dumbbell_Wrist_Curl_Over_A_Bench",
-    "name": "Palms-Up Dumbbell Wrist Curl Over A Bench",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Palms-Up_Dumbbell_Wrist_Curl_Over_A_Bench/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Parallel_Bar_Dip",
-    "name": "Parallel Bar Dip",
-    "category": "Arms",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Parallel_Bar_Dip/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Pelvic_Tilt_Into_Bridge",
-    "name": "Pelvic Tilt Into Bridge",
+    "id": "1773",
+    "name": "One Arm Towel Row",
     "category": "Back",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Pelvic_Tilt_Into_Bridge/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1773-bKWbrTA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1773-bKWbrTA.gif"
   },
   {
-    "id": "Peroneals-SMR",
-    "name": "Peroneals-SMR",
+    "id": "1386",
+    "name": "One Leg Donkey Calf Raise",
     "category": "Legs",
-    "equipment": "Foam Roll",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Peroneals-SMR/0.jpg",
-    "requiresWeight": false
+    "equipment": "Bodyweight",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1386-A2upspL.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1386-A2upspL.gif"
   },
   {
-    "id": "Peroneals_Stretch",
+    "id": "1387",
+    "name": "One Leg Floor Calf Raise",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "calves",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1387-0jp9Rlz.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1387-0jp9Rlz.gif"
+  },
+  {
+    "id": "1476",
+    "name": "One Leg Squat",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1476-C31LMnP.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1476-C31LMnP.gif"
+  },
+  {
+    "id": "0641",
+    "name": "Otis Up",
+    "category": "Core",
+    "equipment": "Other",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0641-UVL20oz.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0641-UVL20oz.gif"
+  },
+  {
+    "id": "0642",
+    "name": "Outside Leg Kick Push-Up",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0642-jNU1gFQ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0642-jNU1gFQ.gif"
+  },
+  {
+    "id": "0643",
+    "name": "Overhead Triceps Stretch",
+    "category": "Arms",
+    "equipment": "Bodyweight",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0643-Z5YStHW.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0643-Z5YStHW.gif"
+  },
+  {
+    "id": "3147",
+    "name": "Pelvic Tilt",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3147-NKJ8o6x.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3147-NKJ8o6x.gif"
+  },
+  {
+    "id": "1422",
+    "name": "Pelvic Tilt Into Bridge",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1422-D9qe7CM.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1422-D9qe7CM.gif"
+  },
+  {
+    "id": "1388",
     "name": "Peroneals Stretch",
     "category": "Legs",
     "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Peroneals_Stretch/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "calves",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1388-XhfS1DZ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1388-XhfS1DZ.gif"
   },
   {
-    "id": "Physioball_Hip_Bridge",
-    "name": "Physioball Hip Bridge",
+    "id": "3662",
+    "name": "Pike-To-Cobra Push-Up",
     "category": "Legs",
-    "equipment": "Exercise Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Physioball_Hip_Bridge/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Pin_Presses",
-    "name": "Pin Presse (Barbell)",
-    "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Pin_Presses/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Piriformis-SMR",
-    "name": "Piriformis-SMR",
-    "category": "Legs",
-    "equipment": "Foam Roll",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Piriformis-SMR/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Plank",
-    "name": "Plank",
-    "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Plank/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "abs",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3662-XPUDTt7.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3662-XPUDTt7.gif"
   },
   {
-    "id": "Plate_Pinch",
-    "name": "Plate Pinch",
-    "category": "Arms",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Plate_Pinch/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Plate_Twist",
-    "name": "Plate Twist",
-    "category": "Core",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Plate_Twist/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Platform_Hamstring_Slides",
-    "name": "Platform Hamstring Slides",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Platform_Hamstring_Slides/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Plie_Dumbbell_Squat",
-    "name": "Plie Dumbbell Squat",
-    "category": "Legs",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Plie_Dumbbell_Squat/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Plyo_Kettlebell_Pushups",
-    "name": "Plyo Kettlebell Pushup",
-    "category": "Chest",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Plyo_Kettlebell_Pushups/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Plyo_Push-up",
-    "name": "Plyo Push-up",
+    "id": "1306",
+    "name": "Plyo Push Up",
     "category": "Chest",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Plyo_Push-up/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1306-Snj1wSv.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1306-Snj1wSv.gif"
   },
   {
-    "id": "Posterior_Tibialis_Stretch",
+    "id": "1687",
+    "name": "Posterior Step To Overhead Reach",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1687-ErqK3UL.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1687-ErqK3UL.gif"
+  },
+  {
+    "id": "1389",
     "name": "Posterior Tibialis Stretch",
     "category": "Legs",
     "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Posterior_Tibialis_Stretch/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1389-DEEqoI2.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1389-DEEqoI2.gif"
   },
   {
-    "id": "Power_Clean",
-    "name": "Power Clean (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Power_Clean/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Power_Clean_from_Blocks",
-    "name": "Power Clean from Block (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Power_Clean_from_Blocks/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Power_Jerk",
-    "name": "Power Jerk (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Power_Jerk/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Power_Partials",
-    "name": "Power Partial (Dumbbell)",
-    "category": "Shoulders",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Power_Partials/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Power_Snatch",
-    "name": "Power Snatch (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Power_Snatch/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Power_Snatch_from_Blocks",
-    "name": "Power Snatch from Block (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Power_Snatch_from_Blocks/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Power_Stairs",
-    "name": "Power Stairs",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Power_Stairs/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Preacher_Curl",
-    "name": "Preacher Curl (Barbell)",
-    "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Preacher_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Preacher_Hammer_Dumbbell_Curl",
-    "name": "Preacher Hammer Dumbbell Curl",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Preacher_Hammer_Dumbbell_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Press_Sit-Up",
-    "name": "Press Sit-Up (Barbell)",
+    "id": "3119",
+    "name": "Potty Squat",
     "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3119-75Bgtjy.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3119-75Bgtjy.gif"
+  },
+  {
+    "id": "3132",
+    "name": "Potty Squat With Support",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3132-b63ZzGe.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3132-b63ZzGe.gif"
+  },
+  {
+    "id": "0648",
+    "name": "Power Clean",
+    "category": "Legs",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Press_Sit-Up/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "hamstring",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0648-SiWCcTN.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0648-SiWCcTN.gif"
   },
   {
-    "id": "Prone_Manual_Hamstring",
-    "name": "Prone Manual Hamstring",
-    "category": "Legs",
+    "id": "3665",
+    "name": "Power Point Plank",
+    "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Prone_Manual_Hamstring/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3665-hCjGsRQ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3665-hCjGsRQ.gif"
   },
   {
-    "id": "Prowler_Sprint",
-    "name": "Prowler Sprint",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Prowler_Sprint/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Pull_Through",
-    "name": "Pull Through (Cable)",
-    "category": "Legs",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Pull_Through/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Pullups",
-    "name": "Pullups",
-    "category": "Back",
+    "id": "3203",
+    "name": "Prisoner Half Sit-Up (Male)",
+    "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Pullups/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3203-mgejmGP.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3203-mgejmGP.gif"
   },
   {
-    "id": "Push-Up_Wide",
-    "name": "Push-Up Wide",
-    "category": "Chest",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Push-Up_Wide/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Push-Ups_-_Close_Triceps_Position",
-    "name": "Push-Ups - Close Triceps Position",
-    "category": "Arms",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Push-Ups_-_Close_Triceps_Position/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Push-Ups_With_Feet_Elevated",
-    "name": "Push-Ups With Feet Elevated",
-    "category": "Chest",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Push-Ups_With_Feet_Elevated/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Push-Ups_With_Feet_On_An_Exercise_Ball",
-    "name": "Push-Ups With Feet On An Exercise Ball",
-    "category": "Chest",
-    "equipment": "Exercise Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Push-Ups_With_Feet_On_An_Exercise_Ball/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Push_Press",
-    "name": "Push Pre (Barbell)",
-    "category": "Shoulders",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Push_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Push_Press_-_Behind_the_Neck",
-    "name": "Push Press - Behind the Neck (Barbell)",
-    "category": "Shoulders",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Push_Press_-_Behind_the_Neck/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Push_Up_to_Side_Plank",
-    "name": "Push Up to Side Plank",
-    "category": "Chest",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Push_Up_to_Side_Plank/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Pushups",
-    "name": "Pushups",
-    "category": "Chest",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Pushups/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Pushups_Close_and_Wide_Hand_Positions",
-    "name": "Pushups (Close and Wide Hand Positions)",
-    "category": "Chest",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Pushups_Close_and_Wide_Hand_Positions/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Pyramid",
-    "name": "Pyramid",
-    "category": "Back",
-    "equipment": "Exercise Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Pyramid/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Quad_Stretch",
-    "name": "Quad Stretch",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Quad_Stretch/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Quadriceps-SMR",
-    "name": "Quadriceps-SMR",
-    "category": "Legs",
-    "equipment": "Foam Roll",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Quadriceps-SMR/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Quick_Leap",
-    "name": "Quick Leap",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Quick_Leap/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Rack_Delivery",
-    "name": "Rack Delivery (Barbell)",
-    "category": "Shoulders",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Rack_Delivery/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Rack_Pull_with_Bands",
-    "name": "Rack Pull with Band (Barbell)",
-    "category": "Back",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Rack_Pull_with_Bands/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Rack_Pulls",
-    "name": "Rack Pull (Barbell)",
-    "category": "Back",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Rack_Pulls/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Rear_Leg_Raises",
-    "name": "Rear Leg Raises",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Rear_Leg_Raises/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Recumbent_Bike",
-    "name": "Recumbent Bike (Machine)",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Recumbent_Bike/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Return_Push_from_Stance",
-    "name": "Return Push from Stance (Medicine Ball)",
-    "category": "Shoulders",
+    "id": "1707",
+    "name": "Prone Twist On Stability Ball",
+    "category": "Core",
     "equipment": "Medicine Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Return_Push_from_Stance/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1707-1IG6gVF.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1707-1IG6gVF.gif"
   },
   {
-    "id": "Reverse_Band_Bench_Press",
-    "name": "Reverse Band Bench Pre (Barbell)",
-    "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Reverse_Band_Bench_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Reverse_Band_Box_Squat",
-    "name": "Reverse Band Box Squat (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Reverse_Band_Box_Squat/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Reverse_Band_Deadlift",
-    "name": "Reverse Band Deadlift (Barbell)",
+    "id": "0651",
+    "name": "Pull Up (Neutral Grip)",
     "category": "Back",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Reverse_Band_Deadlift/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0651-0V2YQjW.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0651-0V2YQjW.gif"
   },
   {
-    "id": "Reverse_Band_Power_Squat",
-    "name": "Reverse Band Power Squat (Barbell)",
+    "id": "0650",
+    "name": "Pull-In (On Stability Ball)",
+    "category": "Core",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0650-UQr48Oi.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0650-UQr48Oi.gif"
+  },
+  {
+    "id": "0652",
+    "name": "Pull-Up",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0652-lBDjFxJ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0652-lBDjFxJ.gif"
+  },
+  {
+    "id": "1689",
+    "name": "Push And Pull Bodyweight",
+    "category": "Chest",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1689-wXvUZC8.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1689-wXvUZC8.gif"
+  },
+  {
+    "id": "3638",
+    "name": "Push To Run",
+    "category": "Cardio",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3638-PrQbjvB.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3638-PrQbjvB.gif"
+  },
+  {
+    "id": "1307",
+    "name": "Push Up On Bosu Ball",
+    "category": "Chest",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1307-wVompEp.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1307-wVompEp.gif"
+  },
+  {
+    "id": "0662",
+    "name": "Push-Up",
+    "category": "Chest",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0662-I4hDWkc.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0662-I4hDWkc.gif"
+  },
+  {
+    "id": "0653",
+    "name": "Push-Up (Bosu Ball)",
+    "category": "Chest",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0653-2kr2lWy.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0653-2kr2lWy.gif"
+  },
+  {
+    "id": "0655",
+    "name": "Push-Up (On Stability Ball)",
+    "category": "Chest",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0655-Y4BRNQF.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0655-Y4BRNQF.gif"
+  },
+  {
+    "id": "0656",
+    "name": "Push-Up (On Stability Ball)",
+    "category": "Chest",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0656-tgryw5Y.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0656-tgryw5Y.gif"
+  },
+  {
+    "id": "0659",
+    "name": "Push-Up (Wall)",
+    "category": "Chest",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0659-LEH9jxP.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0659-LEH9jxP.gif"
+  },
+  {
+    "id": "0658",
+    "name": "Push-Up (Wall) V. 2",
+    "category": "Chest",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0658-NCmbLCw.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0658-NCmbLCw.gif"
+  },
+  {
+    "id": "0660",
+    "name": "Push-Up Close-Grip Off Dumbbell",
+    "category": "Arms",
+    "equipment": "Dumbbell",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0660-KZXAtKQ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0660-KZXAtKQ.gif"
+  },
+  {
+    "id": "0661",
+    "name": "Push-Up Inside Leg Kick",
     "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Reverse_Band_Power_Squat/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0661-0br45wL.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0661-0br45wL.gif"
   },
   {
-    "id": "Reverse_Band_Sumo_Deadlift",
-    "name": "Reverse Band Sumo Deadlift (Barbell)",
+    "id": "0663",
+    "name": "Push-Up Medicine Ball",
+    "category": "Chest",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0663-W8KAlkI.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0663-W8KAlkI.gif"
+  },
+  {
+    "id": "1467",
+    "name": "Push-Up On Lower Arms",
+    "category": "Arms",
+    "equipment": "Bodyweight",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1467-4Jt8QsQ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1467-4Jt8QsQ.gif"
+  },
+  {
+    "id": "3145",
+    "name": "Push-Up Plus",
+    "category": "Chest",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3145-pvBMLHA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3145-pvBMLHA.gif"
+  },
+  {
+    "id": "0664",
+    "name": "Push-Up To Side Plank",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0664-KhHJ338.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0664-KhHJ338.gif"
+  },
+  {
+    "id": "3533",
+    "name": "Quads",
     "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Reverse_Band_Sumo_Deadlift/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3533-6YUfHPL.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3533-6YUfHPL.gif"
   },
   {
-    "id": "Reverse_Barbell_Curl",
-    "name": "Reverse Barbell Curl",
+    "id": "3201",
+    "name": "Quarter Sit-Up",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3201-enxnJcM.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3201-enxnJcM.gif"
+  },
+  {
+    "id": "3552",
+    "name": "Quick Feet V. 2",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "calves",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3552-mweqJin.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3552-mweqJin.gif"
+  },
+  {
+    "id": "0666",
+    "name": "Raise Single Arm Push-Up",
+    "category": "Chest",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0666-13TpY4H.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0666-13TpY4H.gif"
+  },
+  {
+    "id": "0668",
+    "name": "Rear Decline Bridge",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0668-UpAlold.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0668-UpAlold.gif"
+  },
+  {
+    "id": "0669",
+    "name": "Rear Deltoid Stretch",
+    "category": "Shoulders",
+    "equipment": "Bodyweight",
+    "specificMuscle": "back-deltoids",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0669-xifhB5W.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0669-xifhB5W.gif"
+  },
+  {
+    "id": "0670",
+    "name": "Rear Pull-Up",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0670-CbFSYC1.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0670-CbFSYC1.gif"
+  },
+  {
+    "id": "1582",
+    "name": "Reclining Big Toe Pose With Rope",
+    "category": "Legs",
+    "equipment": "Other",
+    "specificMuscle": "hamstring",
+    "secondaryMuscle": "calves",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1582-K5xgdvI.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1582-K5xgdvI.gif"
+  },
+  {
+    "id": "3236",
+    "name": "Resistance Band Hip Thrusts On Knees (Female)",
+    "category": "Legs",
+    "equipment": "Band",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3236-Pjbc0Kt.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3236-Pjbc0Kt.gif"
+  },
+  {
+    "id": "3007",
+    "name": "Resistance Band Leg Extension",
+    "category": "Legs",
+    "equipment": "Band",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3007-Y1MsI1l.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3007-Y1MsI1l.gif"
+  },
+  {
+    "id": "3123",
+    "name": "Resistance Band Seated Biceps Curl",
     "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Reverse_Barbell_Curl/0.jpg",
-    "requiresWeight": true
+    "equipment": "Band",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3123-XFc3vpY.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3123-XFc3vpY.gif"
   },
   {
-    "id": "Reverse_Barbell_Preacher_Curls",
-    "name": "Reverse Barbell Preacher Curl (EZ Bar)",
-    "category": "Arms",
-    "equipment": "EZ Bar",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Reverse_Barbell_Preacher_Curls/0.jpg",
-    "requiresWeight": true
+    "id": "3124",
+    "name": "Resistance Band Seated Chest Press",
+    "category": "Chest",
+    "equipment": "Band",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3124-4x5Okof.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3124-4x5Okof.gif"
   },
   {
-    "id": "Reverse_Cable_Curl",
-    "name": "Reverse Cable Curl",
-    "category": "Arms",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Reverse_Cable_Curl/0.jpg",
-    "requiresWeight": true
+    "id": "3006",
+    "name": "Resistance Band Seated Hip Abduction",
+    "category": "Legs",
+    "equipment": "Band",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3006-0xDpB4L.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3006-0xDpB4L.gif"
   },
   {
-    "id": "Reverse_Crunch",
+    "id": "3122",
+    "name": "Resistance Band Seated Shoulder Press",
+    "category": "Shoulders",
+    "equipment": "Band",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3122-S93zLTG.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3122-S93zLTG.gif"
+  },
+  {
+    "id": "3144",
+    "name": "Resistance Band Seated Straight Back Row",
+    "category": "Back",
+    "equipment": "Band",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3144-Nu7jqFE.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3144-Nu7jqFE.gif"
+  },
+  {
+    "id": "0872",
     "name": "Reverse Crunch",
     "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Reverse_Crunch/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0872-nCU1Ekp.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0872-nCU1Ekp.gif"
   },
   {
-    "id": "Reverse_Flyes",
-    "name": "Reverse Flye (Dumbbell)",
-    "category": "Shoulders",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Reverse_Flyes/0.jpg",
-    "requiresWeight": true
+    "id": "0672",
+    "name": "Reverse Dip",
+    "category": "Arms",
+    "equipment": "Bodyweight",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0672-NZ5Qqkz.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0672-NZ5Qqkz.gif"
   },
   {
-    "id": "Reverse_Flyes_With_External_Rotation",
-    "name": "Reverse Flyes With External Rotation (Dumbbell)",
-    "category": "Shoulders",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Reverse_Flyes_With_External_Rotation/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Reverse_Grip_Bent-Over_Rows",
-    "name": "Reverse Grip Bent-Over Row (Barbell)",
+    "id": "0673",
+    "name": "Reverse Grip Machine Lat Pulldown",
     "category": "Back",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Reverse_Grip_Bent-Over_Rows/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Reverse_Grip_Triceps_Pushdown",
-    "name": "Reverse Grip Triceps Pushdown (Cable)",
-    "category": "Arms",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Reverse_Grip_Triceps_Pushdown/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Reverse_Hyperextension",
-    "name": "Reverse Hyperextension (Machine)",
-    "category": "Legs",
     "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Reverse_Hyperextension/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0673-ecpY0rH.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0673-ecpY0rH.gif"
   },
   {
-    "id": "Reverse_Machine_Flyes",
-    "name": "Reverse Machine Flye",
-    "category": "Shoulders",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Reverse_Machine_Flyes/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Reverse_Plate_Curls",
-    "name": "Reverse Plate Curls",
-    "category": "Arms",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Reverse_Plate_Curls/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Reverse_Triceps_Bench_Press",
-    "name": "Reverse Triceps Bench Pre (Barbell)",
-    "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Reverse_Triceps_Bench_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Rhomboids-SMR",
-    "name": "Rhomboids-SMR",
+    "id": "0674",
+    "name": "Reverse Grip Pull-Up",
     "category": "Back",
-    "equipment": "Foam Roll",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Rhomboids-SMR/0.jpg",
-    "requiresWeight": false
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0674-YAk5dIw.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0674-YAk5dIw.gif"
   },
   {
-    "id": "Rickshaw_Carry",
-    "name": "Rickshaw Carry",
-    "category": "Arms",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Rickshaw_Carry/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Rickshaw_Deadlift",
-    "name": "Rickshaw Deadlift",
+    "id": "0675",
+    "name": "Reverse Hyper Extension (On Stability Ball)",
     "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Rickshaw_Deadlift/0.jpg",
-    "requiresWeight": true
+    "equipment": "Medicine Ball",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0675-vM5YS2g.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0675-vM5YS2g.gif"
   },
   {
-    "id": "Ring_Dips",
-    "name": "Ring Dips",
-    "category": "Arms",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Ring_Dips/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Rocket_Jump",
-    "name": "Rocket Jump",
+    "id": "1423",
+    "name": "Reverse Hyper On Flat Bench",
     "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Rocket_Jump/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1423-OrETs32.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1423-OrETs32.gif"
   },
   {
-    "id": "Rocking_Standing_Calf_Raise",
-    "name": "Rocking Standing Calf Raise (Barbell)",
+    "id": "3663",
+    "name": "Reverse Plank With Leg Lift",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3663-tFToB7l.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3663-tFToB7l.gif"
+  },
+  {
+    "id": "0677",
+    "name": "Ring Dips",
+    "category": "Arms",
+    "equipment": "Bodyweight",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0677-ezTvXcr.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0677-ezTvXcr.gif"
+  },
+  {
+    "id": "2571",
+    "name": "Rocking Frog Stretch",
     "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Rocking_Standing_Calf_Raise/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2571-2Dk4xQV.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2571-2Dk4xQV.gif"
   },
   {
-    "id": "Rocky_Pull-Ups_Pulldowns",
-    "name": "Rocky Pull-Ups/Pulldowns",
+    "id": "0678",
+    "name": "Rocky Pull-Up Pulldown",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0678-cQ19bBP.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0678-cQ19bBP.gif"
+  },
+  {
+    "id": "2208",
+    "name": "Roller Back Stretch",
     "category": "Back",
     "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Rocky_Pull-Ups_Pulldowns/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "lower-back",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2208-isofgzg.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2208-isofgzg.gif"
   },
   {
-    "id": "Romanian_Deadlift",
-    "name": "Romanian Deadlift (Barbell)",
+    "id": "2204",
+    "name": "Roller Body Saw",
+    "category": "Core",
+    "equipment": "Other",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2204-XeMvLgE.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2204-XeMvLgE.gif"
+  },
+  {
+    "id": "2205",
+    "name": "Roller Hip Lat Stretch",
     "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Romanian_Deadlift/0.jpg",
-    "requiresWeight": true
+    "equipment": "Other",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2205-0L2KwtI.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2205-0L2KwtI.gif"
   },
   {
-    "id": "Romanian_Deadlift_from_Deficit",
-    "name": "Romanian Deadlift from Deficit (Barbell)",
+    "id": "2202",
+    "name": "Roller Hip Stretch",
     "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Romanian_Deadlift_from_Deficit/0.jpg",
-    "requiresWeight": true
+    "equipment": "Other",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2202-oMypNrz.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2202-oMypNrz.gif"
   },
   {
-    "id": "Rope_Climb",
+    "id": "2206",
+    "name": "Roller Reverse Crunch",
+    "category": "Core",
+    "equipment": "Other",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2206-SKXQAx3.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2206-SKXQAx3.gif"
+  },
+  {
+    "id": "2203",
+    "name": "Roller Seated Shoulder Flexor Depresor Retractor",
+    "category": "Chest",
+    "equipment": "Other",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2203-8coXSYU.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2203-8coXSYU.gif"
+  },
+  {
+    "id": "2209",
+    "name": "Roller Seated Single Leg Shoulder Flexor Depresor Retractor",
+    "category": "Chest",
+    "equipment": "Other",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2209-CjETvlw.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2209-CjETvlw.gif"
+  },
+  {
+    "id": "2207",
+    "name": "Roller Side Lat Stretch",
+    "category": "Back",
+    "equipment": "Other",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2207-c3Pfhti.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2207-c3Pfhti.gif"
+  },
+  {
+    "id": "0680",
     "name": "Rope Climb",
     "category": "Back",
     "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Rope_Climb/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0680-yaAxcQr.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0680-yaAxcQr.gif"
   },
   {
-    "id": "Rope_Crunch",
-    "name": "Rope Crunch (Cable)",
-    "category": "Core",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Rope_Crunch/0.jpg",
-    "requiresWeight": true
+    "id": "0685",
+    "name": "Run",
+    "category": "Cardio",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0685-oLrKqDH.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0685-oLrKqDH.gif"
   },
   {
-    "id": "Rope_Jumping",
-    "name": "Rope Jumping",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Rope_Jumping/0.jpg",
-    "requiresWeight": false
+    "id": "0684",
+    "name": "Run (Equipment)",
+    "category": "Cardio",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0684-y5p0H8a.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0684-y5p0H8a.gif"
   },
   {
-    "id": "Rope_Straight-Arm_Pulldown",
-    "name": "Rope Straight-Arm Pulldown (Cable)",
-    "category": "Back",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Rope_Straight-Arm_Pulldown/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Round_The_World_Shoulder_Stretch",
-    "name": "Round The World Shoulder Stretch",
-    "category": "Shoulders",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Round_The_World_Shoulder_Stretch/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Rowing_Stationary",
-    "name": "Rowing, Stationary (Machine)",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Rowing_Stationary/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Runners_Stretch",
-    "name": "Runner's Stretch",
+    "id": "1585",
+    "name": "Runners Stretch",
     "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Runners_Stretch/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "hamstring",
+    "secondaryMuscle": "calves",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1585-0mB6wHO.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1585-0mB6wHO.gif"
   },
   {
-    "id": "Running_Treadmill",
-    "name": "Running, Treadmill (Machine)",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Running_Treadmill/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Russian_Twist",
+    "id": "0687",
     "name": "Russian Twist",
     "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Russian_Twist/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0687-XVDdcoj.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0687-XVDdcoj.gif"
   },
   {
-    "id": "Sandbag_Load",
-    "name": "Sandbag Load",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Sandbag_Load/0.jpg",
-    "requiresWeight": true
+    "id": "3012",
+    "name": "Scapula Dips",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "trapezius",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3012-7xeukSt.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3012-7xeukSt.gif"
   },
   {
-    "id": "Scapular_Pull-Up",
+    "id": "3021",
+    "name": "Scapula Push-Up",
+    "category": "Chest",
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3021-jV65tKx.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3021-jV65tKx.gif"
+  },
+  {
+    "id": "0688",
     "name": "Scapular Pull-Up",
     "category": "Back",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Scapular_Pull-Up/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "trapezius",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0688-uTBt1HV.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0688-uTBt1HV.gif"
   },
   {
-    "id": "Scissor_Kick",
-    "name": "Scissor Kick",
+    "id": "3219",
+    "name": "Scissor Jumps (Male)",
+    "category": "Cardio",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3219-Eh2v5Iu.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3219-Eh2v5Iu.gif"
+  },
+  {
+    "id": "1390",
+    "name": "Seated Calf Stretch (Male)",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1390-17bqEXD.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1390-17bqEXD.gif"
+  },
+  {
+    "id": "1424",
+    "name": "Seated Glute Stretch",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1424-DeDThfG.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1424-DeDThfG.gif"
+  },
+  {
+    "id": "0689",
+    "name": "Seated Leg Raise",
     "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Scissor_Kick/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0689-Hgs6Nl1.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0689-Hgs6Nl1.gif"
   },
   {
-    "id": "Scissors_Jump",
-    "name": "Scissors Jump",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Scissors_Jump/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Seated_Band_Hamstring_Curl",
-    "name": "Seated Band Hamstring Curl",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Band_Hamstring_Curl/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Seated_Barbell_Military_Press",
-    "name": "Seated Barbell Military Pre",
-    "category": "Shoulders",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Barbell_Military_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Seated_Barbell_Twist",
-    "name": "Seated Barbell Twist",
-    "category": "Core",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Barbell_Twist/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Seated_Bent-Over_One-Arm_Dumbbell_Triceps_Extension",
-    "name": "Seated Bent-Over One-Arm Dumbbell Triceps Extension",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Bent-Over_One-Arm_Dumbbell_Triceps_Extension/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Seated_Bent-Over_Rear_Delt_Raise",
-    "name": "Seated Bent-Over Rear Delt Raise (Dumbbell)",
-    "category": "Shoulders",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Bent-Over_Rear_Delt_Raise/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Seated_Bent-Over_Two-Arm_Dumbbell_Triceps_Extension",
-    "name": "Seated Bent-Over Two-Arm Dumbbell Triceps Extension",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Bent-Over_Two-Arm_Dumbbell_Triceps_Extension/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Seated_Biceps",
-    "name": "Seated Biceps",
-    "category": "Arms",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Biceps/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Seated_Cable_Rows",
-    "name": "Seated Cable Row",
-    "category": "Back",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Cable_Rows/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Seated_Cable_Shoulder_Press",
-    "name": "Seated Cable Shoulder Pre",
-    "category": "Shoulders",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Cable_Shoulder_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Seated_Calf_Raise",
-    "name": "Seated Calf Raise (Machine)",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Calf_Raise/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Seated_Calf_Stretch",
-    "name": "Seated Calf Stretch",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Calf_Stretch/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Seated_Close-Grip_Concentration_Barbell_Curl",
-    "name": "Seated Close-Grip Concentration Barbell Curl",
-    "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Close-Grip_Concentration_Barbell_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Seated_Dumbbell_Curl",
-    "name": "Seated Dumbbell Curl",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Dumbbell_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Seated_Dumbbell_Inner_Biceps_Curl",
-    "name": "Seated Dumbbell Inner Biceps Curl",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Dumbbell_Inner_Biceps_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Seated_Dumbbell_Palms-Down_Wrist_Curl",
-    "name": "Seated Dumbbell Palms-Down Wrist Curl",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Dumbbell_Palms-Down_Wrist_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Seated_Dumbbell_Palms-Up_Wrist_Curl",
-    "name": "Seated Dumbbell Palms-Up Wrist Curl",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Dumbbell_Palms-Up_Wrist_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Seated_Dumbbell_Press",
-    "name": "Seated Dumbbell Pre",
-    "category": "Shoulders",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Dumbbell_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Seated_Flat_Bench_Leg_Pull-In",
-    "name": "Seated Flat Bench Leg Pull-In",
-    "category": "Core",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Flat_Bench_Leg_Pull-In/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Seated_Floor_Hamstring_Stretch",
-    "name": "Seated Floor Hamstring Stretch",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Floor_Hamstring_Stretch/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Seated_Front_Deltoid",
-    "name": "Seated Front Deltoid",
-    "category": "Shoulders",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Front_Deltoid/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Seated_Glute",
-    "name": "Seated Glute",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Glute/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Seated_Good_Mornings",
-    "name": "Seated Good Morning (Barbell)",
-    "category": "Back",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Good_Mornings/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Seated_Hamstring",
-    "name": "Seated Hamstring",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Hamstring/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Seated_Hamstring_and_Calf_Stretch",
-    "name": "Seated Hamstring and Calf Stretch",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Hamstring_and_Calf_Stretch/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Seated_Head_Harness_Neck_Resistance",
-    "name": "Seated Head Harness Neck Resistance",
-    "category": "Shoulders",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Head_Harness_Neck_Resistance/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Seated_Leg_Curl",
-    "name": "Seated Leg Curl (Machine)",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Leg_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Seated_Leg_Tucks",
-    "name": "Seated Leg Tucks",
-    "category": "Core",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Leg_Tucks/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Seated_One-Arm_Dumbbell_Palms-Down_Wrist_Curl",
-    "name": "Seated One-Arm Dumbbell Palms-Down Wrist Curl",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_One-Arm_Dumbbell_Palms-Down_Wrist_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Seated_One-Arm_Dumbbell_Palms-Up_Wrist_Curl",
-    "name": "Seated One-Arm Dumbbell Palms-Up Wrist Curl",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_One-Arm_Dumbbell_Palms-Up_Wrist_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Seated_One-arm_Cable_Pulley_Rows",
-    "name": "Seated One-arm Cable Pulley Row",
-    "category": "Back",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_One-arm_Cable_Pulley_Rows/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Seated_Overhead_Stretch",
-    "name": "Seated Overhead Stretch",
-    "category": "Core",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Overhead_Stretch/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Seated_Palm-Up_Barbell_Wrist_Curl",
-    "name": "Seated Palm-Up Barbell Wrist Curl",
-    "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Palm-Up_Barbell_Wrist_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Seated_Palms-Down_Barbell_Wrist_Curl",
-    "name": "Seated Palms-Down Barbell Wrist Curl",
-    "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Palms-Down_Barbell_Wrist_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Seated_Side_Lateral_Raise",
-    "name": "Seated Side Lateral Raise (Dumbbell)",
-    "category": "Shoulders",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Side_Lateral_Raise/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Seated_Triceps_Press",
-    "name": "Seated Triceps Pre (Dumbbell)",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Triceps_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Seated_Two-Arm_Palms-Up_Low-Pulley_Wrist_Curl",
-    "name": "Seated Two-Arm Palms-Up Low-Pulley Wrist Curl (Cable)",
-    "category": "Arms",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Two-Arm_Palms-Up_Low-Pulley_Wrist_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "See-Saw_Press_Alternating_Side_Press",
-    "name": "See-Saw Press (Alternating Side Press) (Dumbbell)",
-    "category": "Shoulders",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/See-Saw_Press_Alternating_Side_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Shotgun_Row",
-    "name": "Shotgun Row (Cable)",
-    "category": "Back",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Shotgun_Row/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Shoulder_Circles",
-    "name": "Shoulder Circles",
-    "category": "Shoulders",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Shoulder_Circles/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Shoulder_Press_-_With_Bands",
-    "name": "Shoulder Press - With Band",
-    "category": "Shoulders",
-    "equipment": "Band",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Shoulder_Press_-_With_Bands/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Shoulder_Raise",
-    "name": "Shoulder Raise",
-    "category": "Shoulders",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Shoulder_Raise/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Shoulder_Stretch",
-    "name": "Shoulder Stretch",
-    "category": "Shoulders",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Shoulder_Stretch/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Side-Lying_Floor_Stretch",
-    "name": "Side-Lying Floor Stretch",
+    "id": "0690",
+    "name": "Seated Lower Back Stretch",
     "category": "Back",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side-Lying_Floor_Stretch/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0690-QFmz6ch.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0690-QFmz6ch.gif"
   },
   {
-    "id": "Side_Bridge",
-    "name": "Side Bridge",
+    "id": "2567",
+    "name": "Seated Piriformis Stretch",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2567-QY39eBr.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2567-QY39eBr.gif"
+  },
+  {
+    "id": "0691",
+    "name": "Seated Side Crunch (Wall)",
     "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_Bridge/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0691-Y9hNPcN.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0691-Y9hNPcN.gif"
   },
   {
-    "id": "Side_Hop-Sprint",
-    "name": "Side Hop-Sprint",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_Hop-Sprint/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Side_Jackknife",
-    "name": "Side Jackknife",
-    "category": "Core",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_Jackknife/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Side_Lateral_Raise",
-    "name": "Side Lateral Raise (Dumbbell)",
-    "category": "Shoulders",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_Lateral_Raise/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Side_Laterals_to_Front_Raise",
-    "name": "Side Laterals to Front Raise (Dumbbell)",
-    "category": "Shoulders",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_Laterals_to_Front_Raise/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Side_Leg_Raises",
-    "name": "Side Leg Raises",
+    "id": "1587",
+    "name": "Seated Wide Angle Pose Sequence",
     "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_Leg_Raises/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "hamstring",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1587-HIgYKAB.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1587-HIgYKAB.gif"
   },
   {
-    "id": "Side_Lying_Groin_Stretch",
-    "name": "Side Lying Groin Stretch",
+    "id": "0697",
+    "name": "Self Assisted Inverse Leg Curl",
     "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_Lying_Groin_Stretch/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "hamstring",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0697-GwYwElT.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0697-GwYwElT.gif"
   },
   {
-    "id": "Side_Neck_Stretch",
-    "name": "Side Neck Stretch",
-    "category": "Shoulders",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_Neck_Stretch/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Side_Standing_Long_Jump",
-    "name": "Side Standing Long Jump",
+    "id": "1766",
+    "name": "Self Assisted Inverse Leg Curl",
     "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_Standing_Long_Jump/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "hamstring",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1766-ZSY3MsL.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1766-ZSY3MsL.gif"
   },
   {
-    "id": "Side_To_Side_Chins",
-    "name": "Side To Side Chins",
+    "id": "0696",
+    "name": "Self Assisted Inverse Leg Curl (On Floor)",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "hamstring",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0696-E4PwJqI.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0696-E4PwJqI.gif"
+  },
+  {
+    "id": "3222",
+    "name": "Semi Squat Jump (Male)",
+    "category": "Cardio",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3222-6FMU51h.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3222-6FMU51h.gif"
+  },
+  {
+    "id": "3656",
+    "name": "Short Stride Run",
+    "category": "Cardio",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3656-CcWEoWV.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3656-CcWEoWV.gif"
+  },
+  {
+    "id": "1763",
+    "name": "Shoulder Grip Pull-Up",
     "category": "Back",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_To_Side_Chins/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Side_Wrist_Pull",
-    "name": "Side Wrist Pull",
-    "category": "Shoulders",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_Wrist_Pull/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1763-YtgD7Xq.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1763-YtgD7Xq.gif"
   },
   {
-    "id": "Side_to_Side_Box_Shuffle",
-    "name": "Side to Side Box Shuffle",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_to_Side_Box_Shuffle/0.jpg",
-    "requiresWeight": false
+    "id": "3699",
+    "name": "Shoulder Tap",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3699-yRpV5TC.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3699-yRpV5TC.gif"
   },
   {
-    "id": "Single-Arm_Cable_Crossover",
-    "name": "Single-Arm Cable Crossover",
-    "category": "Chest",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Single-Arm_Cable_Crossover/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Single-Arm_Linear_Jammer",
-    "name": "Single-Arm Linear Jammer (Barbell)",
-    "category": "Shoulders",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Single-Arm_Linear_Jammer/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Single-Arm_Push-Up",
-    "name": "Single-Arm Push-Up",
+    "id": "0699",
+    "name": "Shoulder Tap Push-Up",
     "category": "Chest",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Single-Arm_Push-Up/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0699-qEse6fe.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0699-qEse6fe.gif"
   },
   {
-    "id": "Single-Cone_Sprint_Drill",
-    "name": "Single-Cone Sprint Drill",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Single-Cone_Sprint_Drill/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Single-Leg_High_Box_Squat",
-    "name": "Single-Leg High Box Squat",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Single-Leg_High_Box_Squat/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Single-Leg_Hop_Progression",
-    "name": "Single-Leg Hop Progression",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Single-Leg_Hop_Progression/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Single-Leg_Lateral_Hop",
-    "name": "Single-Leg Lateral Hop",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Single-Leg_Lateral_Hop/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Single-Leg_Leg_Extension",
-    "name": "Single-Leg Leg Extension (Machine)",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Single-Leg_Leg_Extension/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Single-Leg_Stride_Jump",
-    "name": "Single-Leg Stride Jump",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Single-Leg_Stride_Jump/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Single_Dumbbell_Raise",
-    "name": "Single Dumbbell Raise",
-    "category": "Shoulders",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Single_Dumbbell_Raise/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Single_Leg_Butt_Kick",
-    "name": "Single Leg Butt Kick",
+    "id": "1774",
+    "name": "Side Bridge Hip Abduction",
     "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Single_Leg_Butt_Kick/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1774-WL4EmxJ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1774-WL4EmxJ.gif"
   },
   {
-    "id": "Single_Leg_Glute_Bridge",
-    "name": "Single Leg Glute Bridge",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Single_Leg_Glute_Bridge/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Single_Leg_Push-off",
-    "name": "Single Leg Push-off",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Single_Leg_Push-off/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Sit-Up",
-    "name": "Sit-Up",
+    "id": "0705",
+    "name": "Side Bridge V. 2",
     "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Sit-Up/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0705-RKjH6Lt.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0705-RKjH6Lt.gif"
   },
   {
-    "id": "Sit_Squats",
-    "name": "Sit Squats",
+    "id": "0709",
+    "name": "Side Hip (On Parallel Bars)",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0709-jTkSc6o.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0709-jTkSc6o.gif"
+  },
+  {
+    "id": "0710",
+    "name": "Side Hip Abduction",
     "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Sit_Squats/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0710-7WaDzyL.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0710-7WaDzyL.gif"
   },
   {
-    "id": "Skating",
-    "name": "Skating",
+    "id": "1358",
+    "name": "Side Lying Floor Stretch",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1358-jDOKRM5.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1358-jDOKRM5.gif"
+  },
+  {
+    "id": "3667",
+    "name": "Side Lying Hip Adduction (Male)",
     "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Skating/0.jpg",
-    "requiresWeight": false
+    "equipment": "Bodyweight",
+    "specificMuscle": "adductor",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3667-c8f5cSY.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3667-c8f5cSY.gif"
   },
   {
-    "id": "Sled_Drag_-_Harness",
-    "name": "Sled Drag - Harness",
+    "id": "1775",
+    "name": "Side Plank Hip Adduction",
     "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Sled_Drag_-_Harness/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "adductor",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1775-VO2qeJg.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1775-VO2qeJg.gif"
   },
   {
-    "id": "Sled_Overhead_Backward_Walk",
-    "name": "Sled Overhead Backward Walk",
-    "category": "Shoulders",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Sled_Overhead_Backward_Walk/0.jpg",
-    "requiresWeight": true
+    "id": "0716",
+    "name": "Side Push Neck Stretch",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "trapezius",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0716-oQRJYkC.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0716-oQRJYkC.gif"
   },
   {
-    "id": "Sled_Overhead_Triceps_Extension",
-    "name": "Sled Overhead Triceps Extension",
+    "id": "0717",
+    "name": "Side Push-Up",
     "category": "Arms",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Sled_Overhead_Triceps_Extension/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0717-wpbD28t.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0717-wpbD28t.gif"
   },
   {
-    "id": "Sled_Push",
-    "name": "Sled Push",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Sled_Push/0.jpg",
-    "requiresWeight": true
+    "id": "0721",
+    "name": "Side Wrist Pull Stretch",
+    "category": "Arms",
+    "equipment": "Bodyweight",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0721-UtmIqcI.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0721-UtmIqcI.gif"
   },
   {
-    "id": "Sled_Reverse_Flye",
-    "name": "Sled Reverse Flye",
-    "category": "Shoulders",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Sled_Reverse_Flye/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Sled_Row",
-    "name": "Sled Row",
+    "id": "0720",
+    "name": "Side-To-Side Chin",
     "category": "Back",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Sled_Row/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0720-isAAZWA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0720-isAAZWA.gif"
   },
   {
-    "id": "Sledgehammer_Swings",
-    "name": "Sledgehammer Swings",
+    "id": "3213",
+    "name": "Side-To-Side Toe Touch (Male)",
     "category": "Core",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Sledgehammer_Swings/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3213-WCAvOfC.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3213-WCAvOfC.gif"
   },
   {
-    "id": "Smith_Incline_Shoulder_Raise",
-    "name": "Smith Incline Shoulder Raise (Barbell)",
-    "category": "Shoulders",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Incline_Shoulder_Raise/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Smith_Machine_Behind_the_Back_Shrug",
-    "name": "Smith Machine Behind the Back Shrug",
-    "category": "Back",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Machine_Behind_the_Back_Shrug/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Smith_Machine_Bench_Press",
-    "name": "Smith Machine Bench Pre",
+    "id": "0725",
+    "name": "Single Arm Push-Up",
     "category": "Chest",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Machine_Bench_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Smith_Machine_Bent_Over_Row",
-    "name": "Smith Machine Bent Over Row",
-    "category": "Back",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Machine_Bent_Over_Row/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Smith_Machine_Calf_Raise",
-    "name": "Smith Machine Calf Raise",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Machine_Calf_Raise/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Smith_Machine_Close-Grip_Bench_Press",
-    "name": "Smith Machine Close-Grip Bench Pre",
-    "category": "Arms",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Machine_Close-Grip_Bench_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Smith_Machine_Decline_Press",
-    "name": "Smith Machine Decline Pre",
-    "category": "Chest",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Machine_Decline_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Smith_Machine_Hang_Power_Clean",
-    "name": "Smith Machine Hang Power Clean",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Machine_Hang_Power_Clean/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Smith_Machine_Hip_Raise",
-    "name": "Smith Machine Hip Raise",
-    "category": "Core",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Machine_Hip_Raise/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Smith_Machine_Incline_Bench_Press",
-    "name": "Smith Machine Incline Bench Pre",
-    "category": "Chest",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Machine_Incline_Bench_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Smith_Machine_Leg_Press",
-    "name": "Smith Machine Leg Pre",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Machine_Leg_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Smith_Machine_One-Arm_Upright_Row",
-    "name": "Smith Machine One-Arm Upright Row",
-    "category": "Shoulders",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Machine_One-Arm_Upright_Row/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Smith_Machine_Overhead_Shoulder_Press",
-    "name": "Smith Machine Overhead Shoulder Pre",
-    "category": "Shoulders",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Machine_Overhead_Shoulder_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Smith_Machine_Pistol_Squat",
-    "name": "Smith Machine Pistol Squat",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Machine_Pistol_Squat/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Smith_Machine_Reverse_Calf_Raises",
-    "name": "Smith Machine Reverse Calf Raise",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Machine_Reverse_Calf_Raises/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Smith_Machine_Squat",
-    "name": "Smith Machine Squat",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Machine_Squat/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Smith_Machine_Stiff-Legged_Deadlift",
-    "name": "Smith Machine Stiff-Legged Deadlift",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Machine_Stiff-Legged_Deadlift/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Smith_Machine_Upright_Row",
-    "name": "Smith Machine Upright Row",
-    "category": "Back",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Machine_Upright_Row/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Smith_Single-Leg_Split_Squat",
-    "name": "Smith Single-Leg Split Squat (Machine)",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Single-Leg_Split_Squat/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Snatch",
-    "name": "Snatch (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Snatch/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Snatch_Balance",
-    "name": "Snatch Balance (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Snatch_Balance/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Snatch_Deadlift",
-    "name": "Snatch Deadlift (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Snatch_Deadlift/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Snatch_Pull",
-    "name": "Snatch Pull (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Snatch_Pull/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Snatch_Shrug",
-    "name": "Snatch Shrug (Barbell)",
-    "category": "Back",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Snatch_Shrug/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Snatch_from_Blocks",
-    "name": "Snatch from Block (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Snatch_from_Blocks/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Speed_Band_Overhead_Triceps",
-    "name": "Speed Band Overhead Tricep",
-    "category": "Arms",
-    "equipment": "Band",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Speed_Band_Overhead_Triceps/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Speed_Box_Squat",
-    "name": "Speed Box Squat (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Speed_Box_Squat/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Speed_Squats",
-    "name": "Speed Squat (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Speed_Squats/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Spell_Caster",
-    "name": "Spell Caster (Dumbbell)",
-    "category": "Core",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Spell_Caster/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Spider_Crawl",
-    "name": "Spider Crawl",
-    "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Spider_Crawl/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0725-MUic5zN.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0725-MUic5zN.gif"
   },
   {
-    "id": "Spider_Curl",
-    "name": "Spider Curl (EZ Bar)",
-    "category": "Arms",
-    "equipment": "EZ Bar",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Spider_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Spinal_Stretch",
-    "name": "Spinal Stretch",
-    "category": "Back",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Spinal_Stretch/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Split_Clean",
-    "name": "Split Clean (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Split_Clean/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Split_Jerk",
-    "name": "Split Jerk (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Split_Jerk/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Split_Jump",
-    "name": "Split Jump",
+    "id": "3645",
+    "name": "Single Leg Bridge With Outstretched Leg",
     "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Split_Jump/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3645-rmEukuS.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3645-rmEukuS.gif"
   },
   {
-    "id": "Split_Snatch",
-    "name": "Split Snatch (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Split_Snatch/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Split_Squat_with_Dumbbells",
-    "name": "Split Squat with Dumbbell",
+    "id": "0727",
+    "name": "Single Leg Calf Raise (On A Dumbbell)",
     "category": "Legs",
     "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Split_Squat_with_Dumbbells/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "calves",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0727-fKZgDEO.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0727-fKZgDEO.gif"
   },
   {
-    "id": "Split_Squats",
+    "id": "0730",
+    "name": "Single Leg Platform Slide",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "hamstring",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0730-LNE3wfo.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0730-LNE3wfo.gif"
+  },
+  {
+    "id": "1759",
+    "name": "Single Leg Squat (Pistol) Male",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1759-nqs5HGV.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1759-nqs5HGV.gif"
+  },
+  {
+    "id": "1489",
+    "name": "Sissy Squat",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "calves",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1489-xdYPUtE.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1489-xdYPUtE.gif"
+  },
+  {
+    "id": "0735",
+    "name": "Sit-Up V. 2",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0735-Bn6TXyO.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0735-Bn6TXyO.gif"
+  },
+  {
+    "id": "3679",
+    "name": "Sit-Up With Arms On Chest",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3679-6ZCiYWQ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3679-6ZCiYWQ.gif"
+  },
+  {
+    "id": "3361",
+    "name": "Skater Hops",
+    "category": "Cardio",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3361-zfNHMN9.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3361-zfNHMN9.gif"
+  },
+  {
+    "id": "2142",
+    "name": "Ski Ergometer",
+    "category": "Arms",
+    "equipment": "Machine",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2142-vpQaQkH.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2142-vpQaQkH.gif"
+  },
+  {
+    "id": "3671",
+    "name": "Ski Step",
+    "category": "Cardio",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3671-5MRH8H2.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3671-5MRH8H2.gif"
+  },
+  {
+    "id": "3304",
+    "name": "Skin The Cat",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3304-MSfvriJ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3304-MSfvriJ.gif"
+  },
+  {
+    "id": "1425",
+    "name": "Sled 45 Degrees One Leg Press",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1425-WWD6FzI.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1425-WWD6FzI.gif"
+  },
+  {
+    "id": "0738",
+    "name": "Sled 45в° Calf Press",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0738-qCNVnaU.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0738-qCNVnaU.gif"
+  },
+  {
+    "id": "0739",
+    "name": "Sled 45в° Leg Press",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0739-10Z2DXU.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0739-10Z2DXU.gif"
+  },
+  {
+    "id": "1464",
+    "name": "Sled 45в° Leg Press (Back Pov)",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1464-yn2lLSI.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1464-yn2lLSI.gif"
+  },
+  {
+    "id": "1463",
+    "name": "Sled 45° Leg Press (Side Pov)",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1463-2Qh2J1e.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1463-2Qh2J1e.gif"
+  },
+  {
+    "id": "0740",
+    "name": "Sled 45в° Leg Wide Press",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0740-tj41Nu6.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0740-tj41Nu6.gif"
+  },
+  {
+    "id": "1391",
+    "name": "Sled Calf Press On Leg Press",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1391-ykHcWme.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1391-ykHcWme.gif"
+  },
+  {
+    "id": "0741",
+    "name": "Sled Closer Hack Squat",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0741-gf3ZjB9.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0741-gf3ZjB9.gif"
+  },
+  {
+    "id": "0742",
+    "name": "Sled Forward Angled Calf Raise",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0742-XDOiFns.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0742-XDOiFns.gif"
+  },
+  {
+    "id": "0743",
+    "name": "Sled Hack Squat",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0743-Qa55kX1.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0743-Qa55kX1.gif"
+  },
+  {
+    "id": "2334",
+    "name": "Sled Lying Calf Press",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2334-g376LuL.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2334-g376LuL.gif"
+  },
+  {
+    "id": "0744",
+    "name": "Sled Lying Squat",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0744-9n2149Z.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0744-9n2149Z.gif"
+  },
+  {
+    "id": "1392",
+    "name": "Sled One Leg Calf Press On Leg Press",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1392-u0pLNgz.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1392-u0pLNgz.gif"
+  },
+  {
+    "id": "1496",
+    "name": "Sledge Hammer",
+    "category": "Core",
+    "equipment": "Other",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1496-REXmfVC.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1496-REXmfVC.gif"
+  },
+  {
+    "id": "0746",
+    "name": "Smith Back Shrug",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "trapezius",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0746-MzNnwx9.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0746-MzNnwx9.gif"
+  },
+  {
+    "id": "0747",
+    "name": "Smith Behind Neck Press",
+    "category": "Shoulders",
+    "equipment": "Machine",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0747-Gpn4ADc.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0747-Gpn4ADc.gif"
+  },
+  {
+    "id": "0748",
+    "name": "Smith Bench Press",
+    "category": "Chest",
+    "equipment": "Machine",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0748-trqKQv2.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0748-trqKQv2.gif"
+  },
+  {
+    "id": "0749",
+    "name": "Smith Bent Knee Good Morning",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0749-1bQkKZK.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0749-1bQkKZK.gif"
+  },
+  {
+    "id": "1359",
+    "name": "Smith Bent Over Row",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1359-ZX9UZmj.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1359-ZX9UZmj.gif"
+  },
+  {
+    "id": "0750",
+    "name": "Smith Chair Squat",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0750-Gu2rNJd.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0750-Gu2rNJd.gif"
+  },
+  {
+    "id": "0751",
+    "name": "Smith Close-Grip Bench Press",
+    "category": "Arms",
+    "equipment": "Machine",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0751-WcHl7ru.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0751-WcHl7ru.gif"
+  },
+  {
+    "id": "0752",
+    "name": "Smith Deadlift",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0752-UfePqpx.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0752-UfePqpx.gif"
+  },
+  {
+    "id": "0753",
+    "name": "Smith Decline Bench Press",
+    "category": "Chest",
+    "equipment": "Machine",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0753-ETZfAbZ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0753-ETZfAbZ.gif"
+  },
+  {
+    "id": "0754",
+    "name": "Smith Decline Reverse-Grip Press",
+    "category": "Chest",
+    "equipment": "Machine",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0754-MY9P1WA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0754-MY9P1WA.gif"
+  },
+  {
+    "id": "1433",
+    "name": "Smith Front Squat (Clean Grip)",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1433-lFhb2Rw.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1433-lFhb2Rw.gif"
+  },
+  {
+    "id": "3281",
+    "name": "Smith Full Squat",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3281-NNoHCEA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3281-NNoHCEA.gif"
+  },
+  {
+    "id": "0755",
+    "name": "Smith Hack Squat",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0755-ZuPXtCK.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0755-ZuPXtCK.gif"
+  },
+  {
+    "id": "0756",
+    "name": "Smith Hip Raise",
+    "category": "Core",
+    "equipment": "Machine",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0756-CqhoytW.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0756-CqhoytW.gif"
+  },
+  {
+    "id": "0757",
+    "name": "Smith Incline Bench Press",
+    "category": "Chest",
+    "equipment": "Machine",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0757-5v7KYld.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0757-5v7KYld.gif"
+  },
+  {
+    "id": "0758",
+    "name": "Smith Incline Reverse-Grip Press",
+    "category": "Chest",
+    "equipment": "Machine",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0758-78VqWQK.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0758-78VqWQK.gif"
+  },
+  {
+    "id": "0759",
+    "name": "Smith Incline Shoulder Raises",
+    "category": "Chest",
+    "equipment": "Machine",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0759-ayAHcEm.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0759-ayAHcEm.gif"
+  },
+  {
+    "id": "0760",
+    "name": "Smith Leg Press",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0760-7zdxRTl.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0760-7zdxRTl.gif"
+  },
+  {
+    "id": "1434",
+    "name": "Smith Low Bar Squat",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1434-RGLscZM.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1434-RGLscZM.gif"
+  },
+  {
+    "id": "1683",
+    "name": "Smith Machine Bicep Curl",
+    "category": "Arms",
+    "equipment": "Machine",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1683-zILLZ98.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1683-zILLZ98.gif"
+  },
+  {
+    "id": "1625",
+    "name": "Smith Machine Decline Close Grip Bench Press",
+    "category": "Arms",
+    "equipment": "Machine",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1625-yB9SvIF.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1625-yB9SvIF.gif"
+  },
+  {
+    "id": "1752",
+    "name": "Smith Machine Incline Tricep Extension",
+    "category": "Arms",
+    "equipment": "Machine",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1752-o8aOcrz.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1752-o8aOcrz.gif"
+  },
+  {
+    "id": "1626",
+    "name": "Smith Machine Reverse Decline Close Grip Bench Press",
+    "category": "Chest",
+    "equipment": "Machine",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1626-QyO6Uma.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1626-QyO6Uma.gif"
+  },
+  {
+    "id": "0761",
+    "name": "Smith Narrow Row",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0761-JGKowMS.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0761-JGKowMS.gif"
+  },
+  {
+    "id": "1360",
+    "name": "Smith One Arm Row",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1360-Q4DSJPC.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1360-Q4DSJPC.gif"
+  },
+  {
+    "id": "1393",
+    "name": "Smith One Leg Floor Calf Raise",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1393-9GXrTE6.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1393-9GXrTE6.gif"
+  },
+  {
+    "id": "0762",
+    "name": "Smith Rear Delt Row",
+    "category": "Shoulders",
+    "equipment": "Machine",
+    "specificMuscle": "back-deltoids",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0762-nFUwqG6.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0762-nFUwqG6.gif"
+  },
+  {
+    "id": "0763",
+    "name": "Smith Reverse Calf Raises",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0763-ywaNfuh.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0763-ywaNfuh.gif"
+  },
+  {
+    "id": "1394",
+    "name": "Smith Reverse Calf Raises",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1394-Lsqrgh4.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1394-Lsqrgh4.gif"
+  },
+  {
+    "id": "1361",
+    "name": "Smith Reverse Grip Bent Over Row",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1361-aaxA3cm.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1361-aaxA3cm.gif"
+  },
+  {
+    "id": "0764",
+    "name": "Smith Reverse-Grip Press",
+    "category": "Chest",
+    "equipment": "Machine",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0764-zK8Fu1W.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0764-zK8Fu1W.gif"
+  },
+  {
+    "id": "1395",
+    "name": "Smith Seated One Leg Calf Raise",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1395-0S75mYG.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1395-0S75mYG.gif"
+  },
+  {
+    "id": "0765",
+    "name": "Smith Seated Shoulder Press",
+    "category": "Shoulders",
+    "equipment": "Machine",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0765-xUwnBMT.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0765-xUwnBMT.gif"
+  },
+  {
+    "id": "1426",
+    "name": "Smith Seated Wrist Curl",
+    "category": "Arms",
+    "equipment": "Machine",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1426-B6dAO1t.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1426-B6dAO1t.gif"
+  },
+  {
+    "id": "0766",
+    "name": "Smith Shoulder Press",
+    "category": "Shoulders",
+    "equipment": "Machine",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0766-903mzG8.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0766-903mzG8.gif"
+  },
+  {
+    "id": "0767",
+    "name": "Smith Shrug",
+    "category": "Back",
+    "equipment": "Machine",
+    "specificMuscle": "trapezius",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0767-OUQ0ZyW.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0767-OUQ0ZyW.gif"
+  },
+  {
+    "id": "0768",
+    "name": "Smith Single Leg Split Squat",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0768-wWFspEi.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0768-wWFspEi.gif"
+  },
+  {
+    "id": "0769",
+    "name": "Smith Sprint Lunge",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0769-HsjbB1z.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0769-HsjbB1z.gif"
+  },
+  {
+    "id": "0770",
+    "name": "Smith Squat",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0770-jFtipLl.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0770-jFtipLl.gif"
+  },
+  {
+    "id": "0771",
+    "name": "Smith Standing Back Wrist Curl",
+    "category": "Arms",
+    "equipment": "Machine",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0771-hfmQ0Tz.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0771-hfmQ0Tz.gif"
+  },
+  {
+    "id": "0772",
+    "name": "Smith Standing Behind Head Military Press",
+    "category": "Shoulders",
+    "equipment": "Machine",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0772-ht8xDrP.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0772-ht8xDrP.gif"
+  },
+  {
+    "id": "0773",
+    "name": "Smith Standing Leg Calf Raise",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0773-6MaEjVA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0773-6MaEjVA.gif"
+  },
+  {
+    "id": "0774",
+    "name": "Smith Standing Military Press",
+    "category": "Shoulders",
+    "equipment": "Machine",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0774-jjUPrze.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0774-jjUPrze.gif"
+  },
+  {
+    "id": "3142",
+    "name": "Smith Sumo Squat",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3142-dzz6BiV.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3142-dzz6BiV.gif"
+  },
+  {
+    "id": "1396",
+    "name": "Smith Toe Raise",
+    "category": "Legs",
+    "equipment": "Machine",
+    "specificMuscle": "calves",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1396-Y4QlY8z.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1396-Y4QlY8z.gif"
+  },
+  {
+    "id": "0775",
+    "name": "Smith Upright Row",
+    "category": "Shoulders",
+    "equipment": "Machine",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "trapezius",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0775-1DN3iz4.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0775-1DN3iz4.gif"
+  },
+  {
+    "id": "1308",
+    "name": "Smith Wide Grip Bench Press",
+    "category": "Chest",
+    "equipment": "Machine",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1308-zoOvPcx.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1308-zoOvPcx.gif"
+  },
+  {
+    "id": "1309",
+    "name": "Smith Wide Grip Decline Bench Press",
+    "category": "Chest",
+    "equipment": "Machine",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1309-wi2H9QX.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1309-wi2H9QX.gif"
+  },
+  {
+    "id": "0776",
+    "name": "Snatch Pull",
+    "category": "Legs",
+    "equipment": "Barbell",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0776-dG5Smob.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0776-dG5Smob.gif"
+  },
+  {
+    "id": "0777",
+    "name": "Spell Caster",
+    "category": "Core",
+    "equipment": "Dumbbell",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0777-p9cCe2r.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0777-p9cCe2r.gif"
+  },
+  {
+    "id": "1362",
+    "name": "Sphinx",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "lower-back",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1362-DIVyqrU.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1362-DIVyqrU.gif"
+  },
+  {
+    "id": "0778",
+    "name": "Spider Crawl Push Up",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "abs",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0778-P9GFBME.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0778-P9GFBME.gif"
+  },
+  {
+    "id": "1363",
+    "name": "Spine Stretch",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "lower-back",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1363-JbC2iaV.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1363-JbC2iaV.gif"
+  },
+  {
+    "id": "2329",
+    "name": "Spine Twist",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2329-2jl9K55.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2329-2jl9K55.gif"
+  },
+  {
+    "id": "2368",
     "name": "Split Squats",
     "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Split_Squats/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2368-9E25EOx.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2368-9E25EOx.gif"
   },
   {
-    "id": "Squat_Jerk",
-    "name": "Squat Jerk (Barbell)",
+    "id": "0786",
+    "name": "Squat Jerk",
     "category": "Legs",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Squat_Jerk/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0786-IMRsOCn.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0786-IMRsOCn.gif"
   },
   {
-    "id": "Squat_with_Bands",
-    "name": "Squat with Band (Barbell)",
+    "id": "1705",
+    "name": "Squat On Bosu Ball",
     "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Squat_with_Bands/0.jpg",
-    "requiresWeight": true
+    "equipment": "Medicine Ball",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1705-T2fA5Ir.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1705-T2fA5Ir.gif"
   },
   {
-    "id": "Squat_with_Chains",
-    "name": "Squat with Chain (Barbell)",
+    "id": "1685",
+    "name": "Squat To Overhead Reach",
     "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Squat_with_Chains/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1685-QChZi3x.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1685-QChZi3x.gif"
   },
   {
-    "id": "Squat_with_Plate_Movers",
-    "name": "Squat with Plate Mover (Barbell)",
+    "id": "1686",
+    "name": "Squat To Overhead Reach With Twist",
     "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Squat_with_Plate_Movers/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1686-5BZHW9s.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1686-5BZHW9s.gif"
   },
   {
-    "id": "Squats_-_With_Bands",
-    "name": "Squats - With Band",
-    "category": "Legs",
-    "equipment": "Band",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Squats_-_With_Bands/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Stairmaster",
-    "name": "Stairmaster (Machine)",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Stairmaster/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_Alternating_Dumbbell_Press",
-    "name": "Standing Alternating Dumbbell Pre",
-    "category": "Shoulders",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Alternating_Dumbbell_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_Barbell_Calf_Raise",
-    "name": "Standing Barbell Calf Raise",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Barbell_Calf_Raise/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_Barbell_Press_Behind_Neck",
-    "name": "Standing Barbell Press Behind Neck",
-    "category": "Shoulders",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Barbell_Press_Behind_Neck/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_Bent-Over_One-Arm_Dumbbell_Triceps_Extension",
-    "name": "Standing Bent-Over One-Arm Dumbbell Triceps Extension",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Bent-Over_One-Arm_Dumbbell_Triceps_Extension/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_Bent-Over_Two-Arm_Dumbbell_Triceps_Extension",
-    "name": "Standing Bent-Over Two-Arm Dumbbell Triceps Extension",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Bent-Over_Two-Arm_Dumbbell_Triceps_Extension/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_Biceps_Cable_Curl",
-    "name": "Standing Biceps Cable Curl",
-    "category": "Arms",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Biceps_Cable_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_Biceps_Stretch",
-    "name": "Standing Biceps Stretch",
-    "category": "Arms",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Biceps_Stretch/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Standing_Bradford_Press",
-    "name": "Standing Bradford Pre (Barbell)",
-    "category": "Shoulders",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Bradford_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_Cable_Chest_Press",
-    "name": "Standing Cable Chest Pre",
-    "category": "Chest",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Cable_Chest_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_Cable_Lift",
-    "name": "Standing Cable Lift",
+    "id": "2297",
+    "name": "Stability Ball Crunch (Full Range Hands Behind Head)",
     "category": "Core",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Cable_Lift/0.jpg",
-    "requiresWeight": true
+    "equipment": "Medicine Ball",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2297-Gn5FwYT.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2297-Gn5FwYT.gif"
   },
   {
-    "id": "Standing_Cable_Wood_Chop",
-    "name": "Standing Cable Wood Chop",
-    "category": "Core",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Cable_Wood_Chop/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_Calf_Raises",
-    "name": "Standing Calf Raise (Machine)",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Calf_Raises/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_Concentration_Curl",
-    "name": "Standing Concentration Curl (Dumbbell)",
+    "id": "3291",
+    "name": "Stalder Press",
     "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Concentration_Curl/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3291-zd4P4B2.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3291-zd4P4B2.gif"
   },
   {
-    "id": "Standing_Dumbbell_Calf_Raise",
-    "name": "Standing Dumbbell Calf Raise",
-    "category": "Legs",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Dumbbell_Calf_Raise/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_Dumbbell_Press",
-    "name": "Standing Dumbbell Pre",
-    "category": "Shoulders",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Dumbbell_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_Dumbbell_Reverse_Curl",
-    "name": "Standing Dumbbell Reverse Curl",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Dumbbell_Reverse_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_Dumbbell_Straight-Arm_Front_Delt_Raise_Above_Head",
-    "name": "Standing Dumbbell Straight-Arm Front Delt Raise Above Head",
-    "category": "Shoulders",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Dumbbell_Straight-Arm_Front_Delt_Raise_Above_Head/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_Dumbbell_Triceps_Extension",
-    "name": "Standing Dumbbell Triceps Extension",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Dumbbell_Triceps_Extension/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_Dumbbell_Upright_Row",
-    "name": "Standing Dumbbell Upright Row",
+    "id": "3669",
+    "name": "Standing Archer",
     "category": "Back",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Dumbbell_Upright_Row/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3669-JF8AkMX.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3669-JF8AkMX.gif"
   },
   {
-    "id": "Standing_Elevated_Quad_Stretch",
-    "name": "Standing Elevated Quad Stretch",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Elevated_Quad_Stretch/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Standing_Front_Barbell_Raise_Over_Head",
-    "name": "Standing Front Barbell Raise Over Head",
+    "id": "0788",
+    "name": "Standing Behind Neck Press",
     "category": "Shoulders",
     "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Front_Barbell_Raise_Over_Head/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0788-xDh0lJr.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0788-xDh0lJr.gif"
   },
   {
-    "id": "Standing_Gastrocnemius_Calf_Stretch",
-    "name": "Standing Gastrocnemius Calf Stretch",
+    "id": "1490",
+    "name": "Standing Calf Raise (On A Staircase)",
     "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Gastrocnemius_Calf_Stretch/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "calves",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1490-6HmFgmx.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1490-6HmFgmx.gif"
   },
   {
-    "id": "Standing_Hamstring_and_Calf_Stretch",
-    "name": "Standing Hamstring and Calf Stretch",
+    "id": "1397",
+    "name": "Standing Calves",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1397-XIHEoCG.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1397-XIHEoCG.gif"
+  },
+  {
+    "id": "1398",
+    "name": "Standing Calves Calf Stretch",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1398-qOKcgVP.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1398-qOKcgVP.gif"
+  },
+  {
+    "id": "1599",
+    "name": "Standing Hamstring And Calf Stretch With Strap",
     "category": "Legs",
     "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Hamstring_and_Calf_Stretch/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "hamstring",
+    "secondaryMuscle": "calves",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1599-xTjr103.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1599-xTjr103.gif"
   },
   {
-    "id": "Standing_Hip_Circles",
-    "name": "Standing Hip Circles",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Hip_Circles/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Standing_Hip_Flexors",
-    "name": "Standing Hip Flexors",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Hip_Flexors/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Standing_Inner-Biceps_Curl",
-    "name": "Standing Inner-Biceps Curl (Dumbbell)",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Inner-Biceps_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_Lateral_Stretch",
+    "id": "0794",
     "name": "Standing Lateral Stretch",
-    "category": "Core",
+    "category": "Back",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Lateral_Stretch/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0794-1jXLYEw.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0794-1jXLYEw.gif"
   },
   {
-    "id": "Standing_Leg_Curl",
-    "name": "Standing Leg Curl (Machine)",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Leg_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_Long_Jump",
-    "name": "Standing Long Jump",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Long_Jump/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Standing_Low-Pulley_Deltoid_Raise",
-    "name": "Standing Low-Pulley Deltoid Raise (Cable)",
-    "category": "Shoulders",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Low-Pulley_Deltoid_Raise/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_Low-Pulley_One-Arm_Triceps_Extension",
-    "name": "Standing Low-Pulley One-Arm Triceps Extension (Cable)",
-    "category": "Arms",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Low-Pulley_One-Arm_Triceps_Extension/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_Military_Press",
-    "name": "Standing Military Pre (Barbell)",
-    "category": "Shoulders",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Military_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_Olympic_Plate_Hand_Squeeze",
-    "name": "Standing Olympic Plate Hand Squeeze",
-    "category": "Arms",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Olympic_Plate_Hand_Squeeze/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_One-Arm_Cable_Curl",
-    "name": "Standing One-Arm Cable Curl",
-    "category": "Arms",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_One-Arm_Cable_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_One-Arm_Dumbbell_Curl_Over_Incline_Bench",
-    "name": "Standing One-Arm Dumbbell Curl Over Incline Bench",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_One-Arm_Dumbbell_Curl_Over_Incline_Bench/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_One-Arm_Dumbbell_Triceps_Extension",
-    "name": "Standing One-Arm Dumbbell Triceps Extension",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_One-Arm_Dumbbell_Triceps_Extension/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_Overhead_Barbell_Triceps_Extension",
-    "name": "Standing Overhead Barbell Triceps Extension",
-    "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Overhead_Barbell_Triceps_Extension/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_Palm-In_One-Arm_Dumbbell_Press",
-    "name": "Standing Palm-In One-Arm Dumbbell Pre",
-    "category": "Shoulders",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Palm-In_One-Arm_Dumbbell_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_Palms-In_Dumbbell_Press",
-    "name": "Standing Palms-In Dumbbell Pre",
-    "category": "Shoulders",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Palms-In_Dumbbell_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_Palms-Up_Barbell_Behind_The_Back_Wrist_Curl",
-    "name": "Standing Palms-Up Barbell Behind The Back Wrist Curl",
-    "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Palms-Up_Barbell_Behind_The_Back_Wrist_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Standing_Pelvic_Tilt",
+    "id": "1364",
     "name": "Standing Pelvic Tilt",
     "category": "Back",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Pelvic_Tilt/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "lower-back",
+    "secondaryMuscle": "abs",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1364-cuKYxhu.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1364-cuKYxhu.gif"
   },
   {
-    "id": "Standing_Rope_Crunch",
-    "name": "Standing Rope Crunch (Cable)",
+    "id": "0795",
+    "name": "Standing Single Leg Curl",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "hamstring",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0795-C5jncD2.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0795-C5jncD2.gif"
+  },
+  {
+    "id": "0796",
+    "name": "Standing Wheel Rollerout",
     "category": "Core",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Rope_Crunch/0.jpg",
-    "requiresWeight": true
+    "equipment": "Other",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0796-KtRomty.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0796-KtRomty.gif"
   },
   {
-    "id": "Standing_Soleus_And_Achilles_Stretch",
-    "name": "Standing Soleus And Achilles Stretch",
-    "category": "Legs",
+    "id": "3223",
+    "name": "Star Jump (Male)",
+    "category": "Cardio",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Soleus_And_Achilles_Stretch/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "chest",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3223-HtfCpfi.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3223-HtfCpfi.gif"
   },
   {
-    "id": "Standing_Toe_Touches",
-    "name": "Standing Toe Touches",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Toe_Touches/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Standing_Towel_Triceps_Extension",
-    "name": "Standing Towel Triceps Extension",
-    "category": "Arms",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Towel_Triceps_Extension/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Standing_Two-Arm_Overhead_Throw",
-    "name": "Standing Two-Arm Overhead Throw (Medicine Ball)",
-    "category": "Shoulders",
-    "equipment": "Medicine Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Two-Arm_Overhead_Throw/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Star_Jump",
-    "name": "Star Jump",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Star_Jump/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Step-up_with_Knee_Raise",
-    "name": "Step-up with Knee Raise",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Step-up_with_Knee_Raise/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Step_Mill",
-    "name": "Step Mill (Machine)",
-    "category": "Legs",
+    "id": "2138",
+    "name": "Stationary Bike Run V. 3",
+    "category": "Cardio",
     "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Step_Mill/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "chest",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2138-H1PESYI.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2138-H1PESYI.gif"
   },
   {
-    "id": "Stiff-Legged_Barbell_Deadlift",
-    "name": "Stiff-Legged Barbell Deadlift",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Stiff-Legged_Barbell_Deadlift/0.jpg",
-    "requiresWeight": true
+    "id": "0798",
+    "name": "Stationary Bike Walk",
+    "category": "Cardio",
+    "equipment": "Machine",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0798-a8VDgLw.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0798-a8VDgLw.gif"
   },
   {
-    "id": "Stiff-Legged_Dumbbell_Deadlift",
-    "name": "Stiff-Legged Dumbbell Deadlift",
-    "category": "Legs",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Stiff-Legged_Dumbbell_Deadlift/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Stiff_Leg_Barbell_Good_Morning",
-    "name": "Stiff Leg Barbell Good Morning",
-    "category": "Back",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Stiff_Leg_Barbell_Good_Morning/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Stomach_Vacuum",
-    "name": "Stomach Vacuum",
+    "id": "3314",
+    "name": "Straddle Maltese",
     "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Stomach_Vacuum/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3314-HfqciZF.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3314-HfqciZF.gif"
   },
   {
-    "id": "Straight-Arm_Dumbbell_Pullover",
-    "name": "Straight-Arm Dumbbell Pullover",
+    "id": "3298",
+    "name": "Straddle Planche",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3298-BL3GHeY.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3298-BL3GHeY.gif"
+  },
+  {
+    "id": "1427",
+    "name": "Straight Leg Outer Hip Abductor",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1427-mQ1tBXn.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1427-mQ1tBXn.gif"
+  },
+  {
+    "id": "0803",
+    "name": "Superman Push-Up",
     "category": "Chest",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Straight-Arm_Dumbbell_Pullover/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Straight-Arm_Pulldown",
-    "name": "Straight-Arm Pulldown (Cable)",
-    "category": "Back",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Straight-Arm_Pulldown/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Straight_Bar_Bench_Mid_Rows",
-    "name": "Straight Bar Bench Mid Row (Barbell)",
-    "category": "Back",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Straight_Bar_Bench_Mid_Rows/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Straight_Raises_on_Incline_Bench",
-    "name": "Straight Raises on Incline Bench (Barbell)",
-    "category": "Shoulders",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Straight_Raises_on_Incline_Bench/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Stride_Jump_Crossover",
-    "name": "Stride Jump Crossover",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Stride_Jump_Crossover/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Sumo_Deadlift",
-    "name": "Sumo Deadlift (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Sumo_Deadlift/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Sumo_Deadlift_with_Bands",
-    "name": "Sumo Deadlift with Band (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Sumo_Deadlift_with_Bands/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Sumo_Deadlift_with_Chains",
-    "name": "Sumo Deadlift with Chain (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Sumo_Deadlift_with_Chains/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Superman",
-    "name": "Superman",
-    "category": "Back",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Superman/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "chest",
+    "secondaryMuscle": "abs",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0803-4GqRrAk.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0803-4GqRrAk.gif"
   },
   {
-    "id": "Supine_Chest_Throw",
-    "name": "Supine Chest Throw (Medicine Ball)",
-    "category": "Arms",
-    "equipment": "Medicine Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Supine_Chest_Throw/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Supine_One-Arm_Overhead_Throw",
-    "name": "Supine One-Arm Overhead Throw (Medicine Ball)",
+    "id": "0805",
+    "name": "Suspended Abdominal Fallout",
     "category": "Core",
-    "equipment": "Medicine Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Supine_One-Arm_Overhead_Throw/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0805-X3TCNEU.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0805-X3TCNEU.gif"
   },
   {
-    "id": "Supine_Two-Arm_Overhead_Throw",
-    "name": "Supine Two-Arm Overhead Throw (Medicine Ball)",
-    "category": "Core",
-    "equipment": "Medicine Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Supine_Two-Arm_Overhead_Throw/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Suspended_Fallout",
-    "name": "Suspended Fallout",
-    "category": "Core",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Suspended_Fallout/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Suspended_Push-Up",
+    "id": "0806",
     "name": "Suspended Push-Up",
     "category": "Chest",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Suspended_Push-Up/0.jpg",
-    "requiresWeight": false
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0806-IaGQCrC.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0806-IaGQCrC.gif"
   },
   {
-    "id": "Suspended_Reverse_Crunch",
+    "id": "0807",
     "name": "Suspended Reverse Crunch",
     "category": "Core",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Suspended_Reverse_Crunch/0.jpg",
-    "requiresWeight": false
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0807-R1WYG5D.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0807-R1WYG5D.gif"
   },
   {
-    "id": "Suspended_Row",
+    "id": "0808",
     "name": "Suspended Row",
     "category": "Back",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Suspended_Row/0.jpg",
-    "requiresWeight": false
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0808-4OaumBr.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0808-4OaumBr.gif"
   },
   {
-    "id": "Suspended_Split_Squat",
+    "id": "0809",
     "name": "Suspended Split Squat",
     "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Suspended_Split_Squat/0.jpg",
-    "requiresWeight": false
+    "equipment": "Bodyweight",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0809-QpXqiq8.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0809-QpXqiq8.gif"
   },
   {
-    "id": "Svend_Press",
-    "name": "Svend Press",
-    "category": "Chest",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Svend_Press/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "T-Bar_Row_with_Handle",
-    "name": "T-Bar Row with Handle (Barbell)",
-    "category": "Back",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/T-Bar_Row_with_Handle/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Tate_Press",
-    "name": "Tate Pre (Dumbbell)",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Tate_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "The_Straddle",
-    "name": "The Straddle",
+    "id": "3433",
+    "name": "Swimmer Kicks V. 2 (Male)",
     "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/The_Straddle/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3433-SP3hUez.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3433-SP3hUez.gif"
   },
   {
-    "id": "Thigh_Abductor",
-    "name": "Thigh Abductor (Machine)",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Thigh_Abductor/0.jpg",
-    "requiresWeight": true
+    "id": "3318",
+    "name": "Swing 360",
+    "category": "Cardio",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3318-tnaj0mT.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3318-tnaj0mT.gif"
   },
   {
-    "id": "Thigh_Adductor",
-    "name": "Thigh Adductor (Machine)",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Thigh_Adductor/0.jpg",
-    "requiresWeight": true
+    "id": "1753",
+    "name": "Three Bench Dip",
+    "category": "Arms",
+    "equipment": "Bodyweight",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1753-DQ0cqkT.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1753-DQ0cqkT.gif"
   },
   {
-    "id": "Tire_Flip",
+    "id": "2459",
     "name": "Tire Flip",
     "category": "Legs",
     "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Tire_Flip/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2459-oZjMu1t.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2459-oZjMu1t.gif"
   },
   {
-    "id": "Toe_Touchers",
-    "name": "Toe Touchers",
-    "category": "Core",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Toe_Touchers/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Torso_Rotation",
-    "name": "Torso Rotation",
-    "category": "Core",
-    "equipment": "Exercise Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Torso_Rotation/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Trail_Running_Walking",
-    "name": "Trail Running/Walking",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Trail_Running_Walking/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Trap_Bar_Deadlift",
+    "id": "0811",
     "name": "Trap Bar Deadlift",
     "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Trap_Bar_Deadlift/0.jpg",
-    "requiresWeight": true
+    "equipment": "Barbell",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0811-jQGwmxN.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0811-jQGwmxN.gif"
   },
   {
-    "id": "Tricep_Dumbbell_Kickback",
-    "name": "Tricep Dumbbell Kickback",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Tricep_Dumbbell_Kickback/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Tricep_Side_Stretch",
-    "name": "Tricep Side Stretch",
+    "id": "0814",
+    "name": "Triceps Dip",
     "category": "Arms",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Tricep_Side_Stretch/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0814-X6C6i5Y.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0814-X6C6i5Y.gif"
   },
   {
-    "id": "Triceps_Overhead_Extension_with_Rope",
-    "name": "Triceps Overhead Extension with Rope (Cable)",
+    "id": "0812",
+    "name": "Triceps Dip (Bench Leg)",
     "category": "Arms",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Triceps_Overhead_Extension_with_Rope/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0812-VuoerH0.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0812-VuoerH0.gif"
   },
   {
-    "id": "Triceps_Pushdown",
-    "name": "Triceps Pushdown (Cable)",
+    "id": "0813",
+    "name": "Triceps Dip (Between Benches)",
     "category": "Arms",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Triceps_Pushdown/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0813-Wgbn9qo.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0813-Wgbn9qo.gif"
   },
   {
-    "id": "Triceps_Pushdown_-_Rope_Attachment",
-    "name": "Triceps Pushdown - Rope Attachment (Cable)",
+    "id": "0815",
+    "name": "Triceps Dips Floor",
     "category": "Arms",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Triceps_Pushdown_-_Rope_Attachment/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0815-7aVz15j.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0815-7aVz15j.gif"
   },
   {
-    "id": "Triceps_Pushdown_-_V-Bar_Attachment",
-    "name": "Triceps Pushdown - V-Bar Attachment (Cable)",
+    "id": "0816",
+    "name": "Triceps Press",
     "category": "Arms",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Triceps_Pushdown_-_V-Bar_Attachment/0.jpg",
-    "requiresWeight": true
+    "equipment": "Bodyweight",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0816-fSrPP6B.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0816-fSrPP6B.gif"
   },
   {
-    "id": "Triceps_Stretch",
+    "id": "0817",
     "name": "Triceps Stretch",
     "category": "Arms",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Triceps_Stretch/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0817-uOV3Itw.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0817-uOV3Itw.gif"
   },
   {
-    "id": "Tuck_Crunch",
+    "id": "0871",
     "name": "Tuck Crunch",
     "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Tuck_Crunch/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0871-BMMolZ3.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0871-BMMolZ3.gif"
   },
   {
-    "id": "Two-Arm_Dumbbell_Preacher_Curl",
-    "name": "Two-Arm Dumbbell Preacher Curl",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Two-Arm_Dumbbell_Preacher_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Two-Arm_Kettlebell_Clean",
-    "name": "Two-Arm Kettlebell Clean",
-    "category": "Shoulders",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Two-Arm_Kettlebell_Clean/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Two-Arm_Kettlebell_Jerk",
-    "name": "Two-Arm Kettlebell Jerk",
-    "category": "Shoulders",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Two-Arm_Kettlebell_Jerk/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Two-Arm_Kettlebell_Military_Press",
-    "name": "Two-Arm Kettlebell Military Pre",
-    "category": "Shoulders",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Two-Arm_Kettlebell_Military_Press/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Two-Arm_Kettlebell_Row",
-    "name": "Two-Arm Kettlebell Row",
-    "category": "Back",
-    "equipment": "Kettlebell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Two-Arm_Kettlebell_Row/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Underhand_Cable_Pulldowns",
-    "name": "Underhand Cable Pulldown",
+    "id": "0818",
+    "name": "Twin Handle Parallel Grip Lat Pulldown",
     "category": "Back",
     "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Underhand_Cable_Pulldowns/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0818-rkg41Fb.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0818-rkg41Fb.gif"
   },
   {
-    "id": "Upper_Back-Leg_Grab",
-    "name": "Upper Back-Leg Grab",
+    "id": "1466",
+    "name": "Twist Hip Lift",
     "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Upper_Back-Leg_Grab/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1466-AX1kB0o.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1466-AX1kB0o.gif"
   },
   {
-    "id": "Upper_Back_Stretch",
+    "id": "2802",
+    "name": "Twisted Leg Raise",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2802-C0eCeEt.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2802-C0eCeEt.gif"
+  },
+  {
+    "id": "2801",
+    "name": "Twisted Leg Raise (Female)",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2801-yT9tk17.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2801-yT9tk17.gif"
+  },
+  {
+    "id": "3231",
+    "name": "Two Toe Touch (Male)",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "lower-back",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3231-p195zsJ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3231-p195zsJ.gif"
+  },
+  {
+    "id": "1365",
     "name": "Upper Back Stretch",
     "category": "Back",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Upper_Back_Stretch/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1365-GSDioYu.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1365-GSDioYu.gif"
   },
   {
-    "id": "Upright_Barbell_Row",
-    "name": "Upright Barbell Row",
-    "category": "Shoulders",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Upright_Barbell_Row/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Upright_Cable_Row",
-    "name": "Upright Cable Row",
-    "category": "Back",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Upright_Cable_Row/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Upright_Row_-_With_Bands",
-    "name": "Upright Row - With Band",
-    "category": "Back",
-    "equipment": "Band",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Upright_Row_-_With_Bands/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Upward_Stretch",
-    "name": "Upward Stretch",
-    "category": "Shoulders",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Upward_Stretch/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "V-Bar_Pulldown",
-    "name": "V-Bar Pulldown (Cable)",
-    "category": "Back",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/V-Bar_Pulldown/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "V-Bar_Pullup",
-    "name": "V-Bar Pullup",
+    "id": "1366",
+    "name": "Upward Facing Dog",
     "category": "Back",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/V-Bar_Pullup/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "lower-back",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1366-01qpYSe.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1366-01qpYSe.gif"
   },
   {
-    "id": "Vertical_Swing",
-    "name": "Vertical Swing (Dumbbell)",
-    "category": "Legs",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Vertical_Swing/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Walking_Treadmill",
-    "name": "Walking, Treadmill (Machine)",
-    "category": "Legs",
-    "equipment": "Machine",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Walking_Treadmill/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Weighted_Ball_Hyperextension",
-    "name": "Weighted Ball Hyperextension",
-    "category": "Back",
-    "equipment": "Exercise Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Weighted_Ball_Hyperextension/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Weighted_Ball_Side_Bend",
-    "name": "Weighted Ball Side Bend",
+    "id": "3420",
+    "name": "V-Sit On Floor",
     "category": "Core",
-    "equipment": "Exercise Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Weighted_Ball_Side_Bend/0.jpg",
-    "requiresWeight": false
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3420-ZuXu4Eq.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3420-ZuXu4Eq.gif"
   },
   {
-    "id": "Weighted_Bench_Dip",
+    "id": "0826",
+    "name": "Vertical Leg Raise (On Parallel Bars)",
+    "category": "Core",
+    "equipment": "Bodyweight",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0826-ZNgOYQU.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0826-ZNgOYQU.gif"
+  },
+  {
+    "id": "2141",
+    "name": "Walk Elliptical Cross Trainer",
+    "category": "Cardio",
+    "equipment": "Machine",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2141-rjtuP6X.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2141-rjtuP6X.gif"
+  },
+  {
+    "id": "3655",
+    "name": "Walking High Knees Lunge",
+    "category": "Cardio",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3655-J9zIWig.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3655-J9zIWig.gif"
+  },
+  {
+    "id": "1460",
+    "name": "Walking Lunge",
+    "category": "Legs",
+    "equipment": "Bodyweight",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1460-IZVHb27.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1460-IZVHb27.gif"
+  },
+  {
+    "id": "3666",
+    "name": "Walking On Incline Treadmill",
+    "category": "Cardio",
+    "equipment": "Machine",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3666-rjiM4L3.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3666-rjiM4L3.gif"
+  },
+  {
+    "id": "2311",
+    "name": "Walking On Stepmill",
+    "category": "Cardio",
+    "equipment": "Machine",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2311-j9Q5crt.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2311-j9Q5crt.gif"
+  },
+  {
+    "id": "0830",
     "name": "Weighted Bench Dip",
     "category": "Arms",
     "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Weighted_Bench_Dip/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0830-MU9HnE7.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0830-MU9HnE7.gif"
   },
   {
-    "id": "Weighted_Crunches",
-    "name": "Weighted Crunche (Medicine Ball)",
-    "category": "Core",
-    "equipment": "Medicine Ball",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Weighted_Crunches/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Weighted_Jump_Squat",
-    "name": "Weighted Jump Squat (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Weighted_Jump_Squat/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Weighted_Pull_Ups",
-    "name": "Weighted Pull Ups",
+    "id": "2987",
+    "name": "Weighted Close Grip Chin-Up On Dip Cage",
     "category": "Back",
     "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Weighted_Pull_Ups/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2987-Gk1r408.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2987-Gk1r408.gif"
   },
   {
-    "id": "Weighted_Sissy_Squat",
-    "name": "Weighted Sissy Squat (Barbell)",
+    "id": "3643",
+    "name": "Weighted Cossack Squats (Male)",
     "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Weighted_Sissy_Squat/0.jpg",
-    "requiresWeight": true
+    "equipment": "Other",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3643-GWoKnIm.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3643-GWoKnIm.gif"
   },
   {
-    "id": "Weighted_Sit-Ups_-_With_Bands",
-    "name": "Weighted Sit-Ups - With Bands",
+    "id": "0832",
+    "name": "Weighted Crunch",
     "category": "Core",
     "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Weighted_Sit-Ups_-_With_Bands/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0832-s8nrDXF.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0832-s8nrDXF.gif"
   },
   {
-    "id": "Weighted_Squat",
+    "id": "3670",
+    "name": "Weighted Decline Sit-Up",
+    "category": "Core",
+    "equipment": "Other",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3670-EZeDVzO.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3670-EZeDVzO.gif"
+  },
+  {
+    "id": "0833",
+    "name": "Weighted Donkey Calf Raise",
+    "category": "Legs",
+    "equipment": "Other",
+    "specificMuscle": "calves",
+    "secondaryMuscle": "hamstring",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0833-LmaFNZS.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0833-LmaFNZS.gif"
+  },
+  {
+    "id": "1310",
+    "name": "Weighted Drop Push Up",
+    "category": "Chest",
+    "equipment": "Other",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1310-PSlvNMs.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1310-PSlvNMs.gif"
+  },
+  {
+    "id": "2135",
+    "name": "Weighted Front Plank",
+    "category": "Core",
+    "equipment": "Other",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2135-VBAWRPG.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2135-VBAWRPG.gif"
+  },
+  {
+    "id": "0834",
+    "name": "Weighted Front Raise",
+    "category": "Shoulders",
+    "equipment": "Other",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0834-e4aFmFY.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0834-e4aFmFY.gif"
+  },
+  {
+    "id": "0866",
+    "name": "Weighted Hanging Leg-Hip Raise",
+    "category": "Core",
+    "equipment": "Other",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0866-QOA0FD0.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0866-QOA0FD0.gif"
+  },
+  {
+    "id": "0835",
+    "name": "Weighted Hyperextension (On Stability Ball)",
+    "category": "Back",
+    "equipment": "Other",
+    "specificMuscle": "lower-back",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0835-8urJS9b.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0835-8urJS9b.gif"
+  },
+  {
+    "id": "3641",
+    "name": "Weighted Kneeling Step With Swing",
+    "category": "Shoulders",
+    "equipment": "Other",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3641-7uFJuXp.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3641-7uFJuXp.gif"
+  },
+  {
+    "id": "3644",
+    "name": "Weighted Lunge With Swing",
+    "category": "Legs",
+    "equipment": "Other",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3644-5WiFcYk.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3644-5WiFcYk.gif"
+  },
+  {
+    "id": "3286",
+    "name": "Weighted Muscle Up",
+    "category": "Back",
+    "equipment": "Other",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3286-JsOV1SU.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3286-JsOV1SU.gif"
+  },
+  {
+    "id": "3312",
+    "name": "Weighted Muscle Up (On Bar)",
+    "category": "Back",
+    "equipment": "Other",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3312-MCkqdKE.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3312-MCkqdKE.gif"
+  },
+  {
+    "id": "3290",
+    "name": "Weighted One Hand Pull Up",
+    "category": "Back",
+    "equipment": "Other",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3290-fXfqg1E.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3290-fXfqg1E.gif"
+  },
+  {
+    "id": "0840",
+    "name": "Weighted Overhead Crunch (On Stability Ball)",
+    "category": "Core",
+    "equipment": "Other",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0840-xmM75XG.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0840-xmM75XG.gif"
+  },
+  {
+    "id": "0841",
+    "name": "Weighted Pull-Up",
+    "category": "Back",
+    "equipment": "Other",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0841-HMzLjXx.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0841-HMzLjXx.gif"
+  },
+  {
+    "id": "0844",
+    "name": "Weighted Round Arm",
+    "category": "Shoulders",
+    "equipment": "Other",
+    "specificMuscle": "front-deltoids",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0844-VLYXo8S.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0844-VLYXo8S.gif"
+  },
+  {
+    "id": "0846",
+    "name": "Weighted Russian Twist",
+    "category": "Core",
+    "equipment": "Other",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0846-fZFZ704.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0846-fZFZ704.gif"
+  },
+  {
+    "id": "0845",
+    "name": "Weighted Russian Twist (Legs Up)",
+    "category": "Core",
+    "equipment": "Other",
+    "specificMuscle": "abs",
+    "secondaryMuscle": null,
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0845-WU9BLIs.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0845-WU9BLIs.gif"
+  },
+  {
+    "id": "2371",
+    "name": "Weighted Russian Twist V. 2",
+    "category": "Core",
+    "equipment": "Other",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2371-YIUAtYf.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2371-YIUAtYf.gif"
+  },
+  {
+    "id": "0847",
+    "name": "Weighted Seated Bicep Curl (On Stability Ball)",
+    "category": "Arms",
+    "equipment": "Medicine Ball",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0847-b4b6afT.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0847-b4b6afT.gif"
+  },
+  {
+    "id": "0849",
+    "name": "Weighted Seated Twist (On Stability Ball)",
+    "category": "Core",
+    "equipment": "Other",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0849-s34Y4LR.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0849-s34Y4LR.gif"
+  },
+  {
+    "id": "0850",
+    "name": "Weighted Side Bend (On Stability Ball)",
+    "category": "Core",
+    "equipment": "Other",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0850-6bOA1Oi.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0850-6bOA1Oi.gif"
+  },
+  {
+    "id": "0851",
+    "name": "Weighted Sissy Squat",
+    "category": "Legs",
+    "equipment": "Other",
+    "specificMuscle": "quadriceps",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0851-0lQnxMZ.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0851-0lQnxMZ.gif"
+  },
+  {
+    "id": "0852",
     "name": "Weighted Squat",
     "category": "Legs",
     "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Weighted_Squat/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0852-JZuApnB.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0852-JZuApnB.gif"
   },
   {
-    "id": "Wide-Grip_Barbell_Bench_Press",
-    "name": "Wide-Grip Barbell Bench Pre",
+    "id": "0853",
+    "name": "Weighted Standing Curl",
+    "category": "Arms",
+    "equipment": "Other",
+    "specificMuscle": "biceps",
+    "secondaryMuscle": "forearm",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0853-M5Y7GPg.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0853-M5Y7GPg.gif"
+  },
+  {
+    "id": "0854",
+    "name": "Weighted Standing Hand Squeeze",
+    "category": "Arms",
+    "equipment": "Other",
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0854-bjqbauy.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0854-bjqbauy.gif"
+  },
+  {
+    "id": "3313",
+    "name": "Weighted Straight Bar Dip",
     "category": "Chest",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Wide-Grip_Barbell_Bench_Press/0.jpg",
-    "requiresWeight": true
+    "equipment": "Other",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3313-Ff18ItA.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3313-Ff18ItA.gif"
   },
   {
-    "id": "Wide-Grip_Decline_Barbell_Bench_Press",
-    "name": "Wide-Grip Decline Barbell Bench Pre",
+    "id": "3642",
+    "name": "Weighted Stretch Lunge",
+    "category": "Legs",
+    "equipment": "Other",
+    "specificMuscle": "gluteal",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3642-13VW2VO.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3642-13VW2VO.gif"
+  },
+  {
+    "id": "0856",
+    "name": "Weighted Svend Press",
     "category": "Chest",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Wide-Grip_Decline_Barbell_Bench_Press/0.jpg",
-    "requiresWeight": true
+    "equipment": "Other",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "front-deltoids",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0856-I1OBLnn.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0856-I1OBLnn.gif"
   },
   {
-    "id": "Wide-Grip_Decline_Barbell_Pullover",
-    "name": "Wide-Grip Decline Barbell Pullover",
-    "category": "Chest",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Wide-Grip_Decline_Barbell_Pullover/0.jpg",
-    "requiresWeight": true
+    "id": "1754",
+    "name": "Weighted Three Bench Dips",
+    "category": "Arms",
+    "equipment": "Other",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1754-gtO1ErP.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1754-gtO1ErP.gif"
   },
   {
-    "id": "Wide-Grip_Lat_Pulldown",
-    "name": "Wide-Grip Lat Pulldown (Cable)",
-    "category": "Back",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Wide-Grip_Lat_Pulldown/0.jpg",
-    "requiresWeight": true
+    "id": "1755",
+    "name": "Weighted Tricep Dips",
+    "category": "Arms",
+    "equipment": "Other",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1755-bZq4bwK.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1755-bZq4bwK.gif"
   },
   {
-    "id": "Wide-Grip_Pulldown_Behind_The_Neck",
-    "name": "Wide-Grip Pulldown Behind The Neck (Cable)",
-    "category": "Back",
-    "equipment": "Cable",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Wide-Grip_Pulldown_Behind_The_Neck/0.jpg",
-    "requiresWeight": true
+    "id": "1767",
+    "name": "Weighted Triceps Dip On High Parallel Bars",
+    "category": "Arms",
+    "equipment": "Other",
+    "specificMuscle": "triceps",
+    "secondaryMuscle": "chest",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1767-K1vlode.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1767-K1vlode.gif"
   },
   {
-    "id": "Wide-Grip_Rear_Pull-Up",
-    "name": "Wide-Grip Rear Pull-Up",
+    "id": "0857",
+    "name": "Wheel Rollerout",
+    "category": "Core",
+    "equipment": "Other",
+    "specificMuscle": "abs",
+    "secondaryMuscle": "upper-back",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0857-NAgVB3t.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0857-NAgVB3t.gif"
+  },
+  {
+    "id": "3637",
+    "name": "Wheel Run",
+    "category": "Cardio",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/3637-km2Ljzj.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/3637-km2Ljzj.gif"
+  },
+  {
+    "id": "1429",
+    "name": "Wide Grip Pull-Up",
     "category": "Back",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Wide-Grip_Rear_Pull-Up/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1429-Qqi7bko.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1429-Qqi7bko.gif"
   },
   {
-    "id": "Wide-Grip_Standing_Barbell_Curl",
-    "name": "Wide-Grip Standing Barbell Curl",
-    "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Wide-Grip_Standing_Barbell_Curl/0.jpg",
-    "requiresWeight": true
+    "id": "1367",
+    "name": "Wide Grip Rear Pull-Up",
+    "category": "Back",
+    "equipment": "Bodyweight",
+    "specificMuscle": "upper-back",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1367-OYFhXVD.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1367-OYFhXVD.gif"
   },
   {
-    "id": "Wide_Stance_Barbell_Squat",
-    "name": "Wide Stance Barbell Squat",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Wide_Stance_Barbell_Squat/0.jpg",
-    "requiresWeight": true
+    "id": "1311",
+    "name": "Wide Hand Push Up",
+    "category": "Chest",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1311-JmMVpR3.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1311-JmMVpR3.gif"
   },
   {
-    "id": "Wide_Stance_Stiff_Legs",
-    "name": "Wide Stance Stiff Leg (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Wide_Stance_Stiff_Legs/0.jpg",
-    "requiresWeight": true
+    "id": "2363",
+    "name": "Wide-Grip Chest Dip On High Parallel Bars",
+    "category": "Chest",
+    "equipment": "Bodyweight",
+    "specificMuscle": "chest",
+    "secondaryMuscle": "triceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/2363-O2K9Vb5.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/2363-O2K9Vb5.gif"
   },
   {
-    "id": "Wind_Sprints",
+    "id": "0858",
     "name": "Wind Sprints",
     "category": "Core",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Wind_Sprints/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "abs",
+    "secondaryMuscle": "quadriceps",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0858-Qoujh3Q.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0858-Qoujh3Q.gif"
   },
   {
-    "id": "Windmills",
-    "name": "Windmills",
+    "id": "1604",
+    "name": "World Greatest Stretch",
     "category": "Legs",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Windmills/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "hamstring",
+    "secondaryMuscle": "gluteal",
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1604-DFGXwZr.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1604-DFGXwZr.gif"
   },
   {
-    "id": "Worlds_Greatest_Stretch",
-    "name": "World's Greatest Stretch",
-    "category": "Legs",
-    "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Worlds_Greatest_Stretch/0.jpg",
-    "requiresWeight": false
-  },
-  {
-    "id": "Wrist_Circles",
+    "id": "1428",
     "name": "Wrist Circles",
     "category": "Arms",
     "equipment": "Bodyweight",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Wrist_Circles/0.jpg",
-    "requiresWeight": false
+    "specificMuscle": "forearm",
+    "secondaryMuscle": null,
+    "requiresWeight": false,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/1428-2zNKRUB.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/1428-2zNKRUB.gif"
   },
   {
-    "id": "Wrist_Roller",
-    "name": "Wrist Roller",
+    "id": "0859",
+    "name": "Wrist Rollerer",
     "category": "Arms",
     "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Wrist_Roller/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Wrist_Rotations_with_Straight_Bar",
-    "name": "Wrist Rotations with Straight Bar (Barbell)",
-    "category": "Arms",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Wrist_Rotations_with_Straight_Bar/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Yoke_Walk",
-    "name": "Yoke Walk",
-    "category": "Legs",
-    "equipment": "Other",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Yoke_Walk/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Zercher_Squats",
-    "name": "Zercher Squat (Barbell)",
-    "category": "Legs",
-    "equipment": "Barbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Zercher_Squats/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Zottman_Curl",
-    "name": "Zottman Curl (Dumbbell)",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Zottman_Curl/0.jpg",
-    "requiresWeight": true
-  },
-  {
-    "id": "Zottman_Preacher_Curl",
-    "name": "Zottman Preacher Curl (Dumbbell)",
-    "category": "Arms",
-    "equipment": "Dumbbell",
-    "imageUrl": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Zottman_Preacher_Curl/0.jpg",
-    "requiresWeight": true
+    "specificMuscle": "forearm",
+    "secondaryMuscle": "biceps",
+    "requiresWeight": true,
+    "imageUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/images/0859-bd5b860.jpg",
+    "gifUrl": "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/videos/0859-bd5b860.gif"
   }
 ];
-
-
 
 export function exerciseRequiresWeight(exercise) {
   if (!exercise) return true;
   if (typeof exercise.requiresWeight === "boolean") return exercise.requiresWeight;
   const eq = (exercise.equipment || "").trim();
   const name = (exercise.name || "").toLowerCase();
-  if (["Bodyweight", "Foam Roll", "Band", "Exercise Ball"].includes(eq)) return false;
+  if (["Bodyweight", "Band", "Cardio"].includes(eq)) return false;
   if (["Barbell", "Dumbbell", "Cable", "Machine", "Kettlebell", "EZ Bar", "Medicine Ball"].includes(eq)) {
-    if (name.includes("bodyweight") && !["weighted", "band", "press", "curl", "row"].some(w => name.includes(w))) return false;
+    if (name.includes("bodyweight") && !["weighted", "press", "curl", "row"].some(w => name.includes(w))) return false;
     return true;
   }
   const weightKeywords = [
-    "weighted", "plate", "chain", "sled", "deadlift", "stone", "keg", 
-    "log", "rickshaw", "yoke", "axle", "conan", "hammer", "sandbag", 
-    "tire", "wrist roller", "crucifix", "circus bell", "power stairs",
-    "farmer", "harness", "battling rope"
+    "weighted", "plate", "chain", "sled", "deadlift", "press", "curl", "squat"
   ];
   return weightKeywords.some(w => name.includes(w));
 }
